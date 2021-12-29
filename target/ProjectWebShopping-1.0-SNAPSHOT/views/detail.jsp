@@ -44,7 +44,7 @@
             <div id="image__right">
 
                 <div id="image__right__element">
-                    <img id="image__right__element--img" src="/<%=request.getContextPath()%>/img/${productDetail.id}/<%=listImage[0]%>" >
+                    <img id="image__right__element--img" src="<%=request.getContextPath()%>/img/${productDetail.id}/<%=listImage[0]%>" >
                 </div>
                 <div class="img-zoom-lens">
                 </div>

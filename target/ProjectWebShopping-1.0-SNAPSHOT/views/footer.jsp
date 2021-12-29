@@ -5,16 +5,7 @@
   Time: 3:27 PM
   To change this template use File | Settings | File Templates.
 --%>
-<<<<<<< HEAD
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-=======
-<<<<<<< HEAD
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-=======
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
->>>>>>> 25024be354303017d2e97240d3f5cd1284bdb47c
->>>>>>> 414bc0f2f6b7a2e31dfc31ed97809172c5f15262
-
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <footer>
     <div id="home-about">
         <div class="inner">
