@@ -5,7 +5,7 @@
   Time: 3:13 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <header id="header">
     <div id="header-first">
         <div class="container">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="header-top-wrap-logo">
                     <h1>
-                        <a href="#"><img src="../img/logo.png" alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
+                        <a href="#"><img src="<%=request.getContextPath()%>/img/logo.png" alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
                     </h1>
                 </div>
                 <div class="header-top-list">
@@ -49,13 +49,13 @@
                             </ul>
                             <div class="sub-nav-left">
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -75,10 +75,10 @@
                             </ul>
                             <div class="sub-nav-left">
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -98,10 +98,10 @@
                             </ul>
                             <div class="sub-nav-left">
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -121,10 +121,10 @@
                             </ul>
                             <div class="sub-nav-left">
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -144,10 +144,10 @@
                             </ul>
                             <div class="sub-nav-left">
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -167,10 +167,10 @@
                             </ul>
                             <div class="sub-nav-left">
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -190,10 +190,10 @@
                             </ul>
                             <div class="sub-nav-left">
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                                 <div class="sub-nav-img">
-                                    <img src="../img/subimgtem1.jpg" alt="">
+                                    <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
             <div class="header-top">
                 <div class="header-top-wrap-logo">
                     <h1>
-                        <a href="#"><img src="../img/logo.png" alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
+                        <a href="#"><img src="<%=request.getContextPath()%>/img/logo.png" alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
                     </h1>
                 </div>
                 <nav class="nav-bar">
@@ -229,10 +229,10 @@
                                 </ul>
                                 <div class="sub-nav-left">
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -252,10 +252,10 @@
                                 </ul>
                                 <div class="sub-nav-left">
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -275,10 +275,10 @@
                                 </ul>
                                 <div class="sub-nav-left">
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -298,10 +298,10 @@
                                 </ul>
                                 <div class="sub-nav-left">
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -321,10 +321,10 @@
                                 </ul>
                                 <div class="sub-nav-left">
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -344,10 +344,10 @@
                                 </ul>
                                 <div class="sub-nav-left">
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -367,10 +367,10 @@
                                 </ul>
                                 <div class="sub-nav-left">
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                     <div class="sub-nav-img">
-                                        <img src="../img/subimgtem1.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>/img/subimgtem1.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -400,7 +400,7 @@
                 </div>
                 <div class="header-top-wrap-logo">
                     <h1>
-                        <a href="#"><img src="../img/logo.png"
+                        <a href="#"><img src="<%=request.getContextPath()%>/img/logo.png"
                                          alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
                     </h1>
                 </div>

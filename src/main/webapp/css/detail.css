@@ -208,7 +208,7 @@ li {
     font-weight: 400;
 }
 .product__price .product__percent__sale {
-    background-image: url("/img/icon/sale-background.png");
+    background-image: url('../img/icon/sale-background.png');
     background-repeat: no-repeat;
     background-position: left center;
     object-fit: cover;
