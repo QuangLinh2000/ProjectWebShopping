@@ -17,16 +17,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/936c874066.js" crossorigin="anonymous"></script>
 
+<<<<<<< HEAD
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
     <!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/style/home.css"> -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/product.css">
     <!-- <script src="<%=request.getContextPath()%>/script/home.js"></script> -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
+=======
+    <link rel="stylesheet" href="../css/header.css">
+    <!-- <link rel="stylesheet" href="../style/home.css"> -->
+    <link rel="stylesheet" href="../css/product.css">
+    <!-- <script src="../script/home.js"></script> -->
+    <link rel="stylesheet" href="../css/footer.css">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
 
 <body>
 <%@ include file="../views/Header.jsp" %>
 
+<<<<<<< HEAD
+=======
+<a href="#" class="scrollup show-scroll" id="scroll-up">
+    <i class="fa-solid fa-arrow-up"></i>
+</a>
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 <div class="container">
     <section class="contain">
         <div class="left-contain">
@@ -118,108 +132,184 @@
 
                 <div class="right-contain-item">
                     <div class="right-contain-item-box-image">
+<<<<<<< HEAD
                         <img src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" class="right-contain-item-image">
+=======
+                        <img src="../img/collection1_slide_product_2.jpg" class="right-contain-item-image">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                         <div class="right-contain-item-icon-buy">
                             <p>MUA NGAY</p>
                         </div>
 
                         <div class="right-contain-item-icon-search">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/2-01.png">
+=======
+                            <img src="../img/icon/2-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
 
                         <div class="right-contain-item-icon-basket">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/11-01.png">
+=======
+                            <img src="../img/icon/11-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
                     </div>
 
                     <div class="right-contain-item-image-small">
+<<<<<<< HEAD
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/collection_1_1.jpg"
                              urlImage="<%=request.getContextPath()%>/img/product/lon1.png">
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/collection_1_1.jpg"
                              urlImage="<%=request.getContextPath()%>/img/product/lon2.png">
+=======
+                        <img class="right-contain-item-image-small-item" src="../img/collection_1_1.jpg"
+                             urlImage="../img/product/lon1.png">
+                        <img class="right-contain-item-image-small-item" src="../img/collection_1_1.jpg"
+                             urlImage="../img/product/lon2.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                     </div>
                     <p class="right-contain-item-description">Đầm xòe sát nách màu tím thắt đai C54087C</p>
                     <p class="right-contain-item-price">399,000₫</p>
                 </div>
                 <div class="right-contain-item">
                     <div class="right-contain-item-box-image">
+<<<<<<< HEAD
                         <img src="<%=request.getContextPath()%>/img/product/lon1.png" class="right-contain-item-image">
+=======
+                        <img src="../img/product/lon1.png" class="right-contain-item-image">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                         <div class="right-contain-item-icon-buy">
                             <p>MUA NGAY</p>
                         </div>
 
                         <div class="right-contain-item-icon-search">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/2-01.png">
+=======
+                            <img src="../img/icon/2-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
 
                         <div class="right-contain-item-icon-basket">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/11-01.png">
+=======
+                            <img src="../img/icon/11-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
                     </div>
 
                     <div class="right-contain-item-image-small">
+<<<<<<< HEAD
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho1.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon1.png">
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho2.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon2.png">
+=======
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho1.png"
+                             urlImage="../img/product/lon1.png">
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho2.png"
+                             urlImage="../img/product/lon2.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                     </div>
                     <p class="right-contain-item-description">Đầm xòe sát nách màu tím thắt đai C54087C</p>
                     <p class="right-contain-item-price">399,000₫</p>
                 </div>
                 <div class="right-contain-item">
                     <div class="right-contain-item-box-image">
+<<<<<<< HEAD
                         <img src="<%=request.getContextPath()%>/img/product/lon1.png" class="right-contain-item-image">
+=======
+                        <img src="../img/product/lon1.png" class="right-contain-item-image">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                         <div class="right-contain-item-icon-buy">
                             <p>MUA NGAY</p>
                         </div>
 
                         <div class="right-contain-item-icon-search">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/2-01.png">
+=======
+                            <img src="../img/icon/2-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
 
                         <div class="right-contain-item-icon-basket">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/11-01.png">
+=======
+                            <img src="../img/icon/11-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
                     </div>
 
                     <div class="right-contain-item-image-small">
+<<<<<<< HEAD
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho1.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon1.png">
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho2.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon2.png">
+=======
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho1.png"
+                             urlImage="../img/product/lon1.png">
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho2.png"
+                             urlImage="../img/product/lon2.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                     </div>
                     <p class="right-contain-item-description">Đầm xòe sát nách màu tím thắt đai C54087C</p>
                     <p class="right-contain-item-price">399,000₫</p>
                 </div>
                 <div class="right-contain-item">
                     <div class="right-contain-item-box-image">
+<<<<<<< HEAD
                         <img src="<%=request.getContextPath()%>/img/product/lon1.png" class="right-contain-item-image">
+=======
+                        <img src="../img/product/lon1.png" class="right-contain-item-image">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                         <div class="right-contain-item-icon-buy">
                             <p>MUA NGAY</p>
                         </div>
 
                         <div class="right-contain-item-icon-search">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/2-01.png">
+=======
+                            <img src="../img/icon/2-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
 
                         <div class="right-contain-item-icon-basket">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/11-01.png">
+=======
+                            <img src="../img/icon/11-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
                     </div>
 
                     <div class="right-contain-item-image-small">
+<<<<<<< HEAD
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho1.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon1.png">
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho2.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon2.png">
+=======
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho1.png"
+                             urlImage="../img/product/lon1.png">
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho2.png"
+                             urlImage="../img/product/lon2.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                     </div>
                     <p class="right-contain-item-description">Đầm xòe sát nách màu tím thắt đai C54087C</p>
                     <p class="right-contain-item-price">399,000₫</p>
@@ -228,56 +318,94 @@
 
                 <div class="right-contain-item">
                     <div class="right-contain-item-box-image">
+<<<<<<< HEAD
                         <img src="<%=request.getContextPath()%>/img/product/lon1.png" class="right-contain-item-image">
+=======
+                        <img src="../img/product/lon1.png" class="right-contain-item-image">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                         <div class="right-contain-item-icon-buy">
                             <p>MUA NGAY</p>
                         </div>
 
                         <div class="right-contain-item-icon-search">
 
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/2-01.png">
+=======
+                            <img src="../img/icon/2-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
 
                         </div>
 
                         <div class="right-contain-item-icon-basket">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/11-01.png">
+=======
+                            <img src="../img/icon/11-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
                     </div>
 
                     <div class="right-contain-item-image-small">
+<<<<<<< HEAD
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho1.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon1.png">
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho2.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon2.png">
+=======
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho1.png"
+                             urlImage="../img/product/lon1.png">
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho2.png"
+                             urlImage="../img/product/lon2.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                     </div>
                     <p class="right-contain-item-description">Đầm xòe sát nách màu tím thắt đai C54087C</p>
                     <p class="right-contain-item-price">399,000₫</p>
                 </div>
                 <div class="right-contain-item">
                     <div class="right-contain-item-box-image">
+<<<<<<< HEAD
                         <img src="<%=request.getContextPath()%>/img/product/lon1.png" class="right-contain-item-image">
+=======
+                        <img src="../img/product/lon1.png" class="right-contain-item-image">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                         <div class="right-contain-item-icon-buy">
                             <p>MUA NGAY</p>
                         </div>
 
                         <div class="right-contain-item-icon-search">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/2-01.png">
+=======
+                            <img src="../img/icon/2-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
 
                         <div class="right-contain-item-icon-basket">
+<<<<<<< HEAD
                             <img src="<%=request.getContextPath()%>/img/icon/11-01.png">
+=======
+                            <img src="../img/icon/11-01.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
                         </div>
                     </div>
 
                     <div class="right-contain-item-image-small">
+<<<<<<< HEAD
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho1.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon1.png">
                         <img class="right-contain-item-image-small-item" src="<%=request.getContextPath()%>/img/product/nho2.png"
                              urlImage="<%=request.getContextPath()%>/img/product/lon2.png">
+=======
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho1.png"
+                             urlImage="../img/product/lon1.png">
+                        <img class="right-contain-item-image-small-item" src="../img/product/nho2.png"
+                             urlImage="../img/product/lon2.png">
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
                     </div>
                     <p class="right-contain-item-description">Đầm xòe sát nách màu tím thắt đai C54087C</p>
                     <p class="right-contain-item-price">399,000₫</p>
@@ -301,8 +429,13 @@
 </div>
 <%@include file="../views/footer.jsp"%>
 
+<<<<<<< HEAD
 <script src="<%=request.getContextPath()%>/script/header.js"></script>
 <script src="<%=request.getContextPath()%>/script/product.js"></script>
+=======
+<script src="../script/header.js"></script>
+<script src="../script/product.js"></script>
+>>>>>>> d775895454706ad0e21131be396b35ebbed7c7e3
 
 
 </body>
