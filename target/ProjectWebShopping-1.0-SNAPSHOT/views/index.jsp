@@ -13,9 +13,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thời trang sevenam</title>
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/home.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
     <!-- ====================FONT AWESOME ============================= -->
     <script src="https://kit.fontawesome.com/936c874066.js" crossorigin="anonymous"></script>
 
@@ -31,24 +31,24 @@
         <div class="slideshow-content" id="ml-slide">
             <!-- slide1 -->
             <div class="mySlides">
-                <img src="../img/slider1.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/img/slider1.jpg" alt="">
             </div>
             <!-- slide2 -->
             <div class="mySlides">
-                <img src="../img/slider2.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/img/slider2.jpg" alt="">
 
             </div>
             <!-- slide 3 -->
             <div class="mySlides">
-                <img src="../img/slider3.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/img/slider3.jpg" alt="">
             </div>
             <!-- slide 4 -->
             <div class="mySlides">
-                <img src="../img/slider4.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/img/slider4.jpg" alt="">
             </div>
             <!-- slide 5 -->
             <div class="mySlides">
-                <img src="../img/slider5.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/img/slider5.jpg" alt="">
             </div>
         </div>
         <div class="slick">
@@ -91,7 +91,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -106,9 +106,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -124,7 +124,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -139,9 +139,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -156,7 +156,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -171,9 +171,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -188,7 +188,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -203,9 +203,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -220,7 +220,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -235,9 +235,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -292,7 +292,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -307,9 +307,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -325,7 +325,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -340,9 +340,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -357,7 +357,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -372,9 +372,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -389,7 +389,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -404,9 +404,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -421,7 +421,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -436,9 +436,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -453,7 +453,7 @@
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -468,9 +468,9 @@
                                     </div>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
@@ -521,7 +521,7 @@
                     <div class="slide-collection">
                         <div class="collection-slide-div">
                             <a href="#">
-                                <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                             </a>
                             <div class="btn-img padding-btn-slider">
                                 <div class="btn-img-search">
@@ -550,7 +550,7 @@
                     <div class="slide-collection">
                         <div class="collection-slide-div">
                             <a href="#">
-                                <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                             </a>
                             <div class="btn-img padding-btn-slider">
                                 <div class="btn-img-search">
@@ -567,7 +567,7 @@
                                 <div class="tag-saleoff">
                                     <span>-10%</span>
                                 </div>
-                                <img src="../img/img-sale.png" alt="" class="img-sale">
+                                <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                             </div>
                         </div>
                         <div class="text-content-collection">
@@ -590,7 +590,7 @@
                     <div class="slide-collection">
                         <div class="collection-slide-div">
                             <a href="#">
-                                <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                             </a>
                             <div class="btn-img padding-btn-slider">
                                 <div class="btn-img-search">
@@ -619,7 +619,7 @@
                     <div class="slide-collection">
                         <div class="collection-slide-div">
                             <a href="#">
-                                <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                             </a>
                             <div class="btn-img padding-btn-slider">
                                 <div class="btn-img-search">
@@ -636,7 +636,7 @@
                                 <div class="tag-saleoff">
                                     <span>-10%</span>
                                 </div>
-                                <img src="../img/img-sale.png" alt="" class="img-sale">
+                                <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                             </div>
                         </div>
                         <div class="text-content-collection">
@@ -659,7 +659,7 @@
                     <div class="slide-collection">
                         <div class="collection-slide-div">
                             <a href="#">
-                                <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                             </a>
                             <div class="btn-img padding-btn-slider">
                                 <div class="btn-img-search">
@@ -687,7 +687,7 @@
                     <div class="slide-collection">
                         <div class="collection-slide-div">
                             <a href="#">
-                                <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                             </a>
                             <div class="btn-img padding-btn-slider">
                                 <div class="btn-img-search">
@@ -715,7 +715,7 @@
                     <div class="slide-collection">
                         <div class="collection-slide-div">
                             <a href="#">
-                                <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                             </a>
                             <div class="btn-img padding-btn-slider">
                                 <div class="btn-img-search">
@@ -771,7 +771,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -788,13 +788,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -814,7 +814,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -831,13 +831,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -856,7 +856,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -873,13 +873,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -898,7 +898,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -915,13 +915,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -941,7 +941,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -958,13 +958,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -983,7 +983,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -1000,13 +1000,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -1034,7 +1034,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -1051,13 +1051,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -1077,7 +1077,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -1094,13 +1094,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -1130,7 +1130,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -1147,13 +1147,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -1173,7 +1173,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -1190,13 +1190,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -1215,7 +1215,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -1232,13 +1232,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -1258,7 +1258,7 @@
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="../img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -1275,13 +1275,13 @@
                             <div class="tag-saleoff">
                                 <span>-10%</span>
                             </div>
-                            <img src="../img/img-sale.png" alt="" class="img-sale">
+                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="../img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
+                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -1314,7 +1314,7 @@
         <div class="customer-grid">
             <div class="customer-item">
                 <div class="customer-img shine-hover">
-                    <img src="../img/home_customer_img1.jpg" alt="">
+                    <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
                 </div>
                 <div class="bg-color">
                 </div>
@@ -1330,7 +1330,7 @@
             </div>
             <div class="customer-item">
                 <div class="customer-img shine-hover">
-                    <img src="../img/home_customer_img1.jpg" alt="">
+                    <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
                 </div>
                 <div class="bg-color">
                 </div>
@@ -1346,7 +1346,7 @@
             </div>
             <div class="customer-item">
                 <div class="customer-img shine-hover">
-                    <img src="../img/home_customer_img1.jpg" alt="">
+                    <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
                 </div>
                 <div class="bg-color">
                 </div>
@@ -1362,7 +1362,7 @@
             </div>
             <div class="customer-item">
                 <div class="customer-img shine-hover">
-                    <img src="../img/home_customer_img1.jpg" alt="">
+                    <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
                 </div>
                 <div class="bg-color">
                 </div>
@@ -1378,7 +1378,7 @@
             </div>
             <div class="customer-item">
                 <div class="customer-img shine-hover">
-                    <img src="../img/home_customer_img1.jpg" alt="">
+                    <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
                 </div>
                 <div class="bg-color">
                 </div>
@@ -1406,7 +1406,7 @@
             <div class="article-item article-item-left">
                 <div>
                     <div class="article-img shine-hover">
-                        <img src="../img/home_blog_main.jpg" alt="">
+                        <img src="<%=request.getContextPath()%>/img/home_blog_main.jpg" alt="">
                     </div>
                     <div class="article-info">
                         <a href="#" class="article-title">
@@ -1427,7 +1427,7 @@
             </div>
             <div class="article-item article-item-right">
                 <div class="article-img1 shine-hover zoom-hover">
-                    <img src="../img/home_blog.jpg" alt="Shall We Dance - Vũ khúc mùa thu trong BST mới nhất của Seven.AM">
+                    <img src="<%=request.getContextPath()%>/img/home_blog.jpg" alt="Shall We Dance - Vũ khúc mùa thu trong BST mới nhất của Seven.AM">
                 </div>
 
                 <div class="article-info1">
@@ -1450,7 +1450,7 @@
             </div>
             <div class="article-item article-item-right">
                 <div class="article-img1 shine-hover zoom-hover">
-                    <img src="../img/home_blog.jpg" alt="Shall We Dance - Vũ khúc mùa thu trong BST mới nhất của Seven.AM">
+                    <img src="<%=request.getContextPath()%>/img/home_blog.jpg" alt="Shall We Dance - Vũ khúc mùa thu trong BST mới nhất của Seven.AM">
 
                 </div>
 
@@ -1479,8 +1479,8 @@
     </div>
 </section>
 <%@include file="../views/footer.jsp"%>
-<script src="../script/home.js"></script>
-<script src="../script/header.js"></script>
+<script src="<%=request.getContextPath()%>/script/home.js"></script>
+<script src="<%=request.getContextPath()%>/script/header.js"></script>
 
 </body>
 </html>

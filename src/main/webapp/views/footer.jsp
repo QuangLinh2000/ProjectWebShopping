@@ -54,7 +54,7 @@
 
     </div>
     <div class="footer-top">
-        <img src="../img/icon/ft-logo.png" >
+        <img src="<%=request.getContextPath()%>/img/icon/ft-logo.png" >
     </div>
     <div class="footer-content">
         <div class="footer-content-item footer-content-item-contact">
@@ -108,7 +108,7 @@
                 <i class="far fa-paper-plane"></i>
             </div>
             <div class="footer-content-item-image">
-                <img src="../img/footer/imge-footer.jpg" >
+                <img src="<%=request.getContextPath()%>/img/footer/imge-footer.jpg" >
             </div>
         </div>
     </div>
