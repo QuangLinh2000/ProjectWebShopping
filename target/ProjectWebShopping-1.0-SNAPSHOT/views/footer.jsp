@@ -5,11 +5,7 @@
   Time: 3:27 PM
   To change this template use File | Settings | File Templates.
 --%>
-<<<<<<< HEAD
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-=======
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
->>>>>>> 25024be354303017d2e97240d3f5cd1284bdb47c
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <footer>
     <div id="home-about">
@@ -58,7 +54,7 @@
 
     </div>
     <div class="footer-top">
-        <img src="../img/icon/ft-logo.png" >
+        <img src="<%=request.getContextPath()%>/img/icon/ft-logo.png" >
     </div>
     <div class="footer-content">
         <div class="footer-content-item footer-content-item-contact">
@@ -112,7 +108,7 @@
                 <i class="far fa-paper-plane"></i>
             </div>
             <div class="footer-content-item-image">
-                <img src="../img/footer/imge-footer.jpg" >
+                <img src="<%=request.getContextPath()%>/img/footer/imge-footer.jpg" >
             </div>
         </div>
     </div>
