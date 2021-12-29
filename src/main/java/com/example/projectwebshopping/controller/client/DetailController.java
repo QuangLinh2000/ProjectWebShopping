@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 @WebServlet(name = "detailServlet", value = "/detailServlet")
-public class detailController extends HttpServlet {
+public class DetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 doPost(request,response);
