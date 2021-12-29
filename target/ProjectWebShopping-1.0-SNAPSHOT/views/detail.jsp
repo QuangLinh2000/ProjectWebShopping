@@ -3,8 +3,7 @@
 <%@ page import="modal.beans.Product" %>
 <%@ page import="modal.beans.ProductSize" %>
 <%@ page import="modal.beans.ProductColor" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <% Product product=(Product)request.getAttribute("productDetail");
     ArrayList<Product> listRelated=(ArrayList<Product>)request.getAttribute("relatedProduct");
@@ -34,8 +33,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Product</title>
-    <link rel="stylesheet" href="..<%=request.getContextPath()%>/css/detail.css">
-    <link rel="stylesheet" href="..<%=request.getContextPath()%>/css/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body onresize="resizeWindow()">
@@ -45,7 +44,7 @@
             <div id="image__right">
 
                 <div id="image__right__element">
-                    <img id="image__right__element--img" src="..<%=request.getContextPath()%>/img/${productDetail.id}/<%=listImage[0]%>" >
+                    <img id="image__right__element--img" src="/<%=request.getContextPath()%>/img/${productDetail.id}/<%=listImage[0]%>" >
                 </div>
                 <div class="img-zoom-lens">
                 </div>
@@ -58,7 +57,7 @@
                     <c:forEach items="${productDetail.listImage}" var="i" >
                     <li class="image__left__item">
 
-                       <img onclick="leftToRightSupport(this)" class="image__left__element" src="..<%=request.getContextPath()%>/img/${productDetail.id}/${i}">
+                       <img onclick="leftToRightSupport(this)" class="image__left__element" src="<%=request.getContextPath()%>/img/${productDetail.id}/${i}">
                    </li>
                     </c:forEach>
 
@@ -116,11 +115,11 @@
                                     <c:choose>
                                     <c:when test="${item.status==0}">
 
-                                        <img class ="sold-out-image" src="..<%=request.getContextPath()%>/img/icon/soldout.png" alt="">
+                                        <img class ="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png" alt="">
 
                                     </c:when>
                                         <c:otherwise>
-                                            <img class ="sold-out-image select-image" src="..<%=request.getContextPath()%>/img/icon/select.png" alt="">
+                                            <img class ="sold-out-image select-image" src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
                                         </c:otherwise>
                                     </c:choose>
                                 </label>
@@ -198,7 +197,7 @@
                     <div class="wrap__list__box">
                         <c:forEach var="item" items="<%=listRelated%>">
                         <li class="wrap__element">
-                            <div class="wrap__element__image"> <img src="..<%=request.getContextPath()%>/img/${item.id}/${item.listImage[0]}" alt="">
+                            <div class="wrap__element__image"> <img src="<%=request.getContextPath()%>/img/${item.id}/${item.listImage[0]}" alt="">
                                 <div class="clear-fix">
                                     <a href="https://nemshop.vn/collections/tat-ca-san-pham/products/ao-khoac-2710" class="detail__link"></a>
                                     <div class="advise-box">
@@ -253,7 +252,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="table__image-decription"><a href=""><img src="..<%=request.getContextPath()%>/img/321691492193020636/1.jpg" alt=""></a></td>
+                            <td class="table__image-decription"><a href=""><img src="<%=request.getContextPath()%>/img/321691492193020636/1.jpg" alt=""></a></td>
                             <td class="table__infor-decription ">	
                                 <a href="" class="bold-text"><h5>ĐẦM TIỆC HỒNG PHỐI SEQUIN D32169</h5></a> <br>
                                <span>Phiên bản: Size 6 / Hồng </span><br>
@@ -264,7 +263,7 @@
                             <td class="table__delete-element"><i class="fas fa-trash-alt"></i></td>
                         </tr>
                         <tr>
-                            <td class="table__image-decription"><a href=""><img src="..<%=request.getContextPath()%>/img/321691492193020636/1.jpg" alt=""></a></td>
+                            <td class="table__image-decription"><a href=""><img src="<%=request.getContextPath()%>/img/321691492193020636/1.jpg" alt=""></a></td>
                             <td class="table__infor-decription ">	
                                 <a href="" class="bold-text"><h5>ĐẦM TIỆC HỒNG PHỐI SEQUIN D32169</h5></a> <br>
                                <span>Phiên bản: Size 6 / Hồng </span><br>
@@ -297,7 +296,7 @@
         </div>
     </div>
    <%@include file="footer.jsp"%>
-    <script src="..<%=request.getContextPath()%>/script/detail.js"></script>
+    <script src="<%=request.getContextPath()%>/script/detail.js"></script>
 
 </body>
 

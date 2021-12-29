@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-@WebServlet(name = "detailServlet", value = "/detailServlet")
+@WebServlet(name = "detailController", value = "/detailController")
 public class detailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
