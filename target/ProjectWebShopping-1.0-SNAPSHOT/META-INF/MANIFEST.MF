@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-<<<<<<< HEAD
 Built-By: trong
 Build-Jdk: version 17
-=======
-Built-By: NGUYEN VAN HAU
-Build-Jdk: 17
->>>>>>> 25024be354303017d2e97240d3f5cd1284bdb47c
 

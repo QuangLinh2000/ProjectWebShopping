@@ -275,8 +275,9 @@
   </section>
 
   <%@include file="../views/footer.jsp"%>
-
-  <script src="<%=request.getContextPath()%>/script/home.js"></script>
+  <%@include file="../views/footer.jsp"%>
   <script src="<%=request.getContextPath()%>/script/header.js"></script>
+  <script src="<%=request.getContextPath()%>/script/cart.js"></script>
+
   </body>
 </html>
