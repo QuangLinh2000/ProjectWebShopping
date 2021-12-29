@@ -33,6 +33,7 @@
         <div class="container-center__form container-center--signup">
             <form id="my-form" action="/Shopping/signin-signup" method="post" class="form">
                 <h2 class="form__title">Đăng ký</h2>
+                <h4 id="error-signin" class="err-text" style="visibility: hidden"> Tài khoản đã tồn tại</h4>
                 <% String checkRegister = (String) request.getAttribute("register");
                  if(checkRegister != null){%>
                 <input value="<%=request.getParameter("userName")%>" name="userName" required type="text" placeholder="Tên đăng nhập" class="input" id="exampleInputName1"/>
@@ -54,6 +55,7 @@
         <div class="container-center__form container-center--signin content-agile2">
             <form action="/signin-signup" method="POST" class="form">
                 <h2 class="form__title">Đăng nhập</h2>
+                <h4 id="error-signup" class="err-text" style="visibility: hidden"> Tài khoản đã tồn tại</h4>
                 <input type="text" placeholder="Tên đăng nhập" name="userName" class="input" id="email"
                        title="Vui lòng nhập UserName" required=""/>
                 <input type="password" placeholder="Mật khẩu" name="pass" class="input" id="password1"
@@ -87,7 +89,8 @@
     const container = document.querySelector(".container-center");
     <%if(checkRegister != null){%>
     container.classList.add("right-panel-active");
-
+    document.getElementById("error-signin").style.visibility = "visible";
+    document.getElementById("error-signin").textContent ="tai khoan da ton tai";
     <%}else{%>
     container.classList.remove("right-panel-active");
 

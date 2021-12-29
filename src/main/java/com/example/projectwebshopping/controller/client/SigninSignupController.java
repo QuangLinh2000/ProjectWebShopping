@@ -22,6 +22,7 @@ public class SigninSignupController extends HttpServlet {
        String password= request.getParameter("password");
        String email= request.getParameter("email");
        IUserService userService = new UserService();
+       String path = request.getServletPath();
       if(userService.isValidUser(userName,password,email)){
           String text = "<a>xac thuc</a>";
           userService.sendMail(email,"Xac thuc tai khoan shop ITYSUKI",text);
