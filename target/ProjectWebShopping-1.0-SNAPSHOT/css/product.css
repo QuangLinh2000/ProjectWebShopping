@@ -1,0 +1,248 @@
+:root {
+    --transition-time: 0.3s;
+}
+.contain {
+    display: flex;
+    width: 100%;
+}
+.left-contain {
+    flex: 1;
+    margin-top: 55px;
+}
+.right-contain {
+    flex: 4;
+    margin-left: 20px;
+}
+.right-contain-top {
+    display: flex;
+    justify-content: space-between;
+}
+.right-contain-title {
+    margin-left: 20px;
+}
+.right-contain-sort {
+    margin-right: 20px;
+}
+.right-contain-body {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.right-contain-item {
+    flex-basis: 300px;
+    height: 600px;
+}
+.right-contain-item-box-image {
+    position: relative;
+}
+.right-contain-item-box-image img {
+    width: 100%;
+    height: 400px;
+}
+.right-contain-item-icon-buy {
+    position: absolute;
+    width: 100px;
+    height: 0;
+    background-color: #000000;
+    opacity: 0.6;
+    bottom: 10px;
+    display: flex;
+    left: calc(50% - 50px);
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+    line-height: 45px;
+    transition: var(--transition-time) ease;
+}
+.right-contain-item-icon-buy a {
+    width: 100%;
+}
+.right-contain-item-icon-buy p {
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+}
+.right-contain-item-icon-search {
+    position: absolute;
+    width: 0px;
+    height: 45px;
+    background-color: #000000;
+    opacity: 0.6;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    transition: var(--transition-time) ease;
+}
+.right-contain-item-icon-search img {
+    width: 25px;
+    height: 25px;
+    margin: auto;
+}
+
+.right-contain-item-icon-basket {
+    cursor: pointer;
+    position: absolute;
+    width: 0px;
+    height: 45px;
+    background-color: #000000;
+    opacity: 0.6;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    transition: var(--transition-time) ease;
+}
+.right-contain-item-icon-basket img {
+    width: 25px;
+    height: 25px;
+    margin: auto;
+}
+.right-contain-item-image-small {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.right-contain-item-image-small-item {
+    flex-basis: 35px;
+    height: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.right-contain-item-description {
+    text-align: center;
+    z-index: 1;
+    font-weight: 600;
+    padding-top: 20px;
+    font-size: 18px;
+}
+.right-contain-item-price {
+    text-align: center;
+    z-index: 1;
+    color: red;
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 18px;
+}
+.right-contain-item:hover .right-contain-item-image-small-item {
+    height: 50px;
+}
+.right-contain-item:hover .right-contain-item-icon-buy {
+    height: 45px;
+}
+.right-contain-item:hover .right-contain-item-icon-search {
+    width: 50px;
+}
+.right-contain-item:hover .right-contain-item-icon-search img {
+    width: 25px;
+}
+.right-contain-item:hover .right-contain-item-icon-basket {
+    width: 50px;
+}
+.right-contain-item:hover .right-contain-item-icon-basket img {
+    width: 25px;
+}
+
+/*-------------------------- left menu -------------------------------------- */
+.left-contain-item-title {
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 530;
+
+    border-bottom: solid 1px black;
+    margin-bottom: 0;
+}
+.left-contain-item-box-content-color {
+    overflow: auto;
+}
+.left-contain-item-box-content-color-item {
+    float: left;
+    display: flex;
+    width: 50%;
+    margin-top: 25px;
+}
+.left-contain-item-box-content-color-item p {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    margin-left: 10px;
+}
+.left-contain-item-box-content-size {
+    overflow: auto;
+    margin-top: 25px;
+}
+.left-contain-item-box-content-size-item {
+    float: left;
+    width: 50%;
+    margin-bottom: 20px;
+}
+.left-contain-item-box-content {
+    margin-top: 25px;
+}
+.left-contain-item-box-content input,
+label {
+    margin-bottom: 20px;
+}
+.left-contain-item-box-content-color-item input {
+    margin-top: 3px;
+}
+/* ------------can chinh right-------------- */
+
+.right-contain-title p {
+    font-size: 25px;
+    font-weight: 530;
+    margin: 0;
+    margin-top: 40px;
+    margin-left: 30px;
+}
+.right-contain-top {
+    position: relative;
+}
+.right-contain-sort {
+    /* position: absolute; */
+    /* right: 0px;
+    bottom: 5px; */
+}
+#cars {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.right-contain-sort label {
+    margin-right: 15px;
+}
+/* ---------------- */
+.pagination {
+    width: 100%;
+    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+}
+.pagination a {
+    display: block;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.pagination a.active {
+    background-color: gray;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+@media screen and (max-width: 768px) {
+    .contain {
+        flex-direction: column;
+    }
+    .right-contain-top {
+        align-items: center;
+        row-gap: 20px;
+        flex-direction: column;
+    }
+}
