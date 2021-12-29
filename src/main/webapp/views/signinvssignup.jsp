@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
 </head>
 <body>
+
+<%--<form method="post" action="">--%>
+<%--    <input style="visibility: hidden" type="text" name="verificationCode" value="" placeholder="Username" required >--%>
+<%--    <button type="submit">Xác Thực</button>--%>
+<%--    --%>
+<%--</form>--%>
+
 <header>
     <div class="header-top-wrap-logo">
         <h1>

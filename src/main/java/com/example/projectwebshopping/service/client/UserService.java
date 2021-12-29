@@ -9,8 +9,8 @@ import java.util.Properties;
 
 public class UserService implements IUserService {
     @Override
-    public boolean isValidUser(String username, String password,String email) {
-        return UserDAO.getInstance().isValidUser(username, password,email);
+    public boolean isValidUser(String username, String password,String email,String vetificationCode) {
+        return UserDAO.getInstance().isValidUser(username, password,email,vetificationCode);
     }
 
     @Override

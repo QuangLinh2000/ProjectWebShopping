@@ -20,7 +20,7 @@ public class UserDAO {
         return instance;
     }
 
-    public boolean isValidUser(String username, String password,String mail) {
+    public boolean isValidUser(String username, String password,String mail,String vetificationCode) {
         try {
             Connection connection =  DataSourceConnection.getConnection();
             //inser sql user
@@ -32,7 +32,7 @@ public class UserDAO {
             preparedStatement.setString(3,password);
             preparedStatement.setString(4,mail);
             preparedStatement.setInt(5,1);
-            preparedStatement.setString(6,UUID.randomUUID().toString());
+            preparedStatement.setString(6,vetificationCode);
             preparedStatement.setLong(7, System.currentTimeMillis());
             preparedStatement.setInt(8,1);
             if(preparedStatement.executeUpdate()==1){
