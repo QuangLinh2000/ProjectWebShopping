@@ -5,7 +5,7 @@
   Time: 3:13 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <header id="header">
     <div id="header-first">
         <div class="container">
