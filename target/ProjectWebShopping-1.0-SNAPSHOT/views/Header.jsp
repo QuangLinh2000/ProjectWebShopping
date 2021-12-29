@@ -474,3 +474,8 @@
     </div>
 
 </header>
+
+<%--scroll top--%>
+<a href="#" class="scrollup show-scroll" id="scroll-up">
+    <i class="fa-solid fa-arrow-up"></i>
+</a>

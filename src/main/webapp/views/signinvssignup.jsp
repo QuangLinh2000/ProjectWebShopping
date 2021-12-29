@@ -31,20 +31,30 @@
     <div class="container-center right-panel-active">
         <!-- Sign Up -->
         <div class="container-center__form container-center--signup">
-            <div class="form">
+            <form id="my-form" action="/Shopping/signin-signup" method="post" class="form">
                 <h2 class="form__title">Đăng ký</h2>
-                <input type="text" placeholder="Tên đăng nhập" class="input" id="exampleInputName1"/>
-                <input type="email" placeholder="Email" class="input" id="exampleInputEmail"/>
-                <input type="password" placeholder="Mật khẩu" class="input" id="exampleInputPassword1"/>
-                <input type="password" placeholder="Nhập lại mật khẩu" class="input" id="exampleConfirmPassword1"/>
-                <button class="btn" onclick="">Đăng ký</button>
-            </div>
+                <% String checkRegister = (String) request.getAttribute("register");
+                 if(checkRegister != null){%>
+                <input value="<%=request.getParameter("userName")%>" name="userName" required type="text" placeholder="Tên đăng nhập" class="input" id="exampleInputName1"/>
+                <input value="<%=request.getParameter("email")%>" name="email" required type="email" placeholder="Email" class="input" id="exampleInputEmail"/>
+                <input name="password" required type="password" placeholder="Mật khẩu" class="input" id="exampleInputPassword1"/>
+                <input name="conpassword" required type="password" placeholder="Nhập lại mật khẩu" class="input" id="exampleConfirmPassword1"/>
+
+                <%}else{%>
+                <input name="userName" required type="text" placeholder="Tên đăng nhập" class="input" id="exampleInputName1"/>
+                <input  name="email" required type="email" placeholder="Email" class="input" id="exampleInputEmail"/>
+                <input name="password" required type="password" placeholder="Mật khẩu" class="input" id="exampleInputPassword1"/>
+                <input name="conpassword" required type="password" placeholder="Nhập lại mật khẩu" class="input" id="exampleConfirmPassword1"/>
+
+                <%}%>
+               <a class="btn" onclick="rigister()">Đăng ký</a>
+            </form>
         </div>
         <!-- Sign In -->
         <div class="container-center__form container-center--signin content-agile2">
-            <form action="" method="POST" class="form">
+            <form action="/signin-signup" method="POST" class="form">
                 <h2 class="form__title">Đăng nhập</h2>
-                <input type="text" placeholder="Tên đăng nhập" name="name" class="input" id="email"
+                <input type="text" placeholder="Tên đăng nhập" name="userName" class="input" id="email"
                        title="Vui lòng nhập UserName" required=""/>
                 <input type="password" placeholder="Mật khẩu" name="pass" class="input" id="password1"
                        title="Vui Lòng nhập password" required=""/>
@@ -75,13 +85,39 @@
     const signInBtn = document.getElementById("signIn");
     const signUpBtn = document.getElementById("signUp");
     const container = document.querySelector(".container-center");
+    <%if(checkRegister != null){%>
+    container.classList.add("right-panel-active");
+
+    <%}else{%>
     container.classList.remove("right-panel-active");
+
+    <%}%>
     signInBtn.addEventListener("click", () => {
         container.classList.remove("right-panel-active");
     });
     signUpBtn.addEventListener("click", () => {
         container.classList.add("right-panel-active");
     });
+    // window.addEventListener("load",function() {
+    //     document.getElementById('my-form').addEventListener("submit",function(e) {
+    //         e.preventDefault(); // before the code
+    //
+    //     });
+    // });
+    function rigister() {
+        var pass = document.getElementById("exampleInputPassword1").value;
+        var repass = document.getElementById("exampleConfirmPassword1").value;
+        if (pass !== repass ) {
+            //set border  red solid
+            document.getElementById("exampleInputPassword1").style.border = "1px solid red";
+            document.getElementById("exampleConfirmPassword1").style.border = "1px solid red";
+
+
+        } else {
+             document.getElementById("my-form").submit();
+        }
+    }
+
 </script>
 </body>
 </html>

@@ -60,16 +60,7 @@ productID:'AK62546',price:1399000,sale:0,available:0, Productsize:[size1={size:'
 // danh sách các sản phẩm liên quan
 var listRelatedProduct=[product0,product1,product2,product3,product4,product5];
 // thiết lập danh sách các hình ảnh mô tả của sản phẩm
-function settingImageLeft(product){
-    let imageListLeft=document.querySelector(".image__left__list")
-    for (var i=0;i<product.image.length;i++){
-        var imageItem=document.createElement('li')
-        imageItem.setAttribute('class','image__left__item')
-        imageItem.innerHTML=`<img class="image__left__element" src="../img/${product.productID}/${i+1}.jpg" alt="Image ${i+1}">`
-        imageListLeft.appendChild(imageItem)
-    }
-}
-settingImageLeft(product)
+
 //chỉnh lại view khi kích thước trang thay đổi
 let slideWrap=document.querySelector(".wrap__list__box");
 function resizeWindow(){
@@ -93,48 +84,14 @@ else {
 resizeWindow();
 // điều chỉnh khu vực các sản phẩm liên quan dựa vào class name
 function replaceClassWrap(className){
-
-slideWrap.innerHTML="";
-settingRelatedProduct(listRelatedProduct,className)
+    let wrapElement=slideWrap.getElementsByTagName('li');
+    for (let i = 0; i < wrapElement.length ; i++) {
+        wrapElement[i].classList=className;
+    }
 }
 
 // hàm này sẽ chỉnh lại số thành phần trong list các sản phẩm liên quan dựa vào tên class truyền vào
-function settingRelatedProduct(listRelatedProduct,className){
-    for(var i=0;i<listRelatedProduct.length;i++){
-        var related=listRelatedProduct[i]
-        let wrapElement=document.createElement('li');
-        wrapElement.classList+=className+"";
-        wrapElement.innerHTML=`<div class="wrap__element__image"> <img src="../img/${related.productID}/${related.image[0]}" alt="">
-                    <div class="clear-fix">
-                        <a href="https://nemshop.vn/collections/tat-ca-san-pham/products/ao-khoac-2710" class="detail__link"></a>
-                        <div class="advise-box">
-                        <a href="" class="advise__button text-center">TƯ VẤN</a>
-                        </div>
-                    </div>
-                    ` + checkAvailable(related)+`
-                    </div>
-                    <div class="wrap__title">
-                        <a class="text-center" href=""> ${related.title}</a>
-                    </div>
-                    <div class="wrap__price text-center">
-                    `+ checkSale(related)+`            
-                </div>`;
-                        `+ checkSale(related)'+
 
-                </div>
-                    <div class="wrap__sale-off text-center">
-                        ${related.sale}%
-                    </div>
-
-                    ` + checkAvailable(related);
-          
-
-                    slideWrap.appendChild(wrapElement)
-    }
-
-
-}
-settingRelatedProduct(listRelatedProduct,"wrap__element")
 
 // Kiểm tra xem sản phẩm liên quan có giảm giá hay không
 function checkSale(relatedProduct){

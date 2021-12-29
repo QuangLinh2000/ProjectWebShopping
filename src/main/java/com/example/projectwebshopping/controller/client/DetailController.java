@@ -1,6 +1,5 @@
 package com.example.projectwebshopping.controller.client;
 
-
 import modal.beans.Product;
 import dao.managerProductDetail;
 
@@ -12,11 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-@WebServlet(name = "detailServlet", value = "/detailServlet")
-public class detailController extends HttpServlet {
+@WebServlet(name = "detailController", value = "/detail")
+public class DetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-doPost(request,response);
+        doPost(request,response);
     }
 
     @Override
