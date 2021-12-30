@@ -12,11 +12,7 @@ import java.util.ArrayList;
 
 
 @WebServlet(name = "detailController", value = "/detail")
-<<<<<<< HEAD:src/main/java/com/example/projectwebshopping/controller/client/detailController.java
-public class detailController extends HttpServlet {
-=======
 public class DetailController extends HttpServlet {
->>>>>>> a6ef03fb6ef6107a45a0b6d6f85595e7e9c0ea25:src/main/java/com/example/projectwebshopping/controller/client/DetailController.java
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
@@ -29,6 +25,7 @@ public class DetailController extends HttpServlet {
         request.setAttribute("relatedProduct",listRelatedProduct);
         request.setAttribute("productDetail",product);
         request.getRequestDispatcher("/views/detail.jsp").forward(request,response);
+
 
     }
 }

@@ -57,13 +57,13 @@
                     <c:forEach items="${productDetail.listImage}" var="i" >
                     <li class="image__left__item">
 
-                       <img onclick="leftToRightSupport(this)" class="image__left__element" src="<%=request.getContextPath()%>/img/${productDetail.id}/${i}">
+                       <img onclick="leftToRightSupport(this);imageZoom();" class="image__left__element" src="<%=request.getContextPath()%>/img/${productDetail.id}/${i}">
                    </li>
                     </c:forEach>
 
                 </ul>
-                <div class="up text-center" onclick="changeImage(-1)"><i class="fas fa-angle-up"></i></div>
-                <div class="down text-center" onclick="changeImage(1)"><i class="fas fa-angle-down"></i></div>
+                <div class="up text-center" onclick="changeImage(-1,<%=product.getListImage().length%>)"><i class="fas fa-angle-up"></i></div>
+                <div class="down text-center" onclick="changeImage(1,<%=product.getListImage().length%>)"><i class="fas fa-angle-down"></i></div>
             </div>
 
         </div>
@@ -220,8 +220,20 @@
                                 <a class="text-center" href=""> ${item.title}</a>
                             </div>
                             <div class="wrap__price text-center">
-                                `+ checkSale(related)+`
-
+                                <c:choose>
+                                    <c:when test="<%=product.getSale()>0%>">
+                                        <span class="curren-price"><%=convertPrice(product.getPrice()-(product.getPrice()*product.getSale()/100))%>₫
+                        </span>
+                                        <span class="origin-price">
+                            <s><%=convertPrice(product.getPrice())%>₫</s>
+                        </span>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <span class="curren-price">
+                            <s><%=convertPrice(product.getPrice())%>₫</s>
+                        </span>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </li>
                         </c:forEach>

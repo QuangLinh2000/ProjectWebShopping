@@ -1,65 +1,14 @@
 
-var product={title: 'Đầm tiệc hồng phối sequin D32169', trademark:'Thương Hiệu: NEM',
-productID:'321691492193020636',price:1493000,sale:20,available:5, Productsize:[size1={size:'Size 6',status:'off'},size1={size:'Size 8',status:'on'},size3={size:'Size 10',status:'on'}]
-                    , color:[color1 ={idColor:'rgb(224 181 165)',status:'on'}], material:'Vải tafta cao cấp',
-                    type:'Đầm tiệc 2 dây dáng ôm, dài qua gối, tone màu đen hồng nhạt, eo đính nơ bản to, kết hợp tà chất liệu voan sequin'
-                    , match:'Đi làm, sự kiện, hay đi dạo phố, tạo vẻ trẻ trung nữ tính cho người mặc.'
-                    , producBranch:'NEM LUXURY', model:'Mặc sản phẩm size 2',
-                    image:['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg']
-};
 
 
 let mainImgTag, mainImg,list, lens, result;
+result=document.querySelector(".img-zoom-result")
+lens=document.querySelector(".img-zoom-lens")
 let amount=1;
 let indexOfImage=0;
 let indexOfWrapSlide=0;
 let numWrapSlide=4;
 //Khởi tạo các sản phẩm liên quan, thay đổi dựa theo base Date
-var product0={title: 'ÁO PHAO ĐỎ AK66106', trademark:'Thương Hiệu: NEM',
-productID:'661061872034020682',price:799000,sale:50,available:0, Productsize:[size1={size:'Size 2',status:'off'},size1={size:'Size 4',status:'off'},size1={size:'Size 6',status:'on'},size1={size:'Size 8',status:'on'}]
-                    , color:[color1 ={idColor:'#ff0000',status:'off'},color2 ={idColor:'rgb(51 83 221)',status:'on'}], material:'',
-                    type:'Áo khoác phao dáng ngắn, tone màu đỏ trơn, thiết kế tay bo trẻ trung'
-                    , match:'Đi làm, sự kiện, hay đi dạo phố, tạo vẻ thanh lịch cho người mặc.'
-                    , producBranch:' NEM NEW', model:'Mặc sản phẩm size 2',
-                    image:['1.jpg','image2','image3','image4','image5']};
-var product1={title: 'ĐẦM HOA XANH D00869', trademark:'Thương Hiệu: NEM',
-productID:'Dam-hoa-xanh-D00869',price:1559000,sale:20,available:0, Productsize:[size1={size:'Size 6',status:'off'},size1={size:'Size 8',status:'on'}]
-                    , color:[color1 ={idColor:'rgb(224 181 165)',status:'off'},color2 ={idColor:'rgb(51 83 221)',status:'on'}], material:'Vải tafta cao cấp',
-                    type:'Đầm tiệc 2 dây dáng ôm, dài qua gối, tone màu đen hồng nhạt, eo đính nơ bản to, kết hợp tà chất liệu voan sequin'
-                    , match:'Đi làm, sự kiện, hay đi dạo phố, tạo vẻ trẻ trung nữ tính cho người mặc.'
-                    , producBranch:'NEM LUXURY', model:'Mặc sản phẩm size 2',
-                    image:['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg']}
-var product2={title: 'Áo len dài tay AL62326', trademark:'Thương Hiệu: NEM',
-productID:'AL62326',price:1493000,sale:50,available:0, Productsize:[size1={size:'Size 6',status:'off'},size1={size:'Size 8',status:'on'}]
-                    , color:[color1 ={idColor:'rgb(224 181 165)',status:'on'}], material:'Vải len cao cấp',
-                    type:' ​áo len dài tay cổ V, tone màu hồng nhạt , phối khuy '
-                    , match:'đi làm, sự kiện, hay đi dạo phố, tạo vẻ thanh lịch cho người mặc.'
-                    , producBranch:'NEM NEW', model:'Mặc sản phẩm size 2',
-                    image:['1.jpg','image2','image3','image4','image5']}
-var product3={title: 'ÁO KHOÁC THIẾT KẾ AK31582', trademark:'Thương Hiệu: NEM',
-productID:'AK31582',price:2299000,sale:50,available:10, Productsize:[size1={size:'Size 6',status:'off'},size1={size:'Size 8',status:'on'}]
-                    , color:[color1 ={idColor:'#663537',status:'on'}], material:'vải tổng hợp cao cấp mềm mại, không nhăn bền màu.',
-                    type:'áo khoác thiết kế dáng dài cổ 2 ve, họa tiết zic zac '
-                    , match:'đi làm, đi sự kiện, hay đi dạo phố, kết hợp quần hay chân váy, tạo vẻ trẻ trung hiện đại cho người mặc.'
-                    , producBranch:'NEW NEM', model:'Mặc sản phẩm size 2',
-                    image:['1.jpg','image2','image3','image4','image5']}
-var product4={title: 'ĐẦM NHUNG ĐỎ D25432', trademark:'Thương Hiệu: NEM',
-productID:'D25432',price:1892000,sale:84,available:10, Productsize:[size1={size:'Size 6',status:'off'},size1={size:'Size 8',status:'on'}]
-                    , color:[color1 ={idColor:'#f00',status:'on'}], material:' vải nhung cao cấp',
-                    type:'Đầm thiết kế dáng chữ A dài qua gối, tay dài, tone màu đỏ trơn'
-                    , match:'đi làm, đi sự kiện, hay đi dạo phố,tạo vẻ trẻ trung quyến nữ tính cho người mặc.'
-                    , producBranch:'NEM NEW', model:'Mặc sản phẩm size 2',
-                    image:['1.jpg','image2','image3','image4','image5']}
-var product5={title: 'ÁO KHOÁC LEN HỌA TIẾT AK62546', trademark:'Thương Hiệu: NEM',
-productID:'AK62546',price:1399000,sale:0,available:0, Productsize:[size1={size:'Size 6',status:'off'},size1={size:'Size 8',status:'on'}]
-                    , color:[color1 ={idColor:'rgb(224 181 165)',status:'off'},color2 ={idColor:'rgb(51 83 221)',status:'on'}], material:'vải len cao cấp',
-                    type:'Áo khoác len khuy cài trước, cổ V, kết hợp họa tiết bắt mắt'
-                    , match:'Đi làm, sự kiện, hay đi dạo phố, tạo vẻ trẻ trung nữ tính cho người mặc.'
-                    , producBranch:'NEM NEW', model:'Mặc sản phẩm size 2',
-                    image:['1.jpg']};
-// danh sách các sản phẩm liên quan
-var listRelatedProduct=[product0,product1,product2,product3,product4,product5];
-// thiết lập danh sách các hình ảnh mô tả của sản phẩm
 
 //chỉnh lại view khi kích thước trang thay đổi
 let slideWrap=document.querySelector(".wrap__list__box");
@@ -94,15 +43,7 @@ function replaceClassWrap(className){
 
 
 // Kiểm tra xem sản phẩm liên quan có giảm giá hay không
-function checkSale(relatedProduct){
-if(relatedProduct.sale>0) return `<span class="curren-price">`+convertPrice(relatedProduct.price*relatedProduct.sale/100)+`₫
-                        </span>
-                        <span class="origin-price">
-                            <s>`+convertPrice(relatedProduct.price)+`₫</s>
-                        </span>`
-                        else return `<span class="curren-price">`+convertPrice(relatedProduct.price)+`₫
-                        </span>`;
-}
+
 // Kiểm tra có còn hàng hay không 
 function checkAvailable(product){
 if(product.available==0) return `
@@ -158,6 +99,7 @@ amountLabel.innerHTML=amount;
 
 
 function createaE(product){
+
     let inforHead=document.querySelector(".infor__head");
     inforHead.innerHTML=`<div class="product__title">
             <h1>${product.title}</h1>
@@ -263,41 +205,15 @@ else {
     <span> <strong>Thông tin người mẫu: </strong>${product.model}</span> `;
 
 }
-createaE(product)
-//tạo thẻ len và result bên trong imageRight
-mainImgTag=document.getElementById("image__right");
-lens=document.createElement('div');
-    lens.setAttribute('class','img-zoom-lens');
-    mainImgTag.appendChild(lens);
-    result=document.createElement('div');
-    result.setAttribute('class','img-zoom-result')
-    mainImgTag.appendChild(result);
-list=document.getElementsByClassName("image__left__element");
- // Thêm sự kiện vào list ảnh
-    for(var j=0; j<list.length;j++){
-        var item=list[j];
-        item.onclick=function(){
-            leftToRightSupport(this.outerHTML);// chuyển ảnh sang phải
 
-            imageZoom() // load lại result
-
-        };
-
-    } 
 showList(indexOfImage);
 // khởi tạo thuộc tính ban đầu cho thẻ khi mới load trang
-leftToRightSupport('<img class="image__right__element" src="../img/321691492193020636/1.jpg" alt="Front">');
-
     // nhấn ảnh bên trái thì bên phải đổi ảnh
-    console.log(indexOfImage)
-function changeImage(index1){
+function changeImage(index1,length){
     indexOfImage += index1
-    if(indexOfImage>product.image.length-2) indexOfImage=0;
+    if(indexOfImage>length-2) indexOfImage=0;
     if(indexOfImage<0) indexOfImage=product.image.length-2;
-    console.log(indexOfImage)
     showList(indexOfImage);
-    
-    
 }
 // sự kiện pull up(down) trong danh sách ảnh
 function showList(index1){
@@ -325,11 +241,12 @@ function imageZoom() {
     cx =3;
 
     cy = 3;
-    mainImg=mainImgTag.firstElementChild.firstChild;
+
+    mainImg=document.getElementById("image__right__element--img");
 
     result.style.backgroundImage="url('" + mainImg.src + "')";
 
-    result.style.backgroundSize = (mainImg.width * cx) + "px " + (mainImg.height * cy) + "px";
+    result.style.backgroundSize = (mainImg.style.width * cx) + "px " + (mainImg.style.height * cy) + "px";
 
       /*execute a function when someone moves the cursor over the image, or the lens:*/
     lens.addEventListener("mousemove", moveLens);
