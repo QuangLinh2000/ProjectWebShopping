@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
 <header id="header">
     <div id="header-first">
         <div class="container">
@@ -20,29 +19,35 @@
                         <a href="#"><img src="<%=request.getContextPath()%>/img/logo.png" alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
                     </h1>
                 </div>
+
                 <div class="header-top-list">
+                    <div class="nav-item">
+                        <a class="nav-link btn-icon" href="#"> <i class="fa-regular fa-bell"></i></a>
+                    </div>
                     <div>
                         <a href="#">
                             <i class="fa-solid fa-cart-shopping icon-header"></i>
                             Giỏ hàng(<span class="cart-count color-red">0</span>)
                         </a>
                     </div>
+                    <%String username = (String) session.getAttribute("isusername");
+                    if(username == null){%>
                     <div class="btn-signup">
                         <a href="<%=request.getContextPath()%>/signin" id="login-a" class="color-red">Đăng nhập </a>
                         <a href="<%=request.getContextPath()%>/signup">/ Đăng ký</a>
                     </div>
-                    <div class="nav-item">
-                        <a class="nav-link btn-icon" href="#"> <i class="fa-regular fa-bell"></i></a>
-                    </div>
+                    <%}else{%>
                     <div class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#"> <img class="img-xs rounded-circle"
-                                src="${pageContext.request.contextPath}/img/avatar.png" alt="User"></a>
+                                                                                            src="${pageContext.request.contextPath}/img/avatar.png" alt="User"></a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
                             <a class="dropdown-item" href="page-settings-1.html">Giỏ hàng</a>
                             <a class="dropdown-item text-danger" href="#">Đăng xuất</a>
                         </div>
                     </div>
+                    <%}%>
+
                 </div>
             </div>
             <nav class="nav-bar">

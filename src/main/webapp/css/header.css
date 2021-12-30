@@ -276,7 +276,7 @@ body {
     animation: slide-down 0.5s;
 }
 #header-scroll .header-top-list {
-    width: none;
+    width: auto;
 }
 
 @keyframes slide-down {
@@ -401,13 +401,13 @@ body {
     transform: translateX(0);
 }
 /*avatar*/
-img-xs{
+.img-xs{
     width: 40px;
     height: 40px;
     border: 2px solid #eee;
 }
 .rounded-circle{
-    border-radius: 50%;!important;
+    border-radius: 50% !important;
 }
 .dropdown {
     position: relative;

@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.projectwebshopping.model.client.BoSuaTap" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 12/29/2021
@@ -6,6 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +21,9 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
     <!-- ====================FONT AWESOME ============================= -->
     <script src="https://kit.fontawesome.com/936c874066.js" crossorigin="anonymous"></script>
+    <%List<BoSuaTap> listBST = (List<BoSuaTap>) request.getAttribute("listBST");
+     BoSuaTap boSuaTap1 = listBST.get(0);
+     BoSuaTap boSuaTap2 = listBST.get(1);%>
 
 </head>
 <body>
@@ -26,26 +32,14 @@
     <div id="main-slideshow">
         <div class="slideshow-content" id="ml-slide">
             <!-- slide1 -->
-            <div class="mySlides">
-                <img src="<%=request.getContextPath()%>/img/slider1.jpg" alt="">
-            </div>
-            <!-- slide2 -->
-            <div class="mySlides">
-                <img src="<%=request.getContextPath()%>/img/slider2.jpg" alt="">
 
-            </div>
-            <!-- slide 3 -->
-            <div class="mySlides">
-                <img src="<%=request.getContextPath()%>/img/slider3.jpg" alt="">
-            </div>
-            <!-- slide 4 -->
-            <div class="mySlides">
-                <img src="<%=request.getContextPath()%>/img/slider4.jpg" alt="">
-            </div>
-            <!-- slide 5 -->
-            <div class="mySlides">
-                <img src="<%=request.getContextPath()%>/img/slider5.jpg" alt="">
-            </div>
+
+            <c:forEach var="p" items="${listQC}">
+                <div class="mySlides">
+                    <a href="<%=request.getContextPath()%>/${p.url}"><img src="${p.hinhAnh}" alt=""></a>
+                </div>
+
+            </c:forEach>
         </div>
         <div class="slick">
             <div onclick="plusDivs(-1)">
@@ -67,17 +61,15 @@
 <section id="home-collection">
     <div class="container">
         <div class="collection-item" id="collection-first">
-            <div class="collection-banner">
-                <a href="#"></a>
+            <div class="collection-banner" style="background-image: url(<%=boSuaTap1.getHinhAnh()%>)">
+                <a href="<%=boSuaTap1.getLinnk()%>"></a>
             </div>
             <div class="collection-main">
                 <h2 class="section-title margin-right-5">
-                    SEVEN.AM - SHALL WE DANCE
+                   <%=boSuaTap1.getTieuDe()%>
                 </h2>
                 <p class="subtile-section">
-                    Shall We DanceVũ khúc của mùa thu như đang nhảy múa trên những thiết kế
-                    đầy cuốn hút của Shall We Dance với gam màu nâu vàng chủ đạo cùng họa
-                    tiết cách điệu trang nhã.                            </p>
+                    <%=boSuaTap1.getMota()%>                          </p>
 
                 <div class="collection-slide">
                     <div class="collection-content">
@@ -273,12 +265,10 @@
 
             <div class="collection-main">
                 <h2 class="section-title margin-right-5">
-                    SEVEN.AM - SHALL WE DANCE
+                    <%=boSuaTap2.getTieuDe()%>
                 </h2>
                 <p class="subtile-section">
-                    Shall We DanceVũ khúc của mùa thu như đang nhảy múa trên những thiết kế
-                    đầy cuốn hút của Shall We Dance với gam màu nâu vàng chủ đạo cùng họa
-                    tiết cách điệu trang nhã.                            </p>
+                    <%=boSuaTap2.getMota()%>                          </p>
 
                 <div class="collection-slide">
                     <div class="collection-content">
@@ -492,13 +482,13 @@
 
                 <!-- btn -->
                 <div>
-                    <a href="#" class="btn">
+                    <a href="<%=boSuaTap2.getLinnk()%>" class="btn">
                         xem thêm
                     </a>
                 </div>
             </div>
-            <div class="collection-banner">
-                <a href="#"></a>
+            <div class="collection-banner" style="background-image: url(<%=boSuaTap2.getHinhAnh()%>)">
+                <a href="<%=boSuaTap2.getLinnk()%>"></a>
             </div>
 
         </div>

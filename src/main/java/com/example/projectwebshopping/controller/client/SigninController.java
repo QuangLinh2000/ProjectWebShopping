@@ -29,7 +29,7 @@ public class SigninController extends HttpServlet {
        IUserService userService = new UserService();
        if(username != null && password != null &&userService.checkLogin(username, password)){
            HttpSession session = request.getSession();
-           session.setAttribute("username", username);
+           session.setAttribute("isusername", username);
            response.sendRedirect("/Shopping/home");
 
        }else{
