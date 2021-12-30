@@ -20,12 +20,6 @@
 </head>
 <body>
 
-<%--<form method="post" action="">--%>
-<%--    <input style="visibility: hidden" type="text" name="verificationCode" value="" placeholder="Username" required >--%>
-<%--    <button type="submit">Xác Thực</button>--%>
-<%--    --%>
-<%--</form>--%>
-
 <header>
     <div class="header-top-wrap-logo">
         <h1>
@@ -38,8 +32,9 @@
     <div class="container-center right-panel-active">
         <!-- Sign Up -->
         <div class="container-center__form container-center--signup">
-            <form id="my-form" action="/Shopping/signin-signup" method="post" class="form">
+            <form id="my-form" action="/Shopping/signup" method="post" class="form">
                 <h2 class="form__title">Đăng ký</h2>
+                <h6 id="error-signin" class="err-text" style="visibility: hidden"> Tài khoản đã tồn tại</h6>
                 <% String checkRegister = (String) request.getAttribute("register");
                  if(checkRegister != null){%>
                 <input value="<%=request.getParameter("userName")%>" name="userName" required type="text" placeholder="Tên đăng nhập" class="input" id="exampleInputName1"/>
@@ -59,12 +54,21 @@
         </div>
         <!-- Sign In -->
         <div class="container-center__form container-center--signin content-agile2">
-            <form action="/signin-signup" method="POST" class="form">
+            <form action="/Shopping/signin" method="POST" class="form">
                 <h2 class="form__title">Đăng nhập</h2>
-                <input type="text" placeholder="Tên đăng nhập" name="userName" class="input" id="email"
-                       title="Vui lòng nhập UserName" required=""/>
+                <h6 id="error-signup" class="err-text" style="visibility: hidden">Tài khoản hoặc mật khẩu không đúng</h6>
+                <% String checkLogin = (String) request.getAttribute("login_err");
+                    if(checkLogin != null){%>
+                <input value="<%=request.getParameter("username")%>" type="text" placeholder="Tên đăng nhập" name="username" class="input" id="email"
+                       title="Vui lòng nhập UserName" required/>
+
+                <%}else{%>
+                <input type="text" placeholder="Tên đăng nhập" name="username" class="input" id="email"
+                       title="Vui lòng nhập UserName" required/>
+                <%}%>
+
                 <input type="password" placeholder="Mật khẩu" name="pass" class="input" id="password1"
-                       title="Vui Lòng nhập password" required=""/>
+                       title="Vui Lòng nhập password" required/>
                 <a href="#" class="link">Quên mật khẩu</a>
                 <!-- <button class="btn">Đăng nhập</button> -->
                 <input type="submit" class="register btn" value="Đăng Nhập">
@@ -92,8 +96,18 @@
     const signInBtn = document.getElementById("signIn");
     const signUpBtn = document.getElementById("signUp");
     const container = document.querySelector(".container-center");
+    <%if(checkLogin != null){%>
+    document.getElementById("error-signup").style.visibility = "visible";
+    document.getElementById("error-signup").style.color ="red";
+
+    <%}else{%>
+    <%}%>
     <%if(checkRegister != null){%>
     container.classList.add("right-panel-active");
+    document.getElementById("error-signin").style.visibility = "visible";
+    document.getElementById("error-signin").textContent ="Tài khoản đã tồn tại";
+    document.getElementById("error-signin").style.color ="red";
+
 
     <%}else{%>
     container.classList.remove("right-panel-active");

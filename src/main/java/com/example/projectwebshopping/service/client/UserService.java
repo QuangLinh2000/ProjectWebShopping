@@ -9,8 +9,8 @@ import java.util.Properties;
 
 public class UserService implements IUserService {
     @Override
-    public boolean isValidUser(String username, String password,String email,String vetificationCode) {
-        return UserDAO.getInstance().isValidUser(username, password,email,vetificationCode);
+    public boolean isValidUser(String username, String email) {
+        return UserDAO.getInstance().isValidUser(username,email);
     }
 
     @Override
@@ -48,5 +48,20 @@ public class UserService implements IUserService {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public boolean isVerification(String idUser, String verificationCode) {
+        return UserDAO.getInstance().isVerification(idUser, verificationCode);
+    }
+
+    @Override
+    public boolean insertUser(String username, String password, String mail, String vetificationCode, String idUser) {
+        return UserDAO.getInstance().insertUser(username, password, mail, vetificationCode, idUser);
+    }
+
+    @Override
+    public boolean checkLogin(String username, String password) {
+        return UserDAO.getInstance().checkLogin(username, password);
     }
 }
