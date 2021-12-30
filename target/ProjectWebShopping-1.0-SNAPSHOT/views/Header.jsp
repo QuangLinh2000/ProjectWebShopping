@@ -39,15 +39,8 @@
                     <%}else{%>
                     <div class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#"> <img class="img-xs rounded-circle"
-<<<<<<< HEAD
                                                                                             src="${pageContext.request.contextPath}/img/avatar.png" alt="User"></a>
                         <div class="dropdown-menu dropdown-menu-end">
-=======
-                                                                                            src="../img/avatar.png" alt="User">
-                            <i class="fa-solid fa-caret-down "></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end" id="drop-top">
->>>>>>> 4c90a3123bd9ec90f67698179cbcc8e159900a80
                             <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
                             <a class="dropdown-item" href="page-settings-1.html">Giỏ hàng</a>
                             <a class="dropdown-item text-danger" href="#">Đăng xuất</a>

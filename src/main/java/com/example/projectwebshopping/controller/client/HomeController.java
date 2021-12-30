@@ -15,7 +15,6 @@ public class HomeController extends HttpServlet {
         IHomeService iHomeService = new HomeSerVice();
         request.setAttribute("listQC",iHomeService.getAllQC());
         request.setAttribute("listBST",iHomeService.getAllBS());
-        System.out.println(iHomeService.getAllQC().size());
         request.getRequestDispatcher("/views/index.jsp").forward(request, response);
     }
 
