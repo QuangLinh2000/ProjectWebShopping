@@ -23,7 +23,7 @@
 <header>
     <div class="header-top-wrap-logo">
         <h1>
-            <a href="./home.html"><img src="<%=request.getContextPath()%>/img/logo.png"
+            <a href="<%=request.getContextPath()%>/home"><img src="<%=request.getContextPath()%>/img/logo.png"
                                        alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
         </h1>
     </div>
@@ -36,7 +36,7 @@
                 <h2 class="form__title">Đăng ký</h2>
                 <h6 id="error-signin" class="err-text" style="visibility: hidden"> Tài khoản đã tồn tại</h6>
                 <% String checkRegister = (String) request.getAttribute("register");
-                 if(checkRegister != null){%>
+                 if(checkRegister != null && checkRegister.equals("Register_Err")){%>
                 <input value="<%=request.getParameter("userName")%>" name="userName" required type="text" placeholder="Tên đăng nhập" class="input" id="exampleInputName1"/>
                 <input value="<%=request.getParameter("email")%>" name="email" required type="email" placeholder="Email" class="input" id="exampleInputEmail"/>
                 <input name="password" required type="password" placeholder="Mật khẩu" class="input" id="exampleInputPassword1"/>
@@ -58,7 +58,7 @@
                 <h2 class="form__title">Đăng nhập</h2>
                 <h6 id="error-signup" class="err-text" style="visibility: hidden">Tài khoản hoặc mật khẩu không đúng</h6>
                 <% String checkLogin = (String) request.getAttribute("login_err");
-                    if(checkLogin != null){%>
+                    if(checkLogin != null && checkLogin.equals("login fall")){%>
                 <input value="<%=request.getParameter("username")%>" type="text" placeholder="Tên đăng nhập" name="username" class="input" id="email"
                        title="Vui lòng nhập UserName" required/>
 
@@ -97,16 +97,20 @@
     const signUpBtn = document.getElementById("signUp");
     const container = document.querySelector(".container-center");
     <%if(checkLogin != null){%>
+    <%if (checkLogin.equals("login fall")){%>
     document.getElementById("error-signup").style.visibility = "visible";
     document.getElementById("error-signup").style.color ="red";
-
+    <%}%>
     <%}else{%>
     <%}%>
     <%if(checkRegister != null){%>
     container.classList.add("right-panel-active");
+    <%if (checkRegister.equals("Register_Err")){%>
     document.getElementById("error-signin").style.visibility = "visible";
     document.getElementById("error-signin").textContent ="Tài khoản đã tồn tại";
     document.getElementById("error-signin").style.color ="red";
+    <%}%>
+
 
 
     <%}else{%>

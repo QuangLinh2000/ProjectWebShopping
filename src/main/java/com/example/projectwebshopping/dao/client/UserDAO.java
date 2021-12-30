@@ -106,6 +106,7 @@ public class UserDAO {
     public boolean checkLogin(String username,String password){
         try {
             Connection connection =  DataSourceConnection.getConnection();
+
             PreparedStatement preparedStatement = connection.prepareStatement("select * from users where username = ? and USERPASSWORD = ?");
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,hashPassword(password));

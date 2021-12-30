@@ -18,6 +18,7 @@ public class SigninController extends HttpServlet {
         if(code != null ){
            userService.isVerification(idUser, code);
         }
+        request.setAttribute("login_err","login");
         request.getRequestDispatcher("views/signinvssignup.jsp").forward(request, response);
     }
 

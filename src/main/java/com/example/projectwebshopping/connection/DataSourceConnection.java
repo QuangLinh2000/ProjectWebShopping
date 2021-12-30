@@ -14,12 +14,25 @@ public class DataSourceConnection {
 
     public static   Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection connection = pool.getConnectionFromPool();
+        synchronized (pool){
+            if(connection == null){
+                try {
+                    pool.wait();
+                    connection = pool.getConnectionFromPool();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         return connection;
     }
 
     public static  void returnConnection(Connection connection) {
         pool.returnConnectionToPool(connection);
+        synchronized (pool){
+            pool.notifyAll();
+        }
 
     }
 

@@ -27,8 +27,8 @@
                         </a>
                     </div>
                     <div class="btn-signup">
-                        <a href="./signinvssignup.html" id="login-a" class="color-red">Đăng nhập </a>
-                        <a href="./signinvssignup.html">/ Đăng ký</a>
+                        <a href="<%=request.getContextPath()%>/signin" id="login-a" class="color-red">Đăng nhập </a>
+                        <a href="<%=request.getContextPath()%>/signup">/ Đăng ký</a>
                     </div>
                 </div>
             </div>

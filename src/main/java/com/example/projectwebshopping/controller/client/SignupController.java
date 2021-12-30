@@ -17,6 +17,7 @@ public class SignupController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
+        request.setAttribute("register", "Register");
         request.getRequestDispatcher("views/signinvssignup.jsp").forward(request, response);
     }
 
