@@ -3,7 +3,7 @@ package modal.beans;
 
 
 import java.io.Serializable;
-
+import java.util.UUID;
 
 
 public class Product implements Serializable {

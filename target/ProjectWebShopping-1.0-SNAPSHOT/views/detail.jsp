@@ -1,29 +1,11 @@
 
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="modal.beans.Product" %>
-<%@ page import="modal.beans.ProductSize" %>
-<%@ page import="modal.beans.ProductColor" %>
+
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <% Product product=(Product)request.getAttribute("productDetail");
     ArrayList<Product> listRelated=(ArrayList<Product>)request.getAttribute("relatedProduct");
-    request.setCharacterEncoding("UTF-8");
-    response.setCharacterEncoding("UTF-8");
-    String trademark=product.getTrademark();
-    String title =product.getTitle();
-    String id=product.getId();
-    double price= product.getPrice();
-    double sale=product.getSale();
-    int available=product.getAvailable();
-    ProductSize[] listSizes= product.getListSize();
-    ProductColor[] listColor= product.getListColor();
-    String material=product.getMaterial();
-    String type=product.getType();
-    String match=product.getMatch();
-    String productBranch=product.getProductBranch();
-    String modelDescribe=product.getModelDescribe();
-    String[] listImage=product.getListImage();
-    int amount=0;
 
 %>
 <!DOCTYPE html>
@@ -35,6 +17,7 @@
     <title>Detail Product</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body onresize="resizeWindow()">
@@ -44,7 +27,7 @@
             <div id="image__right">
 
                 <div id="image__right__element">
-                    <img id="image__right__element--img" src="<%=request.getContextPath()%>/img/${productDetail.id}/<%=listImage[0]%>" >
+                    <img id="image__right__element--img" src="<%=request.getContextPath()%>/img/${productDetail.id}/<%=product.getListImage()[0]%>" >
                 </div>
                 <div class="img-zoom-lens">
                 </div>
@@ -85,22 +68,22 @@
                 <div class="product__price" >
 
                     <c:choose>
-                        <c:when test="<%=sale>0%>">
+                        <c:when test="<%=product.getSale()>0%>">
 
-                            <span><%=convertPrice(price-price*sale/100)%>₫</span>
-                            <div class='product__price__sale'><s><%=convertPrice(price)%>₫</s> </div>
+                            <span><%=convertPrice(product.getPrice()-product.getPrice()*product.getSale()/100)%>₫</span>
+                            <div class='product__price__sale'><s><%=convertPrice(product.getPrice())%>₫</s> </div>
                             <div class='product__percent__sale' >
-                            <span><%=sale%>%</span>
+                            <span><%=product.getSale()%>%</span>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <span><%=convertPrice(price)%>₫</span>
+                            <span><%=convertPrice(product.getPrice())%>₫</span>
                         </c:otherwise>
                     </c:choose>
 
                 </div>
                 <c:choose>
-                <c:when test="<%=available>0%>">
+                <c:when test="<%=product.getAvailable()>0%>">
                 <div class="product__size">
                     <div class="product__header">
                         Kích thước
@@ -108,7 +91,7 @@
                     <div class="product__size__elements">
                         <div class="product__size__element">
 
-                            <c:forEach var="item" items="<%=listSizes%>" >
+                            <c:forEach var="item" items="<%=product.getListSize()%>" >
 
                                 <label <c:if test="${item.status==1}">onclick="hiddenLabel(this)" </c:if>class="text-center">
                                     <c:out value="${item.sizeTitle}"></c:out>
@@ -137,7 +120,7 @@
 
                     </div>
                     <div class="product__color__elements action-flex">
-                        <c:forEach var="item" items="<%=listColor%>">
+                        <c:forEach var="item" items="<%=product.getListColor()%>">
                         <div class="product__color__element" style="background-color: ${item.colorID}">
                         </div>
                         </c:forEach>
@@ -151,9 +134,9 @@
                 <div class="product__amount">
                     <div class="product__header">Số lượng</div>
                     <div class="product__amount__form">
-                        <button class="decrease" onclick='changeAmount(-1,<%=available%>)'><i class="fas fa-chevron-left"></i></button>
+                        <button class="decrease" onclick='changeAmount(-1,<%=product.getAvailable()%>)'><i class="fas fa-chevron-left"></i></button>
                         <label id="countLabel" class="amount-num text-center">1</label>
-                        <button class="increase" onclick='changeAmount(1,<%=available%>)'><i class="fas fa-chevron-right"></i></button>
+                        <button class="increase" onclick='changeAmount(1,<%=product.getAvailable()%>)'><i class="fas fa-chevron-right"></i></button>
 
                     </div>
 
@@ -176,11 +159,11 @@
             </c:otherwise>
             </c:choose>
             <div class="decriptions">
-                <span><strong>Chất Liệu: </strong><%=material%></span>
-                <span><strong>Kiểu Dáng: </strong> <%=type%> </span>
-                <span><strong>Phù Hợp: </strong><%=match%></span>
-                <span><strong>Sản phẩm thuộc dòng sản phẩm: </strong><%=productBranch%></span>
-                <span> <strong>Thông tin người mẫu: </strong><%=modelDescribe%></span>
+                <span><strong>Chất Liệu: </strong><%=product.getMaterial()%></span>
+                <span><strong>Kiểu Dáng: </strong> <%=product.getType()%> </span>
+                <span><strong>Phù Hợp: </strong><%=product.getMatch()%></span>
+                <span><strong>Sản phẩm thuộc dòng sản phẩm: </strong><%=product.getProductBranch()%></span>
+                <span> <strong>Thông tin người mẫu: </strong><%=product.getModelDescribe()%></span>
             </div>
         </div>
 
@@ -238,8 +221,8 @@
                         </li>
                         </c:forEach>
                     </div>
-                    <div class="wrap-left-slide text-center" onclick="transition(-1)"><i class="fas fa-angle-left"></i></div>
-                    <div class="wrap-right-slide text-center" onclick="transition(1)"><i class="fas fa-angle-right"></i></div>         
+                    <div class="wrap-left-slide text-center" onclick="transition(-1,<%=listRelated.size()%>)"><i class="fas fa-angle-left"></i></div>
+                    <div class="wrap-right-slide text-center" onclick="transition(1,<%=listRelated.size()%>)"><i class="fas fa-angle-right"></i></div>
                 </ul>
             </div>
         </div>
