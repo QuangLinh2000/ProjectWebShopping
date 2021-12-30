@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
 <header id="header">
     <div id="header-first">
         <div class="container">
@@ -28,15 +27,15 @@
                         </a>
                     </div>
                     <div class="btn-signup">
-                        <a href="<%=request.getContextPath()%>/signin" id="login-a" class="color-red">Đăng nhập </a>
-                        <a href="<%=request.getContextPath()%>/signup">/ Đăng ký</a>
+                        <a href="./signinvssignup.html" id="login-a" class="color-red">Đăng nhập </a>
+                        <a href="./signinvssignup.html">/ Đăng ký</a>
                     </div>
                     <div class="nav-item">
-                        <a class="nav-link btn-icon" href="#"> <i class="fa-regular fa-bell"></i></a>
+                        <a class="nav-link btn-icon" href="#"> <i class="material-icons md-notifications_active"></i> </a>
                     </div>
                     <div class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#"> <img class="img-xs rounded-circle"
-                                src="${pageContext.request.contextPath}/img/avatar.png" alt="User"></a>
+                                src="../admin/images/people/avatar1.jpg" alt="User"></a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
                             <a class="dropdown-item" href="page-settings-1.html">Giỏ hàng</a>
