@@ -35,3 +35,21 @@ const btnCloseBar = document.getElementById("icon-close");
 btnCloseBar.addEventListener("click", function () {
     navBarMobile.classList.remove("active-mobile");
 });
+//dropdown click dropdown-toggle open  dropdown-menu and click outside dropdown-menu off
+const dropdown = document.getElementsByClassName("dropdown");
+for (let i = 0; i < dropdown.length; i++) {
+    dropdown[i].addEventListener("click", function (e) {
+        this.classList.toggle("show");
+        e.stopPropagation();
+    });
+}
+window.addEventListener("click", function (e) {
+    if (!e.target.matches(".dropdown")) {
+        for (let i = 0; i < dropdown.length; i++) {
+            dropdown[i].classList.remove("show");
+        }
+    }
+});
+document.getElementById("drop-top").addEventListener("click", function (event) {
+    event.stopPropagation();
+});
