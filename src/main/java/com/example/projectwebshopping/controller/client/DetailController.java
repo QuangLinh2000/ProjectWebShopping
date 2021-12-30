@@ -26,5 +26,6 @@ public class DetailController extends HttpServlet {
         request.setAttribute("productDetail",product);
         request.getRequestDispatcher("/views/detail.jsp").forward(request,response);
 
+
     }
 }
