@@ -3,15 +3,17 @@ package com.example.projectwebshopping.connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import java.sql.Connection;
+import java.util.Queue;
 
 
 public class JdbcConnectionPool {
 
-   private  List<Connection> availableConnections = new ArrayList<Connection>();
-
+   private  List<Connection> availableConnections = new ArrayList<>();
+   private  Queue<Connection> usedConnections = new LinkedList<>();
     public JdbcConnectionPool() {
         initializeConnectionPool();
     }
@@ -55,7 +57,7 @@ public class JdbcConnectionPool {
             connection = availableConnections.get(0);
             availableConnections.remove(0);
         }
-        
+
         return connection;
     }
 
