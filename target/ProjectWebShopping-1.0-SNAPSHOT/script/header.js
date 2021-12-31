@@ -50,6 +50,11 @@ window.addEventListener("click", function (e) {
         }
     }
 });
-document.getElementById("drop-top").addEventListener("click", function (event) {
-    event.stopPropagation();
-});
+
+//check null element by id drop top addEventListener
+const dropDown = document.getElementById("drop-top");
+if (dropDown) {
+    dropDown.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+}
