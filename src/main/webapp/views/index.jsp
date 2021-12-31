@@ -62,14 +62,14 @@
     <div class="container">
         <div class="collection-item" id="collection-first">
             <div class="collection-banner" style="background-image: url(<%=boSuaTap1.getHinhAnh()%>)">
-                <a href="<%=boSuaTap1.getLinnk()%>"></a>
+                <a href=""></a>
             </div>
             <div class="collection-main">
                 <h2 class="section-title margin-right-5">
-                   <%=boSuaTap1.getTieuDe()%>
+                   <%=boSuaTap1.getName()%>
                 </h2>
                 <p class="subtile-section">
-                    <%=boSuaTap1.getMota()%>                          </p>
+                    <%=boSuaTap1.getTieuDe()%>                          </p>
 
                 <div class="collection-slide">
                     <div class="collection-content">
@@ -265,10 +265,10 @@
 
             <div class="collection-main">
                 <h2 class="section-title margin-right-5">
-                    <%=boSuaTap2.getTieuDe()%>
+                    <%=boSuaTap2.getName()%>
                 </h2>
                 <p class="subtile-section">
-                    <%=boSuaTap2.getMota()%>                          </p>
+                    <%=boSuaTap2.getTieuDe()%>                          </p>
 
                 <div class="collection-slide">
                     <div class="collection-content">
@@ -482,13 +482,13 @@
 
                 <!-- btn -->
                 <div>
-                    <a href="<%=boSuaTap2.getLinnk()%>" class="btn">
+                    <a href="" class="btn">
                         xem thêm
                     </a>
                 </div>
             </div>
             <div class="collection-banner" style="background-image: url(<%=boSuaTap2.getHinhAnh()%>)">
-                <a href="<%=boSuaTap2.getLinnk()%>"></a>
+                <a href=""></a>
             </div>
 
         </div>

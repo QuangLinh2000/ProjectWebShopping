@@ -1,22 +1,24 @@
 package com.example.projectwebshopping.model.client;
 
-public class BoSuaTap {
+import java.io.Serializable;
+
+public class BoSuaTap implements Serializable {
     private String id;
+    private String name;
     private String tieuDe;
     private String mota;
     private String hinhAnh;
-    private String linnk;
     //empty constructor
     public BoSuaTap(){
 
     }
     //constructor
-    public BoSuaTap(String id, String tieuDe, String mota, String hinhAnh, String linnk) {
+    public BoSuaTap(String id, String name, String tieuDe, String mota, String hinhAnh) {
         this.id = id;
+        this.name = name;
         this.tieuDe = tieuDe;
         this.mota = mota;
         this.hinhAnh = hinhAnh;
-        this.linnk = linnk;
     }
 
     public String getId() {
@@ -43,6 +45,14 @@ public class BoSuaTap {
         this.mota = mota;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getHinhAnh() {
         return hinhAnh;
     }
@@ -50,14 +60,7 @@ public class BoSuaTap {
     public void setHinhAnh(String hinhAnh) {
         this.hinhAnh = hinhAnh;
     }
-
-    public String getLinnk() {
-        return linnk;
-    }
-
-    public void setLinnk(String linnk) {
-        this.linnk = linnk;
-    }
-
-
 }
+
+
+

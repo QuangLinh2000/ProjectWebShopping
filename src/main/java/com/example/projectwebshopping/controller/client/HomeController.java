@@ -14,7 +14,8 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         IHomeService iHomeService = new HomeSerVice();
         request.setAttribute("listQC",iHomeService.getAllQC());
-        request.setAttribute("listBST",iHomeService.getAllBS());
+        request.setAttribute("listBST",iHomeService.getBSHome());
+        request.setAttribute("listLoaiSP",iHomeService.getAllLoaiSP());
         request.getRequestDispatcher("/views/index.jsp").forward(request, response);
     }
 

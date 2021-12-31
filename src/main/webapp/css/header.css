@@ -458,23 +458,14 @@ body {
 #header-mobile #nav-bar-active.active-mobile {
     transform: translateX(0);
 }
-<<<<<<< HEAD
-/*avatar*/
-.img-xs{
-=======
 
 /*============================avatar*/
 .img-xs {
->>>>>>> 4c90a3123bd9ec90f67698179cbcc8e159900a80
     width: 40px;
     height: 40px;
     border: 2px solid #eee;
 }
-<<<<<<< HEAD
-.rounded-circle{
-=======
 .rounded-circle {
->>>>>>> 4c90a3123bd9ec90f67698179cbcc8e159900a80
     border-radius: 50% !important;
 }
 .dropdown {
