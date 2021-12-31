@@ -71,11 +71,15 @@ li {
     margin: 0 auto;
     padding: 0 30px;
 }
-
-body {
+body{
     font-family: var(--font-body);
     color: var(--text-color);
     font-size: var(--normal-font-size);
+}
+html body {
+
+    background-color: #ffffff;
+
 }
 
 /* ==============================================text-hover ===================================*/
@@ -205,7 +209,10 @@ body {
     align-content: center;
     padding: 15px 0px;
 }
-
+#header a {
+    color: black;
+    text-decoration: none;
+}
 #header-first .header-top-list {
     width: 350px;
     gap: 10px;
@@ -239,6 +246,7 @@ body {
     flex-wrap: wrap;
     padding: 0 100px;
     align-content: center;
+    margin-bottom: 0px;
 }
 
 .nav-item {
@@ -405,6 +413,7 @@ body {
     flex-wrap: nowrap;
     width: 100%;
     margin-top: 70px;
+    margin-bottom: 0px;
 }
 
 #header-mobile .nav-bar {
