@@ -1,5 +1,7 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.projectwebshopping.model.client.BoSuaTap" %><%--
+<%@ page import="com.example.projectwebshopping.model.client.BoSuaTap" %>
+<%@ page import="com.example.projectwebshopping.model.client.Product" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 12/29/2021
@@ -8,6 +10,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,12 +77,16 @@
                 <div class="collection-slide">
                     <div class="collection-content">
 
+
                         <div class="slideshow-collection">
 
+                            <%List<Product> productList2 = (List<Product>) request.getAttribute("listBoSTLeft");
+                                for ( Product p : productList2) {%>
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -92,150 +99,42 @@
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
-                                <div class="text-content-collection">
-                                    <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                                    </h3>
-                                    <span class="slide-collection-price">
-                                            847,000đ
-                                        </span>
-                                </div>
-                            </div>
-
-
-                            <div class="slide-collection">
-                                <div class="collection-slide-div">
-                                    <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    </a>
-                                    <div class="btn-img">
-                                        <div class="btn-img-search">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                    <%if(p.getSell() > 0){%>
+                                    <div class="colection-tag">
+                                        <div class="tag-saleoff">
+                                    <span><%String giasel =((int)(p.getSell()*100))+"%";%>
+                                    <%=giasel%></span>
                                         </div>
-                                        <div class="btn-img-buy">
-                                            <span>mua ngay</span>
-                                        </div>
-                                        <div class="btn-img-cart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
+                                        <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                                     </div>
+                                    <%}%>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                    <%for ( String url : p.getListUrlImg()) {%>
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%><%=url%>" alt="">
+
+                                    <%}%>
                                 </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
+                                        <%=p.getTenSP()%>
                                     </h3>
                                     <span class="slide-collection-price">
-                                            847,000đ
+                                           <fmt:formatNumber type = "number"
+                                                             maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                         </span>
+                                    <%if(p.getSell() > 0){%>
+                                    <span class="current-price">
+                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+                                </span>
+                                    <%}%>
                                 </div>
                             </div>
 
-                            <div class="slide-collection">
-                                <div class="collection-slide-div">
-                                    <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    </a>
-                                    <div class="btn-img">
-                                        <div class="btn-img-search">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </div>
-                                        <div class="btn-img-buy">
-                                            <span>mua ngay</span>
-                                        </div>
-                                        <div class="btn-img-cart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
-                                <div class="text-content-collection">
-                                    <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                                    </h3>
-                                    <span class="slide-collection-price">
-                                            847,000đ
-                                        </span>
-                                </div>
-                            </div>
 
-                            <div class="slide-collection">
-                                <div class="collection-slide-div">
-                                    <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    </a>
-                                    <div class="btn-img">
-                                        <div class="btn-img-search">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </div>
-                                        <div class="btn-img-buy">
-                                            <span>mua ngay</span>
-                                        </div>
-                                        <div class="btn-img-cart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
-                                <div class="text-content-collection">
-                                    <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                                    </h3>
-                                    <span class="slide-collection-price">
-                                            847,000đ
-                                        </span>
-                                </div>
-                            </div>
+                            <%}%>
 
-                            <div class="slide-collection">
-                                <div class="collection-slide-div">
-                                    <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    </a>
-                                    <div class="btn-img">
-                                        <div class="btn-img-search">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </div>
-                                        <div class="btn-img-buy">
-                                            <span>mua ngay</span>
-                                        </div>
-                                        <div class="btn-img-cart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
-                                <div class="text-content-collection">
-                                    <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                                    </h3>
-                                    <span class="slide-collection-price">
-                                            847,000đ
-                                        </span>
-                                </div>
-                            </div>
 
                         </div>
 
@@ -275,10 +174,13 @@
 
                         <div class="slideshow-collection">
 
+                         <%List<Product> productList = (List<Product>) request.getAttribute("listBoSTRight");
+                             for ( Product p : productList) {%>
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
                                     <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+
+                                        <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                                     </a>
                                     <div class="btn-img">
                                         <div class="btn-img-search">
@@ -291,182 +193,43 @@
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
-                                <div class="text-content-collection">
-                                    <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                                    </h3>
-                                    <span class="slide-collection-price">
-                                            847,000đ
-                                        </span>
-                                </div>
-                            </div>
-
-
-                            <div class="slide-collection">
-                                <div class="collection-slide-div">
-                                    <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    </a>
-                                    <div class="btn-img">
-                                        <div class="btn-img-search">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                    <%if(p.getSell() > 0){%>
+                                    <div class="colection-tag">
+                                        <div class="tag-saleoff">
+                                    <span><%String giasel =((int)(p.getSell()*100))+"%";%>
+                                    <%=giasel%></span>
                                         </div>
-                                        <div class="btn-img-buy">
-                                            <span>mua ngay</span>
-                                        </div>
-                                        <div class="btn-img-cart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
+                                        <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                                     </div>
+                                    <%}%>
                                 </div>
                                 <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
+                                    <%for ( String url : p.getListUrlImg()) {%>
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%><%=url%>" alt="">
+
+                                    <%}%>
+                                   </div>
                                 <div class="text-content-collection">
                                     <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
+                                        <%=p.getTenSP()%>
                                     </h3>
                                     <span class="slide-collection-price">
-                                            847,000đ
+                                           <fmt:formatNumber type = "number"
+                                                             maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                         </span>
+                                    <%if(p.getSell() > 0){%>
+                                    <span class="current-price">
+                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+                                </span>
+                                    <%}%>
                                 </div>
                             </div>
 
-                            <div class="slide-collection">
-                                <div class="collection-slide-div">
-                                    <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    </a>
-                                    <div class="btn-img">
-                                        <div class="btn-img-search">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </div>
-                                        <div class="btn-img-buy">
-                                            <span>mua ngay</span>
-                                        </div>
-                                        <div class="btn-img-cart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
-                                <div class="text-content-collection">
-                                    <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                                    </h3>
-                                    <span class="slide-collection-price">
-                                            847,000đ
-                                        </span>
-                                </div>
-                            </div>
 
-                            <div class="slide-collection">
-                                <div class="collection-slide-div">
-                                    <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    </a>
-                                    <div class="btn-img">
-                                        <div class="btn-img-search">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </div>
-                                        <div class="btn-img-buy">
-                                            <span>mua ngay</span>
-                                        </div>
-                                        <div class="btn-img-cart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
-                                <div class="text-content-collection">
-                                    <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                                    </h3>
-                                    <span class="slide-collection-price">
-                                            847,000đ
-                                        </span>
-                                </div>
-                            </div>
+                            <%}%>
 
-                            <div class="slide-collection">
-                                <div class="collection-slide-div">
-                                    <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    </a>
-                                    <div class="btn-img">
-                                        <div class="btn-img-search">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </div>
-                                        <div class="btn-img-buy">
-                                            <span>mua ngay</span>
-                                        </div>
-                                        <div class="btn-img-cart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
-                                <div class="text-content-collection">
-                                    <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                                    </h3>
-                                    <span class="slide-collection-price">
-                                            847,000đ
-                                        </span>
-                                </div>
-                            </div>
 
-                            <div class="slide-collection">
-                                <div class="collection-slide-div">
-                                    <a href="#">
-                                        <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    </a>
-                                    <div class="btn-img">
-                                        <div class="btn-img-search">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </div>
-                                        <div class="btn-img-buy">
-                                            <span>mua ngay</span>
-                                        </div>
-                                        <div class="btn-img-cart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-image-hover">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                                </div>
-                                <div class="text-content-collection">
-                                    <h3 class="slide-collection-title">
-                                        Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                                    </h3>
-                                    <span class="slide-collection-price">
-                                            847,000đ
-                                        </span>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
@@ -503,11 +266,13 @@
         </h2>
         <div class="section-content">
             <div class="section-slideshow" id="section-slideshow">
+                <%List<Product> productList3 = (List<Product>) request.getAttribute("listSPNoiBat");
+                    for ( Product p : productList3) {%>
                 <div class="slides-item">
                     <div class="slide-collection">
                         <div class="collection-slide-div">
                             <a href="#">
-                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                                <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                             </a>
                             <div class="btn-img padding-btn-slider">
                                 <div class="btn-img-search">
@@ -520,211 +285,35 @@
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
-                        </div>
-                        <div class="text-content-collection">
-                            <h3 class="slide-collection-title">
-                                Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                            </h3>
-                            <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
-                <!-- have sale tag -->
-                <div class="slides-item">
-                    <div class="slide-collection">
-                        <div class="collection-slide-div">
-                            <a href="#">
-                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                            </a>
-                            <div class="btn-img padding-btn-slider">
-                                <div class="btn-img-search">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <div class="btn-img-buy">
-                                    <span>mua ngay</span>
-                                </div>
-                                <div class="btn-img-cart">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </div>
-                            </div>
+                            <%if(p.getSell() > 0){%>
                             <div class="colection-tag">
                                 <div class="tag-saleoff">
-                                    <span>-10%</span>
+                                    <span><%String giasel =((int)(p.getSell()*100))+"%";%>
+                                    <%=giasel%></span>
                                 </div>
                                 <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                             </div>
+                            <%}%>
                         </div>
                         <div class="text-content-collection">
                             <h3 class="slide-collection-title">
-                                Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
+                                <%=p.getTenSP()%>
                             </h3>
-                            <div>
-                                    <span class="slide-collection-price">
-                                        847,000đ
-                                    </span>
-                                <span class="current-price">
-                                        941,000đ
-                                    </span>
-                            </div>
+                            <span class="slide-collection-price">
+                                     <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
+                                </span>
+                            <%if(p.getSell() > 0){%>
+                            <span class="current-price">
+                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+                                </span>
+                            <%}%>
+                        </div>
+                    </div>
+                </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="slides-item">
-                    <div class="slide-collection">
-                        <div class="collection-slide-div">
-                            <a href="#">
-                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                            </a>
-                            <div class="btn-img padding-btn-slider">
-                                <div class="btn-img-search">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <div class="btn-img-buy">
-                                    <span>mua ngay</span>
-                                </div>
-                                <div class="btn-img-cart">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-content-collection">
-                            <h3 class="slide-collection-title">
-                                Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                            </h3>
-                            <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
-                <!-- have sale tag -->
-                <div class="slides-item">
-                    <div class="slide-collection">
-                        <div class="collection-slide-div">
-                            <a href="#">
-                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                            </a>
-                            <div class="btn-img padding-btn-slider">
-                                <div class="btn-img-search">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <div class="btn-img-buy">
-                                    <span>mua ngay</span>
-                                </div>
-                                <div class="btn-img-cart">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </div>
-                            </div>
-                            <div class="colection-tag">
-                                <div class="tag-saleoff">
-                                    <span>-10%</span>
-                                </div>
-                                <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                            </div>
-                        </div>
-                        <div class="text-content-collection">
-                            <h3 class="slide-collection-title">
-                                Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                            </h3>
-                            <div>
-                                    <span class="slide-collection-price">
-                                        847,000đ
-                                    </span>
-                                <span class="current-price">
-                                        941,000đ
-                                    </span>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="slides-item">
-                    <div class="slide-collection">
-                        <div class="collection-slide-div">
-                            <a href="#">
-                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                            </a>
-                            <div class="btn-img padding-btn-slider">
-                                <div class="btn-img-search">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <div class="btn-img-buy">
-                                    <span>mua ngay</span>
-                                </div>
-                                <div class="btn-img-cart">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-content-collection">
-                            <h3 class="slide-collection-title">
-                                Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                            </h3>
-                            <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="slides-item">
-                    <div class="slide-collection">
-                        <div class="collection-slide-div">
-                            <a href="#">
-                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                            </a>
-                            <div class="btn-img padding-btn-slider">
-                                <div class="btn-img-search">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <div class="btn-img-buy">
-                                    <span>mua ngay</span>
-                                </div>
-                                <div class="btn-img-cart">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-content-collection">
-                            <h3 class="slide-collection-title">
-                                Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                            </h3>
-                            <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="slides-item">
-                    <div class="slide-collection">
-                        <div class="collection-slide-div">
-                            <a href="#">
-                                <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                            </a>
-                            <div class="btn-img padding-btn-slider">
-                                <div class="btn-img-search">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <div class="btn-img-buy">
-                                    <span>mua ngay</span>
-                                </div>
-                                <div class="btn-img-cart">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-content-collection">
-                            <h3 class="slide-collection-title">
-                                Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay & Vải Thun Kiểu Dáng Thêu Viền Tay
-                            </h3>
-                            <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
+                <%}%>
             </div>
             <div class="slick-section">
                 <div class="slick-style-prev" id="slick-prev">
@@ -750,57 +339,18 @@
         <div class="tab">
             <h2 class="tablinks active">Sản phẩm mới</h2>
             <h2 class="tablinks">BEST SELLER</h2>
-            <h2 class="tablinks">BEST SELLER</h2>
+            <h2 class="tablinks"> KHUYẾN MÃI</h2>
         </div>
         <div id="list-tab1">
             <div class="list-tab-content">
-                <div class="slide-collection">
-                    <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        </a>
-                        <div class="btn-img">
-                            <div class="btn-img-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="btn-img-buy">
-                                <span>mua ngay</span>
-                            </div>
-                            <div class="btn-img-cart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                        </div>
-                        <div class="colection-tag">
-                            <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
-                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                        </div>
-                    </div>
-                    <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
-                    <div class="text-content-collection">
-                        <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
-                        </h3>
-                        <div>
-                                <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                            <span class="current-price">
-                                    941,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
+
+                <%List<Product> productList4 = (List<Product>) request.getAttribute("listSPMoi");
+                    for ( Product p : productList4) {%>
 
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -813,201 +363,45 @@
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
+                        <%if(p.getSell() > 0){%>
                         <div class="colection-tag">
                             <div class="tag-saleoff">
-                                <span>-10%</span>
+                           <span><%String giasel =((int)(p.getSell()*100))+"%";%>
+                                    <%=giasel%></span>
                             </div>
                             <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
+                        <%}%>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
+                        <%for ( String url : p.getListUrlImg()) {%>
+                         <img class="img-item-hov" src="<%=request.getContextPath()%><%=url%>" alt="">
+
+                         <%}%>
+                         </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
+                            <%=p.getTenSP()%>
                         </h3>
                         <div>
                                 <span class="slide-collection-price">
-                                    847,000đ
+                                     <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                 </span>
+
+                            <%if(p.getSell() > 0){%>
                             <span class="current-price">
-                                    941,000đ
+                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
                                 </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-collection">
-                    <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        </a>
-                        <div class="btn-img">
-                            <div class="btn-img-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="btn-img-buy">
-                                <span>mua ngay</span>
-                            </div>
-                            <div class="btn-img-cart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                        </div>
-                        <div class="colection-tag">
-                            <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
-                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                        </div>
-                    </div>
-                    <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
-                    <div class="text-content-collection">
-                        <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
-                        </h3>
-                        <div>
-                                <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                            <span class="current-price">
-                                    941,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-collection">
-                    <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        </a>
-                        <div class="btn-img">
-                            <div class="btn-img-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="btn-img-buy">
-                                <span>mua ngay</span>
-                            </div>
-                            <div class="btn-img-cart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                        </div>
-                        <div class="colection-tag">
-                            <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
-                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                        </div>
-                    </div>
-                    <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
-                    <div class="text-content-collection">
-                        <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
-                        </h3>
-                        <div>
-                                <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                            <span class="current-price">
-                                    941,000đ
-                                </span>
+                            <%}%>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="slide-collection">
-                    <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        </a>
-                        <div class="btn-img">
-                            <div class="btn-img-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="btn-img-buy">
-                                <span>mua ngay</span>
-                            </div>
-                            <div class="btn-img-cart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                        </div>
-                        <div class="colection-tag">
-                            <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
-                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                        </div>
-                    </div>
-                    <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
-                    <div class="text-content-collection">
-                        <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
-                        </h3>
-                        <div>
-                                <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                            <span class="current-price">
-                                    941,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-collection">
-                    <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        </a>
-                        <div class="btn-img">
-                            <div class="btn-img-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="btn-img-buy">
-                                <span>mua ngay</span>
-                            </div>
-                            <div class="btn-img-cart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                        </div>
-                        <div class="colection-tag">
-                            <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
-                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                        </div>
-                    </div>
-                    <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
-                    <div class="text-content-collection">
-                        <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
-                        </h3>
-                        <div>
-                                <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                            <span class="current-price">
-                                    941,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
+
+                <%}%>
+
             </div>
             <div class="div-btn-tab">
                 <a href="#" class="btn btn-tab">xem thêm</a>
@@ -1110,56 +504,16 @@
             </div>
 
         </div>
-
         <div id="list-tab3">
             <div class="list-tab-content">
-                <div class="slide-collection">
-                    <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        </a>
-                        <div class="btn-img">
-                            <div class="btn-img-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="btn-img-buy">
-                                <span>mua ngay</span>
-                            </div>
-                            <div class="btn-img-cart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                        </div>
-                        <div class="colection-tag">
-                            <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
-                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                        </div>
-                    </div>
-                    <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
-                    <div class="text-content-collection">
-                        <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
-                        </h3>
-                        <div>
-                                <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                            <span class="current-price">
-                                    941,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
+
+                <%List<Product> productList6 = (List<Product>) request.getAttribute("listSPKM");
+                    for ( Product p : productList6) {%>
 
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
@@ -1172,123 +526,51 @@
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
+                        <%if(p.getSell() > 0){%>
                         <div class="colection-tag">
                             <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
+                         <span><%String giasel =((int)(p.getSell()*100))+"%";%>
+                                    <%=giasel%></span>                            </div>
                             <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
+                        <%}%>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <%for ( String url : p.getListUrlImg()) {%>
+                        <img class="img-item-hov" src="<%=request.getContextPath()%><%=url%>" alt="">
+
+                        <%}%>
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
+                            <%=p.getTenSP()%>
                         </h3>
                         <div>
                                 <span class="slide-collection-price">
-                                    847,000đ
+                                     <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                 </span>
+
+                            <%if(p.getSell() > 0){%>
                             <span class="current-price">
-                                    941,000đ
+                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
                                 </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-collection">
-                    <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        </a>
-                        <div class="btn-img">
-                            <div class="btn-img-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="btn-img-buy">
-                                <span>mua ngay</span>
-                            </div>
-                            <div class="btn-img-cart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                        </div>
-                        <div class="colection-tag">
-                            <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
-                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                        </div>
-                    </div>
-                    <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
-                    <div class="text-content-collection">
-                        <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
-                        </h3>
-                        <div>
-                                <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                            <span class="current-price">
-                                    941,000đ
-                                </span>
+                            <%}%>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="slide-collection">
-                    <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        </a>
-                        <div class="btn-img">
-                            <div class="btn-img-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="btn-img-buy">
-                                <span>mua ngay</span>
-                            </div>
-                            <div class="btn-img-cart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                        </div>
-                        <div class="colection-tag">
-                            <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
-                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                        </div>
-                    </div>
-                    <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
-                    <div class="text-content-collection">
-                        <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
-                        </h3>
-                        <div>
-                                <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                            <span class="current-price">
-                                    941,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
+
+                <%}%>
+
             </div>
             <div class="div-btn-tab">
                 <a href="#" class="btn btn-tab">xem thêm</a>
             </div>
 
         </div>
+
     </div>
 </section>
 
