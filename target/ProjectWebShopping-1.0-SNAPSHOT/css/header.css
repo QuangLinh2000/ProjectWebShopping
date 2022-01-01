@@ -225,7 +225,9 @@ html body {
     justify-content: flex-end;
     gap: 15px;
 }
-
+.header-top-list a{
+    line-height: 24px;
+}
 .header-top-wrap-logo {
     padding: 0 10px;
 }
@@ -246,6 +248,7 @@ html body {
     flex-wrap: wrap;
     padding: 0 100px;
     align-content: center;
+    margin-bottom: 0px;
 }
 
 .nav-item {

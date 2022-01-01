@@ -3,6 +3,7 @@
     text-align: center;
     justify-content: center;
 }
+
 .btn {
     margin-top: 20px;
     display: inline-block;
@@ -16,6 +17,7 @@
     text-align: center;
     border: solid 1px #222222;
 }
+
 .btn-tab {
     margin-top: 0;
 }
@@ -24,15 +26,19 @@
     display: flex;
     width: 100%;
 }
+
 .left-contain {
     flex: 1;
 }
+
 .right-contain {
     flex: 4;
     margin-left: 20px;
 }
+
 #main-search {
 }
+
 /*-------------------------- left menu -------------------------------------- */
 .left-contain-item-title {
     padding-bottom: 10px;
@@ -42,40 +48,49 @@
     border-bottom: solid 1px black;
     margin-bottom: 0;
 }
+
 .left-contain-item-box-content-color {
     overflow: auto;
 }
+
 .left-contain-item-box-content-color-item {
     float: left;
     display: flex;
     width: 50%;
     margin-top: 25px;
 }
+
 .left-contain-item-box-content-color-item p {
     width: 20px;
     height: 20px;
     margin: 0;
     margin-left: 10px;
 }
+
 .left-contain-item-box-content-size {
     overflow: auto;
     margin-top: 25px;
 }
+
 .left-contain-item-box-content-size-item {
     float: left;
     width: 50%;
     margin-bottom: 20px;
 }
+
 .left-contain-item-box-content {
     margin-top: 25px;
 }
+
 .left-contain-item-box-content input,
 label {
     margin-bottom: 20px;
 }
+
 .left-contain-item-box-content-color-item input {
     margin-top: 3px;
 }
+
 /*  right menu */
 .list-tab-content {
     display: grid;
@@ -83,9 +98,11 @@ label {
     /* grid-template-columns: repeat(auto-fill, 25%); */
     grid-template-columns: repeat(4, 1fr);
 }
+
 .collection-slide-div {
     position: relative;
 }
+
 .btn-img {
     position: absolute;
     bottom: 0;
@@ -96,6 +113,7 @@ label {
     align-items: center;
     padding: 0 4px 4px;
 }
+
 .btn-img div {
     font-size: 18px;
     padding: 8px 12px;
@@ -114,6 +132,7 @@ label {
     transform: translateX(0px);
     transform: translateY(0px);
 }
+
 .list-image-hover {
     margin: 5px 0;
     visibility: hidden;
@@ -121,24 +140,30 @@ label {
     justify-content: center;
     column-gap: 4px;
 }
+
 .slide-collection:hover .list-image-hover {
     visibility: visible;
 }
+
 .img-item-hov {
     max-width: 30px;
 }
+
 .btn-img-search {
     opacity: 0;
     transform: translateX(-58px);
 }
+
 .btn-img-cart {
     opacity: 0;
     transform: translateX(58px);
 }
+
 .btn-img-buy {
     opacity: 0;
     transform: translateY(53px);
 }
+
 /* text */
 
 .text-content-collection {
@@ -147,6 +172,7 @@ label {
     transition: all 0.2s;
     text-align: center;
 }
+
 .slide-collection-title {
     font-size: var(--h3-font-size);
     font-weight: var(--font-bold);
@@ -157,16 +183,19 @@ label {
     text-overflow: ellipsis;
     text-align: center;
 }
+
 .slide-collection-price {
     font-size: 18px;
     font-family: var(--font-nav);
     color: var(--text-color-red);
     font-weight: var(--font-medium);
 }
+
 .slide-collection:hover .text-content-collection {
     margin-top: 0;
     margin-bottom: 0;
 }
+
 .colection-tag {
     width: 65px;
     position: absolute;
@@ -174,6 +203,7 @@ label {
     right: -10px;
     z-index: 9;
 }
+
 .tag-saleoff span {
     position: absolute;
     color: white;
@@ -182,6 +212,7 @@ label {
     top: 16px;
     left: 13px;
 }
+
 .current-price {
     margin-left: 20px;
     font-size: 14px;
@@ -204,35 +235,55 @@ label {
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .top-search-title {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
+
 .title-sum-product {
     font-size: var(--normal-font-size);
     /* color: var(--subtitle-color); */
     color: #767676;
     line-height: 30px;
 }
+
 .top-search-title {
     padding: 20px;
     margin-bottom: 10px;
 }
+
 .btn-img-buy a {
     color: #fff;
 }
-
+.wrapper-search-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.top-search-title select {
+    padding: 4px 6px;
+    margin-left: 10px;
+}
 @media screen and (max-width: 768px) {
     .list-tab-content {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media screen and (max-width: 600px) {
     .contain {
         flex-direction: column;
     }
+
     .left-contain {
         margin-bottom: 20px;
     }
+
     .list-tab-content {
         grid-template-columns: repeat(1, 1fr);
     }
