@@ -8,20 +8,9 @@
     ArrayList<Product> listRelated=(ArrayList<Product>)request.getAttribute("relatedProduct");
 
 %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Product</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body onresize="resizeWindow()">
-   <%@include file="Header.jsp"%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css">
+
+
     <section class="detail">
         <div class="detail__image">
             <div id="image__right">
@@ -290,12 +279,9 @@
             </div>
         </div>
     </div>
-   <%@include file="footer.jsp"%>
     <script src="<%=request.getContextPath()%>/script/detail.js"></script>
 
-</body>
 
-</html>
 <%!
     private String convertPrice(double price) {
         double priceCoppy=price;

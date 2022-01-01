@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 public class CheckOutsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      request.getRequestDispatcher("/views/checkOuts.jsp").forward(request, response);
-      //local date  miliseconds
-      LocalDateTime now = LocalDateTime.now();
-      System.out.println(now);
+//      request.getRequestDispatcher("/views/checkOuts.jsp").forward(request, response);
+        request.setAttribute("container_view","/views/checkOuts.jsp");
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override

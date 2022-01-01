@@ -6,25 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Check Outs</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://kit.fontawesome.com/936c874066.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/checkOuts.css">
 
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
-  <!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/style/home.css"> -->
-  <!-- <script src="<%=request.getContextPath()%>/script/home.js"></script> -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/checkOuts.css">
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
-
-</head>
-<body>
-<%@ include file="../views/Header.jsp" %>
 
 <div class="container">
   <div class="top">
@@ -178,10 +161,7 @@
 
   </div>
 </div>
-<%@include file="../views/footer.jsp"%>
 
-</body>
-<script src="<%=request.getContextPath()%>/script/header.js"></script>
 <script >
   var array;
   var valueTinhThanhPho = "Tỉnh/Thành Phố";

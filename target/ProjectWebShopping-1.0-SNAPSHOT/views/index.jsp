@@ -11,26 +11,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%List<BoSuaTap> listBST = (List<BoSuaTap>) request.getAttribute("listBST");
+    BoSuaTap boSuaTap1 = listBST.get(0);
+    BoSuaTap boSuaTap2 = listBST.get(1);%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/home.css">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thời trang sevenam</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/home.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
-    <!-- ====================FONT AWESOME ============================= -->
-    <script src="https://kit.fontawesome.com/936c874066.js" crossorigin="anonymous"></script>
-    <%List<BoSuaTap> listBST = (List<BoSuaTap>) request.getAttribute("listBST");
-     BoSuaTap boSuaTap1 = listBST.get(0);
-     BoSuaTap boSuaTap2 = listBST.get(1);%>
-
-</head>
-<body>
- <%@ include file="../views/Header.jsp" %>
 <section id="banner">
     <div id="main-slideshow">
         <div class="slideshow-content" id="ml-slide">
@@ -746,8 +731,4 @@
         </div>
     </div>
 </section>
-<%@include file="../views/footer.jsp"%>
 <script src="<%=request.getContextPath()%>/script/home.js"></script>
-<script src="<%=request.getContextPath()%>/script/header.js"></script>
-</body>
-</html>

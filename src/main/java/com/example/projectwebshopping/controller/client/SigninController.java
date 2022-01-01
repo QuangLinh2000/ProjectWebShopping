@@ -19,7 +19,10 @@ public class SigninController extends HttpServlet {
            userService.isVerification(idUser, code);
         }
         request.setAttribute("login_err","login");
-        request.getRequestDispatcher("views/signinvssignup.jsp").forward(request, response);
+        request.setAttribute("container_view","/views/signinvssignup.jsp");
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+//        request.getRequestDispatcher("views/signinvssignup.jsp").forward(request, response);
     }
 
     @Override
@@ -34,7 +37,9 @@ public class SigninController extends HttpServlet {
 
        }else{
            request.setAttribute("login_err","login fall");
-           request.getRequestDispatcher("views/signinvssignup.jsp").forward(request, response);
+           request.setAttribute("container_view","/views/signinvssignup.jsp");
+
+           request.getRequestDispatcher("index.jsp").forward(request, response);
        }
     }
 }

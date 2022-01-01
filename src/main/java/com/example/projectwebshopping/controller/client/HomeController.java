@@ -15,24 +15,22 @@ import java.util.List;
 public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         IHomeService iHomeService = new HomeSerVice();
         List<BoSuaTap> listBoSuaTap = iHomeService.getBSHome();
         request.setAttribute("listQC",iHomeService.getAllQC());
         request.setAttribute("listBST",listBoSuaTap);
-        request.setAttribute("listLoaiSP",iHomeService.getAllLoaiSP());
         request.setAttribute("listSPNoiBat",iHomeService.getSanPhamNoiBat(0));
         request.setAttribute("listSPMoi",iHomeService.getSanPhamNoiBat(1));
         request.setAttribute("listSPKM",iHomeService.getSanPhamNoiBat(2));
         String idBoSTLeft = listBoSuaTap.get(0).getId();
         String idBoSTRight = listBoSuaTap.get(1).getId();
         request.setAttribute("listBoSTLeft",iHomeService.getAllProductByBSTId(idBoSTLeft));
-//        for (Product product : iHomeService.getAllProductByBSTId(idBoSTLeft)) {
-//
-//            System.out.println(product.getUrlImg());
-//
-//        }
         request.setAttribute("listBoSTRight",iHomeService.getAllProductByBSTId(idBoSTRight));
-        request.getRequestDispatcher("/views/index.jsp").forward(request, response);
+
+        request.setAttribute("container_view","/views/index.jsp");
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override

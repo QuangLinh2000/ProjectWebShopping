@@ -18,8 +18,9 @@ public class SignupController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         request.setAttribute("register", "Register");
-        request.getRequestDispatcher("views/signinvssignup.jsp").forward(request, response);
-    }
+        request.setAttribute("container_view","/views/signinvssignup.jsp");
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,8 +47,9 @@ public class SignupController extends HttpServlet {
 
         } else {
             request.setAttribute("register", "Register_Err");
-            request.getRequestDispatcher("views/signinvssignup.jsp").forward(request, response);
+            request.setAttribute("container_view","/views/signinvssignup.jsp");
 
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
     }

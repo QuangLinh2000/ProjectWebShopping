@@ -9,7 +9,10 @@ import java.io.IOException;
 public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("views/search.jsp").forward(request, response);
+        request.setAttribute("container_view","/views/search.jsp");
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+//        request.getRequestDispatcher("views/search.jsp").forward(request, response);
     }
 
     @Override
