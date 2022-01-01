@@ -12,8 +12,20 @@
 <section id="main-search" class="margin-top-mobile">
     <div class="container">
         <div class="top-search-title">
-            <h2 class="text-search">Áo</h2>
-            <span class="title-sum-product">415949 sản phẩm</span>
+            <div class="wrapper-search-left">
+                <h2 class="text-search">Áo</h2>
+                <span class="title-sum-product">415949 sản phẩm</span>
+            </div>
+
+            <div class="right-contain-sort">
+                <label for="cars">Sắp Xếp</label>
+                <select name="cars" id="cars">
+                    <option value="volvo">Tùy chọn</option>
+                    <option value="saab">Sản phẩm bán chạy</option>
+                    <option value="opel">Sắp xếp từ A-Z</option>
+                    <option value="audi">Sắp xếp từ Z-A</option>
+                </select>
+            </div>
         </div>
         <div class="contain">
             <div class="left-contain">
