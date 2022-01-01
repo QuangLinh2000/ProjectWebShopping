@@ -9,7 +9,9 @@ import java.io.IOException;
 public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      request.getRequestDispatcher("/views/product.jsp").forward(request, response);
+        request.setAttribute("container_view","/views/product.jsp");
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override

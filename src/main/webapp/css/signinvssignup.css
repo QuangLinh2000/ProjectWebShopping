@@ -22,6 +22,7 @@
 ::after {
     box-sizing: border-box;
 }
+
 #sign {
     align-items: center;
     background-color: var(--white);
@@ -224,4 +225,7 @@ input:focus {
 }
 .header-top-wrap-logo img {
     display: block;
+}
+.header-signin-sigup{
+    display: none;
 }

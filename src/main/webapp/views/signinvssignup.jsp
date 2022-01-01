@@ -6,19 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
-
-    <title>SignUp vs SignIn</title>
-    <script src="https://kit.fontawesome.com/936c874066.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/signinvssignup.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
-</head>
-<body>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/signinvssignup.css">
 
 <header>
     <div class="header-top-wrap-logo">
@@ -88,7 +76,6 @@
         </div>
     </div>
 </section>
-<%@include file="../views/footer.jsp"%>
 
 <script>
 
@@ -144,5 +131,3 @@
     }
 
 </script>
-</body>
-</html>
