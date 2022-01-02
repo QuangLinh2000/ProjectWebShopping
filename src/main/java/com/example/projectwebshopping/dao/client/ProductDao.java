@@ -30,16 +30,22 @@ public class ProductDao {
 
     //get all product by category id
 
-    public List<Product> getAllProductByBSTId(String idBoSuaTap) {
-        Map<String,Product> map = new HashMap<>();
+    public List<Product> getAllProductByBSTId(String idBoSuaTap, int limit) {
+        Map<String, Product> map = new HashMap<>();
         List<Product> products = new ArrayList<>();
         try {
-            Connection connection =  DataSourceConnection.getConnection();
+            Connection connection = DataSourceConnection.getConnection();
 
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from products p JOIN hinhanh h ON p.MASP = h.IDSP WHERE IDBoSuuTap = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT * FROM hinhanh AS h " +
+                            "INNER JOIN  (SELECT * FROM products " +
+                            "WHERE IDBoSuuTap = ? AND TRANGTHAI = ?  LIMIT ? ) " +
+                            "as p ON h.IDSP = p.MASP ");
             preparedStatement.setString(1, idBoSuaTap);
+            preparedStatement.setInt(2, 1);
+            preparedStatement.setInt(3, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String maSP = resultSet.getString("MASP");
                 String tenSP = resultSet.getString("TENSP");
                 String url = resultSet.getString("URL");
@@ -62,16 +68,16 @@ public class ProductDao {
                 product.setLoaiSP(loaiSP);
                 product.setTrangThai(trangThai);
                 product.setNayNhap(resultSet.getDate("NgayNhap"));
-                if(map.containsKey(maSP)){
+                if (map.containsKey(maSP)) {
                     List<String> listURL = map.get(maSP).getListUrlImg();
                     listURL.add(url);
                     product.setListUrlImg(listURL);
-                    map.put(maSP,product);
-                }else{
+                    map.put(maSP, product);
+                } else {
                     List<String> listURL = new ArrayList<>();
                     listURL.add(url);
                     product.setListUrlImg(listURL);
-                    map.put(maSP,product);
+                    map.put(maSP, product);
                 }
 
             }
@@ -84,39 +90,47 @@ public class ProductDao {
             e.printStackTrace();
         }
         //convert map to list
-        int i = 0;
-        for(Map.Entry<String,Product> entry : map.entrySet()){
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
             products.add(entry.getValue());
-            i++;
-            if(i >= 10) break;
         }
         return products;
     }
+    /*
+     * 0 sản phẩm nổi bật
+     * 1 sản phẩm mới
+     * 2 sản phẩm khuyến mãi
+     * 3 sản phẩm bán chạy
+     * */
 
 
-    public List<Product> getSanPhamNoiBat(int loaiSlected) {
-        Map<String,Product> map = new HashMap<>();
+    public List<Product> getSanPhamNoiBat(int loaiSlected, int limit) {
+        Map<String, Product> map = new HashMap<>();
         List<Product> products = new ArrayList<>();
         try {
-            Connection connection =  DataSourceConnection.getConnection();
+            Connection connection = DataSourceConnection.getConnection();
             PreparedStatement preparedStatement;
-            switch (loaiSlected){
+            switch (loaiSlected) {
                 case 0:
-                    preparedStatement = connection.prepareStatement("SELECT  * from products p JOIN hinhanh h ON p.MASP = h.IDSP ORDER BY DONGIA DESC");
+                    preparedStatement = connection.prepareStatement(" SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products where  TRANGTHAI = ? ORDER BY DONGIA DESC LIMIT ?) as p ON h.IDSP = p.MASP ORDER BY DONGIA DESC");
                     break;
                 case 1:
-                    preparedStatement = connection.prepareStatement("SELECT  * from products p JOIN hinhanh h ON p.MASP = h.IDSP ORDER BY NGAYNHAP DESC");
+                    preparedStatement = connection.prepareStatement(" SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products where  TRANGTHAI = ? ORDER BY NGAYNHAP DESC LIMIT ?) as p ON h.IDSP = p.MASP ORDER BY NGAYNHAP DESC");
                     break;
                 case 2:
-                    preparedStatement = connection.prepareStatement("SELECT  * from products p JOIN hinhanh h ON p.MASP = h.IDSP\n" +
-                            "WHERE SALE > 0 AND CURDATE() BETWEEN NGAYBATDAUSALE AND NGAYKETTHUCSALE  ORDER BY SALE DESC ");
+                    preparedStatement = connection.prepareStatement("  SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products WHERE  TRANGTHAI = ? AND SALE > 0 AND CURDATE() BETWEEN NGAYBATDAUSALE AND NGAYKETTHUCSALE" +
+                            "  ORDER BY SALE DESC  LIMIT ?) as p ON h.IDSP = p.MASP ORDER BY SALE DESC");
+                    break;
+                case 3:
+                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products where  TRANGTHAI = ? ORDER BY NGAYNHAP DESC LIMIT ?) as p ON h.IDSP = p.MASP ORDER BY NGAYNHAP DESC");
                     break;
 
                 default:
                     throw new IllegalStateException("Unexpected value: " + loaiSlected);
             }
+            preparedStatement.setInt(1, 1);
+            preparedStatement.setInt(2, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String maSP = resultSet.getString("MASP");
                 String tenSP = resultSet.getString("TENSP");
                 String url = resultSet.getString("URL");
@@ -139,16 +153,16 @@ public class ProductDao {
                 product.setLoaiSP(loaiSP);
                 product.setTrangThai(trangThai);
                 product.setNayNhap(resultSet.getDate("NgayNhap"));
-                if(map.containsKey(maSP)){
+                if (map.containsKey(maSP)) {
                     List<String> listURL = map.get(maSP).getListUrlImg();
                     listURL.add(url);
                     product.setListUrlImg(listURL);
-                    map.put(maSP,product);
-                }else{
+                    map.put(maSP, product);
+                } else {
                     List<String> listURL = new ArrayList<>();
                     listURL.add(url);
                     product.setListUrlImg(listURL);
-                    map.put(maSP,product);
+                    map.put(maSP, product);
                 }
 
             }
@@ -161,16 +175,252 @@ public class ProductDao {
             e.printStackTrace();
         }
         //convert map to list
-        int i = 0;
-        for(Map.Entry<String,Product> entry : map.entrySet()){
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
             products.add(entry.getValue());
-            i++;
-            if(i >= 8) break;
+
         }
         return products;
     }
-   
 
+    /*
+
+     * ---loaiSlected--
+     * 0 sản phẩm nổi bật giá tiền đắt nhất
+     * 1 sản phẩm mới ngày nhập mới nhất
+     * 2 best seller bán nhiều nhất
+     * 3 giảm giá
+     * */
+    public List<Product> getSanPhamHeader(String idLoai, int limit, int loaiSlected) {
+        Map<String, Product> map = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement;
+            switch (loaiSlected) {
+                case 0:
+                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products WHERE LOAISP = ? AND TRANGTHAI = ?  ORDER BY DONGIA DESC  LIMIT ? ) as p ON h.IDSP = p.MASP ");
+                    break;
+                case 1:
+                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products WHERE LOAISP = ? AND TRANGTHAI = ?  ORDER BY NGAYNHAP DESC  LIMIT ? ) as p ON h.IDSP = p.MASP ");
+                    break;
+                case 2:
+                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products WHERE LOAISP = ? AND TRANGTHAI = ?  ORDER BY DONGIA DESC  LIMIT ? ) as p ON h.IDSP = p.MASP ");
+                    break;
+
+                case 3:
+                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products WHERE LOAISP = ? AND TRANGTHAI = ?  AND SALE > 0 AND CURDATE() BETWEEN NGAYBATDAUSALE AND NGAYKETTHUCSALE " +
+                            "ORDER BY SALE DESC  LIMIT ?) as p ON h.IDSP = p.MASP ORDER BY SALE DESC");
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid loaiSlected");
+            }
+
+
+            preparedStatement.setString(1, idLoai);
+            preparedStatement.setInt(2, 1);
+            preparedStatement.setInt(3, limit);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String maSP = resultSet.getString("MASP");
+                String tenSP = resultSet.getString("TENSP");
+                String url = resultSet.getString("URL");
+                String idBoSuaTap2 = resultSet.getString("IDBoSuuTap");
+                String moTa = resultSet.getString("MOTA");
+                Double donGia = resultSet.getDouble("DONGIA");
+                Double sell = resultSet.getDouble("SALE");
+                String mau = resultSet.getString("MAU");
+                String loaiSP = resultSet.getString("LOAISP");
+                int trangThai = resultSet.getInt("TRANGTHAI");
+
+                Product product = new Product();
+                product.setMaSP(maSP);
+                product.setTenSP(tenSP);
+                product.setIdBoST(idBoSuaTap2);
+                product.setMoTa(moTa);
+                product.setGia(donGia);
+                product.setSell(sell);
+                product.setMau(mau);
+                product.setLoaiSP(loaiSP);
+                product.setTrangThai(trangThai);
+                product.setNayNhap(resultSet.getDate("NgayNhap"));
+                if (map.containsKey(maSP)) {
+                    List<String> listURL = map.get(maSP).getListUrlImg();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                } else {
+                    List<String> listURL = new ArrayList<>();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                }
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //convert map to list
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
+            products.add(entry.getValue());
+        }
+        return products;
+    }
+
+
+    /*
+
+     * ---loaiSlected--
+     * 0 sản phẩm nổi bật giá tiền đắt nhất
+     * 1 sản phẩm mới ngày nhập mới nhất
+     * 2 best seller bán nhiều nhất
+     * 3 giảm giá
+     * ----------sap xep----------
+     * 0 tùy chọn
+     * 1 sản phẩm bán chạy nhất
+     * 2 theo chữ cái a-z
+     * 3 theo chữ cái z-a
+     * 4 theo giá tăng dần
+     * 5 theo giá giảm dần
+     * 6 mới nhất
+     * 7 cũ nhất
+     * */
+    public List<Product> getProducts(String idLoai, int loaiSlected) {
+        Map<String, Product> map = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+        String sqlStart = "SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products ";
+        String sqlWhere = " WHERE LOAISP = ? AND TRANGTHAI = ?  ";
+        String sqlOrderBy = "";
+        String sqlEnd = "  ) as p ON h.IDSP = p.MASP";
+
+        switch (loaiSlected) {
+            case 0: sqlOrderBy += " ORDER BY DONGIA DESC ";
+                break;
+            case 1: sqlOrderBy += " ORDER BY NGAYNHAP DESC";
+                break;
+            case 2: sqlOrderBy += " ORDER BY DONGIA DESC";
+                break;
+
+            case 3: sqlOrderBy += " ORDER BY SALE DESC";
+                sqlWhere += " AND SALE > 0 AND CURDATE() BETWEEN NGAYBATDAUSALE AND NGAYKETTHUCSALE ";
+                break;
+            case 4: sqlOrderBy += "";
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid loaiSlected");
+
+        }
+
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+
+            String sql = sqlStart + sqlWhere + sqlOrderBy + sqlEnd;
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+
+
+            preparedStatement.setString(1, idLoai);
+            preparedStatement.setInt(2, 1);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String maSP = resultSet.getString("MASP");
+                String tenSP = resultSet.getString("TENSP");
+                String url = resultSet.getString("URL");
+                String idBoSuaTap2 = resultSet.getString("IDBoSuuTap");
+                String moTa = resultSet.getString("MOTA");
+                Double donGia = resultSet.getDouble("DONGIA");
+                Double sell = resultSet.getDouble("SALE");
+                String mau = resultSet.getString("MAU");
+                String loaiSP = resultSet.getString("LOAISP");
+                int trangThai = resultSet.getInt("TRANGTHAI");
+
+                Product product = new Product();
+                product.setMaSP(maSP);
+                product.setTenSP(tenSP);
+                product.setIdBoST(idBoSuaTap2);
+                product.setMoTa(moTa);
+                product.setGia(donGia);
+                product.setSell(sell);
+                product.setMau(mau);
+                product.setLoaiSP(loaiSP);
+                product.setTrangThai(trangThai);
+                product.setNayNhap(resultSet.getDate("NgayNhap"));
+                if (map.containsKey(maSP)) {
+                    List<String> listURL = map.get(maSP).getListUrlImg();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                } else {
+                    List<String> listURL = new ArrayList<>();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                }
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //convert map to list
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
+            products.add(entry.getValue());
+        }
+        return products;
+    }
+
+    public  int getCountPage(String idLoai, int loaiSlected){
+        String sqlStart = "SELECT COUNT(*) totle FROM products ";
+        String sqlWhere = " WHERE LOAISP = ? AND TRANGTHAI = ?  ";
+        int totle = 0;
+        if (loaiSlected == 3) {
+                sqlWhere += " AND SALE > 0 AND CURDATE() BETWEEN NGAYBATDAUSALE AND NGAYKETTHUCSALE ";
+
+
+        }
+
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+
+            String sql = sqlStart + sqlWhere ;
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+
+
+            preparedStatement.setString(1, idLoai);
+            preparedStatement.setInt(2, 1);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                 totle = resultSet.getInt("totle");
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totle;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new ProductDao().getCountPage("5723de72-32ec-4ef3-80ef-dd69b8a5cff0",4));
+    }
 //    public static void main(String[] args) {
 //
 //

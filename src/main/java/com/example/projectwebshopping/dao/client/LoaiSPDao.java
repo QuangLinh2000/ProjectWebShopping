@@ -37,7 +37,7 @@ public class LoaiSPDao {
                 loaiSP.setMaLoai(resultSet.getString("idloai"));
                 loaiSP.setTenLoai(resultSet.getString("nameLoai"));
                 loaiSP.setMoTa(resultSet.getString("Mota"));
-
+                loaiSP.setListProduct(new ArrayList<>());
                 loaiSPS.add(loaiSP);
             }
             resultSet.close();

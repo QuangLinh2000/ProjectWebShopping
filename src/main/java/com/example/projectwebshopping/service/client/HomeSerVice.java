@@ -9,6 +9,7 @@ import com.example.projectwebshopping.model.client.LoaiSP;
 import com.example.projectwebshopping.model.client.Product;
 import com.example.projectwebshopping.model.client.QuangCao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeSerVice implements IHomeService{
@@ -28,12 +29,29 @@ public class HomeSerVice implements IHomeService{
     }
 
     @Override
-    public List<Product> getAllProductByBSTId(String idBoSuaTap) {
-        return ProductDao.getInstance().getAllProductByBSTId(idBoSuaTap);
+    public List<Product> getAllProductByBSTId(String idBoSuaTap,int limit) {
+        return ProductDao.getInstance().getAllProductByBSTId(idBoSuaTap,limit);
     }
 
     @Override
-    public List<Product> getSanPhamNoiBat(int loaiSlected) {
-        return ProductDao.getInstance().getSanPhamNoiBat(loaiSlected);
+    public List<Product> getSanPhamNoiBat(int loaiSlected,int limit) {
+        return ProductDao.getInstance().getSanPhamNoiBat(loaiSlected,limit);
     }
+
+    @Override
+    public List<Product> getSanPhamHeader(String idLoai, int limit, int loaiSlected) {
+        return ProductDao.getInstance().getSanPhamHeader(idLoai,limit,loaiSlected);
+    }
+
+    @Override
+    public List<Product> getProducts(String idLoai, int loaiSlected) {
+        return ProductDao.getInstance().getProducts(idLoai,loaiSlected);
+    }
+
+    @Override
+    public int getCountPage(String idLoai, int loaiSlected){
+        return ProductDao.getInstance().getCountPage(idLoai,loaiSlected);
+    }
+
+
 }

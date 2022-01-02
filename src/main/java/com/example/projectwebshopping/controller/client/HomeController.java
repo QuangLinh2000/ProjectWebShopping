@@ -20,13 +20,13 @@ public class HomeController extends HttpServlet {
         List<BoSuaTap> listBoSuaTap = iHomeService.getBSHome();
         request.setAttribute("listQC",iHomeService.getAllQC());
         request.setAttribute("listBST",listBoSuaTap);
-        request.setAttribute("listSPNoiBat",iHomeService.getSanPhamNoiBat(0));
-        request.setAttribute("listSPMoi",iHomeService.getSanPhamNoiBat(1));
-        request.setAttribute("listSPKM",iHomeService.getSanPhamNoiBat(2));
+        request.setAttribute("listSPNoiBat",iHomeService.getSanPhamNoiBat(0,8));
+        request.setAttribute("listSPMoi",iHomeService.getSanPhamNoiBat(1,8));
+        request.setAttribute("listSPKM",iHomeService.getSanPhamNoiBat(2,8));
         String idBoSTLeft = listBoSuaTap.get(0).getId();
         String idBoSTRight = listBoSuaTap.get(1).getId();
-        request.setAttribute("listBoSTLeft",iHomeService.getAllProductByBSTId(idBoSTLeft));
-        request.setAttribute("listBoSTRight",iHomeService.getAllProductByBSTId(idBoSTRight));
+        request.setAttribute("listBoSTLeft",iHomeService.getAllProductByBSTId(idBoSTLeft,10));
+        request.setAttribute("listBoSTRight",iHomeService.getAllProductByBSTId(idBoSTRight,10));
 
         request.setAttribute("container_view","/views/index.jsp");
 

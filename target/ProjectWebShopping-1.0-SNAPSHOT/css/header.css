@@ -523,6 +523,13 @@ html body {
     font-size: 16px;
     font-family: var(--font-body);
 }
+.sub-nav-img{
+    display: none;
+}
+.sub-nav-img.active{
+    display: block;
+}
+
 
 /* =================================================responsive==================================== */
 /* responsive web  */

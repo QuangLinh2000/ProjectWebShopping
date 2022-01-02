@@ -27,7 +27,7 @@ public class Configuration {
         DB_PASSWORD = "";
         DB_URL = "jdbc:mysql://localhost:3306/shopthoitrang";
         DB_DRIVER = "com.mysql.cj.jdbc.Driver";
-        DB_MAX_CONNECTIONS = 2;
+        DB_MAX_CONNECTIONS = 10;
     }
 
 }
