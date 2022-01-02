@@ -17,8 +17,7 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/936c874066.js" crossorigin="anonymous"></script>
-    <link rel="icon" type="image/svg+xml" href="<%=request.getContextPath()%>/img/favicon.svg">
-    <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/img/favicon.png">
+
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">

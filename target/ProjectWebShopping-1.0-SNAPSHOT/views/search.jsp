@@ -201,6 +201,7 @@
                                 </div>
                                 <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                             </div>
+<%--                            demo--%>
                         </div>
                         <div class="list-image-hover">
                             <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
