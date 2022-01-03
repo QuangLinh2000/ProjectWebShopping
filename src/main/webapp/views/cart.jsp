@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cart.css">
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/notify/simple-notify.min.css">
   <section id="cart" class="margin-top-mobile">
     <div class="container">
       <div class="cart-holder">
@@ -245,6 +245,8 @@
                 </div>
                 <a href="" class="btn-cart btn-total-checkout">Đặt hàng</a>
                 <a href="" class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
+                <p class="btn-cart" onclick="pushNotify()">OK</p>
+
               </div>
               <div class="bag-payment-options">
                 <h3 class="text-accept">Chúng tôi chấp nhận:</h3>
@@ -260,6 +262,30 @@
 
 
   </section>
+  <script>
+    function pushNotify() {
+      new Notify ({
+        status: 'success',
+        title: 'Notify Title',
+        text: 'Notify text lorem ipsum',
+        effect: 'slide',
+        speed: 300,
+        customClass: '',
+        customIcon: '',
+        showIcon: true,
+        showCloseButton: true,
+        autoclose: true,
+        autotimeout: 3000,
+        gap: 20,
+        distance: 20,
+        type: 1,
+        position: 'right top',
+        customWrapper: '',
+      })
+    }
+
+  </script>
+<script src="<%=request.getContextPath()%>/assets/notify/simple-notify.min.js"></script>
 
   <script src="<%=request.getContextPath()%>/script/cart.js"></script>
 
