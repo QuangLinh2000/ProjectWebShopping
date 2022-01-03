@@ -2,7 +2,9 @@
 <%@ page import="com.example.projectwebshopping.service.client.HomeSerVice" %>
 <%@ page import="com.example.projectwebshopping.model.client.Cart" %>
 <%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %><%--
+<%@ page import="java.util.Map" %>
+<%@ page import="com.example.projectwebshopping.model.client.User" %>
+<%@ page import="com.example.projectwebshopping.dao.client.CartDao" %><%--
   Created by IntelliJ IDEA.
   User: trong
   Date: 29/12/2021
@@ -19,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
     <title>Document</title>
     <script src="<%=request.getContextPath()%>/script/jquery-3.5.0.min.js"></script>
-    <script src="<%=request.getContextPath()%>/script/fontawesome.js" crossorigin="anonymous"></script>
+    <link href="<%=request.getContextPath()%>/assets/fontawesome-free-6.0.0-beta3-web/css/all.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
 
@@ -44,10 +46,10 @@
  <script>
      <%
      int quantity = 0;
-     if (request.getSession().getAttribute("name") == null) {
-
-
+     User user = (User) request.getSession().getAttribute("user");
      Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
+
+     if (user == null) {
      if (cartMap == null) {
          cartMap = new HashMap<>();
      }
@@ -59,10 +61,7 @@
 
      %>
      $('.cart-count.color-red').text('<%=quantity%>');
-     <%
-     } else {
-
-     }
+     <%}
      %>
 
  </script>

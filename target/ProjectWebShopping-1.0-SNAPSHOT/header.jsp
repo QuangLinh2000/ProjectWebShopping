@@ -3,7 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.projectwebshopping.model.client.Product" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.projectwebshopping.model.client.LoaiSP" %><%--
+<%@ page import="com.example.projectwebshopping.model.client.LoaiSP" %>
+<%@ page import="com.example.projectwebshopping.model.client.User" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 12/29/2021
@@ -42,8 +43,8 @@
                         </a>
                     </div>
                     <%
-                        String username = (String) session.getAttribute("isusername");
-                        if (username == null) {
+                        User user = (User) session.getAttribute("userLognin");
+                        if (user == null) {
                     %>
                     <div class="btn-signup">
                         <a href="<%=request.getContextPath()%>/signin" id="login-a" class="color-red">Đăng nhập </a>
@@ -213,7 +214,7 @@
                         </a>
                     </div>
                     <%
-                        if (username != null) {
+                        if (user != null) {
                     %>
                     <div class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown">
@@ -267,7 +268,7 @@
                             </li>
                         </c:forEach>
                         <%
-                            if (username == null) {
+                            if (user == null) {
                         %>
                         <li class="nav-item">
                             <div class="nav-item-warper">

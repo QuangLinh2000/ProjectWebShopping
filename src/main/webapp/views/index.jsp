@@ -752,7 +752,9 @@
                     //get json
                     var json = JSON.parse(data);
                     if (json.success === 'true') {
-                        $('.cart-count.color-red').text(json.quantity);
+                        if(json.quantity != null){
+                            $('.cart-count.color-red').text(json.quantity);
+                        }
                         alert('Thêm vào giỏ hàng thành công');
                     } else {
                         alert('Thêm vào giỏ hàng thất bại');

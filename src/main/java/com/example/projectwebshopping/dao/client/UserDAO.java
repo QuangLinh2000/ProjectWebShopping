@@ -1,6 +1,7 @@
 package com.example.projectwebshopping.dao.client;
 
 import com.example.projectwebshopping.connection.DataSourceConnection;
+import com.example.projectwebshopping.model.client.User;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -103,7 +104,7 @@ public class UserDAO {
         }
     }
     //check login
-    public boolean checkLogin(String username,String password){
+    public User checkLogin(String username, String password){
         try {
             Connection connection =  DataSourceConnection.getConnection();
 
@@ -117,23 +118,27 @@ public class UserDAO {
                     resultSet.close();
                     preparedStatement.close();
                     DataSourceConnection.returnConnection(connection);
-                    return false;
+                    return null;
                 }
+                User user = new User();
+                user.setId(resultSet.getString("id"));
+                user.setEmail(resultSet.getString("usermail"));
+                user.setUsername(resultSet.getString("username"));
                 resultSet.close();
                 preparedStatement.close();
                 DataSourceConnection.returnConnection(connection);
-                return true;
+                return user;
             }
             resultSet.close();
             preparedStatement.close();
             DataSourceConnection.returnConnection(connection);
-            return false;
+            return null;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            return false;
+            return null;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

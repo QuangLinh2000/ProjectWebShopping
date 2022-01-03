@@ -1,6 +1,8 @@
 package com.example.projectwebshopping.controller.client;
 
+import com.example.projectwebshopping.dao.client.CartDao;
 import com.example.projectwebshopping.model.client.Cart;
+import com.example.projectwebshopping.model.client.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -25,8 +27,8 @@ public class CartController extends HttpServlet {
 
         //get name from session
         HttpSession session = request.getSession();
-        String name = (String) session.getAttribute("name");
-        if(name == null){
+        User user = (User) session.getAttribute("userLognin");
+        if(user == null){
             //get the Map cart from session
             Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
             if (cartMap == null) {
@@ -50,7 +52,11 @@ public class CartController extends HttpServlet {
             response.getWriter().write("{\"quantity\":\"" + quantity + "\",\"success\":\"true\"}");
 
 
+        }else{
 
+
+            CartDao.getInstance().addGioHang(user.getId(), id,1);
+            response.getWriter().write("{\"success\":\"true\"}");
 
 
         }

@@ -9,6 +9,7 @@
   Time: 3:45 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -141,7 +142,10 @@
                             <%for ( int j = 0; j < product.getListUrlImg().size(); j++ ) {%>
                             <% if(j >= limitImageSmall)break;%>
                             <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 169c3de5ef7dcad4d7e55240773b8cc229df579d
                             <%}%>
                         </div>
                         <div class="text-content-collection">
@@ -238,10 +242,6 @@
                                 item++;
                             }
                         }%>
-
-                    <%%>
-                    <%%>
-
 
                 </div>
 
