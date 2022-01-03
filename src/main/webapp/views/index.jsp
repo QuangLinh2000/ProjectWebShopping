@@ -14,6 +14,8 @@
 <%List<BoSuaTap> listBST = (List<BoSuaTap>) request.getAttribute("listBST");
     BoSuaTap boSuaTap1 = listBST.get(0);
     BoSuaTap boSuaTap2 = listBST.get(1);%>
+<%--limit imgae small gioi han anh hover--%>
+<%int limitImageSmall =5;%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/home.css">
 
 <section id="banner">
@@ -69,7 +71,7 @@
                                 for ( Product p : productList2) {%>
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
-                                    <a href="#">
+                                    <a href="/Shopping/detail?id=<%=p.getMaSP()%>">
 
                                         <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                                     </a>
@@ -78,7 +80,7 @@
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </div>
                                         <div class="btn-img-buy">
-                                            <span>mua ngay</span>
+                                            <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                         </div>
                                         <div class="btn-img-cart">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -95,9 +97,10 @@
                                     <%}%>
                                 </div>
                                 <div class="list-image-hover">
-                                    <%for ( String url : p.getListUrlImg()) {%>
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%><%=url%>" alt="">
 
+                                    <%for ( int j = 0; j < p.getListUrlImg().size(); j++ ) {%>
+                                    <% if(j >= limitImageSmall)break;%>
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(j)%>" alt="">
                                     <%}%>
                                 </div>
                                 <div class="text-content-collection">
@@ -163,7 +166,7 @@
                              for ( Product p : productList) {%>
                             <div class="slide-collection">
                                 <div class="collection-slide-div">
-                                    <a href="#">
+                                    <a href="/Shopping/detail?id=<%=p.getMaSP()%>">
 
                                         <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                                     </a>
@@ -172,7 +175,7 @@
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </div>
                                         <div class="btn-img-buy">
-                                            <span>mua ngay</span>
+                                            <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                         </div>
                                         <div class="btn-img-cart">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -189,9 +192,9 @@
                                     <%}%>
                                 </div>
                                 <div class="list-image-hover">
-                                    <%for ( String url : p.getListUrlImg()) {%>
-                                    <img class="img-item-hov" src="<%=request.getContextPath()%><%=url%>" alt="">
-
+                                    <%for ( int j = 0; j < p.getListUrlImg().size(); j++ ) {%>
+                                    <% if(j >= limitImageSmall)break;%>
+                                    <img class="img-item-hov" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(j)%>" alt="">
                                     <%}%>
                                    </div>
                                 <div class="text-content-collection">
@@ -256,7 +259,7 @@
                 <div class="slides-item">
                     <div class="slide-collection">
                         <div class="collection-slide-div">
-                            <a href="#">
+                            <a href="/Shopping/detail?id=<%=p.getMaSP()%>">
                                 <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                             </a>
                             <div class="btn-img padding-btn-slider">
@@ -264,7 +267,7 @@
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <div class="btn-img-buy">
-                                    <span>mua ngay</span>
+                                    <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                 </div>
                                 <div class="btn-img-cart">
                                     <i class="fa-solid fa-cart-shopping"></i>
@@ -334,7 +337,7 @@
 
                 <div class="slide-collection">
                     <div class="collection-slide-div">
-                        <a href="#">
+                        <a href="/Shopping/detail?id=<%=p.getMaSP()%>">
                             <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                         </a>
                         <div class="btn-img">
@@ -342,7 +345,7 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                             <div class="btn-img-buy">
-                                <span>mua ngay</span>
+                                <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                             </div>
                             <div class="btn-img-cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
@@ -359,10 +362,10 @@
                         <%}%>
                     </div>
                     <div class="list-image-hover">
-                        <%for ( String url : p.getListUrlImg()) {%>
-                         <img class="img-item-hov" src="<%=request.getContextPath()%><%=url%>" alt="">
-
-                         <%}%>
+                        <%for ( int j = 0; j < p.getListUrlImg().size(); j++ ) {%>
+                        <% if(j >= limitImageSmall)break;%>
+                        <img class="img-item-hov" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(j)%>" alt="">
+                        <%}%>
                          </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
@@ -497,7 +500,7 @@
 
                 <div class="slide-collection">
                     <div class="collection-slide-div">
-                        <a href="#">
+                        <a href="/Shopping/detail?id=<%=p.getMaSP()%>">
                             <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                         </a>
                         <div class="btn-img">
@@ -505,7 +508,7 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                             <div class="btn-img-buy">
-                                <span>mua ngay</span>
+                                <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                             </div>
                             <div class="btn-img-cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
@@ -521,9 +524,9 @@
                         <%}%>
                     </div>
                     <div class="list-image-hover">
-                        <%for ( String url : p.getListUrlImg()) {%>
-                        <img class="img-item-hov" src="<%=request.getContextPath()%><%=url%>" alt="">
-
+                        <%for ( int j = 0; j < p.getListUrlImg().size(); j++ ) {%>
+                        <% if(j >= limitImageSmall)break;%>
+                        <img class="img-item-hov" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(j)%>" alt="">
                         <%}%>
                     </div>
                     <div class="text-content-collection">
