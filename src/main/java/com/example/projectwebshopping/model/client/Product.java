@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Random;
 
 public class Product implements Serializable {
     private String maSP;
@@ -242,6 +245,21 @@ public class Product implements Serializable {
     }
    //toJson
 
+//    public static void main(String[] args) {
+//        //random date
+//        Random random = new Random();
+//        int count = 0;
+//        while (count < 330){
+//            int ngay = random.nextInt(100)+1;
+//
+//            System.out.println(ngay);
+//
+//
+//
+//            count++;
+//
+//        }
+//    }
 
 
 

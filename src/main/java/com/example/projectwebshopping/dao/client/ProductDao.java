@@ -400,13 +400,26 @@ public class ProductDao {
 
 
 //    public static void main(String[] args) {
-//
-//
+////        List<String> list = new ArrayList<>();
+////
+////        try {
+////            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\t.txt")));
+////            String line;
+////            while ((line =bufferedReader.readLine())!=null){
+////                list.add(line);
+////            }
+////        } catch (Exception e) {
+////            e.printStackTrace();
+////        }
+//        Map<String,String> map = new HashMap<>();
 //        try {
 //            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\demo.txt")));
 //            String line;
 //            while ((line =bufferedReader.readLine())!=null){
-//              System.out.println("/img/product/"+line);
+//              if(map.containsKey(line)){
+//                  System.out.println(line);
+//              }
+//              map.put(line,line);
 //            }
 //        } catch (Exception e) {
 //            e.printStackTrace();
