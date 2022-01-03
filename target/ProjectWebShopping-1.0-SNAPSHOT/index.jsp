@@ -22,6 +22,8 @@
     <title>Document</title>
     <script src="<%=request.getContextPath()%>/script/jquery-3.5.0.min.js"></script>
     <link href="<%=request.getContextPath()%>/assets/fontawesome-free-6.0.0-beta3-web/css/all.css" rel="stylesheet" />
+    <%--    link notify--%>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/notify/simple-notify.min.css">
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
 
@@ -40,6 +42,7 @@
 
 <%}%>
 <jsp:include page="footer.jsp"></jsp:include>
+<script src="<%=request.getContextPath()%>/assets/notify/simple-notify.min.js"></script>
 <script src="<%=request.getContextPath()%>/script/header.js"></script>
 
 </body>
