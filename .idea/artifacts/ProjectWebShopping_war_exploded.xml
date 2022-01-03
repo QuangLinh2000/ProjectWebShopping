@@ -14,18 +14,6 @@
         <element id="directory" name="classes">
           <element id="module-output" name="ProjectWebShopping" />
         </element>
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.9" />
-          <element id="library" level="project" name="Maven: com.fasterxml.uuid:java-uuid-generator:4.0.1" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.29" />
-          <element id="library" level="project" name="Maven: org.jdbi:jdbi:2.53" />
-          <element id="library" level="project" name="Maven: com.google.code.findbugs:annotations:2.0.2" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.25" />
-          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
-          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.6.2" />
-          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
-          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
-        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/ProjectWebShopping-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />

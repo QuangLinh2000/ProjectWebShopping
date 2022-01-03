@@ -271,7 +271,18 @@ li {
     margin-right: 0.625em;
     position: relative;
 }
-
+.product__color__elements label{
+    padding: 0.625em;
+    min-width: 2.3125em;
+    height: 2.1875em;
+    line-height: 2.1875em;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    position: relative;
+    width: auto;
+    margin-right: 0.625em;
+}
 .product__amount {
     display: flex;
     margin-bottom: 0.3125em;

@@ -21,7 +21,7 @@ public class DetailController extends HttpServlet {
         String idSP=request.getParameter("id");
         IHomeService homeService = new HomeSerVice();
        DetailProduct detailProduct =  homeService.getProduct(idSP);
-
+        request.setAttribute("related",detailProduct.getRelated());
         request.setAttribute("product",detailProduct.getProduct());
         request.setAttribute("bosuutap",detailProduct.getBoSuaTap());
 
