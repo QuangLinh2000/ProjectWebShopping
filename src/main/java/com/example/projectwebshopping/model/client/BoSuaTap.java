@@ -77,7 +77,7 @@ public class BoSuaTap implements Serializable {
             this.name = resultSet.getString("name");
             this.tieuDe = resultSet.getString("tieuDe");
             this.mota = resultSet.getString("mota");
-            this.hinhAnh = resultSet.getString("hinhAnh");
+            this.hinhAnh = resultSet.getString("URL");
             this.check = resultSet.getInt("check");
         }catch(Exception e){
             e.printStackTrace();

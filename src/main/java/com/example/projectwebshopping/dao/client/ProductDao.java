@@ -382,7 +382,7 @@ public class ProductDao {
                 }
                 boSuaTap.addBoST(resultSet);
             }
-            List<Product> related=getProducts(id,map.get(id).getLoaiSP());
+            List<Product> related=ProductDao.getInstance().getProducts(id,map.get(id).getLoaiSP());
             detailProduct.setRelated(related);
             detailProduct.setProduct(map.get(id));
             detailProduct.setBoSuaTap(boSuaTap);

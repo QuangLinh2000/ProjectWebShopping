@@ -1,11 +1,14 @@
 <%@ page import="com.example.projectwebshopping.model.client.Product" %>
 <%@ page import="com.example.projectwebshopping.model.client.BoSuaTap" %>
+<%@ page import="java.util.StringTokenizer" %>
+<%@ page import="java.util.List" %>
 
 
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <% Product product=(Product)request.getAttribute("product");
     BoSuaTap bst=(BoSuaTap) request.getAttribute("bosuutap");
+    List<Product> listRelateds=(List<Product>)request.getAttribute("related");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css">
 
@@ -56,19 +59,29 @@
 
                     <c:choose>
                         <c:when test="<%=product.getSell()>0%>">
-                            <span><%=convertPrice(product.getGia()-product.getGia()*product.getSell()/100)%>₫</span>
-                            <div class='product__price__sale'><s><%=convertPrice(product.getGia())%>₫</s> </div>
+                            <span>
+                                <scrip>
+                                    convertPrice(<%=product.getGia()-product.getGia()*product.getSell()/100%>)
+                                </scrip>
+                            </span>
+                            <div class='product__price__sale'><s>
+                                <scrip>
+                                    convertPrice(<%=product.getGia()%>)
+                                </scrip>
+                            </s> </div>
                             <div class='product__percent__sale' >
                             <span><%=product.getSell()%>%</span>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <span><%=convertPrice(product.getGia())%>₫</span>
+                            <span> <scrip>
+                                    convertPrice(<%=product.getGia()%>)
+                                </scrip></span>
                         </c:otherwise>
                     </c:choose>
                 </div>
                 <c:choose>
-                <c:when test="<%=product.getSoLuong>0%>">
+                <c:when test="<%=product.getM()+product.getS()+product.getL()+product.getXL()>0%>">
                 <div class="product__size">
                     <div class="product__header">
                         Kích thước
@@ -76,24 +89,50 @@
                     <div class="product__size__elements">
                         <div class="product__size__element">
 
-
-
-                            <c:forEach var="item" items="<%=product.getListSize%>" >
-                                <label <c:if test="${item.status==1}">onclick="hiddenLabel(this)" </c:if>class="text-center">
-                                    <c:out value="${item.sizeTitle}"></c:out>
+                                <label class="text-center">
                                     <c:choose>
-                                    <c:when test="${item.status==0}">
-
-                                        <img class ="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png" alt="">
-
-                                    </c:when>
+                                        <strong>S</strong>
+                                        <c:when test="<%=product.getS()>0%>">
+                                         <img class ="sold-out-image select-image" src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
+                                        </c:when>
                                         <c:otherwise>
-                                            <img class ="sold-out-image select-image" src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
+                                            <img class ="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png" alt="">
                                         </c:otherwise>
                                     </c:choose>
                                 </label>
-
-                            </c:forEach>
+                            <label class="text-center">
+                                <c:choose>
+                                    <strong>M</strong>
+                                    <c:when test="<%=product.getM()>0%>">
+                                        <img class ="sold-out-image select-image" src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class ="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png" alt="">
+                                    </c:otherwise>
+                                </c:choose>
+                            </label>
+                            <label class="text-center">
+                                <c:choose>
+                                    <strong>L</strong>
+                                    <c:when test="<%=product.getL()>0%>">
+                                        <img class ="sold-out-image select-image" src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class ="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png" alt="">
+                                    </c:otherwise>
+                                </c:choose>
+                            </label>
+                            <label class="text-center">
+                                <c:choose>
+                                    <strong>XL</strong>
+                                    <c:when test="<%=product.getXL()>0%>">
+                                        <img class ="sold-out-image select-image" src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class ="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png" alt="">
+                                    </c:otherwise>
+                                </c:choose>
+                            </label>
 
                         </div>
                     </div>
@@ -106,10 +145,10 @@
 
                     </div>
                     <div class="product__color__elements action-flex">
-                        <c:forEach var="item" items="<%=product.getListColor()%>">
-                        <div class="product__color__element" style="background-color: ${item.colorID}">
-                        </div>
-                        </c:forEach>
+                            <%StringTokenizer sk=new StringTokenizer(product.getMau(),",");
+                            while(sk.hasMoreTokens()){%>
+                        <label class="text-center"><%=sk.nextToken()%></label>
+                            <%}%>
                     </div>
 
                 </div>
@@ -120,9 +159,9 @@
                 <div class="product__amount">
                     <div class="product__header">Số lượng</div>
                     <div class="product__amount__form">
-                        <button class="decrease" onclick='changeAmount(-1,<%=product.getAvailable()%>)'><i class="fas fa-chevron-left"></i></button>
+                        <button class="decrease" onclick='changeAmount(-1,<%=product.getM()+product.getS()+product.getL()+product.getXL()>0%>)'><i class="fas fa-chevron-left"></i></button>
                         <label id="countLabel" class="amount-num text-center">1</label>
-                        <button class="increase" onclick='changeAmount(1,<%=product.getAvailable()%>)'><i class="fas fa-chevron-right"></i></button>
+                        <button class="increase" onclick='changeAmount(1,<%=product.getM()+product.getS()+product.getL()+product.getXL()>0%>)'><i class="fas fa-chevron-right"></i></button>
 
                     </div>
 
@@ -163,9 +202,10 @@
                 <ul class="wrap__list">
 
                     <div class="wrap__list__box">
-                        <c:forEach var="item" items="<%=listRelated%>">
+                        <c:forEach var="item" items="<%=listRelateds%>">
+
                         <li class="wrap__element">
-                            <div class="wrap__element__image"> <img src="<%=request.getContextPath()%>/img/${item.id}/${item.listImage[0]}" alt="">
+                            <div class="wrap__element__image"> <img src="<%=request.getContextPath()%>/${item.listUrlImg.get(0)}" alt="">
                                 <div class="clear-fix">
                                     <a href="https://nemshop.vn/collections/tat-ca-san-pham/products/ao-khoac-2710" class="detail__link"></a>
                                     <div class="advise-box">
@@ -173,32 +213,43 @@
                                     </div>
                                 </div>
                                <c:choose>
-                                   <c:when test="${item.available==0}">
+                                   <c:when test="${item.m+item.s+item.l+item.XL==0}">
                                        <div class="wrap__sale-off text-center">
-                                               ${item.sale}%
+                                               ${item.sell}%
                                        </div>
                                        <div class="wrap__sold-out text-center">STORE ONLY</div>
                                    </c:when>
                                    <c:otherwise>
-                                       <div class="wrap__sale-off text-center" style="right:50%; transform:translateX(50%);">${item.sale}%</div>
+                                       <div class="wrap__sale-off text-center" style="right:50%; transform:translateX(50%);">${item.sell}%</div>
                                    </c:otherwise>
                                </c:choose>
                             </div>
                             <div class="wrap__title">
-                                <a class="text-center" href=""> ${item.title}</a>
+                                <a class="text-center" href=""> ${item.tenSP}</a>
                             </div>
                             <div class="wrap__price text-center">
                                 <c:choose>
-                                    <c:when test="<%=product.getSale()>0%>">
-                                        <span class="curren-price"><%=convertPrice(product.getPrice()-(product.getPrice()*product.getSale()/100))%>₫
-                        </span>
+                                    <c:when test="${item.sell>0}">
+
+                                        <span class="curren-price">
+                                             <scrip>
+                                    convertPrice(<%=product.getGia()-product.getGia()*product.getSell()/100%>)
+                                </scrip>
+                                        </span>
                                         <span class="origin-price">
-                            <s><%=convertPrice(product.getPrice())%>₫</s>
+                            <s> <scrip>
+                                    convertPrice(<%=product.getGia()%>)
+                                </scrip>
+                            </s>
                         </span>
                                     </c:when>
                                     <c:otherwise>
                                       <span class="curren-price">
-                            <s><%=convertPrice(product.getPrice())%>₫</s>
+                            <s>
+                                 <scrip>
+                                    convertPrice(<%=product.getGia()%>)
+                                </scrip>
+                            </s>
                         </span>
                                     </c:otherwise>
                                 </c:choose>
@@ -206,8 +257,8 @@
                         </li>
                         </c:forEach>
                     </div>
-                    <div class="wrap-left-slide text-center" onclick="transition(-1,<%=listRelated.size()%>)"><i class="fas fa-angle-left"></i></div>
-                    <div class="wrap-right-slide text-center" onclick="transition(1,<%=listRelated.size()%>)"><i class="fas fa-angle-right"></i></div>
+                    <div class="wrap-left-slide text-center" onclick="transition(-1,${item.m+item.s+item.l+item.XL})"><i class="fas fa-angle-left"></i></div>
+                    <div class="wrap-right-slide text-center" onclick="transition(1,${item.m+item.s+item.l+item.XL})"><i class="fas fa-angle-right"></i></div>
                 </ul>
             </div>
         </div>
@@ -278,25 +329,3 @@
     <script src="<%=request.getContextPath()%>/script/detail.js"></script>
 
 
-<%!
-    private String convertPrice(double price) {
-        double priceCoppy=price;
-        String str="";
-        if((int)(priceCoppy/1000000)>0){
-            str=(int)(priceCoppy/1000000)+",";
-            //chỉ lấy phần nguyên
-            priceCoppy=priceCoppy%1000000;
-        }
-        if((int)(priceCoppy/1000)>0){
-            str+=(int)(priceCoppy/1000)+",";
-            priceCoppy=priceCoppy%1000;
-        }
-        else str+="000,";
-        if((int)(priceCoppy/1)>0){
-            str+=(int)(priceCoppy/1);
-
-        }
-        else str+="000";
-        return str;
-    }
-%>

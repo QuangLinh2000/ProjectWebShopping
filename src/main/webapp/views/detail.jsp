@@ -258,7 +258,7 @@
                         </c:forEach>
                     </div>
                     <div class="wrap-left-slide text-center" onclick="transition(-1,${item.m+item.s+item.l+item.XL})"><i class="fas fa-angle-left"></i></div>
-                    <div class="wrap-right-slide text-center" onclick="transition(1,${item.m+item.s+item.l+item.XL==0})"><i class="fas fa-angle-right"></i></div>
+                    <div class="wrap-right-slide text-center" onclick="transition(1,${item.m+item.s+item.l+item.XL})"><i class="fas fa-angle-right"></i></div>
                 </ul>
             </div>
         </div>
