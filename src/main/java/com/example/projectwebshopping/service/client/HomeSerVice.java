@@ -38,6 +38,7 @@ public class HomeSerVice implements IHomeService{
         return ProductDao.getInstance().getSanPhamNoiBat(loaiSlected,limit);
     }
 
+
     @Override
     public List<Product> getSanPhamHeader(String idLoai, int limit, int loaiSlected) {
         return ProductDao.getInstance().getSanPhamHeader(idLoai,limit,loaiSlected);
@@ -48,10 +49,6 @@ public class HomeSerVice implements IHomeService{
         return ProductDao.getInstance().getProducts(idLoai,loaiSlected);
     }
 
-    @Override
-    public int getCountPage(String idLoai, int loaiSlected){
-        return ProductDao.getInstance().getCountPage(idLoai,loaiSlected);
-    }
 
 
 }

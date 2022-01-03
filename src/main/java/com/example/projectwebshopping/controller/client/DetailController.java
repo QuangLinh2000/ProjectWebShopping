@@ -1,8 +1,7 @@
 package com.example.projectwebshopping.controller.client;
-
-import modal.beans.Product;
-import dao.managerProductDetail;
-
+import com.example.projectwebshopping.dao.client.ProductDao;
+import com.example.projectwebshopping.model.client.BoSuaTap;
+import com.example.projectwebshopping.model.client.Product;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -20,10 +19,8 @@ public class DetailController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Product product= managerProductDetail.getInstance().getProduct("Dam-hoa-xanh-D00869");
-        ArrayList<Product> listRelatedProduct= (ArrayList<Product>) managerProductDetail.getInstance().getRelatedProduct(product);
-        request.setAttribute("relatedProduct",listRelatedProduct);
-        request.setAttribute("productDetail",product);
+        String idSP=request.getParameter("detailProductID");
+
         request.getRequestDispatcher("/views/detail.jsp").forward(request,response);
 
 
