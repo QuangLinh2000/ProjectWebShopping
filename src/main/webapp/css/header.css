@@ -131,7 +131,10 @@ html body {
     transition-property: width;
     width: 100%;
 }
-
+.nav-item:hover > .text-hover:after {
+    width: 100%;
+    background-color: black;
+}
 .text-hover-underline-goes-right:after {
     left: 0;
     bottom: 0;
@@ -529,7 +532,9 @@ html body {
 .sub-nav-img.active{
     display: block;
 }
-
+.collection-slide-div {
+    overflow: hidden;
+}
 
 /* =================================================responsive==================================== */
 /* responsive web  */

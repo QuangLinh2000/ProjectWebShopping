@@ -131,8 +131,8 @@
                         <div class="list-image-hover">
                             <%int limitImageSmall =5;%>
                             <%for ( int j = 0; j < product.getListUrlImg().size(); j++ ) {%>
-                            <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
                             <% if(j >= limitImageSmall)break;%>
+                            <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
                             <%}%>
                         </div>
                         <div class="text-content-collection">
@@ -182,8 +182,8 @@
                         <div class="list-image-hover">
                             <%int limitImageSmall =5;%>
                             <%for ( int j = 0; j < product.getListUrlImg().size(); j++ ) {%>
-                            <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
                             <% if(j >= limitImageSmall)break;%>
+                            <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
                             <%}%>
                         </div>
                         <div class="text-content-collection">
