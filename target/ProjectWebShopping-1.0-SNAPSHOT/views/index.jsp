@@ -82,7 +82,7 @@
                                         <div class="btn-img-buy">
                                             <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                         </div>
-                                        <div class="btn-img-cart">
+                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@
                                         <div class="btn-img-buy">
                                             <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                         </div>
-                                        <div class="btn-img-cart">
+                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </div>
                                     </div>
@@ -269,7 +269,7 @@
                                 <div class="btn-img-buy">
                                     <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart">
+                                <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -347,7 +347,7 @@
                             <div class="btn-img-buy">
                                 <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                             </div>
-                            <div class="btn-img-cart">
+                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -411,7 +411,7 @@
                             <div class="btn-img-buy">
                                 <span>mua ngay</span>
                             </div>
-                            <div class="btn-img-cart">
+                            <div class="btn-img-cart" >
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -454,7 +454,7 @@
                             <div class="btn-img-buy">
                                 <span>mua ngay</span>
                             </div>
-                            <div class="btn-img-cart">
+                            <div class="btn-img-cart" >
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -510,7 +510,7 @@
                             <div class="btn-img-buy">
                                 <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                             </div>
-                            <div class="btn-img-cart">
+                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -735,3 +735,54 @@
     </div>
 </section>
 <script src="<%=request.getContextPath()%>/script/home.js"></script>
+<script>
+    $(document).ready(function () {
+       //click btn-img-cart
+        $('.btn-img-cart').click(function () {
+            //get attr
+            var id = $(this).attr('idSP');
+           //ajax
+            $.ajax({
+                url: '<%=request.getContextPath()%>/cart',
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    //get json
+                    var json = JSON.parse(data);
+                    if (json.success === 'true') {
+                            $('.cart-count.color-red').text(json.quantity);
+                        pushNotify('success','thêm vào giỏi hàng thành công','Thêm Sản phẩm');
+
+                    } else {
+                        pushNotify('error','thêm vào giỏi hàng thất bại','Thêm Sản phẩm');
+
+                    }
+                }
+            });
+        });
+
+    });
+
+    function pushNotify(status, message, title) {
+        new Notify({
+            status: status,
+            title: title,
+            text: message,
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 2000,
+            gap: 20,
+            distance: 20,
+            type: 1,
+            position: 'right bottom',
+            customWrapper: '',
+        })
+    }
+</script>

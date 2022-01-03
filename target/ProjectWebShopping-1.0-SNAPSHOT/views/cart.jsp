@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cart.css">
-
   <section id="cart" class="margin-top-mobile">
     <div class="container">
       <div class="cart-holder">
@@ -245,6 +244,7 @@
                 </div>
                 <a href="" class="btn-cart btn-total-checkout">Đặt hàng</a>
                 <a href="" class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
+
               </div>
               <div class="bag-payment-options">
                 <h3 class="text-accept">Chúng tôi chấp nhận:</h3>

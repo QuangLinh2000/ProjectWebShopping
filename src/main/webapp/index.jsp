@@ -1,5 +1,10 @@
 <%@ page import="com.example.projectwebshopping.service.client.IHomeService" %>
-<%@ page import="com.example.projectwebshopping.service.client.HomeSerVice" %><%--
+<%@ page import="com.example.projectwebshopping.service.client.HomeSerVice" %>
+<%@ page import="com.example.projectwebshopping.model.client.Cart" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="com.example.projectwebshopping.model.client.User" %>
+<%@ page import="com.example.projectwebshopping.dao.client.CartDao" %><%--
   Created by IntelliJ IDEA.
   User: trong
   Date: 29/12/2021
@@ -16,7 +21,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
     <title>Document</title>
     <script src="<%=request.getContextPath()%>/script/jquery-3.5.0.min.js"></script>
-    <script src="<%=request.getContextPath()%>/script/fontawesome.js" crossorigin="anonymous"></script>
+    <link href="<%=request.getContextPath()%>/assets/fontawesome-free-6.0.0-beta3-web/css/all.css" rel="stylesheet" />
+    <%--    link notify--%>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/notify/simple-notify.min.css">
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
 
@@ -35,6 +42,7 @@
 
 <%}%>
 <jsp:include page="footer.jsp"></jsp:include>
+<script src="<%=request.getContextPath()%>/assets/notify/simple-notify.min.js"></script>
 <script src="<%=request.getContextPath()%>/script/header.js"></script>
 
 </body>

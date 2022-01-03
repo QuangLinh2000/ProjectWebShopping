@@ -9,6 +9,7 @@
   Time: 3:45 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -121,7 +122,7 @@
                                 <div class="btn-img-buy">
                                     <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart">
+                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%>>
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -140,11 +141,11 @@
                             <%int limitImageSmall =5;%>
                             <%for ( int j = 0; j < product.getListUrlImg().size(); j++ ) {%>
                             <% if(j >= limitImageSmall)break;%>
-<<<<<<< HEAD
                             <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
-=======
+<<<<<<< HEAD
 
->>>>>>> de22e2e8d7967cbfa7a578ef7a83d5acbc0b627f
+=======
+>>>>>>> 169c3de5ef7dcad4d7e55240773b8cc229df579d
                             <%}%>
                         </div>
                         <div class="text-content-collection">
@@ -186,7 +187,7 @@
                                 <div class="btn-img-buy">
                                     <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart">
+                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%>>
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -241,10 +242,6 @@
                                 item++;
                             }
                         }%>
-
-                    <%%>
-                    <%%>
-
 
                 </div>
 
@@ -362,7 +359,7 @@
             sortProduct();
         });
 
-
+        addCart();
 
 
     });
@@ -465,7 +462,7 @@
                       '<div class="btn-img-buy">'+
                       '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
-                      '<div class="btn-img-cart">'+
+                      '<div class="btn-img-cart" idSP ="'+product.maSP+'">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
                       '</div>'+
                       '</div>'+ iconsell+
@@ -498,7 +495,7 @@
                       '<div class="btn-img-buy">'+
                       '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
-                      '<div class="btn-img-cart">'+
+                      '<div class="btn-img-cart" idSP ="'+product.maSP+'">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
                       '</div>'+
                       '</div>'+ iconsell+
@@ -551,7 +548,7 @@
             });
         });
         $('.title-sum-product').text(listProduct.length+' sản phẩm');
-
+        addCart();
         var page = document.getElementsByClassName('page');
         for (var i = 0; i < page.length; i++) {
             page[i].addEventListener('click', function () {
@@ -561,6 +558,53 @@
                 $(this).addClass('active');
             });
         }
+
+    }
+    function pushNotify(status, message, title) {
+        new Notify({
+            status: status,
+            title: title,
+            text: message,
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 2000,
+            gap: 20,
+            distance: 20,
+            type: 1,
+            position: 'right bottom',
+            customWrapper: '',
+        })
+    }
+    function addCart(){
+        $('.btn-img-cart').click(function () {
+            //get attr
+            var id = $(this).attr('idSP');
+            //ajax
+            $.ajax({
+                url: '<%=request.getContextPath()%>/cart',
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    //get json
+                    var json = JSON.parse(data);
+                    if (json.success === 'true') {
+                        $('.cart-count.color-red').text(json.quantity);
+                        pushNotify('success','thêm vào giỏi hàng thành công','Thêm Sản phẩm');
+
+                    } else {
+                        pushNotify('error','thêm vào giỏi hàng thất bại','Thêm Sản phẩm');
+
+                    }
+                }
+            });
+        });
 
     }
     function khoangGiaProduct(min,max,arr) {
@@ -622,8 +666,12 @@
   //format mony đ
 
     function formatNumber(num) {
+        //convert double to int
+        num =parseInt(num);
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
+
+
 
 </script>
 

@@ -1,5 +1,7 @@
 package com.example.projectwebshopping.service.client;
 
+import com.example.projectwebshopping.model.client.User;
+
 public interface IUserService {
     //check if user is valid
     boolean isValidUser(String username, String email);
@@ -11,7 +13,7 @@ public interface IUserService {
 
     boolean insertUser(String username, String password, String mail, String vetificationCode, String idUser);
 
-    boolean checkLogin(String username, String password);
+    User checkLogin(String username, String password);
 
 
 }
