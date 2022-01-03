@@ -1,6 +1,7 @@
 package com.example.projectwebshopping.model.client;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 
 public class BoSuaTap implements Serializable {
     private String id;
@@ -8,6 +9,7 @@ public class BoSuaTap implements Serializable {
     private String tieuDe;
     private String mota;
     private String hinhAnh;
+    private int check;
     //empty constructor
     public BoSuaTap(){
 
@@ -59,6 +61,27 @@ public class BoSuaTap implements Serializable {
 
     public void setHinhAnh(String hinhAnh) {
         this.hinhAnh = hinhAnh;
+    }
+
+    public int getCheck() {
+        return check;
+    }
+
+    public void setCheck(int check) {
+        this.check = check;
+    }
+
+    public void addBoST(ResultSet resultSet){
+        try{
+            this.id = resultSet.getString("IdBST");
+            this.name = resultSet.getString("name");
+            this.tieuDe = resultSet.getString("tieuDe");
+            this.mota = resultSet.getString("mota");
+            this.hinhAnh = resultSet.getString("hinhAnh");
+            this.check = resultSet.getInt("check");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
 

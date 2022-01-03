@@ -1,5 +1,6 @@
 package com.example.projectwebshopping.service.client;
 
+import com.example.projectwebshopping.dto.client.DetailProduct;
 import com.example.projectwebshopping.model.client.BoSuaTap;
 import com.example.projectwebshopping.model.client.LoaiSP;
 import com.example.projectwebshopping.model.client.Product;
@@ -15,4 +16,5 @@ public interface IHomeService {
     List<Product> getSanPhamNoiBat(int loaiSlected,int limit);
     List<Product> getSanPhamHeader(String idLoai,int limit,int loaiSlected);
     List<Product> getProducts(String idLoai,int loaiSlected);
+    DetailProduct getProduct(String id);
 }

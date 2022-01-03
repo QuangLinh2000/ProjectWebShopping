@@ -1,6 +1,7 @@
 package com.example.projectwebshopping.dao.client;
 
 import com.example.projectwebshopping.connection.DataSourceConnection;
+import com.example.projectwebshopping.dto.client.DetailProduct;
 import com.example.projectwebshopping.model.client.BoSuaTap;
 import com.example.projectwebshopping.model.client.Product;
 
@@ -308,6 +309,47 @@ public class ProductDao {
         }
         return products;
     }
+
+    public DetailProduct getProduct(String id) {
+        Product product = new Product();
+        DetailProduct detailProduct = new DetailProduct();
+        BoSuaTap boSuaTap = new BoSuaTap();
+        Map<String,Product> map = new HashMap<>();
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            String sql = "SELECT * FROM products p JOIN hinhanh  h ON p.MASP = h.IDSP JOIN bosutap b ON b.IdBST = p.IDBoSuuTap WHERE MASP = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String url = resultSet.getString("URL");
+                product.addProduct(resultSet);
+                if (map.containsKey(id)) {
+                    List<String> listURL = map.get(id).getListUrlImg();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(id, product);
+                } else {
+                    List<String> listURL = new ArrayList<>();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(id, product);
+                }
+                boSuaTap.addBoST(resultSet);
+            }
+            detailProduct.setProduct(map.get(id));
+            detailProduct.setBoSuaTap(boSuaTap);
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return detailProduct;
+    }
+
 
 
 //    public static void main(String[] args) {

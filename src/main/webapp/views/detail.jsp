@@ -75,6 +75,9 @@
                     </div>
                     <div class="product__size__elements">
                         <div class="product__size__element">
+
+
+
                             <c:forEach var="item" items="<%=product.getListSize%>" >
                                 <label <c:if test="${item.status==1}">onclick="hiddenLabel(this)" </c:if>class="text-center">
                                     <c:out value="${item.sizeTitle}"></c:out>

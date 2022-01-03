@@ -4,6 +4,7 @@ import com.example.projectwebshopping.dao.client.BoSuaTapDao;
 import com.example.projectwebshopping.dao.client.LoaiSPDao;
 import com.example.projectwebshopping.dao.client.ProductDao;
 import com.example.projectwebshopping.dao.client.QuangCaoDao;
+import com.example.projectwebshopping.dto.client.DetailProduct;
 import com.example.projectwebshopping.model.client.BoSuaTap;
 import com.example.projectwebshopping.model.client.LoaiSP;
 import com.example.projectwebshopping.model.client.Product;
@@ -49,6 +50,10 @@ public class HomeSerVice implements IHomeService{
         return ProductDao.getInstance().getProducts(idLoai,loaiSlected);
     }
 
+    @Override
+    public DetailProduct getProduct(String id) {
+        return ProductDao.getInstance().getProduct(id);
+    }
 
 
 }

@@ -110,7 +110,7 @@
                     <%if (item == 0) {%>
                     <div class="slide-collection item<%=item%> active">
                         <div class="collection-slide-div">
-                            <a href="./detail.html">
+                            <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">
                                 <img class="collection-slide-image"
                                      src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt="">
                             </a>
@@ -119,7 +119,7 @@
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <div class="btn-img-buy">
-                                    <a href="./checkouts.html">mua ngay</a>
+                                    <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
                                 <div class="btn-img-cart">
                                     <i class="fa-solid fa-cart-shopping"></i>
@@ -172,7 +172,7 @@
                     <%} else {%>
                     <div class="slide-collection item<%=item%>">
                         <div class="collection-slide-div">
-                            <a href="./detail.html">
+                            <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">
                                 <img class="collection-slide-image"
                                      src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt="">
                             </a>
@@ -181,7 +181,7 @@
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <div class="btn-img-buy">
-                                    <a href="./checkouts.html">mua ngay</a>
+                                    <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
                                 <div class="btn-img-cart">
                                     <i class="fa-solid fa-cart-shopping"></i>
@@ -451,7 +451,7 @@
               if(item == 0){
                   $('.list-tab-content').append('<div class="slide-collection item'+item+' active">'+
                       '<div class="collection-slide-div">'+
-                      '<a href="./detail.html">'+
+                      '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">'+
                       '<img class="collection-slide-image"'+
                       'src="<%=request.getContextPath()%>'+product.listUrlImg[0]+'" alt="">'+
                       '</a>'+
@@ -460,7 +460,7 @@
                       '<i class="fa-solid fa-magnifying-glass"></i>'+
                       '</div>'+
                       '<div class="btn-img-buy">'+
-                      '<a href="./checkouts.html">mua ngay</a>'+
+                      '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
                       '<div class="btn-img-cart">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
@@ -484,7 +484,7 @@
               }else{
                   $('.list-tab-content').append('<div class="slide-collection item'+item+'">'+
                       '<div class="collection-slide-div">'+
-                      '<a href="./detail.html">'+
+                      '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">'+
                       '<img class="collection-slide-image"'+
                       'src="<%=request.getContextPath()%>'+product.listUrlImg[0]+'" alt="">'+
                       '</a>'+
@@ -493,7 +493,7 @@
                       '<i class="fa-solid fa-magnifying-glass"></i>'+
                       '</div>'+
                       '<div class="btn-img-buy">'+
-                      '<a href="./checkouts.html">mua ngay</a>'+
+                      '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
                       '<div class="btn-img-cart">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
