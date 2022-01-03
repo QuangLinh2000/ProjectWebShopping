@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cart.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/notify/simple-notify.min.css">
   <section id="cart" class="margin-top-mobile">
     <div class="container">
       <div class="cart-holder">
@@ -285,7 +284,6 @@
     }
 
   </script>
-<script src="<%=request.getContextPath()%>/assets/notify/simple-notify.min.js"></script>
 
   <script src="<%=request.getContextPath()%>/script/cart.js"></script>
 
