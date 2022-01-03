@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
     <title>Document</title>
     <script src="<%=request.getContextPath()%>/script/jquery-3.5.0.min.js"></script>
-    <script src="<%=request.getContextPath()%>/script/fontawesome.js" crossorigin="anonymous"></script>
+    <link href="<%=request.getContextPath()%>/assets/fontawesome-free-6.0.0-beta3-web/css/all.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
 
