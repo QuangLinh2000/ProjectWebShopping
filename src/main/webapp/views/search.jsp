@@ -121,7 +121,7 @@
                                 <div class="btn-img-buy">
                                     <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart">
+                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%>>
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -140,11 +140,8 @@
                             <%int limitImageSmall =5;%>
                             <%for ( int j = 0; j < product.getListUrlImg().size(); j++ ) {%>
                             <% if(j >= limitImageSmall)break;%>
-<<<<<<< HEAD
                             <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
-=======
 
->>>>>>> de22e2e8d7967cbfa7a578ef7a83d5acbc0b627f
                             <%}%>
                         </div>
                         <div class="text-content-collection">
@@ -186,7 +183,7 @@
                                 <div class="btn-img-buy">
                                     <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart">
+                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%>>
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -362,7 +359,7 @@
             sortProduct();
         });
 
-
+        addCart();
 
 
     });
@@ -465,7 +462,7 @@
                       '<div class="btn-img-buy">'+
                       '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
-                      '<div class="btn-img-cart">'+
+                      '<div class="btn-img-cart" idSP ="'+product.maSP+'">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
                       '</div>'+
                       '</div>'+ iconsell+
@@ -498,7 +495,7 @@
                       '<div class="btn-img-buy">'+
                       '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
-                      '<div class="btn-img-cart">'+
+                      '<div class="btn-img-cart" idSP ="'+product.maSP+'">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
                       '</div>'+
                       '</div>'+ iconsell+
@@ -551,7 +548,7 @@
             });
         });
         $('.title-sum-product').text(listProduct.length+' sản phẩm');
-
+        addCart();
         var page = document.getElementsByClassName('page');
         for (var i = 0; i < page.length; i++) {
             page[i].addEventListener('click', function () {
@@ -561,6 +558,31 @@
                 $(this).addClass('active');
             });
         }
+
+    }
+    function addCart(){
+        $('.btn-img-cart').click(function () {
+            //get attr
+            var id = $(this).attr('idSP');
+            //ajax
+            $.ajax({
+                url: '<%=request.getContextPath()%>/cart',
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    //get json
+                    var json = JSON.parse(data);
+                    if (json.success === 'true') {
+                        $('.cart-count.color-red').text(json.quantity);
+                        alert('Thêm vào giỏ hàng thành công');
+                    } else {
+                        alert('Thêm vào giỏ hàng thất bại');
+                    }
+                }
+            });
+        });
 
     }
     function khoangGiaProduct(min,max,arr) {
@@ -622,8 +644,12 @@
   //format mony đ
 
     function formatNumber(num) {
+        //convert double to int
+        num =parseInt(num);
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
+
+
 
 </script>
 

@@ -1,5 +1,8 @@
 <%@ page import="com.example.projectwebshopping.service.client.IHomeService" %>
-<%@ page import="com.example.projectwebshopping.service.client.HomeSerVice" %><%--
+<%@ page import="com.example.projectwebshopping.service.client.HomeSerVice" %>
+<%@ page import="com.example.projectwebshopping.model.client.Cart" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: trong
   Date: 29/12/2021
@@ -38,5 +41,29 @@
 <script src="<%=request.getContextPath()%>/script/header.js"></script>
 
 </body>
+ <script>
+     <%
+     int quantity = 0;
+     if (request.getSession().getAttribute("name") == null) {
 
+
+     Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
+     if (cartMap == null) {
+         cartMap = new HashMap<>();
+     }
+             quantity = 0;
+            for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {
+                quantity += entry.getValue().getQuantity();
+            }
+
+
+     %>
+     $('.cart-count.color-red').text('<%=quantity%>');
+     <%
+     } else {
+
+     }
+     %>
+
+ </script>
 </html>
