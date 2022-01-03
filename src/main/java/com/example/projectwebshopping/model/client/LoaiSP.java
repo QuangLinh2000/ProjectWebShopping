@@ -1,20 +1,23 @@
 package com.example.projectwebshopping.model.client;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class LoaiSP implements Serializable {
     private String maLoai;
     private String tenLoai;
     private String moTa;
+    List<List<Product>> listProduct;
     //emty constructor
     public LoaiSP(){
 
     }
     //constructor
-    public LoaiSP(String maLoai, String tenLoai, String moTa) {
+    public LoaiSP(String maLoai, String tenLoai, String moTa, List<List<Product>> listProduct) {
         this.maLoai = maLoai;
         this.tenLoai = tenLoai;
         this.moTa = moTa;
+        this.listProduct = listProduct;
     }
 
     //getter and setter
@@ -40,5 +43,13 @@ public class LoaiSP implements Serializable {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
+    }
+
+    public List<List<Product>> getListProduct() {
+        return listProduct;
+    }
+
+    public void setListProduct(List<List<Product>> listProduct) {
+        this.listProduct = listProduct;
     }
 }

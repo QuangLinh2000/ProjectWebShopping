@@ -1,29 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thời trang sevenam</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
     <link href="<%=request.getContextPath()%>/css/bootstrapf9e3.css?v=1.1" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
-    <link rel="icon" type="image/svg+xml" href="<%=request.getContextPath()%>/img/favicon.svg">
-    <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/img/favicon.png">
-    <!-- ====================FONT AWESOME ============================= -->
-    <script src="https://kit.fontawesome.com/936c874066.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="<%=request.getContextPath()%>/fonts/material-icon/css/round.css" />
     <!-- custom style -->
     <link href="<%=request.getContextPath()%>/css/uif9e3.css?v=1.1" rel="stylesheet" type="text/css" />
     <link href="<%=request.getContextPath()%>/css/responsivef9e3.css?v=1.1" rel="stylesheet" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/acount.css">
-</head>
-<body data-new-gr-c-s-check-loaded="14.1043.0" data-gr-ext-installed="" cz-shortcut-listen="true">
     <b class="screen-overlay"></b>
-    <%@ include file="../views/Header.jsp" %>
     <main class="main-wrap container">
         <section class="content-main">
 
@@ -110,7 +92,7 @@
                                             </div> <!-- row.// -->
                                         </div> <!-- col.// -->
                                         <aside class="col-lg-4">
-                                            <figure class="text-lg-center">
+                                            <figure class="text-lg-center d-flex flex-column align-items-center justify-content-center">
                                                 <img class="img-lg mb-3 img-avatar" src="<%=request.getContextPath()%>/img/avatar.png"
                                                     alt="User Photo">
                                                 <figcaption>
@@ -128,7 +110,9 @@
                                         </aside> <!-- col.// -->
                                     </div> <!-- row.// -->
                                     <br>
-                                    <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+                                    <div class="center-cus">
+                                        <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+                                    </div>
                                 </form>
 
                                 <hr class="my-5">
@@ -163,7 +147,6 @@
 
         </section> <!-- content-main end// -->
     </main>
-    <%@include file="../views/footer.jsp"%>
     <!-- ============================ COMPONENT END// ============================ -->
     <script>
         if (localStorage.getItem("darkmode")) {
@@ -184,5 +167,3 @@
 
     <!-- Custom JS -->
     <script src="<%=request.getContextPath()%>/script/scriptc619.js?v=1.0"></script>
-</body>
-</html>

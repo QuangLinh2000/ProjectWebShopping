@@ -11,6 +11,9 @@ public interface IHomeService {
     List<BoSuaTap> getBSHome();
     List<QuangCao> getAllQC();
     List<LoaiSP> getAllLoaiSP();
-    List<Product> getAllProductByBSTId(String idBoSuaTap);
-    List<Product> getSanPhamNoiBat(int loaiSlected);
+    List<Product> getAllProductByBSTId(String idBoSuaTap,int limit);
+    List<Product> getSanPhamNoiBat(int loaiSlected,int limit);
+    List<Product> getSanPhamHeader(String idLoai,int limit,int loaiSlected);
+    List<Product> getProducts(String idLoai,int loaiSlected);
+    int getCountPage(String idLoai, int loaiSlected);
 }
