@@ -57,4 +57,30 @@ public class CartDao {
         }
 
     }
+    public int getSizeCart(String idUser) {
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            String sql = "SELECT SUM(SOLuong) SL FROM giohang WHERE IDUSER = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,idUser);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int soLuong = 0;
+            if(resultSet.next()){
+                 soLuong = resultSet.getInt("SL");
+
+
+
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return soLuong;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

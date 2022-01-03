@@ -752,16 +752,37 @@
                     //get json
                     var json = JSON.parse(data);
                     if (json.success === 'true') {
-                        if(json.quantity != null){
                             $('.cart-count.color-red').text(json.quantity);
-                        }
-                        alert('Thêm vào giỏ hàng thành công');
+                        pushNotify('success','thêm vào giỏi hàng thành công','Thêm Sản phẩm');
+
                     } else {
-                        alert('Thêm vào giỏ hàng thất bại');
+                        pushNotify('error','thêm vào giỏi hàng thất bại','Thêm Sản phẩm');
+
                     }
                 }
             });
         });
 
     });
+
+    function pushNotify(status, message, title) {
+        new Notify({
+            status: status,
+            title: title,
+            text: message,
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 2000,
+            gap: 20,
+            distance: 20,
+            type: 1,
+            position: 'right bottom',
+            customWrapper: '',
+        })
+    }
 </script>

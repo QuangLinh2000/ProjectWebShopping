@@ -56,7 +56,9 @@ public class CartController extends HttpServlet {
 
 
             CartDao.getInstance().addGioHang(user.getId(), id,1);
-            response.getWriter().write("{\"success\":\"true\"}");
+            int quantity =  CartDao.getInstance().getSizeCart(user.getId());
+
+            response.getWriter().write("{\"quantity\":\"" + quantity + "\",\"success\":\"true\"}");
 
 
         }

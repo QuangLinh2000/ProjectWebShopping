@@ -46,26 +46,5 @@
 <script src="<%=request.getContextPath()%>/script/header.js"></script>
 
 </body>
- <script>
-     <%
-     int quantity = 0;
-     User user = (User) request.getSession().getAttribute("user");
-     Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
 
-     if (user == null) {
-     if (cartMap == null) {
-         cartMap = new HashMap<>();
-     }
-             quantity = 0;
-            for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {
-                quantity += entry.getValue().getQuantity();
-            }
-
-
-     %>
-     $('.cart-count.color-red').text('<%=quantity%>');
-     <%}
-     %>
-
- </script>
 </html>
