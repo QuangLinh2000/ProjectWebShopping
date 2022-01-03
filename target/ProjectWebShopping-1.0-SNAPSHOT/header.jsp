@@ -105,13 +105,18 @@
                                 <%for (int k = 0; k < product.size(); k++) {%>
                                 <%if(j == 0){%>
                                 <div class="sub-nav-img item<%=j%> active">
-                                    <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
-                                         alt="">
+                                    <a href="/Shopping/detail?id=<%=product.get(k).getMaSP()%>">
+                                        <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
+                                             alt="">
+                                    </a>
                                 </div>
                                 <%}else{%>
                                 <div class="sub-nav-img item<%=j%>">
-                                    <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
-                                         alt="">
+
+                                    <a href="/Shopping/detail?id=<%=product.get(k).getMaSP()%>">
+                                        <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
+                                             alt="">
+                                    </a>
                                 </div>
                                 <%}%>
 
