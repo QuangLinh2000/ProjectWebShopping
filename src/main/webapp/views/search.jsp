@@ -136,16 +136,12 @@
 
                         </div>
                         <div class="list-image-hover">
-<<<<<<< HEAD
-                            <%for (int j = 0; j < product.getListUrlImg().size(); j++) {%>
-                            <img class="img-item-hov"
-                                 src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
-=======
+
                             <%int limitImageSmall =5;%>
                             <%for ( int j = 0; j < product.getListUrlImg().size(); j++ ) {%>
                             <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
                             <% if(j >= limitImageSmall)break;%>
->>>>>>> 530208e6fd81e87ad0feefe1f9309aa2913d7875
+
                             <%}%>
                         </div>
                         <div class="text-content-collection">
@@ -202,16 +198,11 @@
 
                         </div>
                         <div class="list-image-hover">
-<<<<<<< HEAD
-                            <%for (int j = 0; j < product.getListUrlImg().size(); j++) {%>
-                            <img class="img-item-hov"
-                                 src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
-=======
+
                             <%int limitImageSmall =5;%>
                             <%for ( int j = 0; j < product.getListUrlImg().size(); j++ ) {%>
                             <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
                             <% if(j >= limitImageSmall)break;%>
->>>>>>> 530208e6fd81e87ad0feefe1f9309aa2913d7875
                             <%}%>
                         </div>
                         <div class="text-content-collection">

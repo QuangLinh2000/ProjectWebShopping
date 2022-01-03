@@ -310,33 +310,6 @@ public class ProductDao {
     }
 
 
-<<<<<<< HEAD
-
-            preparedStatement.setString(1, idLoai);
-            preparedStatement.setInt(2, 1);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                 totle = resultSet.getInt("totle");
-            }
-            resultSet.close();
-            preparedStatement.close();
-            DataSourceConnection.returnConnection(connection);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return totle;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new ProductDao().getCountPage("5723de72-32ec-4ef3-80ef-dd69b8a5cff0",4));
-    }
-
-
-=======
->>>>>>> 29e17b9c00c314c066fd6455053f4f3326e9df17
 //    public static void main(String[] args) {
 //
 //

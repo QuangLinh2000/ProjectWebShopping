@@ -20,10 +20,7 @@ public class DetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idSP=request.getParameter("detailProductID");
-        Product product= ProductDao.getInstance().getProducts(idSP);
-        BoSuaTap bst=ProductDao.getInstance().getCollection(product.getIdBoST());
-        request.setAttribute("product",product);
-        request.setAttribute("bosuutap",bst);
+
         request.getRequestDispatcher("/views/detail.jsp").forward(request,response);
 
 
