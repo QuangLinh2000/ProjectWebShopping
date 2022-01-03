@@ -15,5 +15,4 @@ public interface IHomeService {
     List<Product> getSanPhamNoiBat(int loaiSlected,int limit);
     List<Product> getSanPhamHeader(String idLoai,int limit,int loaiSlected);
     List<Product> getProducts(String idLoai,int loaiSlected);
-    int getCountPage(String idLoai, int loaiSlected);
 }

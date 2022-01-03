@@ -47,27 +47,9 @@ public class ProductDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String maSP = resultSet.getString("MASP");
-                String tenSP = resultSet.getString("TENSP");
                 String url = resultSet.getString("URL");
-                String idBoSuaTap2 = resultSet.getString("IDBoSuuTap");
-                String moTa = resultSet.getString("MOTA");
-                Double donGia = resultSet.getDouble("DONGIA");
-                Double sell = resultSet.getDouble("SALE");
-                String mau = resultSet.getString("MAU");
-                String loaiSP = resultSet.getString("LOAISP");
-                int trangThai = resultSet.getInt("TRANGTHAI");
-
                 Product product = new Product();
-                product.setMaSP(maSP);
-                product.setTenSP(tenSP);
-                product.setIdBoST(idBoSuaTap2);
-                product.setMoTa(moTa);
-                product.setGia(donGia);
-                product.setSell(sell);
-                product.setMau(mau);
-                product.setLoaiSP(loaiSP);
-                product.setTrangThai(trangThai);
-                product.setNayNhap(resultSet.getDate("NgayNhap"));
+                product.addProduct(resultSet);
                 if (map.containsKey(maSP)) {
                     List<String> listURL = map.get(maSP).getListUrlImg();
                     listURL.add(url);
@@ -132,27 +114,9 @@ public class ProductDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String maSP = resultSet.getString("MASP");
-                String tenSP = resultSet.getString("TENSP");
                 String url = resultSet.getString("URL");
-                String idBoSuaTap2 = resultSet.getString("IDBoSuuTap");
-                String moTa = resultSet.getString("MOTA");
-                Double donGia = resultSet.getDouble("DONGIA");
-                Double sell = resultSet.getDouble("SALE");
-                String mau = resultSet.getString("MAU");
-                String loaiSP = resultSet.getString("LOAISP");
-                int trangThai = resultSet.getInt("TRANGTHAI");
-
                 Product product = new Product();
-                product.setMaSP(maSP);
-                product.setTenSP(tenSP);
-                product.setIdBoST(idBoSuaTap2);
-                product.setMoTa(moTa);
-                product.setGia(donGia);
-                product.setSell(sell);
-                product.setMau(mau);
-                product.setLoaiSP(loaiSP);
-                product.setTrangThai(trangThai);
-                product.setNayNhap(resultSet.getDate("NgayNhap"));
+                product.addProduct(resultSet);
                 if (map.containsKey(maSP)) {
                     List<String> listURL = map.get(maSP).getListUrlImg();
                     listURL.add(url);
@@ -222,27 +186,10 @@ public class ProductDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String maSP = resultSet.getString("MASP");
-                String tenSP = resultSet.getString("TENSP");
                 String url = resultSet.getString("URL");
-                String idBoSuaTap2 = resultSet.getString("IDBoSuuTap");
-                String moTa = resultSet.getString("MOTA");
-                Double donGia = resultSet.getDouble("DONGIA");
-                Double sell = resultSet.getDouble("SALE");
-                String mau = resultSet.getString("MAU");
-                String loaiSP = resultSet.getString("LOAISP");
-                int trangThai = resultSet.getInt("TRANGTHAI");
-
                 Product product = new Product();
-                product.setMaSP(maSP);
-                product.setTenSP(tenSP);
-                product.setIdBoST(idBoSuaTap2);
-                product.setMoTa(moTa);
-                product.setGia(donGia);
-                product.setSell(sell);
-                product.setMau(mau);
-                product.setLoaiSP(loaiSP);
-                product.setTrangThai(trangThai);
-                product.setNayNhap(resultSet.getDate("NgayNhap"));
+                product.addProduct(resultSet);
+
                 if (map.containsKey(maSP)) {
                     List<String> listURL = map.get(maSP).getListUrlImg();
                     listURL.add(url);
@@ -331,27 +278,9 @@ public class ProductDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String maSP = resultSet.getString("MASP");
-                String tenSP = resultSet.getString("TENSP");
                 String url = resultSet.getString("URL");
-                String idBoSuaTap2 = resultSet.getString("IDBoSuuTap");
-                String moTa = resultSet.getString("MOTA");
-                Double donGia = resultSet.getDouble("DONGIA");
-                Double sell = resultSet.getDouble("SALE");
-                String mau = resultSet.getString("MAU");
-                String loaiSP = resultSet.getString("LOAISP");
-                int trangThai = resultSet.getInt("TRANGTHAI");
-
                 Product product = new Product();
-                product.setMaSP(maSP);
-                product.setTenSP(tenSP);
-                product.setIdBoST(idBoSuaTap2);
-                product.setMoTa(moTa);
-                product.setGia(donGia);
-                product.setSell(sell);
-                product.setMau(mau);
-                product.setLoaiSP(loaiSP);
-                product.setTrangThai(trangThai);
-                product.setNayNhap(resultSet.getDate("NgayNhap"));
+                product.addProduct(resultSet);
                 if (map.containsKey(maSP)) {
                     List<String> listURL = map.get(maSP).getListUrlImg();
                     listURL.add(url);
@@ -380,47 +309,7 @@ public class ProductDao {
         return products;
     }
 
-    public  int getCountPage(String idLoai, int loaiSlected){
-        String sqlStart = "SELECT COUNT(*) totle FROM products ";
-        String sqlWhere = " WHERE LOAISP = ? AND TRANGTHAI = ?  ";
-        int totle = 0;
-        if (loaiSlected == 3) {
-                sqlWhere += " AND SALE > 0 AND CURDATE() BETWEEN NGAYBATDAUSALE AND NGAYKETTHUCSALE ";
 
-
-        }
-
-        try {
-            Connection connection = DataSourceConnection.getConnection();
-
-            String sql = sqlStart + sqlWhere ;
-
-
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-
-
-            preparedStatement.setString(1, idLoai);
-            preparedStatement.setInt(2, 1);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                 totle = resultSet.getInt("totle");
-            }
-            resultSet.close();
-            preparedStatement.close();
-            DataSourceConnection.returnConnection(connection);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return totle;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new ProductDao().getCountPage("5723de72-32ec-4ef3-80ef-dd69b8a5cff0",4));
-    }
 //    public static void main(String[] args) {
 //
 //

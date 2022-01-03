@@ -273,7 +273,6 @@
         //get attr
         var attr = $(this).attr("stt");
         //add class active
-        console.log(  $(this).closest(".nav-item").find(".item"+attr))
         $(this).closest(".nav-item").find(".item"+attr).addClass("active");
     }, function () {
         $(this).find(".text-hover").addClass("active");

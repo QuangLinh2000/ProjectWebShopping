@@ -27,6 +27,8 @@ public class SearchController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //get data from form
+
 
     }
     public int getCount(int size,int limit) {
