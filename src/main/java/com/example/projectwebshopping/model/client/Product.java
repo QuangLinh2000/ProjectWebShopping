@@ -2,6 +2,8 @@ package com.example.projectwebshopping.model.client;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Product implements Serializable {
@@ -18,11 +20,15 @@ public class Product implements Serializable {
     private String loaiSP;
     private int trangThai;
     private List<String> listUrlImg;
+    private int S;
+    private int M;
+    private int L;
+    private int XL;
     //emty constructor
     public Product() {
     }
     //constructor
-    public Product(String maSP, String tenSP, String idBoST, String moTa, double gia, double sell, String mau, Date nayNhap, Date ngayBatDausell, Date ngayHetHansell, String loaiSP, int trangThai, List<String> listUrlImg) {
+    public Product(String maSP, String tenSP, String idBoST, String moTa, double gia, double sell, String mau, Date nayNhap, Date ngayBatDausell, Date ngayHetHansell, String loaiSP, int trangThai, List<String> listUrlImg, int s, int m, int l, int xl) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.idBoST = idBoST;
@@ -36,6 +42,10 @@ public class Product implements Serializable {
         this.loaiSP = loaiSP;
         this.trangThai = trangThai;
         this.listUrlImg = listUrlImg;
+        this.S = s;
+        this.M = m;
+        this.L = l;
+        this.XL = xl;
     }
 
 
@@ -142,6 +152,39 @@ public class Product implements Serializable {
     public void setListUrlImg(List<String> listUrlImg) {
         this.listUrlImg = listUrlImg;
     }
+
+    public int getS() {
+        return S;
+    }
+
+    public void setS(int s) {
+        S = s;
+    }
+
+    public int getM() {
+        return M;
+    }
+
+    public void setM(int m) {
+        M = m;
+    }
+
+    public int getL() {
+        return L;
+    }
+
+    public void setL(int l) {
+        L = l;
+    }
+
+    public int getXL() {
+        return XL;
+    }
+
+    public void setXL(int xl) {
+        XL = xl;
+    }
+
  //toString
     @Override
     public String toString() {
@@ -161,11 +204,43 @@ public class Product implements Serializable {
                 ", listUrlImg=" + listUrlImg +
                 '}';
     }
+    public void addProduct(ResultSet resultSet) throws SQLException {
+        String maSP = resultSet.getString("MASP");
+        String tenSP = resultSet.getString("TENSP");
+        String url = resultSet.getString("URL");
+        String idBoSuaTap2 = resultSet.getString("IDBoSuuTap");
+        String moTa = resultSet.getString("MOTA");
+        Double donGia = resultSet.getDouble("DONGIA");
+        Double sell = resultSet.getDouble("SALE");
+        String mau = resultSet.getString("MAU");
+        String loaiSP = resultSet.getString("LOAISP");
+        int trangThai = resultSet.getInt("TRANGTHAI");
+        int S = resultSet.getInt("S");
+        int M = resultSet.getInt("M");
+        int L = resultSet.getInt("L");
+        int XL = resultSet.getInt("XL");
+
+        setMaSP(maSP);
+        setTenSP(tenSP);
+        setIdBoST(idBoSuaTap2);
+        setMoTa(moTa);
+        setGia(donGia);
+        setSell(sell);
+        setMau(mau);
+        setLoaiSP(loaiSP);
+        setTrangThai(trangThai);
+        setNayNhap(resultSet.getDate("NgayNhap"));
+        setS(S);
+        setM(M);
+        setL(L);
+        setXL(XL);
+    }
     //format tiền
     public static String formatMoney(Double money){
         String s = String.format("%,.0f",money);
         return s;
     }
+   //toJson
 
 
 

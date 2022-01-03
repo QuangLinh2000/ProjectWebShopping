@@ -13,8 +13,9 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         IHomeService iHomeService = new HomeSerVice();
-        request.setAttribute("listLoaiSP",iHomeService.getAllLoaiSP());
-        request.getRequestDispatcher("/views/account.jsp").forward(request, response);
+        request.setAttribute("container_view","/views/account.jsp");
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override
