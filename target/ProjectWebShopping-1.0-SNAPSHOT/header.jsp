@@ -212,6 +212,22 @@
                             Giỏ hàng(<span class="cart-count color-red">0</span>)
                         </a>
                     </div>
+                    <%
+                        if (username != null) {
+                    %>
+                    <div class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="img-xs rounded-circle"
+                                 src="<%=request.getContextPath()%>/img/avatar.png" alt="User">
+                            <i class="fa-solid fa-caret-down "></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" class="drop-top">
+                            <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
+                            <a class="dropdown-item" href="page-settings-1.html">Giỏ hàng</a>
+                            <a class="dropdown-item text-danger" href="#">Đăng xuất</a>
+                        </div>
+                    </div>
+                    <%}%>
                 </div>
             </div>
         </div>
@@ -234,16 +250,63 @@
                         <i class="fa-solid fa-xmark icon-nav"></i>
                     </div>
                     <ul class="nav-list">
+                        <li class="nav-item">
+                            <div class="nav-item-warper">
+                                <a href="/Shopping/home" class="text-hover text-hover-underline-goes-right">
+                                    <span>Trang chủ</span>
+                                </a>
+                            </div>
+                        </li>
                         <c:forEach var="p" items="${listLoaiSP}">
                             <li class="nav-item">
                                 <div class="nav-item-warper">
-                                    <a href="#" class="text-hover text-hover-underline-goes-right">
+                                    <a href="/Shopping/search?id=${p.getMaLoai()}&slt=4&name=${p.getTenLoai()}" class="text-hover text-hover-underline-goes-right">
                                         <span>${p.tenLoai}</span>
                                     </a>
                                 </div>
                             </li>
-
                         </c:forEach>
+                        <%
+                            if (username == null) {
+                        %>
+                        <li class="nav-item">
+                            <div class="nav-item-warper">
+                                <a href="<%=request.getContextPath()%>/signin" class="text-hover text-hover-underline-goes-right">
+                                    <span>Đăng nhập</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-item-warper">
+                                <a href="<%=request.getContextPath()%>/signup" class="text-hover text-hover-underline-goes-right">
+                                    <span>Đăng ký</span>
+                                </a>
+                            </div>
+                        </li>
+                        <%} else {%>
+                        <li class="nav-item">
+                            <div class="nav-item-warper">
+                                <a href="<%=request.getContextPath()%>/account" class="text-hover text-hover-underline-goes-right">
+                                    <span>Tài khoản</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-item-warper">
+                                <a href="<%=request.getContextPath()%>/account" class="text-hover text-hover-underline-goes-right">
+                                    <span>Thông báo</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-item-warper">
+                                <a href="#" class="text-hover text-hover-underline-goes-right">
+                                    <span>Đăng xuất</span>
+                                </a>
+                            </div>
+                        </li>
+                        <%}%>
+
                     </ul>
                 </nav>
                 <div class="header-top-list">

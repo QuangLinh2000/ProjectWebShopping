@@ -292,10 +292,22 @@ label {
 .pagination a:hover:not(.active) {
     background-color: #ddd;
 }
+.contain{
+    overflow-x: hidden;
+}
 @media screen and (max-width: 768px) {
     .list-tab-content {
         grid-template-columns: repeat(2, 1fr);
     }
+    .contain {
+        flex-wrap: wrap;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+    .right-contain {
+         margin-left: 0px;
+    }
+
 }
 
 @media screen and (max-width: 600px) {
