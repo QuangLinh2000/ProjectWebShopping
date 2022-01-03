@@ -1,12 +1,11 @@
+<%@ page import="com.example.projectwebshopping.model.client.Product" %>
+<%@ page import="com.example.projectwebshopping.model.client.BoSuaTap" %>
 
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="modal.beans.Product" %>
 
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<% Product product=(Product)request.getAttribute("productDetail");
-    ArrayList<Product> listRelated=(ArrayList<Product>)request.getAttribute("relatedProduct");
-
+<% Product product=(Product)request.getAttribute("product");
+    BoSuaTap bst=(BoSuaTap) request.getAttribute("bosuutap");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css">
 
@@ -16,7 +15,7 @@
             <div id="image__right">
 
                 <div id="image__right__element">
-                    <img id="image__right__element--img" src="<%=request.getContextPath()%>/img/${productDetail.id}/<%=product.getListImage()[0]%>" >
+                    <img id="image__right__element--img" src="<%=request.getContextPath()%>/<%=product.getListUrlImg().get(0)%>" >
                 </div>
                 <div class="img-zoom-lens">
                 </div>
@@ -26,62 +25,57 @@
             <div id="image__left">
                 <ul class="image__left__list">
 
-                    <c:forEach items="${productDetail.listImage}" var="i" >
+                    <c:forEach items="<%=product.getListUrlImg()%>>" var="i" >
                     <li class="image__left__item">
-
-                       <img onclick="leftToRightSupport(this);imageZoom();" class="image__left__element" src="<%=request.getContextPath()%>/img/${productDetail.id}/${i}">
+                       <img onclick="leftToRightSupport(this);imageZoom();" class="image__left__element" src="<%=request.getContextPath()%>/${i}">
                    </li>
                     </c:forEach>
 
                 </ul>
-                <div class="up text-center" onclick="changeImage(-1,<%=product.getListImage().length%>)"><i class="fas fa-angle-up"></i></div>
-                <div class="down text-center" onclick="changeImage(1,<%=product.getListImage().length%>)"><i class="fas fa-angle-down"></i></div>
+                <div class="up text-center" onclick="changeImage(-1,<%=product.getListUrlImg().size()%>)"><i class="fas fa-angle-up"></i></div>
+                <div class="down text-center" onclick="changeImage(1,<%=product.getListUrlImg().size()%>)"><i class="fas fa-angle-down"></i></div>
             </div>
 
         </div>
         <div class="detail__infor">
             <div class="infor__head">
                 <div class="product__title">
-                    <h1>${productDetail.title}</h1>
+                    <h1><%=product.getTenSP()+" "+product.getMaSP()%>></h1>
                 </div>
-                <div class="product__trademark">
+<%--                <div class="product__trademark">
 
                     <span>${productDetail.trademark}</span>
                 </div>
                 <div class="product__id">
 
                     <span>Mã SP: ${productDetail.id}</span>
-                </div>
+                </div>--%>
             </div>
             <div class="infor__body">
                 <div class="product__price" >
 
                     <c:choose>
-                        <c:when test="<%=product.getSale()>0%>">
-
-                            <span><%=convertPrice(product.getPrice()-product.getPrice()*product.getSale()/100)%>₫</span>
-                            <div class='product__price__sale'><s><%=convertPrice(product.getPrice())%>₫</s> </div>
+                        <c:when test="<%=product.getSell()>0%>">
+                            <span><%=convertPrice(product.getGia()-product.getGia()*product.getSell()/100)%>₫</span>
+                            <div class='product__price__sale'><s><%=convertPrice(product.getGia())%>₫</s> </div>
                             <div class='product__percent__sale' >
-                            <span><%=product.getSale()%>%</span>
+                            <span><%=product.getSell()%>%</span>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <span><%=convertPrice(product.getPrice())%>₫</span>
+                            <span><%=convertPrice(product.getGia())%>₫</span>
                         </c:otherwise>
                     </c:choose>
-
                 </div>
                 <c:choose>
-                <c:when test="<%=product.getAvailable()>0%>">
+                <c:when test="<%=product.getSoLuong>0%>">
                 <div class="product__size">
                     <div class="product__header">
                         Kích thước
                     </div>
                     <div class="product__size__elements">
                         <div class="product__size__element">
-
-                            <c:forEach var="item" items="<%=product.getListSize()%>" >
-
+                            <c:forEach var="item" items="<%=product.getListSize%>" >
                                 <label <c:if test="${item.status==1}">onclick="hiddenLabel(this)" </c:if>class="text-center">
                                     <c:out value="${item.sizeTitle}"></c:out>
                                     <c:choose>
@@ -148,11 +142,10 @@
             </c:otherwise>
             </c:choose>
             <div class="decriptions">
-                <span><strong>Chất Liệu: </strong><%=product.getMaterial()%></span>
-                <span><strong>Kiểu Dáng: </strong> <%=product.getType()%> </span>
-                <span><strong>Phù Hợp: </strong><%=product.getMatch()%></span>
-                <span><strong>Sản phẩm thuộc dòng sản phẩm: </strong><%=product.getProductBranch()%></span>
-                <span> <strong>Thông tin người mẫu: </strong><%=product.getModelDescribe()%></span>
+                <p><strong><%=bst.getName()%></strong></p>
+                <p><%=bst.getMota()%></p>
+                <p><%=product.getMoTa()%></p>
+
             </div>
         </div>
 
