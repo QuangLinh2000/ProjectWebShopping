@@ -3,6 +3,7 @@ package com.example.projectwebshopping.controller.client;
 import com.example.projectwebshopping.dao.client.CartDao;
 import com.example.projectwebshopping.model.client.Cart;
 import com.example.projectwebshopping.model.client.User;
+import com.google.gson.Gson;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -50,7 +51,9 @@ public class CartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        //get the cart from ajax
         String id = request.getParameter("id");
-
+        String arrSize = request.getParameter("size");
+        // convert json to list
+        List<String> listSize = new Gson().fromJson(arrSize, List.class);
         //get name from session
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLognin");
@@ -60,14 +63,21 @@ public class CartController extends HttpServlet {
             if (cartMap == null) {
                 cartMap = new HashMap<>();
             }
-            if(cartMap.containsKey(id)){
-                cartMap.get(id).setQuantity(cartMap.get(id).getQuantity() + 1);
-            }else{
-                Cart cart = new Cart();
-                cart.setIdProduct(id);
-                cart.setQuantity(1);
-                cartMap.put(id, cart);
+
+
+            for (String size : listSize) {
+                if(cartMap.containsKey(id+size)){
+                    cartMap.get(id+size).setQuantity(cartMap.get(id+size).getQuantity() + 1);
+                }else{
+                    Cart cart = new Cart();
+                    cart.setIdProduct(id);
+                    cart.setQuantity(1);
+                    cart.setSize(size);
+                    cartMap.put(id+size, cart);
+                }
             }
+
+
             session.setAttribute("cartMap", cartMap);
             //get quantity   from map
             int quantity = 0;
@@ -80,8 +90,9 @@ public class CartController extends HttpServlet {
 
         }else{
 
-
-            CartDao.getInstance().addGioHang(user.getId(), id,1);
+            for (String size : listSize) {
+                CartDao.getInstance().addGioHang(user.getId(), id,1,size);
+            }
             int quantity =  CartDao.getInstance().getSizeCart(user.getId());
 
             response.getWriter().write("{\"quantity\":\"" + quantity + "\",\"success\":\"true\"}");

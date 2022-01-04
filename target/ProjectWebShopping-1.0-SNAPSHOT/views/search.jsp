@@ -623,33 +623,6 @@
             customWrapper: '',
         })
     }
-    function addCart(){
-        $('.btn-img-cart').click(function () {
-            //get attr
-            var id = $(this).attr('idSP');
-            //ajax
-            $.ajax({
-                url: '<%=request.getContextPath()%>/cart',
-                type: 'POST',
-                data: {
-                    id: id
-                },
-                success: function (data) {
-                    //get json
-                    var json = JSON.parse(data);
-                    if (json.success === 'true') {
-                        $('.cart-count.color-red').text(json.quantity);
-                        pushNotify('success','thêm vào giỏi hàng thành công','Thêm Sản phẩm');
-
-                    } else {
-                        pushNotify('error','thêm vào giỏi hàng thất bại','Thêm Sản phẩm');
-
-                    }
-                }
-            });
-        });
-
-    }
     function khoangGiaProduct(min,max,arr) {
         var result = [];
         if(max == -1){
@@ -715,7 +688,6 @@
     }
 
      //-----------------------model add cart---------
-
     document.querySelectorAll('.product-list-size').forEach(element => {
         element.addEventListener('click', function () {
             this.classList.toggle('active');
@@ -729,7 +701,6 @@
     }
     function openModal(position) {
         modalCart.style.display = "flex";
-
         $('.product-list-sizes .product-list-size').removeClass('active');
 
         var product = listProduct[position];
@@ -744,6 +715,8 @@
              $('.slide-collection-price').text(formatNumber(product.gia)+'đ');
          }
           $('.product-color').text(product.mau);
+         //set attr link-continue
+         $('.link-continue').attr('href','<%=request.getContextPath()%>/detail?id='+product.maSP);
 
     }
     //modal close over modal
@@ -796,10 +769,42 @@
                 arrSize.push(size);
             }
         }
-        console.log(arrSize);
+        if(arrSize.length == 0){
+            alert('Chọn size');
+            return;
+        }
+        addCart( arrSize);
 
     });
 
+    function addCart(arrSize) {
+        var id = $('.modal-id').text();
+       closeModal();
+        //convert array to json
+        var size = JSON.stringify(arrSize);
+        //ajax
+        $.ajax({
+            url: '<%=request.getContextPath()%>/cart',
+            type: 'POST',
+            data: {
+                id: id,
+                size: size
+            },
+            success: function (data) {
+                //get json
+                var json = JSON.parse(data);
+                if (json.success === 'true') {
+                    $('.cart-count.color-red').text(json.quantity);
+                    pushNotify('success','thêm vào giỏi hàng thành công','Thêm Sản phẩm');
+
+                } else {
+                    pushNotify('error','thêm vào giỏi hàng thất bại','Thêm Sản phẩm');
+
+                }
+            }
+        });
+
+    }
 
 
 

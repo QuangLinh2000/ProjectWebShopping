@@ -4,6 +4,7 @@ public class Cart {
     private String idUser;
     private String idProduct;
     private int quantity;
+    private String size;
     //EMPTY CONSTRUCTOR
     public Cart() {
     }
@@ -25,6 +26,12 @@ public class Cart {
     }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+    public String getSize() {
+        return size;
+    }
+    public void setSize(String size) {
+        this.size = size;
     }
 
 }
