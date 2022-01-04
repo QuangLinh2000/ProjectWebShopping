@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.projectwebshopping.model.client.Cart" %><%--
   Created by IntelliJ IDEA.
   User: trong
   Date: 29/12/2021
@@ -6,6 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%
+  List<Cart> cartList = (List<Cart>) request.getAttribute("cartList");
+%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cart.css">
   <section id="cart" class="margin-top-mobile">
     <div class="container">

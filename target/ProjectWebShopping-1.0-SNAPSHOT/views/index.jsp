@@ -59,7 +59,8 @@
                    <%=boSuaTap1.getName()%>
                 </h2>
                 <p class="subtile-section">
-                    <%=boSuaTap1.getTieuDe()%>                          </p>
+                    <%=boSuaTap1.getTieuDe()%>
+                </p>
 
                 <div class="collection-slide">
                     <div class="collection-content">
@@ -139,7 +140,7 @@
 
                 <!-- btn -->
                 <div>
-                    <a href="#" class="btn">
+                    <a href="/Shopping/search?id=<%=boSuaTap1.getId()%>&res=bst&name=<%=boSuaTap1.getName()%>" class="btn">
                         xem thêm
                     </a>
                 </div>
@@ -155,7 +156,8 @@
                     <%=boSuaTap2.getName()%>
                 </h2>
                 <p class="subtile-section">
-                    <%=boSuaTap2.getTieuDe()%>                          </p>
+                    <%=boSuaTap2.getTieuDe()%>
+                </p>
 
                 <div class="collection-slide">
                     <div class="collection-content">
@@ -233,7 +235,7 @@
 
                 <!-- btn -->
                 <div>
-                    <a href="" class="btn">
+                    <a href="/Shopping/search?id=<%=boSuaTap2.getId()%>&res=bst&name=<%=boSuaTap2.getName()%>" class="btn">
                         xem thêm
                     </a>
                 </div>
@@ -330,7 +332,7 @@
             <h2 class="tablinks"> KHUYẾN MÃI</h2>
         </div>
         <div id="list-tab1">
-            <div class="list-tab-content">
+            <div class="list-tab-content list-tab-content1">
 
                 <%List<Product> productList4 = (List<Product>) request.getAttribute("listSPMoi");
                     for ( Product p : productList4) {%>
@@ -392,13 +394,13 @@
 
             </div>
             <div class="div-btn-tab">
-                <a href="#" class="btn btn-tab">xem thêm</a>
+                <a class="btn btn-tab" so="1" size ="<%=productList4.size()%>">xem thêm</a>
             </div>
 
         </div>
 
         <div id="list-tab2">
-            <div class="list-tab-content">
+            <div class="list-tab-content list-tab-content3">
                 <div class="slide-collection">
                     <div class="collection-slide-div">
                         <a href="#">
@@ -488,12 +490,12 @@
 
             </div>
             <div class="div-btn-tab">
-                <a href="#" class="btn btn-tab">xem thêm</a>
+                <a class="btn btn-tab" so="3" size ="4" >xem thêm</a>
             </div>
 
         </div>
         <div id="list-tab3">
-            <div class="list-tab-content">
+            <div class="list-tab-content list-tab-content2">
 
                 <%List<Product> productList6 = (List<Product>) request.getAttribute("listSPKM");
                     for ( Product p : productList6) {%>
@@ -554,7 +556,7 @@
 
             </div>
             <div class="div-btn-tab">
-                <a href="#" class="btn btn-tab">xem thêm</a>
+                <a class="btn btn-tab" so="2" size ="<%=productList6.size()%>">xem thêm</a>
             </div>
 
         </div>
@@ -784,5 +786,124 @@
             position: 'right bottom',
             customWrapper: '',
         })
+    }
+
+    //----------xem thêm san pham ---------
+    //set attr
+
+    //click btn btn-tab
+    $('.btn.btn-tab').click(function () {
+        //set attr
+
+        //get attr
+        var so = $(this).attr('so');
+        var size = $(this).attr('size');
+        var actibu = $(this);
+
+         //ajax
+         $.ajax({
+             url: '<%=request.getContextPath()%>/home',
+             type: 'POST',
+             data: {
+                 so: so,
+                 size: size
+             },
+             success: function (data) {
+
+                 if (data != null) {
+                     var json = data;
+                     //set attr
+                     actibu.attr('size', size + json.length);
+
+
+                     for (var i = 0; i < json.length; i++) {
+                         var product = json[i];
+                         var iconsell = '';
+                         var giaCu = '';
+
+                         if (product.sell > 0) {
+                             iconsell = '<div class="colection-tag">' +
+                                 '<div class="tag-saleoff">' +
+                                 '<span>' + (product.sell * 100) + '%</span>' +
+                                 '</div>' +
+                                 '<img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">' +
+                                 '</div>';
+                             giaCu = '<span class="current-price">' +
+                                 formatNumber(product.gia) +
+                                 'đ</span>';
+                         }
+                         var iconHover = '';
+                         var count = 0;
+                         for (var j = 0; j < product.listUrlImg.length; j++) {
+                             var image = product.listUrlImg[j];
+                             iconHover += '<img src="<%=request.getContextPath()%>' + image + '" alt="" class="img-item-hov">';
+                             count++;
+                             if (count >= 5) {
+                                 break;
+                             }
+                         }
+
+                             var price = formatNumber((product.gia - product.sell * product.gia)) + 'đ';
+
+                             $('.list-tab-content'+so).append('<div class="slide-collection">' +
+                                 '<div class="collection-slide-div">' +
+                                 '<a href="<%=request.getContextPath()%>/detail?id=' + product.maSP + '">' +
+                                 '<img class="collection-slide-image"' +
+                                 'src="<%=request.getContextPath()%>' + product.listUrlImg[0] + '" alt="">' +
+                                 '</a>' +
+                                 '<div class="btn-img">' +
+                                 '<div class="btn-img-search">' +
+                                 '<i class="fa-solid fa-magnifying-glass"></i>' +
+                                 '</div>' +
+                                 '<div class="btn-img-buy">' +
+                                 '<a href="<%=request.getContextPath()%>/detail?id=' + product.maSP + '">mua ngay</a>' +
+                                 '</div>' +
+                                 '<div class="btn-img-cart" idSP ="' + product.maSP + '">' +
+                                 '<i class="fa-solid fa-cart-shopping"></i>' +
+                                 '</div>' +
+                                 '</div>' + iconsell +
+                                 '</div>' +
+                                 '<div class="list-image-hover">' + iconHover +
+                                 '</div>' +
+                                 '<div class="text-content-collection">' +
+                                 '<h3 class="slide-collection-title">' +
+                                 product.tenSP +
+                                 '</h3>' +
+                                 '<div>' +
+                                 '<span class="slide-collection-price">' + price +
+                                 '</span>' +
+                                 giaCu +
+                                 '</div>' +
+                                 '</div>' +
+                                 '</div>');
+
+                         }
+
+                     }
+
+
+                 const listImageHover = document.querySelectorAll(".img-item-hov");
+                 listImageHover.forEach((element) => {
+                     element.addEventListener("mouseover", () => {
+                         element
+                             .closest(".slide-collection")
+                             .querySelector(".collection-slide-image").src = element.src;
+                     });
+                 });
+
+
+             }
+         });
+
+
+
+    }
+  );
+
+
+    function formatNumber(num) {
+        //convert double to int
+        num =parseInt(num);
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
 </script>
