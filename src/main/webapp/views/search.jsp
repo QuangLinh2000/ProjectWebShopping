@@ -14,6 +14,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/search.css">
+<%--modal css--%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/modal/modal.css">
+
 <%
     List<Product> productList = (List<Product>) request.getAttribute("list_product");
     int size = (int) request.getAttribute("size");
@@ -117,7 +120,7 @@
                                      src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt="">
                             </a>
                             <div class="btn-img">
-                                <div class="btn-img-search">
+                                <div class="btn-img-search" onclick="openModal()">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <div class="btn-img-buy">
@@ -143,10 +146,6 @@
                             <%for ( int j = 0; j < product.getListUrlImg().size(); j++ ) {%>
                             <% if(j >= limitImageSmall)break;%>
                             <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
-<<<<<<< HEAD
-
-=======
->>>>>>> 169c3de5ef7dcad4d7e55240773b8cc229df579d
                             <%}%>
                         </div>
                         <div class="text-content-collection">
@@ -228,7 +227,6 @@
                                                          maxFractionDigits="3" value="<%=product.getGia()%>"/>đ
 
 
-
                                     </span>
                                 <%}%>
 
@@ -271,7 +269,49 @@
     </div>
 
 </section>
+<%--=================================================modal====================================================--%>
+<div class="modal-custom" id="modal-cart">
+    <div class="modal-dialog-custom">
+        <div class="modal-content-custom">
+            <div class="modal-slide">
+                <img class="modal-img" src="../img/collection1_slide_product_1.jpg" alt="">
 
+            </div>
+            <div class="modal-body-custom">
+                <h4 class="modal-title">
+                    Áo Khoác Lửng Dạ Hồng Ốp Tua Rua Cài Móc Mã H331013C
+                </h4>
+                <h4 class="modal-id">
+                    Mã SP: 321691492193020636
+                </h4>
+                <div class="modal-price">
+                    <span class="slide-collection-price">
+                        847,000đ
+                    </span>
+                    <span class="current-price">
+                        941,000đ
+                    </span>
+                </div>
+                <p class="color-product modal-text"><span class="modal-text-bold">Màu sắc:</span><span class="product-color">trắng</span></p>
+                <div class="product-size modal-text">
+                    <p class="modal-text-bold">Kích cỡ:</p>
+                    <ul class="product-list-sizes">
+                        <li class="product-list-size">S(4)</li>
+                        <li class="product-list-size">M(4)</li>
+                        <li class="product-list-size">L(4)</li>
+                        <li class="product-list-size">XS(4)</li>
+                    </ul>
+                </div>
+                <a class="btn-modal">THÊM VÀO GIỎ HÀNG</a>
+                <a href="#" class="link-continue">Xem chi tiết đầy đủ</a>
+            </div>
+            <div class="icon-close-modal" onclick="closeModal()">
+                <i class="fa-solid fa-xmark icon-modal"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script src="<%=request.getContextPath()%>/script/search.js"></script>
 <script>
     var xapSep = 0;
@@ -670,6 +710,51 @@
         //convert double to int
         num =parseInt(num);
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+    }
+
+    //modal close dom
+    const modalCart = document.getElementById('modal-cart');
+    function closeModal() {
+        modalCart.style.display = "none";
+    }
+    function openModal() {
+        modalCart.style.display = "flex";
+    }
+    //modal close over modal
+    //modal close on click outside
+    modalCart.addEventListener('click', function (event) {
+        if (event.target === modalCart) {
+            modalCart.style.display = "none";
+        }
+    });
+    //windowns load dom
+    document.querySelectorAll('.product-list-size').forEach(element => {
+        element.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    });
+    //============================================modal==============================
+    window.onload = function () {
+        const modalCart = document.getElementById('modal-cart');
+        function closeModal() {
+            modalCart.style.display = "none";
+        }
+        function openModal() {
+            modalCart.style.display = "flex";
+        }
+        //modal close over modal
+        //modal close on click outside
+        modalCart.addEventListener('click', function (event) {
+            if (event.target === modalCart) {
+                modalCart.style.display = "none";
+            }
+        });
+        //windowns load dom
+        document.querySelectorAll('.product-list-size').forEach(element => {
+            element.addEventListener('click', function () {
+                this.classList.toggle('active');
+            });
+        });
     }
 
 
