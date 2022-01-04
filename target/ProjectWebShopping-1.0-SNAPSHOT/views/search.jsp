@@ -752,7 +752,7 @@
         //windowns load dom
         document.querySelectorAll('.product-list-size').forEach(element => {
             element.addEventListener('click', function () {
-                this.classList.toggle('active');
+                element.classList.toggle('active');
             });
         });
     }
