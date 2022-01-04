@@ -120,13 +120,13 @@
                                      src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt="">
                             </a>
                             <div class="btn-img">
-                                <div class="btn-img-search" onclick="openModal()">
+                                <div class="btn-img-search" >
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <div class="btn-img-buy">
                                     <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%>>
+                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%> onclick="openModal('<%=i%>')">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                                 <div class="btn-img-buy">
                                     <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%>>
+                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%> onclick="openModal('<%=i%>')">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -274,7 +274,7 @@
     <div class="modal-dialog-custom">
         <div class="modal-content-custom">
             <div class="modal-slide">
-                <img class="modal-img" src="../img/collection1_slide_product_1.jpg" alt="">
+                <img class="modal-img" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
 
             </div>
             <div class="modal-body-custom">
@@ -296,10 +296,10 @@
                 <div class="product-size modal-text">
                     <p class="modal-text-bold">Kích cỡ:</p>
                     <ul class="product-list-sizes">
-                        <li class="product-list-size">S(4)</li>
-                        <li class="product-list-size">M(4)</li>
-                        <li class="product-list-size">L(4)</li>
-                        <li class="product-list-size">XS(4)</li>
+                        <li class="product-list-size">S</li>
+                        <li class="product-list-size">M</li>
+                        <li class="product-list-size">L</li>
+                        <li class="product-list-size">XL</li>
                     </ul>
                 </div>
                 <a class="btn-modal">THÊM VÀO GIỎ HÀNG</a>
@@ -318,6 +318,7 @@
     var khoangGia = '0';
     var arrColor = [];
     var sizeProduct =[];
+    var listProduct = <%=new Gson().toJson(productList)%>;
 
     var indexPage = 1;
     //click class page dom
@@ -400,7 +401,7 @@
             sortProduct();
         });
 
-        addCart();
+
 
 
     });
@@ -414,7 +415,6 @@
         indexPage = 1;
 
 
-         var listProduct;
          switch (xapSep) {
                case '0':
                    listProduct = <%=new Gson().toJson(productList)%>
@@ -503,7 +503,7 @@
                       '<div class="btn-img-buy">'+
                       '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
-                      '<div class="btn-img-cart" idSP ="'+product.maSP+'">'+
+                      '<div class="btn-img-cart" idSP ="'+product.maSP+'" onclick="openModal(\''+i+'\')">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
                       '</div>'+
                       '</div>'+ iconsell+
@@ -536,7 +536,7 @@
                       '<div class="btn-img-buy">'+
                       '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
-                      '<div class="btn-img-cart" idSP ="'+product.maSP+'">'+
+                      '<div class="btn-img-cart" idSP ="'+product.maSP+'" onclick="openModal(\''+i+'\')">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
                       '</div>'+
                       '</div>'+ iconsell+
@@ -589,7 +589,6 @@
             });
         });
         $('.title-sum-product').text(listProduct.length+' sản phẩm');
-        addCart();
         var page = document.getElementsByClassName('page');
         for (var i = 0; i < page.length; i++) {
             page[i].addEventListener('click', function () {
@@ -599,6 +598,9 @@
                 $(this).addClass('active');
             });
         }
+
+
+
 
     }
     function pushNotify(status, message, title) {
@@ -712,13 +714,37 @@
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
 
+     //-----------------------model add cart---------
+
+    document.querySelectorAll('.product-list-size').forEach(element => {
+        element.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    });
+
     //modal close dom
     const modalCart = document.getElementById('modal-cart');
     function closeModal() {
         modalCart.style.display = "none";
     }
-    function openModal() {
+    function openModal(position) {
         modalCart.style.display = "flex";
+
+        $('.product-list-sizes .product-list-size').removeClass('active');
+
+        var product = listProduct[position];
+
+        $('.modal-img').attr('src','<%=request.getContextPath()%>'+product.listUrlImg[0]);
+         $('.modal-title').text(product.tenSP);
+         $('.modal-id').text(product.maSP);
+         if(product.sell > 0){
+             $('.slide-collection-price').text(formatNumber(product.gia-product.sell*product.gia)+'đ');
+             $('.current-price').text(formatNumber(product.gia)+'đ');
+         }else{
+             $('.slide-collection-price').text(formatNumber(product.gia)+'đ');
+         }
+          $('.product-color').text(product.mau);
+
     }
     //modal close over modal
     //modal close on click outside
@@ -739,8 +765,9 @@
         function closeModal() {
             modalCart.style.display = "none";
         }
-        function openModal() {
+        function openModal(position) {
             modalCart.style.display = "flex";
+
         }
         //modal close over modal
         //modal close on click outside
@@ -756,6 +783,23 @@
             });
         });
     }
+
+    //----------click add cart --------------
+    //click add cart jquery
+    $('.btn-modal').click(function () {
+        var sizes = document.getElementsByClassName('product-list-size');
+        //get class active
+        var arrSize = [];
+        for (var i = 0; i < sizes.length; i++) {
+            if (sizes[i].classList.contains('active')) {
+                var size = sizes[i].innerText;
+                arrSize.push(size);
+            }
+        }
+        console.log(arrSize);
+
+    });
+
 
 
 

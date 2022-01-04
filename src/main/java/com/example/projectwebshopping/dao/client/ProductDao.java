@@ -36,7 +36,6 @@ public class ProductDao {
         List<Product> products = new ArrayList<>();
         try {
             Connection connection = DataSourceConnection.getConnection();
-
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT * FROM hinhanh AS h " +
                             "INNER JOIN  (SELECT * FROM products " +
@@ -112,6 +111,67 @@ public class ProductDao {
             }
             preparedStatement.setInt(1, 1);
             preparedStatement.setInt(2, limit);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String maSP = resultSet.getString("MASP");
+                String url = resultSet.getString("URL");
+                Product product = new Product();
+                product.addProduct(resultSet);
+                if (map.containsKey(maSP)) {
+                    List<String> listURL = map.get(maSP).getListUrlImg();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                } else {
+                    List<String> listURL = new ArrayList<>();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                }
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //convert map to list
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
+            products.add(entry.getValue());
+
+        }
+        return products;
+    }
+    public List<Product> getSanPhamNoiBat(int loaiSlected, int limit,int start) {
+        Map<String, Product> map = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement;
+            switch (loaiSlected) {
+                case 0:
+                    preparedStatement = connection.prepareStatement(" SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products where  TRANGTHAI = ? ORDER BY DONGIA DESC LIMIT ?,?) as p ON h.IDSP = p.MASP ORDER BY DONGIA DESC");
+                    break;
+                case 1:
+                    preparedStatement = connection.prepareStatement(" SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products where  TRANGTHAI = ? ORDER BY NGAYNHAP DESC LIMIT ?,?) as p ON h.IDSP = p.MASP ORDER BY NGAYNHAP DESC");
+                    break;
+                case 2:
+                    preparedStatement = connection.prepareStatement("  SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products WHERE  TRANGTHAI = ? AND SALE > 0 AND CURDATE() BETWEEN NGAYBATDAUSALE AND NGAYKETTHUCSALE" +
+                            "  ORDER BY SALE DESC  LIMIT ?,?) as p ON h.IDSP = p.MASP ORDER BY SALE DESC");
+                    break;
+                case 3:
+                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products where  TRANGTHAI = ? ORDER BY NGAYNHAP DESC LIMIT ?,?) as p ON h.IDSP = p.MASP ORDER BY NGAYNHAP DESC");
+                    break;
+
+                default:
+                    throw new IllegalStateException("Unexpected value: " + loaiSlected);
+            }
+            preparedStatement.setInt(1, 1);
+            preparedStatement.setInt(2, start);
+            preparedStatement.setInt(3, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String maSP = resultSet.getString("MASP");
@@ -227,15 +287,7 @@ public class ProductDao {
      * 1 sản phẩm mới ngày nhập mới nhất
      * 2 best seller bán nhiều nhất
      * 3 giảm giá
-     * ----------sap xep----------
-     * 0 tùy chọn
-     * 1 sản phẩm bán chạy nhất
-     * 2 theo chữ cái a-z
-     * 3 theo chữ cái z-a
-     * 4 theo giá tăng dần
-     * 5 theo giá giảm dần
-     * 6 mới nhất
-     * 7 cũ nhất
+
      * */
 
     public List<Product> getProducts(String idLoai, int loaiSlected) {

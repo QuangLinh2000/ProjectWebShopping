@@ -59,7 +59,7 @@
                         <a class="nav-link btn-icon" href="#"> <i class="fa-regular fa-bell icon-header"></i></a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a href="<%=request.getContextPath()%>/cart">
                             <i class="fa-solid fa-cart-shopping icon-header"></i>
                             Giỏ hàng(<span class="cart-count color-red">0</span>)
                         </a>
@@ -255,7 +255,7 @@
                         <i class="fa-solid fa-magnifying-glass search-icon"></i>
                     </div>
                     <div>
-                        <a href="#">
+                        <a href="<%=request.getContextPath()%>/cart">
                             <i class="fa-solid fa-cart-shopping icon-header"></i>
                             Giỏ hàng(<span class="cart-count color-red">0</span>)
                         </a>
@@ -365,7 +365,7 @@
                 <div class="header-top-list">
 
                     <div>
-                        <a href="#" class="btn-cart">
+                        <a href="<%=request.getContextPath()%>/cart" class="btn-cart">
                             <i class="fa-solid fa-cart-shopping icon-header"></i>
                             <span class="cart-count color-red">0</span>
                         </a>

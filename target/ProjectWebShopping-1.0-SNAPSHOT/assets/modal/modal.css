@@ -72,18 +72,20 @@
 }
 .product-list-sizes .product-list-size{
     border: 1px solid rgb(129, 125, 125);
-    padding: 4px 6px;
+    padding: 6px 20px;
+    margin-top: 20px;
     border-radius: 16px;
     background: transparent;
     cursor: pointer;
 }
 .product-list-sizes .product-list-size.active{
-    border: 1px solid rgb(14, 13, 13);
+    background: black;
+    color: white;
 
 }
 .product-list-sizes .product-list-size:hover{
-    border: 1px solid rgb(14, 13, 13);
-
+    background: black;
+    color: white;
 }
 .btn-modal {
     margin-top: 20px;
@@ -110,4 +112,8 @@
 .btn-modal-continue:hover {
     background-color: #222222;
     color: #fff;
+}
+.link-continue{
+    margin: auto;
+    margin-top: 20px;
 }

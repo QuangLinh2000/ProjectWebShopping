@@ -8,13 +8,39 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "CartController", value = "/cart")
 public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //get name from session
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLognin");
+        List<Cart> cartList = new ArrayList<>();
+        if(user == null){
+            //get the Map cart from session
+            Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
+            if (cartMap != null) {
+                //convert map to list
+                for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {
+                    cartList.add(entry.getValue());
+                }
+
+            }
+
+        }else{
+
+
+
+
+        }
+
+        request.setAttribute("cartList", cartList);
         request.setAttribute("container_view","/views/cart.jsp");
 
         request.getRequestDispatcher("index.jsp").forward(request, response);
