@@ -738,10 +738,12 @@
          $('.modal-title').text(product.tenSP);
          $('.modal-id').text(product.maSP);
          if(product.sell > 0){
-             $('.slide-collection-price').text(formatNumber(product.gia-product.sell*product.gia)+'đ');
-             $('.current-price').text(formatNumber(product.gia)+'đ');
+             $('.modal-custom .slide-collection-price').text(formatNumber(product.gia-product.sell*product.gia)+'đ');
+             $('.modal-custom .current-price').text(formatNumber(product.gia)+'đ');
          }else{
-             $('.slide-collection-price').text(formatNumber(product.gia)+'đ');
+             $('.modal-custom .slide-collection-price').text(formatNumber(product.gia)+'đ');
+             $('.modal-custom .current-price').text('');
+
          }
           $('.product-color').text(product.mau);
 

@@ -84,7 +84,18 @@
                                         <div class="btn-img-buy">
                                             <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                         </div>
-                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%>  onclick="openModal('1')">
+
+                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%>  onclick="openModal(this)"
+                                             data-product-id="<%=p.getMaSP()%>"
+                                             data-product-name="<%=p.getTenSP()%>"
+                                             data-product-price="<%=p.getGia()%>"
+                                             data-product-img="<%=p.getListUrlImg().get(0)%>"
+                                             data-product-sell="<%=p.getSell()%>"
+                                             data-product-size-s="<%=p.getS()%>"
+                                             data-product-size-l="<%=p.getL()%>"
+                                             data-product-size-m="<%=p.getM()%>"
+                                             data-product-size-xl="<%=p.getXL()%>"
+                                             data-product-color="<%=p.getMau()%>">
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </div>
                                     </div>
@@ -106,17 +117,17 @@
                                     <%}%>
                                 </div>
                                 <div class="text-content-collection">
+
                                     <h3 class="slide-collection-title">
                                         <%=p.getTenSP()%>
                                     </h3>
                                     <span class="slide-collection-price">
-                                           <fmt:formatNumber type = "number"
-                                                             maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
-                                        </span>
+                                <%double giaSell = p.getGia()- p.getSell()*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+                                </span>
                                     <%if(p.getSell() > 0){%>
                                     <span class="current-price">
-                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
-                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+                                 <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                 </span>
                                     <%}%>
                                 </div>
@@ -180,7 +191,17 @@
                                         <div class="btn-img-buy">
                                             <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                         </div>
-                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%> onclick="openModal('1')">
+                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%>  onclick="openModal(this)"
+                                             data-product-id="<%=p.getMaSP()%>"
+                                             data-product-name="<%=p.getTenSP()%>"
+                                             data-product-price="<%=p.getGia()%>"
+                                             data-product-img="<%=p.getListUrlImg().get(0)%>"
+                                             data-product-sell="<%=p.getSell()%>"
+                                             data-product-size-s="<%=p.getS()%>"
+                                             data-product-size-l="<%=p.getL()%>"
+                                             data-product-size-m="<%=p.getM()%>"
+                                             data-product-size-xl="<%=p.getXL()%>"
+                                             data-product-color="<%=p.getMau()%>">
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </div>
                                     </div>
@@ -205,13 +226,14 @@
                                         <%=p.getTenSP()%>
                                     </h3>
                                     <span class="slide-collection-price">
-                                           <fmt:formatNumber type = "number"
-                                                             maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
+                                        <%double giaSell = p.getGia()- p.getSell()*p.getGia();%>
+                                        <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+
                                         </span>
                                     <%if(p.getSell() > 0){%>
                                     <span class="current-price">
-                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
-                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+                                     <fmt:formatNumber type = "number"
+                                                       maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                 </span>
                                     <%}%>
                                 </div>
@@ -272,7 +294,17 @@
                                 <div class="btn-img-buy">
                                     <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart" idSP =<%=p.getMaSP()%> onclick="openModal('1')">
+                                <div class="btn-img-cart" idSP =<%=p.getMaSP()%>  onclick="openModal(this)"
+                                     data-product-id="<%=p.getMaSP()%>"
+                                     data-product-name="<%=p.getTenSP()%>"
+                                     data-product-price="<%=p.getGia()%>"
+                                     data-product-img="<%=p.getListUrlImg().get(0)%>"
+                                     data-product-sell="<%=p.getSell()%>"
+                                     data-product-size-s="<%=p.getS()%>"
+                                     data-product-size-l="<%=p.getL()%>"
+                                     data-product-size-m="<%=p.getM()%>"
+                                     data-product-size-xl="<%=p.getXL()%>"
+                                     data-product-color="<%=p.getMau()%>">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -291,12 +323,12 @@
                                 <%=p.getTenSP()%>
                             </h3>
                             <span class="slide-collection-price">
-                                     <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
+                                <%double giaSell = p.getGia()- p.getSell()*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
                                 </span>
                             <%if(p.getSell() > 0){%>
                             <span class="current-price">
-                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
-                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+                                 <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                 </span>
                             <%}%>
                         </div>
@@ -350,7 +382,17 @@
                             <div class="btn-img-buy">
                                 <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                             </div>
-                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%> onclick="openModal('1')">
+                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%>  onclick="openModal(this)"
+                                 data-product-id="<%=p.getMaSP()%>"
+                                 data-product-name="<%=p.getTenSP()%>"
+                                 data-product-price="<%=p.getGia()%>"
+                                 data-product-img="<%=p.getListUrlImg().get(0)%>"
+                                 data-product-sell="<%=p.getSell()%>"
+                                 data-product-size-s="<%=p.getS()%>"
+                                 data-product-size-l="<%=p.getL()%>"
+                                 data-product-size-m="<%=p.getM()%>"
+                                 data-product-size-xl="<%=p.getXL()%>"
+                                 data-product-color="<%=p.getMau()%>">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -376,13 +418,14 @@
                         </h3>
                         <div>
                                 <span class="slide-collection-price">
-                                     <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
+                                     <%double giaSell = p.getGia()- p.getSell()*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+
                                 </span>
 
                             <%if(p.getSell() > 0){%>
                             <span class="current-price">
-                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
-                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+                                   <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                 </span>
                             <%}%>
 
@@ -513,7 +556,17 @@
                             <div class="btn-img-buy">
                                 <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                             </div>
-                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%> onclick="openModal('1')">
+                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%>  onclick="openModal(this)"
+                                 data-product-id="<%=p.getMaSP()%>"
+                                 data-product-name="<%=p.getTenSP()%>"
+                                 data-product-price="<%=p.getGia()%>"
+                                 data-product-img="<%=p.getListUrlImg().get(0)%>"
+                                 data-product-sell="<%=p.getSell()%>"
+                                 data-product-size-s="<%=p.getS()%>"
+                                 data-product-size-l="<%=p.getL()%>"
+                                 data-product-size-m="<%=p.getM()%>"
+                                 data-product-size-xl="<%=p.getXL()%>"
+                                 data-product-color="<%=p.getMau()%>">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -538,13 +591,14 @@
                         </h3>
                         <div>
                                 <span class="slide-collection-price">
-                                     <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
+                                    <%double giaSell = p.getGia()- p.getSell()*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+
                                 </span>
 
                             <%if(p.getSell() > 0){%>
                             <span class="current-price">
-                                    <%double giaSell = (1- p.getSell())*p.getGia();%>
-                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+                                    <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                 </span>
                             <%}%>
 
@@ -571,22 +625,6 @@
             SEVEN.AM - SHALL WE DANCE
         </h2>
         <div class="customer-grid">
-            <div class="customer-item">
-                <div class="customer-img shine-hover">
-                    <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
-                </div>
-                <div class="bg-color">
-                </div>
-                <div class="customer-des">
-                    <h3>
-                        Nguyễn Trần Mỹ Nga
-                    </h3>
-                    <span>Công chức</span>
-                    <p>
-                        Cảm ơn Seven.AM vì đã mang đến những sản phẩm rất vừa với vóc dáng của người phụ nữ Việt. Khi khoác lên mình các trang phục ở đây, tôi cảm thấy vô cùng thoải mái và tự tin.
-                    </p>
-                </div>
-            </div>
             <div class="customer-item">
                 <div class="customer-img shine-hover">
                     <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
@@ -888,7 +926,16 @@
                          }
 
                              var price = formatNumber((product.gia - product.sell * product.gia)) + 'đ';
-
+                         <%--data-product-id="<%=p.getMaSP()%>"--%>
+                         <%--data-product-name="<%=p.getTenSP()%>"--%>
+                         <%--data-product-price="<%=p.getGia()%>"--%>
+                         <%--data-product-img="<%=p.getListUrlImg().get(0)%>"--%>
+                         <%--data-product-sell="<%=p.getSell()%>"--%>
+                         <%--data-product-size-s="<%=p.getS()%>"--%>
+                         <%--data-product-size-l="<%=p.getL()%>"--%>
+                         <%--data-product-size-m="<%=p.getM()%>"--%>
+                         <%--data-product-size-xl="<%=p.getXL()%>"--%>
+                         <%--data-product-color="<%=p.getMau()%>">--%>
                              $('.list-tab-content'+so).append('<div class="slide-collection">' +
                                  '<div class="collection-slide-div">' +
                                  '<a href="<%=request.getContextPath()%>/detail?id=' + product.maSP + '">' +
@@ -902,7 +949,18 @@
                                  '<div class="btn-img-buy">' +
                                  '<a href="<%=request.getContextPath()%>/detail?id=' + product.maSP + '">mua ngay</a>' +
                                  '</div>' +
-                                 '<div class="btn-img-cart" idSP ="' + product.maSP + '"onclick="openModal(\'1\')">' +
+                                 '<div class="btn-img-cart" idSP ="' + product.maSP + '"onclick="openModal(this)"' +
+                                 'data-product-id="'+ product.maSP+'"' +
+                                 'data-product-name="'+ product.tenSP+'"' +
+                                 'data-product-price="'+ product.gia+'"' +
+                                 'data-product-img="'+ product.listUrlImg[0]+'"' +
+                                 'data-product-sell="'+ product.sell+'"' +
+                                 'data-product-size-s="'+ product.S+'"' +
+                                 'data-product-size-l="'+ product.L+'"' +
+                                 'data-product-size-m="'+ product.M+'"' +
+                                 'data-product-size-xl="'+ product.XL+'"' +
+                                 'data-product-color="'+ product.mau+'"' +
+                                 '>' +
                                  '<i class="fa-solid fa-cart-shopping"></i>' +
                                  '</div>' +
                                  '</div>' + iconsell +
@@ -963,25 +1021,47 @@
     function closeModal() {
         modalCart.style.display = "none";
     }
-    function openModal(position) {
-        modalCart.style.display = "flex";
+  //   data-product-id
+  //   data-product-name
+  //   data-product-price
+  //   data-product-img
+  //   data-product-sell
+  //   data-product-size-s
+  //   data-product-size-l
+  //  data-product-size-m
+  //   data-product-size-xl
+  // data-product-color
+    function openModal(element) {
+        let id =element.getAttribute('data-product-id');
+        let name =element.getAttribute('data-product-name');
+        let price =element.getAttribute('data-product-price');
+        let img =element.getAttribute('data-product-img');
+        let sell =element.getAttribute('data-product-sell');
+        let sizeS =element.getAttribute('data-product-size-s');
+        let sizeL =element.getAttribute('data-product-size-l');
+        let sizeM =element.getAttribute('data-product-size-m');
+        let sizeXL =element.getAttribute('data-product-size-xl');
+        let color =element.getAttribute('data-product-color');
+        // alert(sizeS+" "+sizeM+" "+sizeL+" "+sizeXL);
 
         $('.product-list-sizes .product-list-size').removeClass('active');
 
-        var product = listProduct[position];
 
-        $('.modal-img').attr('src','<%=request.getContextPath()%>'+product.listUrlImg[0]);
-        $('.modal-title').text(product.tenSP);
-        $('.modal-id').text(product.maSP);
-        if(product.sell > 0){
-            $('.slide-collection-price').text(formatNumber(product.gia-product.sell*product.gia)+'đ');
-            $('.current-price').text(formatNumber(product.gia)+'đ');
+        $('.modal-img').attr('src','<%=request.getContextPath()%>'+img);
+        $('.modal-title').text(name);
+        $('.modal-id').text(id);
+        if(sell > 0){
+            $('.modal-custom .slide-collection-price').text(formatNumber(price-sell*price)+'đ');
+            $('.modal-custom .current-price').text(formatNumber(price)+'đ');
         }else{
-            $('.slide-collection-price').text(formatNumber(product.gia)+'đ');
+            $('.modal-custom .slide-collection-price').text(formatNumber(price)+'đ');
+            $('.modal-custom .current-price').text('');
         }
-        $('.product-color').text(product.mau);
+        $('.product-color').text(color);
+        modalCart.style.display = "flex";
 
     }
+
     //modal close over modal
     //modal close on click outside
     modalCart.addEventListener('click', function (event) {
