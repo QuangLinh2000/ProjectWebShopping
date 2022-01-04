@@ -17,7 +17,8 @@
 <%--limit imgae small gioi han anh hover--%>
 <%int limitImageSmall =5;%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/home.css">
-
+<%--modal css--%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/modal/modal.css">
 <section id="banner">
     <div id="main-slideshow">
         <div class="slideshow-content" id="ml-slide">
@@ -83,7 +84,7 @@
                                         <div class="btn-img-buy">
                                             <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                         </div>
-                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
+                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%>  onclick="openModal('1')">
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </div>
                                     </div>
@@ -179,7 +180,7 @@
                                         <div class="btn-img-buy">
                                             <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                         </div>
-                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
+                                        <div class="btn-img-cart" idSP =<%=p.getMaSP()%> onclick="openModal('1')">
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </div>
                                     </div>
@@ -271,7 +272,7 @@
                                 <div class="btn-img-buy">
                                     <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
+                                <div class="btn-img-cart" idSP =<%=p.getMaSP()%> onclick="openModal('1')">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -349,7 +350,7 @@
                             <div class="btn-img-buy">
                                 <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                             </div>
-                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
+                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%> onclick="openModal('1')">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -413,7 +414,7 @@
                             <div class="btn-img-buy">
                                 <span>mua ngay</span>
                             </div>
-                            <div class="btn-img-cart" >
+                            <div class="btn-img-cart" onclick="openModal('1')">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -456,7 +457,7 @@
                             <div class="btn-img-buy">
                                 <span>mua ngay</span>
                             </div>
-                            <div class="btn-img-cart" >
+                            <div class="btn-img-cart" onclick="openModal('1')">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -512,7 +513,7 @@
                             <div class="btn-img-buy">
                                 <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                             </div>
-                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%>>
+                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%> onclick="openModal('1')">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
@@ -736,6 +737,49 @@
         </div>
     </div>
 </section>
+<%--=================================================modal====================================================--%>
+<div class="modal-custom" id="modal-cart">
+    <div class="modal-dialog-custom">
+        <div class="modal-content-custom">
+            <div class="modal-slide">
+                <img class="modal-img" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+
+            </div>
+            <div class="modal-body-custom">
+                <h4 class="modal-title">
+                    Áo Khoác Lửng Dạ Hồng Ốp Tua Rua Cài Móc Mã H331013C
+                </h4>
+                <h4 class="modal-id">
+                    Mã SP: 321691492193020636
+                </h4>
+                <div class="modal-price">
+                    <span class="slide-collection-price">
+                        847,000đ
+                    </span>
+                    <span class="current-price">
+                        941,000đ
+                    </span>
+                </div>
+                <p class="color-product modal-text"><span class="modal-text-bold">Màu sắc:</span><span class="product-color">trắng</span></p>
+                <div class="product-size modal-text">
+                    <p class="modal-text-bold">Kích cỡ:</p>
+                    <ul class="product-list-sizes">
+                        <li class="product-list-size">S</li>
+                        <li class="product-list-size">M</li>
+                        <li class="product-list-size">L</li>
+                        <li class="product-list-size">XL</li>
+                    </ul>
+                </div>
+                <a class="btn-modal">THÊM VÀO GIỎ HÀNG</a>
+                <a href="#" class="link-continue">Xem chi tiết đầy đủ</a>
+            </div>
+            <div class="icon-close-modal" onclick="closeModal()">
+                <i class="fa-solid fa-xmark icon-modal"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script src="<%=request.getContextPath()%>/script/home.js"></script>
 <script>
     $(document).ready(function () {
@@ -858,7 +902,7 @@
                                  '<div class="btn-img-buy">' +
                                  '<a href="<%=request.getContextPath()%>/detail?id=' + product.maSP + '">mua ngay</a>' +
                                  '</div>' +
-                                 '<div class="btn-img-cart" idSP ="' + product.maSP + '">' +
+                                 '<div class="btn-img-cart" idSP ="' + product.maSP + '"onclick="openModal(\'1\')">' +
                                  '<i class="fa-solid fa-cart-shopping"></i>' +
                                  '</div>' +
                                  '</div>' + iconsell +
@@ -906,4 +950,74 @@
         num =parseInt(num);
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
+    //-----------------------model add cart---------
+
+    document.querySelectorAll('.product-list-size').forEach(element => {
+        element.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    });
+
+    //modal close dom
+    const modalCart = document.getElementById('modal-cart');
+    function closeModal() {
+        modalCart.style.display = "none";
+    }
+    function openModal(position) {
+        modalCart.style.display = "flex";
+
+        $('.product-list-sizes .product-list-size').removeClass('active');
+
+        var product = listProduct[position];
+
+        $('.modal-img').attr('src','<%=request.getContextPath()%>'+product.listUrlImg[0]);
+        $('.modal-title').text(product.tenSP);
+        $('.modal-id').text(product.maSP);
+        if(product.sell > 0){
+            $('.slide-collection-price').text(formatNumber(product.gia-product.sell*product.gia)+'đ');
+            $('.current-price').text(formatNumber(product.gia)+'đ');
+        }else{
+            $('.slide-collection-price').text(formatNumber(product.gia)+'đ');
+        }
+        $('.product-color').text(product.mau);
+
+    }
+    //modal close over modal
+    //modal close on click outside
+    modalCart.addEventListener('click', function (event) {
+        if (event.target === modalCart) {
+            modalCart.style.display = "none";
+        }
+    });
+    //windowns load dom
+    document.querySelectorAll('.product-list-size').forEach(element => {
+        element.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    });
+    //============================================modal==============================
+    window.onload = function () {
+        const modalCart = document.getElementById('modal-cart');
+        function closeModal() {
+            modalCart.style.display = "none";
+        }
+        function openModal(position) {
+            modalCart.style.display = "flex";
+
+        }
+        //modal close over modal
+        //modal close on click outside
+        modalCart.addEventListener('click', function (event) {
+            if (event.target === modalCart) {
+                modalCart.style.display = "none";
+            }
+        });
+        //windowns load dom
+        document.querySelectorAll('.product-list-size').forEach(element => {
+            element.addEventListener('click', function () {
+                element.classList.toggle('active');
+            });
+        });
+    }
+
 </script>
