@@ -29,6 +29,8 @@
 
 .left-contain {
     flex: 1;
+    padding-top: 50px;
+
 }
 
 .right-contain {
@@ -237,10 +239,10 @@ label {
 
 .top-search-title {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: space-between;
 }
 
 .title-sum-product {
@@ -262,7 +264,6 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
 }
 .top-search-title select {
     padding: 4px 6px;

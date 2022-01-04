@@ -59,7 +59,7 @@
                         <a class="nav-link btn-icon" href="#"> <i class="fa-regular fa-bell icon-header"></i></a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a href="<%=request.getContextPath()%>/cart">
                             <i class="fa-solid fa-cart-shopping icon-header"></i>
                             Giỏ hàng(<span class="cart-count color-red">0</span>)
                         </a>
@@ -222,13 +222,18 @@
                                     <%for (int k = 0; k < product.size(); k++) {%>
                                     <%if (j == 0) {%>
                                     <div class="sub-nav-img item<%=j%> active">
-                                        <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
-                                             alt="">
+
+                                        <a href="/Shopping/detail?id=<%=product.get(k).getMaSP()%>">
+                                            <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
+                                                 alt="">
+                                        </a>
                                     </div>
                                     <%} else {%>
                                     <div class="sub-nav-img item<%=j%>">
-                                        <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
-                                             alt="">
+                                        <a href="/Shopping/detail?id=<%=product.get(k).getMaSP()%>">
+                                            <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
+                                                 alt="">
+                                        </a>
                                     </div>
                                     <%}%>
 
@@ -250,7 +255,7 @@
                         <i class="fa-solid fa-magnifying-glass search-icon"></i>
                     </div>
                     <div>
-                        <a href="#">
+                        <a href="<%=request.getContextPath()%>/cart">
                             <i class="fa-solid fa-cart-shopping icon-header"></i>
                             Giỏ hàng(<span class="cart-count color-red">0</span>)
                         </a>
@@ -360,7 +365,7 @@
                 <div class="header-top-list">
 
                     <div>
-                        <a href="#" class="btn-cart">
+                        <a href="<%=request.getContextPath()%>/cart" class="btn-cart">
                             <i class="fa-solid fa-cart-shopping icon-header"></i>
                             <span class="cart-count color-red">0</span>
                         </a>

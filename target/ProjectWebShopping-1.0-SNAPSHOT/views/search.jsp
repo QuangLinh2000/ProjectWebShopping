@@ -14,6 +14,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/search.css">
+<%--modal css--%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/modal/modal.css">
+
 <%
     List<Product> productList = (List<Product>) request.getAttribute("list_product");
     int size = (int) request.getAttribute("size");
@@ -21,24 +24,6 @@
 %>
 <section id="main-search" class="margin-top-mobile">
     <div class="container">
-        <div class="top-search-title">
-            <div class="wrapper-search-left">
-                <h2 class="text-search"><%=request.getParameter("name")%>
-                </h2>
-                <span class="title-sum-product"><%=request.getAttribute("soLuongSP")%> sản phẩm</span>
-            </div>
-
-            <div class="right-contain-sort">
-                <label for="cars">Sắp Xếp</label>
-                <select name="cars" id="cars">
-                    <option value="0">Tùy chọn</option>
-                    <option value="1">Sắp xếp từ A-Z</option>
-                    <option value="2">Sắp xếp từ Z-A</option>
-                    <option value="3">Sắp xếp theo giá tăng dần</option>
-                    <option value="4">Sắp xếp theo giá giảm dần</option>
-                </select>
-            </div>
-        </div>
         <div class="contain">
             <div class="left-contain">
                 <div class="left-contain-price-range">
@@ -100,6 +85,25 @@
             </div>
 
             <div class="right-contain">
+                <div class="top-search-title">
+                    <div class="wrapper-search-left">
+                        <h2 class="text-search"><%=request.getParameter("name")%>
+                        </h2>
+                        <span class="title-sum-product"><%=request.getAttribute("soLuongSP")%> sản phẩm</span>
+                    </div>
+
+                    <div class="right-contain-sort">
+                        <label for="cars">Sắp Xếp</label>
+                        <select name="cars" id="cars">
+                            <option value="0">Tùy chọn</option>
+                            <option value="1">Sắp xếp từ A-Z</option>
+                            <option value="2">Sắp xếp từ Z-A</option>
+                            <option value="3">Sắp xếp theo giá tăng dần</option>
+                            <option value="4">Sắp xếp theo giá giảm dần</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="list-tab-content">
                     <%int temp = 0;%>
                     <%int item = 0;%>
@@ -116,13 +120,13 @@
                                      src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt="">
                             </a>
                             <div class="btn-img">
-                                <div class="btn-img-search">
+                                <div class="btn-img-search" >
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <div class="btn-img-buy">
                                     <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%>>
+                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%> onclick="openModal('<%=i%>')">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -187,7 +191,7 @@
                                 <div class="btn-img-buy">
                                     <a href="<%=request.getContextPath()%>/detail?id=<%=product.getMaSP()%>">mua ngay</a>
                                 </div>
-                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%>>
+                                <div class="btn-img-cart" idSP =<%=product.getMaSP()%> onclick="openModal('<%=i%>')">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
@@ -225,7 +229,6 @@
                                 <span class="current-price">
                                        <fmt:formatNumber type="number"
                                                          maxFractionDigits="3" value="<%=product.getGia()%>"/>đ
-
 
 
                                     </span>
@@ -270,13 +273,56 @@
     </div>
 
 </section>
+<%--=================================================modal====================================================--%>
+<div class="modal-custom" id="modal-cart">
+    <div class="modal-dialog-custom">
+        <div class="modal-content-custom">
+            <div class="modal-slide">
+                <img class="modal-img" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
 
+            </div>
+            <div class="modal-body-custom">
+                <h4 class="modal-title">
+                    Áo Khoác Lửng Dạ Hồng Ốp Tua Rua Cài Móc Mã H331013C
+                </h4>
+                <h4 class="modal-id">
+                    Mã SP: 321691492193020636
+                </h4>
+                <div class="modal-price">
+                    <span class="slide-collection-price">
+                        847,000đ
+                    </span>
+                    <span class="current-price">
+                        941,000đ
+                    </span>
+                </div>
+                <p class="color-product modal-text"><span class="modal-text-bold">Màu sắc:</span><span class="product-color">trắng</span></p>
+                <div class="product-size modal-text">
+                    <p class="modal-text-bold">Kích cỡ:</p>
+                    <ul class="product-list-sizes">
+                        <li class="product-list-size">S</li>
+                        <li class="product-list-size">M</li>
+                        <li class="product-list-size">L</li>
+                        <li class="product-list-size">XL</li>
+                    </ul>
+                </div>
+                <a class="btn-modal">THÊM VÀO GIỎ HÀNG</a>
+                <a href="#" class="link-continue">Xem chi tiết đầy đủ</a>
+            </div>
+            <div class="icon-close-modal" onclick="closeModal()">
+                <i class="fa-solid fa-xmark icon-modal"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script src="<%=request.getContextPath()%>/script/search.js"></script>
 <script>
     var xapSep = 0;
     var khoangGia = '0';
     var arrColor = [];
     var sizeProduct =[];
+    var listProduct = <%=new Gson().toJson(productList)%>;
 
     var indexPage = 1;
     //click class page dom
@@ -359,7 +405,7 @@
             sortProduct();
         });
 
-        addCart();
+
 
 
     });
@@ -373,7 +419,6 @@
         indexPage = 1;
 
 
-         var listProduct;
          switch (xapSep) {
                case '0':
                    listProduct = <%=new Gson().toJson(productList)%>
@@ -462,7 +507,7 @@
                       '<div class="btn-img-buy">'+
                       '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
-                      '<div class="btn-img-cart" idSP ="'+product.maSP+'">'+
+                      '<div class="btn-img-cart" idSP ="'+product.maSP+'" onclick="openModal(\''+i+'\')">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
                       '</div>'+
                       '</div>'+ iconsell+
@@ -495,7 +540,7 @@
                       '<div class="btn-img-buy">'+
                       '<a href="<%=request.getContextPath()%>/detail?id='+product.maSP+'">mua ngay</a>'+
                       '</div>'+
-                      '<div class="btn-img-cart" idSP ="'+product.maSP+'">'+
+                      '<div class="btn-img-cart" idSP ="'+product.maSP+'" onclick="openModal(\''+i+'\')">'+
                       '<i class="fa-solid fa-cart-shopping"></i>'+
                       '</div>'+
                       '</div>'+ iconsell+
@@ -548,7 +593,6 @@
             });
         });
         $('.title-sum-product').text(listProduct.length+' sản phẩm');
-        addCart();
         var page = document.getElementsByClassName('page');
         for (var i = 0; i < page.length; i++) {
             page[i].addEventListener('click', function () {
@@ -558,6 +602,9 @@
                 $(this).addClass('active');
             });
         }
+
+
+
 
     }
     function pushNotify(status, message, title) {
@@ -670,6 +717,93 @@
         num =parseInt(num);
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
+
+     //-----------------------model add cart---------
+
+    document.querySelectorAll('.product-list-size').forEach(element => {
+        element.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    });
+
+    //modal close dom
+    const modalCart = document.getElementById('modal-cart');
+    function closeModal() {
+        modalCart.style.display = "none";
+    }
+    function openModal(position) {
+        modalCart.style.display = "flex";
+
+        $('.product-list-sizes .product-list-size').removeClass('active');
+
+        var product = listProduct[position];
+
+        $('.modal-img').attr('src','<%=request.getContextPath()%>'+product.listUrlImg[0]);
+         $('.modal-title').text(product.tenSP);
+         $('.modal-id').text(product.maSP);
+         if(product.sell > 0){
+             $('.slide-collection-price').text(formatNumber(product.gia-product.sell*product.gia)+'đ');
+             $('.current-price').text(formatNumber(product.gia)+'đ');
+         }else{
+             $('.slide-collection-price').text(formatNumber(product.gia)+'đ');
+         }
+          $('.product-color').text(product.mau);
+
+    }
+    //modal close over modal
+    //modal close on click outside
+    modalCart.addEventListener('click', function (event) {
+        if (event.target === modalCart) {
+            modalCart.style.display = "none";
+        }
+    });
+    //windowns load dom
+    document.querySelectorAll('.product-list-size').forEach(element => {
+        element.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    });
+    //============================================modal==============================
+    window.onload = function () {
+        const modalCart = document.getElementById('modal-cart');
+        function closeModal() {
+            modalCart.style.display = "none";
+        }
+        function openModal(position) {
+            modalCart.style.display = "flex";
+
+        }
+        //modal close over modal
+        //modal close on click outside
+        modalCart.addEventListener('click', function (event) {
+            if (event.target === modalCart) {
+                modalCart.style.display = "none";
+            }
+        });
+        //windowns load dom
+        document.querySelectorAll('.product-list-size').forEach(element => {
+            element.addEventListener('click', function () {
+                this.classList.toggle('active');
+            });
+        });
+    }
+
+    //----------click add cart --------------
+    //click add cart jquery
+    $('.btn-modal').click(function () {
+        var sizes = document.getElementsByClassName('product-list-size');
+        //get class active
+        var arrSize = [];
+        for (var i = 0; i < sizes.length; i++) {
+            if (sizes[i].classList.contains('active')) {
+                var size = sizes[i].innerText;
+                arrSize.push(size);
+            }
+        }
+        console.log(arrSize);
+
+    });
+
 
 
 

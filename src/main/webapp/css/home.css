@@ -136,6 +136,9 @@
 .slideshow-content {
     transition: 0.9s;
 }
+.btn.btn-tab{
+    cursor: pointer;
+}
 /* ============================= Button============================ */
 .btn {
     margin-top: 20px;
