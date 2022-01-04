@@ -22,6 +22,7 @@ body {
     color: #070707;
     font-weight: 300;
     font-size: var(--medium-font-size);
+
 }
 
 li {
@@ -202,10 +203,12 @@ li {
     margin-bottom: var(--margin-bottom-10);
     padding-bottom: 0.625em;
 }
-.product__price .product__price__sale {
-    color: rgb(219, 15, 32);
+.product__price .product__price-origin{
     margin: 0 0.9375em;
     font-weight: 400;
+}
+.product__price .product__price__sale {
+    color: rgb(219, 15, 32);
 }
 .product__price .product__percent__sale {
     background-image: url('../img/icon/sale-background.png');
@@ -274,7 +277,7 @@ li {
 .product__color__elements label{
     padding: 0.625em;
     min-width: 2.3125em;
-    height: 2.1875em;
+    height: 100%;
     line-height: 2.1875em;
     font-size: 12px;
     border: 1px solid #ccc;
@@ -605,7 +608,7 @@ display: block;
     width: 100%;
     text-transform: uppercase;
     display: inline-block;
-    font-size: var(--font-size-14);
+    font-size: var(--medium-font-size);
     line-height: 21px;
     color: var(--blur-text);
     height: 2.375em;
@@ -615,7 +618,8 @@ display: block;
 }
 
 .curren-price {
-    color: #070707;
+    margin-right: 0.625em;
+    color: rgb(219, 15, 32);
     line-height: 24px;
     font-weight: bold;
 }
@@ -648,8 +652,7 @@ display: block;
     transition: all 0.5s ease 0s;
 }
 .origin-price {
-    margin-left: 0.625em;
-    color: #ff3b30;
+
 }
 .wrap-left-slide,
 .wrap-right-slide {

@@ -186,6 +186,14 @@ function convertPrice(price){
     else str+="000";
     return str+="₫";
 }
+
+function select(element){
+    let listSelect=document.querySelectorAll(".select-image")
+    for (var i=0;i<listSelect;i++){
+        listSelect[i].classList.remove("action");
+    }
+    element.querySelector(".select-image").classList.add("action")
+}
 function activeForm(){
 let form=document.querySelector(".form")
 

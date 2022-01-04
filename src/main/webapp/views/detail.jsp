@@ -4,6 +4,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.projectwebshopping.dto.client.DetailProduct" %>
 <%@ page import="com.example.projectwebshopping.model.client.ProductManager" %>
+<%@ page import="java.util.ArrayList" %>
 
 
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
@@ -13,12 +14,20 @@
     Product product = detailProduct.getProduct();
     BoSuaTap bst = detailProduct.getBoSuaTap();
     List<Product> listRelateds = detailProduct.getRelated();
-
+    List<Integer> listNumber=new ArrayList<>();
+    listNumber.add(5);
+    listNumber.add(3);
+    List<String> listSize=new ArrayList<>();
+    listSize.add("M");
+    listSize.add("XL");
 
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css">
 
+<script>
 
+</script>
+<div class="container">
 <section class="detail">
     <div class="detail__image">
         <div id="image__right">
@@ -63,22 +72,18 @@
             <div class="product__price">
                 <c:choose>
                     <c:when test="<%=product.getSell()>0%>">
-                            <span>
+                            <span class="product__price__sale">
                                <%=ProductManager.getInstance().formatPrice(product.getGia() - (product.getGia() * product.getSell()))%>đ
                             </span>
-                        <div class='product__price__sale'>
-                            <s>
-                                <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ
-
-                            </s>
-
+                        <div class="product__price-origin">
+                              <s>  <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ</s>
                         </div>
-                        <div class='product__percent__sale'>
+                        <div class='product__percent__sale' >
                             <span><%=product.getSell() * 100%>%</span>
                         </div>
                     </c:when>
                     <c:otherwise>
-                            <span>
+                            <span class="product__price__sale" style="color: #000">
                                 <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ
                             </span>
                     </c:otherwise>
@@ -94,52 +99,59 @@
                         </div>
                         <div class="product__size__elements">
                             <div class="product__size__element">
-
-                                <label class="text-center">
+                                <%if (product.getS() > 0) {%>
+                                <label class="text-center" onclick="select(this)">
                                     <strong>S</strong>
-                                    <%if (product.getS() > 0) {%>
                                     <img class="sold-out-image select-image"
                                          src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
-                                    <%} else {%>
+                                </label>
+                                <%} else {%>
+                                <label class="text-center" >
+                                    <strong>S</strong>
                                     <img class="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png"
                                          alt="">
-                                    <%}%>
-
                                 </label>
-                                <label class="text-center">
+                                <%}%>
+
+                                <%if (product.getM() > 0) {%>
+                                <label class="text-center" onclick="select(this)" >
                                     <strong>M</strong>
-                                    <%if (product.getM() > 0) {%>
                                     <img class="sold-out-image select-image"
                                          src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
-                                    <%} else {%>
+                                </label>
+                                <%} else {%>
+                                <label class="text-center" >
+                                    <strong>M</strong>
                                     <img class="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png"
                                          alt="">
-                                    <%}%>
-
                                 </label>
-                                <label class="text-center">
+                                <%}%>
+                                <%if (product.getL() > 0) {%>
+                                <label class="text-center" onclick="select(this)">
                                     <strong>L</strong>
-                                    <%if (product.getL() > 0) {%>
                                     <img class="sold-out-image select-image"
                                          src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
-                                    <%} else {%>
+                                </label>
+                                <%} else {%>
+                                <label class="text-center" >
+                                    <strong>L</strong>
                                     <img class="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png"
                                          alt="">
-                                    <%}%>
-
                                 </label>
-                                <label class="text-center">
+                                <%}%>
+                                <%if (product.getXL() > 0) {%>
+                                <label class="text-center" onclick="select(this)">
                                     <strong>XL</strong>
-
-                                    <%if (product.getXL() > 0) {%>
                                     <img class="sold-out-image select-image"
                                          src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
-                                    <%} else {%>
+                                </label>
+                                <%} else {%>
+                                <label class="text-center" >
+                                    <strong>XL</strong>
                                     <img class="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png"
                                          alt="">
-                                    <%}%>
-
                                 </label>
+                                <%}%>
 
                             </div>
                         </div>
@@ -169,18 +181,18 @@
                             <div class="product__header">Số lượng</div>
                             <div class="product__amount__form">
                                 <button class="decrease"
-                                        onclick='changeAmount(-1,<%=product.getM()+product.getS()+product.getL()+product.getXL()>0%>)'>
+                                        onclick='changeAmount(-1,<%=product.getM()+product.getS()+product.getL()+product.getXL()%>)'>
                                     <i class="fas fa-chevron-left"></i></button>
                                 <label id="countLabel" class="amount-num text-center">1</label>
                                 <button class="increase"
-                                        onclick='changeAmount(1,<%=product.getM()+product.getS()+product.getL()+product.getXL()>0%>)'>
+                                        onclick='changeAmount(1,<%=product.getM()+product.getS()+product.getL()+product.getXL()%>)'>
                                     <i class="fas fa-chevron-right"></i></button>
 
                             </div>
 
                         </div>
                         <div class="add-cart text-center">
-                            <button class="add-cart__button" onclick="activeForm()">THÊM VÀO GIỎ</button>
+                            <button class="add-cart__button" onclick="activeForm();">THÊM VÀO GIỎ</button>
                         </div>
                         <div class="buy-now text-center">
                             <button class="buy-now__button">MUA NGAY</button>
@@ -200,11 +212,13 @@
             <div class="decriptions">
                 <p><strong><%=bst.getName()%>
                 </strong></p>
+
                 <p><%=bst.getMota()%>
                 </p>
+                <%if(product.getMoTa()!=null){%>
                 <p><%=product.getMoTa()%>
                 </p>
-
+                <%}%>
             </div>
         </div>
     </div>
@@ -226,7 +240,7 @@
                             <div class="wrap__element__image"><img
                                     src="<%=request.getContextPath()%>/${item.listUrlImg.get(0)}" alt="">
                                 <div class="clear-fix">
-                                    <a href="https://nemshop.vn/collections/tat-ca-san-pham/products/ao-khoac-2710"
+                                    <a href="/Shopping/detail?id=${item.maSP}"
                                        class="detail__link"></a>
                                     <div class="advise-box">
                                         <a href="" class="advise__button text-center">TƯ VẤN</a>
@@ -234,15 +248,21 @@
                                 </div>
                                 <c:choose>
                                     <c:when test="${item.m+item.s+item.l+item.XL==0}">
-                                        <div class="wrap__sale-off text-center">
-                                                ${item.sell}%
-                                        </div>
+                                        <c:if test="${item.sell>0}">
+                                            <div class="wrap__sale-off text-center">
+                                                    ${item.sell*100}%
+                                            </div>
+                                        </c:if>
+
                                         <div class="wrap__sold-out text-center">STORE ONLY</div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="wrap__sale-off text-center"
-                                             style="right:50%; transform:translateX(50%);">${item.sell}%
-                                        </div>
+                                        <c:if test="${item.sell>0}">
+                                            <div class="wrap__sale-off text-center"
+                                                 style="right:50%; transform:translateX(50%);">${item.sell*100}%
+                                            </div>
+                                        </c:if>
+
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -259,18 +279,15 @@
 
                                         </span>
                                         <span class="origin-price">
-                                    <s>
-                                        <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ
+                                      <s>  <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ</s>
 
-                                     </s>
                         </span>
-
                                     </c:when>
                                     <c:otherwise>
-                                      <span class="curren-price">
-                            <s>
+                                      <span class="curren-price" style="color: #000">
+
                                 <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ
-                            </s>
+
                         </span>
                                     </c:otherwise>
                                 </c:choose>
@@ -278,21 +295,21 @@
                         </li>
                     </c:forEach>
                 </div>
-                <div class="wrap-left-slide text-center" onclick="transition(-1,${item.m+item.s+item.l+item.XL})"><i
+                <div class="wrap-left-slide text-center" onclick="transition(-1,<%=listRelateds.size()%>)"><i
                         class="fas fa-angle-left"></i></div>
-                <div class="wrap-right-slide text-center" onclick="transition(1,${item.m+item.s+item.l+item.XL})"><i
+                <div class="wrap-right-slide text-center" onclick="transition(1,<%=listRelateds.size()%>)"><i
                         class="fas fa-angle-right"></i></div>
             </ul>
         </div>
     </div>
 </section>
-<!-- code html cho form thêm hàng -->
+</div>
 <div class="form">
     <div class="form__content">
         <div class="delete-form" onclick="activeForm()">
             <i class="fas fa-times-circle"></i>
         </div>
-        <div class="form__title"><h3>Giỏ hàng của bạn (Đang có 1 sản phẩm)</h3></div>
+        <div class="form__title"><h3>Giỏ hàng của bạn (Đang có <%=listNumber.size()%> sản phẩm)</h3></div>
         <div class="form__table">
             <table>
                 <thead>
@@ -305,30 +322,21 @@
 
                 </thead>
                 <tbody>
+                <%for(int i=0;i<listNumber.size();i++){%>
                 <tr>
                     <td class="table__image-decription"><a href=""><img
-                            src="<%=request.getContextPath()%>/img/321691492193020636/1.jpg" alt=""></a></td>
+                            src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt=""></a></td>
                     <td class="table__infor-decription ">
-                        <a href="" class="bold-text"><h5>ĐẦM TIỆC HỒNG PHỐI SEQUIN D32169</h5></a> <br>
-                        <span>Phiên bản: Size 6 / Hồng </span><br>
+                        <a href="" class="bold-text"><h5><%=product.getTenSP()+" "+product.getMaSP()%></h5></a> <br>
+                        <span>Phiên bản: Size <%=listSize.get(i)%>> / <%=product.getMau()%>> </span><br>
                         <span>Thương hiệu: NEM</span></td>
                     <td class="table__price-bill bold-text">1,493,000₫</td>
                     <td class="table__amount"><input type="text" placeholder="1"></td>
                     <td class="table__price bold-text">1,493,000₫</td>
                     <td class="table__delete-element"><i class="fas fa-trash-alt"></i></td>
                 </tr>
-                <tr>
-                    <td class="table__image-decription"><a href=""><img
-                            src="<%=request.getContextPath()%>/img/321691492193020636/1.jpg" alt=""></a></td>
-                    <td class="table__infor-decription ">
-                        <a href="" class="bold-text"><h5>ĐẦM TIỆC HỒNG PHỐI SEQUIN D32169</h5></a> <br>
-                        <span>Phiên bản: Size 6 / Hồng </span><br>
-                        <span>Thương hiệu: NEM</span></td>
-                    <td class="table__price-bill bold-text">1,493,000₫</td>
-                    <td class="table__amount"><input type="text" placeholder="1"></td>
-                    <td class="table__price bold-text">1,493,000₫</td>
-                    <td class="table__delete-element"><i class="fas fa-trash-alt"></i></td>
-                </tr>
+                <%}%>
+
                 </tbody>
 
             </table>
@@ -351,6 +359,9 @@
         </div>
     </div>
 </div>
+<!-- code html cho form thêm hàng -->
+
 <script src="<%=request.getContextPath()%>/script/detail.js"></script>
+
 
 

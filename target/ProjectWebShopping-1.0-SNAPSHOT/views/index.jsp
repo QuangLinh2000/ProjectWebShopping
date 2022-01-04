@@ -255,7 +255,7 @@
         <div class="section-content">
             <div class="section-slideshow" id="section-slideshow">
                 <%List<Product> productList3 = (List<Product>) request.getAttribute("listSPNoiBat");
-                    for ( Product p : productList3) {%>
+                    for ( Product p : productList3){%>
                 <div class="slides-item">
                     <div class="slide-collection">
                         <div class="collection-slide-div">

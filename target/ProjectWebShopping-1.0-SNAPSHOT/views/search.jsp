@@ -142,6 +142,10 @@
                             <%for ( int j = 0; j < product.getListUrlImg().size(); j++ ) {%>
                             <% if(j >= limitImageSmall)break;%>
                             <img class="img-item-hov" src="<%=request.getContextPath()%><%=product.getListUrlImg().get(j)%>" alt="">
+<<<<<<< HEAD
+
+=======
+>>>>>>> 169c3de5ef7dcad4d7e55240773b8cc229df579d
                             <%}%>
                         </div>
                         <div class="text-content-collection">
