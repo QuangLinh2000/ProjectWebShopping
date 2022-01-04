@@ -21,24 +21,6 @@
 %>
 <section id="main-search" class="margin-top-mobile">
     <div class="container">
-        <div class="top-search-title">
-            <div class="wrapper-search-left">
-                <h2 class="text-search"><%=request.getParameter("name")%>
-                </h2>
-                <span class="title-sum-product"><%=request.getAttribute("soLuongSP")%> sản phẩm</span>
-            </div>
-
-            <div class="right-contain-sort">
-                <label for="cars">Sắp Xếp</label>
-                <select name="cars" id="cars">
-                    <option value="0">Tùy chọn</option>
-                    <option value="1">Sắp xếp từ A-Z</option>
-                    <option value="2">Sắp xếp từ Z-A</option>
-                    <option value="3">Sắp xếp theo giá tăng dần</option>
-                    <option value="4">Sắp xếp theo giá giảm dần</option>
-                </select>
-            </div>
-        </div>
         <div class="contain">
             <div class="left-contain">
                 <div class="left-contain-price-range">
@@ -100,6 +82,25 @@
             </div>
 
             <div class="right-contain">
+                <div class="top-search-title">
+                    <div class="wrapper-search-left">
+                        <h2 class="text-search"><%=request.getParameter("name")%>
+                        </h2>
+                        <span class="title-sum-product"><%=request.getAttribute("soLuongSP")%> sản phẩm</span>
+                    </div>
+
+                    <div class="right-contain-sort">
+                        <label for="cars">Sắp Xếp</label>
+                        <select name="cars" id="cars">
+                            <option value="0">Tùy chọn</option>
+                            <option value="1">Sắp xếp từ A-Z</option>
+                            <option value="2">Sắp xếp từ Z-A</option>
+                            <option value="3">Sắp xếp theo giá tăng dần</option>
+                            <option value="4">Sắp xếp theo giá giảm dần</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="list-tab-content">
                     <%int temp = 0;%>
                     <%int item = 0;%>

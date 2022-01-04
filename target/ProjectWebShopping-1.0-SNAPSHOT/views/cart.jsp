@@ -244,7 +244,6 @@
                 </div>
                 <a href="" class="btn-cart btn-total-checkout">Đặt hàng</a>
                 <a href="" class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
-                <p class="btn-cart" onclick="pushNotify()">OK</p>
 
               </div>
               <div class="bag-payment-options">
@@ -261,29 +260,6 @@
 
 
   </section>
-  <script>
-    function pushNotify() {
-      new Notify ({
-        status: 'success',
-        title: 'Notify Title',
-        text: 'Notify text lorem ipsum',
-        effect: 'slide',
-        speed: 300,
-        customClass: '',
-        customIcon: '',
-        showIcon: true,
-        showCloseButton: true,
-        autoclose: true,
-        autotimeout: 3000,
-        gap: 20,
-        distance: 20,
-        type: 1,
-        position: 'right top',
-        customWrapper: '',
-      })
-    }
-
-  </script>
 
   <script src="<%=request.getContextPath()%>/script/cart.js"></script>
 
