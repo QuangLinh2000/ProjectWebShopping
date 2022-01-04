@@ -38,7 +38,7 @@ public class BoSuaTapDao {
                 boSuaTap.setId(resultSet.getString("idbst"));
                 boSuaTap.setName(resultSet.getString("name"));
                 boSuaTap.setTieuDe(resultSet.getString("tieude"));
-                boSuaTap.setMota(resultSet.getString("moTa"));
+                boSuaTap.setMota(resultSet.getString("motaBST"));
                 boSuaTap.setHinhAnh(resultSet.getString("img"));
                 boSuaTaps.add(boSuaTap);
             }

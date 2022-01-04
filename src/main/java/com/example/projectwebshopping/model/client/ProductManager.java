@@ -71,6 +71,14 @@ public class ProductManager {
         }
         return colors;
     }
+    //format price from double to string
+    public String formatPrice(double price){
+        String s = String.format("%,.0f",price);
+        return s;
+    }
+
+
+
 
 
 }

@@ -237,50 +237,7 @@ public class ProductDao {
      * 6 mới nhất
      * 7 cũ nhất
      * */
-    public List<Product> getProducts(String idSP,String idLoai) {
-        Map<String, Product> map = new HashMap<>();
-        List<Product> products = new ArrayList<>();
-        try {
-            Connection connection = DataSourceConnection.getConnection();
 
-            String sql = "SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products WHERE LOAISP = ?  ) as p ON h.IDSP = p.MASP";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, idLoai);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                String maSP = resultSet.getString("MASP");
-                String url = resultSet.getString("URL");
-                Product product = new Product();
-                product.addProduct(resultSet);
-                if (map.containsKey(maSP) && !(maSP.equals(idSP))) {
-                    List<String> listURL = map.get(maSP).getListUrlImg();
-                    listURL.add(url);
-                    product.setListUrlImg(listURL);
-                    map.put(maSP, product);
-                } else {
-                    if(!(maSP.equals(idSP))) {
-                        List<String> listURL = new ArrayList<>();
-                        listURL.add(url);
-                        product.setListUrlImg(listURL);
-                        map.put(maSP, product);
-                    }
-                }
-
-            }
-            resultSet.close();
-            preparedStatement.close();
-            DataSourceConnection.returnConnection(connection);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        //convert map to list
-        for (Map.Entry<String, Product> entry : map.entrySet()) {
-            products.add(entry.getValue());
-        }
-        return products;
-    }
     public List<Product> getProducts(String idLoai, int loaiSlected) {
         Map<String, Product> map = new HashMap<>();
         List<Product> products = new ArrayList<>();
@@ -382,8 +339,6 @@ public class ProductDao {
                 }
                 boSuaTap.addBoST(resultSet);
             }
-            List<Product> related=ProductDao.getInstance().getProducts(id,map.get(id).getLoaiSP());
-            detailProduct.setRelated(related);
             detailProduct.setProduct(map.get(id));
             detailProduct.setBoSuaTap(boSuaTap);
             resultSet.close();
