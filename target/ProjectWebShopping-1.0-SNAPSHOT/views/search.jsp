@@ -702,6 +702,7 @@
     function openModal(position) {
         modalCart.style.display = "flex";
         $('.product-list-sizes .product-list-size').removeClass('active');
+        $('.product-list-sizes .product-list-size').removeClass('crossed');
 
         var product = listProduct[position];
 
@@ -717,7 +718,21 @@
           $('.product-color').text(product.mau);
          //set attr link-continue
          $('.link-continue').attr('href','<%=request.getContextPath()%>/detail?id='+product.maSP);
+         var listbtnSize = document.getElementsByClassName('product-list-size');
+         if(parseInt(product.S) <= 0) {
+             listbtnSize[0].classList.add('crossed');
 
+
+         }
+         if(parseInt(product.M) <= 0) {
+             listbtnSize[1].classList.add('crossed');
+         }
+         if(parseInt(product.L) <= 0) {
+             listbtnSize[2].classList.add('crossed');
+         }
+         if(parseInt(product.XL) <= 0) {
+             listbtnSize[3].classList.add('crossed');
+         }
     }
     //modal close over modal
     //modal close on click outside
@@ -752,7 +767,7 @@
         //windowns load dom
         document.querySelectorAll('.product-list-size').forEach(element => {
             element.addEventListener('click', function () {
-                this.classList.toggle('active');
+                element.classList.toggle('active');
             });
         });
     }
@@ -764,13 +779,13 @@
         //get class active
         var arrSize = [];
         for (var i = 0; i < sizes.length; i++) {
-            if (sizes[i].classList.contains('active')) {
+            if (sizes[i].classList.contains('active') && sizes[i].classList.contains('crossed') == false) {
                 var size = sizes[i].innerText;
                 arrSize.push(size);
             }
         }
         if(arrSize.length == 0){
-            alert('Chọn size');
+            pushNotify('warning','Vui lòng chọn size','chọn size');
             return;
         }
         addCart( arrSize);
