@@ -1,5 +1,8 @@
 package com.example.projectwebshopping.controller.client;
 
+import com.example.projectwebshopping.dao.client.CartDao;
+import com.example.projectwebshopping.model.client.Cart;
+import com.example.projectwebshopping.model.client.User;
 import com.example.projectwebshopping.service.client.IUserService;
 import com.example.projectwebshopping.service.client.UserService;
 
@@ -7,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.Map;
 
 @WebServlet(name = "Signin", value = "/signin")
 public class SigninController extends HttpServlet {
@@ -30,9 +34,19 @@ public class SigninController extends HttpServlet {
        String username = request.getParameter("username");
        String password = request.getParameter("pass");
        IUserService userService = new UserService();
-       if(username != null && password != null &&userService.checkLogin(username, password)){
+        User user = userService.checkLogin(username, password);
+       if(username != null && password != null && user != null){
            HttpSession session = request.getSession();
-           session.setAttribute("isusername", username);
+           session.setAttribute("userLognin", user);
+
+           Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
+           if(cartMap != null){
+               for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {
+                   CartDao.getInstance().addGioHang(user.getId(),entry.getKey(), entry.getValue().getQuantity());
+               }
+               request.removeAttribute("cartMap");
+           }
+
            response.sendRedirect("/Shopping/home");
 
        }else{

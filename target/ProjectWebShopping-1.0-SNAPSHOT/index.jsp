@@ -1,5 +1,10 @@
 <%@ page import="com.example.projectwebshopping.service.client.IHomeService" %>
-<%@ page import="com.example.projectwebshopping.service.client.HomeSerVice" %><%--
+<%@ page import="com.example.projectwebshopping.service.client.HomeSerVice" %>
+<%@ page import="com.example.projectwebshopping.model.client.Cart" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="com.example.projectwebshopping.model.client.User" %>
+<%@ page import="com.example.projectwebshopping.dao.client.CartDao" %><%--
   Created by IntelliJ IDEA.
   User: trong
   Date: 29/12/2021

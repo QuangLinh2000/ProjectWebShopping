@@ -237,6 +237,7 @@ public class ProductDao {
      * 6 mới nhất
      * 7 cũ nhất
      * */
+
     public List<Product> getProducts(String idLoai, int loaiSlected) {
         Map<String, Product> map = new HashMap<>();
         List<Product> products = new ArrayList<>();
@@ -314,6 +315,7 @@ public class ProductDao {
         Product product = new Product();
         DetailProduct detailProduct = new DetailProduct();
         BoSuaTap boSuaTap = new BoSuaTap();
+
         Map<String,Product> map = new HashMap<>();
         try {
             Connection connection = DataSourceConnection.getConnection();

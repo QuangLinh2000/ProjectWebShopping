@@ -166,6 +166,26 @@ return {x : x, y : y};
 
 imageZoom();
 
+function convertPrice(price){
+    var priceCoppy=price;
+    var str="";
+    if((priceCoppy-priceCoppy%1000000)/1000000>0){
+        str=(priceCoppy-priceCoppy%1000000)/1000000+",";
+        //chỉ lấy phần nguyên
+        priceCoppy=priceCoppy%1000000;
+    }
+    if((priceCoppy-priceCoppy%1000)/1000>0){
+        str+=(priceCoppy-priceCoppy%1000)/1000+","
+        priceCoppy=priceCoppy%1000;
+    }
+    else str+="000,";
+    if((priceCoppy-priceCoppy%1)/1>0){
+        str+=(priceCoppy-priceCoppy%1)/1;
+
+    }
+    else str+="000";
+    return str+="₫";
+}
 function activeForm(){
 let form=document.querySelector(".form")
 

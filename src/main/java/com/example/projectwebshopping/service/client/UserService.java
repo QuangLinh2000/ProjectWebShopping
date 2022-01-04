@@ -1,6 +1,7 @@
 package com.example.projectwebshopping.service.client;
 
 import com.example.projectwebshopping.dao.client.UserDAO;
+import com.example.projectwebshopping.model.client.User;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -61,7 +62,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean checkLogin(String username, String password) {
+    public User checkLogin(String username, String password) {
         return UserDAO.getInstance().checkLogin(username, password);
     }
 }

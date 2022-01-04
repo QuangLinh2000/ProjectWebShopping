@@ -3,7 +3,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.projectwebshopping.model.client.Product" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.projectwebshopping.model.client.LoaiSP" %><%--
+<%@ page import="com.example.projectwebshopping.model.client.LoaiSP" %>
+<%@ page import="com.example.projectwebshopping.model.client.User" %>
+<%@ page import="com.example.projectwebshopping.model.client.Cart" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="com.example.projectwebshopping.dao.client.CartDao" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 12/29/2021
@@ -15,6 +20,24 @@
 <% IHomeService iHomeService = new HomeSerVice();
     List<LoaiSP> listLoaiSP = (List<LoaiSP>) request.getAttribute("listLoaiSP");
 %>
+<%
+    int quantity = 0;
+    User user = (User) request.getSession().getAttribute("userLognin");
+    Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
+
+    if (user == null) {
+        if (cartMap == null) {
+            cartMap = new HashMap<>();
+        }
+        quantity = 0;
+        for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {
+            quantity += entry.getValue().getQuantity();
+        }
+    } else {
+        quantity = CartDao.getInstance().getSizeCart(user.getId());
+    }
+%>
+
 <header id="header" class="header-signin-sigup">
     <div id="header-first">
         <div class="container">
@@ -27,7 +50,7 @@
                 <div class="header-top-wrap-logo">
                     <h1>
                         <a href="/Shopping/home"><img src="<%=request.getContextPath()%>/img/logo.png"
-                                         alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
+                                                      alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
                     </h1>
                 </div>
 
@@ -42,8 +65,7 @@
                         </a>
                     </div>
                     <%
-                        String username = (String) session.getAttribute("isusername");
-                        if (username == null) {
+                        if (user == null) {
                     %>
                     <div class="btn-signup">
                         <a href="<%=request.getContextPath()%>/signin" id="login-a" class="color-red">Đăng nhập </a>
@@ -73,7 +95,8 @@
                         for (int i = 0; i < listLoaiSP.size(); i++) {
                             LoaiSP loaiSP = listLoaiSP.get(i);%>
                     <li class="nav-item">
-                        <a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=4&name=<%=loaiSP.getTenLoai()%>" class="text-hover text-hover-underline-goes-right">
+                        <a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=4&name=<%=loaiSP.getTenLoai()%>"
+                           class="text-hover text-hover-underline-goes-right">
                             <span><%=loaiSP.getTenLoai()%></span>
                             <%loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 0));%>
                             <%loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 1));%>
@@ -84,33 +107,38 @@
                         <div class="sub-nav">
 
                             <ul class="list-sub">
-                                <li class="item-sub-nav " stt="0"><a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=0&name=<%=loaiSP.getTenLoai()%>"
-                                                                     class="text-hover text-hover-underline-goes-right active">Sản
+                                <li class="item-sub-nav " stt="0"><a
+                                        href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=0&name=<%=loaiSP.getTenLoai()%>"
+                                        class="text-hover text-hover-underline-goes-right active">Sản
                                     phẩm nổi bật</a></li>
-                                <li class="item-sub-nav " stt="1"><a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=1&name=<%=loaiSP.getTenLoai()%>"
-                                                                     class="text-hover text-hover-underline-goes-right ">Sản
+                                <li class="item-sub-nav " stt="1"><a
+                                        href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=1&name=<%=loaiSP.getTenLoai()%>"
+                                        class="text-hover text-hover-underline-goes-right ">Sản
                                     phẩm mới</a></li>
-                                <li class="item-sub-nav " stt="2"><a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=2&name=<%=loaiSP.getTenLoai()%>"
-                                                                     class="text-hover text-hover-underline-goes-right ">Best
+                                <li class="item-sub-nav " stt="2"><a
+                                        href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=2&name=<%=loaiSP.getTenLoai()%>"
+                                        class="text-hover text-hover-underline-goes-right ">Best
                                     seller</a></li>
-                                <li class="item-sub-nav " stt="3"><a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=3&name=<%=loaiSP.getTenLoai()%>"
-                                                                     class="text-hover text-hover-underline-goes-right ">Khuyến
+                                <li class="item-sub-nav " stt="3"><a
+                                        href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=3&name=<%=loaiSP.getTenLoai()%>"
+                                        class="text-hover text-hover-underline-goes-right ">Khuyến
                                     mãi</a></li>
                             </ul>
                             <div class="sub-nav-left">
                                 <%List<List<Product>> loaiSPS = loaiSP.getListProduct();%>
                                 <%for (int j = 0; j < loaiSPS.size(); j++) {%>
-                                <%List<Product> product = loaiSPS.get(j);
-                               %>
+                                <%
+                                    List<Product> product = loaiSPS.get(j);
+                                %>
                                 <%for (int k = 0; k < product.size(); k++) {%>
-                                <%if(j == 0){%>
+                                <%if (j == 0) {%>
                                 <div class="sub-nav-img item<%=j%> active">
                                     <a href="/Shopping/detail?id=<%=product.get(k).getMaSP()%>">
                                         <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
                                              alt="">
                                     </a>
                                 </div>
-                                <%}else{%>
+                                <%} else {%>
                                 <div class="sub-nav-img item<%=j%>">
 
                                     <a href="/Shopping/detail?id=<%=product.get(k).getMaSP()%>">
@@ -142,7 +170,7 @@
                 <div class="header-top-wrap-logo">
                     <h1>
                         <a href="/Shopping/home"><img src="<%=request.getContextPath()%>/img/logo.png"
-                                         alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
+                                                      alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
                     </h1>
                 </div>
                 <nav class="nav-bar">
@@ -152,37 +180,47 @@
                             for (int i = 0; i < listLoaiSP.size(); i++) {
                                 LoaiSP loaiSP = listLoaiSP.get(i);%>
                         <li class="nav-item">
-                            <a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=4&name=<%=loaiSP.getTenLoai()%>" class="text-hover text-hover-underline-goes-right">
+                            <a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=4&name=<%=loaiSP.getTenLoai()%>"
+                               class="text-hover text-hover-underline-goes-right">
                                 <span><%=loaiSP.getTenLoai()%></span>
-                                <%loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 0));%>
-                                <%loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 1));%>
-                                <%loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 2));%>
-                                <%loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 3));%>
+                                <%
+                                    loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 0));%>
+                                <%
+                                    loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 1));%>
+                                <%
+                                    loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 2));%>
+                                <%
+                                    loaiSP.getListProduct().add(iHomeService.getSanPhamHeader(loaiSP.getMaLoai(), 3, 3));%>
                                 <i class="fa-solid fa-angle-down"></i>
                             </a>
                             <div class="sub-nav">
 
                                 <ul class="list-sub">
-                                    <li class="item-sub-nav " stt="0"><a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=0&name=<%=loaiSP.getTenLoai()%>"
-                                                                         class="text-hover text-hover-underline-goes-right active">Sản
+                                    <li class="item-sub-nav " stt="0"><a
+                                            href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=0&name=<%=loaiSP.getTenLoai()%>"
+                                            class="text-hover text-hover-underline-goes-right active">Sản
                                         phẩm nổi bật</a></li>
-                                    <li class="item-sub-nav " stt="1"><a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=1&name=<%=loaiSP.getTenLoai()%>"
-                                                                         class="text-hover text-hover-underline-goes-right ">Sản
+                                    <li class="item-sub-nav " stt="1"><a
+                                            href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=1&name=<%=loaiSP.getTenLoai()%>"
+                                            class="text-hover text-hover-underline-goes-right ">Sản
                                         phẩm mới</a></li>
-                                    <li class="item-sub-nav " stt="2"><a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=2&name=<%=loaiSP.getTenLoai()%>"
-                                                                         class="text-hover text-hover-underline-goes-right ">Best
+                                    <li class="item-sub-nav " stt="2"><a
+                                            href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=2&name=<%=loaiSP.getTenLoai()%>"
+                                            class="text-hover text-hover-underline-goes-right ">Best
                                         seller</a></li>
-                                    <li class="item-sub-nav " stt="3"><a href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=3&name=<%=loaiSP.getTenLoai()%>"
-                                                                         class="text-hover text-hover-underline-goes-right ">Khuyến
+                                    <li class="item-sub-nav " stt="3"><a
+                                            href="/Shopping/search?id=<%=loaiSP.getMaLoai()%>&slt=3&name=<%=loaiSP.getTenLoai()%>"
+                                            class="text-hover text-hover-underline-goes-right ">Khuyến
                                         mãi</a></li>
                                 </ul>
                                 <div class="sub-nav-left">
                                     <%List<List<Product>> loaiSPS = loaiSP.getListProduct();%>
                                     <%for (int j = 0; j < loaiSPS.size(); j++) {%>
-                                    <%List<Product> product = loaiSPS.get(j);
+                                    <%
+                                        List<Product> product = loaiSPS.get(j);
                                     %>
                                     <%for (int k = 0; k < product.size(); k++) {%>
-                                    <%if(j == 0){%>
+                                    <%if (j == 0) {%>
                                     <div class="sub-nav-img item<%=j%> active">
 
                                         <a href="/Shopping/detail?id=<%=product.get(k).getMaSP()%>">
@@ -190,7 +228,7 @@
                                                  alt="">
                                         </a>
                                     </div>
-                                    <%}else{%>
+                                    <%} else {%>
                                     <div class="sub-nav-img item<%=j%>">
                                         <a href="/Shopping/detail?id=<%=product.get(k).getMaSP()%>">
                                             <img src="<%=request.getContextPath()%><%=product.get(k).getListUrlImg().get(0)%>"
@@ -223,7 +261,7 @@
                         </a>
                     </div>
                     <%
-                        if (username != null) {
+                        if (user != null) {
                     %>
                     <div class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown">
@@ -252,7 +290,7 @@
                 <div class="header-top-wrap-logo">
                     <h1>
                         <a href="/Shopping/home"><img src="<%=request.getContextPath()%>/img/logo.png"
-                                         alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
+                                                      alt="Thời trang công sở Seven.AM: Váy đầm, quần áo, vest nữ"></a>
                     </h1>
                 </div>
                 <nav class="nav-bar" id="nav-bar-active">
@@ -270,25 +308,28 @@
                         <c:forEach var="p" items="${listLoaiSP}">
                             <li class="nav-item">
                                 <div class="nav-item-warper">
-                                    <a href="/Shopping/search?id=${p.getMaLoai()}&slt=4&name=${p.getTenLoai()}" class="text-hover text-hover-underline-goes-right">
+                                    <a href="/Shopping/search?id=${p.getMaLoai()}&slt=4&name=${p.getTenLoai()}"
+                                       class="text-hover text-hover-underline-goes-right">
                                         <span>${p.tenLoai}</span>
                                     </a>
                                 </div>
                             </li>
                         </c:forEach>
                         <%
-                            if (username == null) {
+                            if (user == null) {
                         %>
                         <li class="nav-item">
                             <div class="nav-item-warper">
-                                <a href="<%=request.getContextPath()%>/signin" class="text-hover text-hover-underline-goes-right">
+                                <a href="<%=request.getContextPath()%>/signin"
+                                   class="text-hover text-hover-underline-goes-right">
                                     <span>Đăng nhập</span>
                                 </a>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="nav-item-warper">
-                                <a href="<%=request.getContextPath()%>/signup" class="text-hover text-hover-underline-goes-right">
+                                <a href="<%=request.getContextPath()%>/signup"
+                                   class="text-hover text-hover-underline-goes-right">
                                     <span>Đăng ký</span>
                                 </a>
                             </div>
@@ -296,14 +337,16 @@
                         <%} else {%>
                         <li class="nav-item">
                             <div class="nav-item-warper">
-                                <a href="<%=request.getContextPath()%>/account" class="text-hover text-hover-underline-goes-right">
+                                <a href="<%=request.getContextPath()%>/account"
+                                   class="text-hover text-hover-underline-goes-right">
                                     <span>Tài khoản</span>
                                 </a>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="nav-item-warper">
-                                <a href="<%=request.getContextPath()%>/account" class="text-hover text-hover-underline-goes-right">
+                                <a href="<%=request.getContextPath()%>/account"
+                                   class="text-hover text-hover-underline-goes-right">
                                     <span>Thông báo</span>
                                 </a>
                             </div>
@@ -346,9 +389,11 @@
         //get attr
         var attr = $(this).attr("stt");
         //add class active
-        $(this).closest(".nav-item").find(".item"+attr).addClass("active");
+        $(this).closest(".nav-item").find(".item" + attr).addClass("active");
     }, function () {
         $(this).find(".text-hover").addClass("active");
 
     });
+    $('.cart-count.color-red').text(<%=quantity%>);
+
 </script>
