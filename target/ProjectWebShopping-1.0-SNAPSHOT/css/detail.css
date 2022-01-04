@@ -62,7 +62,7 @@ li {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 3.125em 1.875em;
+
     border-top: 1px solid rgb(224, 221, 221);
     margin-top: 0.625em;
 }

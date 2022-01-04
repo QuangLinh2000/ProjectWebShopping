@@ -8,6 +8,7 @@ let amount=1;
 let indexOfImage=0;
 let indexOfWrapSlide=0;
 let numWrapSlide=4;
+let listSelect=document.querySelectorAll(".select-image");
 //Khởi tạo các sản phẩm liên quan, thay đổi dựa theo base Date
 
 //chỉnh lại view khi kích thước trang thay đổi
@@ -186,28 +187,41 @@ function convertPrice(price){
     else str+="000";
     return str+="₫";
 }
+function checkSelect(list){
 
+    var enought=false;
+    for(var i=0;i<list.length;i++){
+        if(list[i].classList.contains("action")) enought=true;
+    }
+    if(enought===false) alert("Vui Lòng Chọn Size !")
+    return enought
+}
 function select(element){
-    let listSelect=document.querySelectorAll(".select-image")
+
+
     for (var i=0;i<listSelect;i++){
         listSelect[i].classList.remove("action");
     }
     element.querySelector(".select-image").classList.add("action")
+
 }
 function activeForm(){
-let form=document.querySelector(".form")
+    if(checkSelect(listSelect)) {
+        let form = document.querySelector(".form")
 
-if(form.classList.contains("action-flex")) {
-    form.firstElementChild.style.animation="modalFadeOut ease 0.4s"
-    setTimeout(function() {
-        form.classList.remove("action-flex")
-    },400)
+        if (form.classList.contains("action-flex")) {
+            form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
+            setTimeout(function () {
+                form.classList.remove("action-flex")
+            }, 400)
 
-}
+        }
+
 else{
 form.firstElementChild.style.animation="modalFadeIn  ease-in 0.4s"
 form.classList.add("action-flex")
 }
+    }
 }
 
 
