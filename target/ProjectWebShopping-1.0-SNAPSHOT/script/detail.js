@@ -8,7 +8,6 @@ let amount=1;
 let indexOfImage=0;
 let indexOfWrapSlide=0;
 let numWrapSlide=4;
-let listSelect=document.querySelectorAll(".select-image");
 //Khởi tạo các sản phẩm liên quan, thay đổi dựa theo base Date
 
 //chỉnh lại view khi kích thước trang thay đổi
@@ -167,61 +166,43 @@ return {x : x, y : y};
 
 imageZoom();
 
-function convertPrice(price){
-    var priceCoppy=price;
-    var str="";
-    if((priceCoppy-priceCoppy%1000000)/1000000>0){
-        str=(priceCoppy-priceCoppy%1000000)/1000000+",";
-        //chỉ lấy phần nguyên
-        priceCoppy=priceCoppy%1000000;
-    }
-    if((priceCoppy-priceCoppy%1000)/1000>0){
-        str+=(priceCoppy-priceCoppy%1000)/1000+","
-        priceCoppy=priceCoppy%1000;
-    }
-    else str+="000,";
-    if((priceCoppy-priceCoppy%1)/1>0){
-        str+=(priceCoppy-priceCoppy%1)/1;
 
-    }
-    else str+="000";
-    return str+="₫";
-}
 function checkSelect(list){
 
     var enought=false;
     for(var i=0;i<list.length;i++){
-        if(list[i].classList.contains("action")) enought=true;
+        if(list[i].classList.contains("active")) enought=true;
     }
-    if(enought===false) alert("Vui Lòng Chọn Size !")
+    if(enought===false)
+        pushNotify('warning','Vui lòng chọn size','chọn size');
+
     return enought
 }
 function select(element){
 
-
-    for (var i=0;i<listSelect;i++){
-        listSelect[i].classList.remove("action");
-    }
     element.querySelector(".select-image").classList.add("action")
 
+
 }
-function activeForm(){
-    if(checkSelect(listSelect)) {
-        let form = document.querySelector(".form")
-
-        if (form.classList.contains("action-flex")) {
-            form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
-            setTimeout(function () {
-                form.classList.remove("action-flex")
-            }, 400)
-
-        }
-
-else{
-form.firstElementChild.style.animation="modalFadeIn  ease-in 0.4s"
-form.classList.add("action-flex")
-}
-    }
+function pushNotify(status, message, title) {
+    new Notify({
+        status: status,
+        title: title,
+        text: message,
+        effect: 'fade',
+        speed: 300,
+        customClass: '',
+        customIcon: '',
+        showIcon: true,
+        showCloseButton: true,
+        autoclose: true,
+        autotimeout: 2000,
+        gap: 20,
+        distance: 20,
+        type: 1,
+        position: 'right bottom',
+        customWrapper: '',
+    })
 }
 
 

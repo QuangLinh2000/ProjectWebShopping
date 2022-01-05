@@ -22,13 +22,14 @@ public class CartDao {
     private CartDao() {
     }
 
-    public void addGioHang(String idUser,String idSanPham,int soLuong) {
+    public void addGioHang(String idUser,String idSanPham,int soLuong,String size) {
         try {
             Connection connection =  DataSourceConnection.getConnection();
-            String sql = "SELECT * FROM giohang WHERE IDUSER = ? AND IDSP = ?";
+            String sql = "SELECT * FROM giohang WHERE IDUSER = ? AND IDSP = ? AND SIZE = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             preparedStatement.setString(1,idUser);
             preparedStatement.setString(2,idSanPham);
+            preparedStatement.setString(3,size);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()){
@@ -38,11 +39,12 @@ public class CartDao {
                 resultSet.updateRow();
 
             }else{
-                String sql2 = "INSERT INTO giohang(IDUSER,IDSP,SOLUONG) VALUES(?,?,?)";
+                String sql2 = "INSERT INTO giohang(IDUSER,IDSP,SOLUONG,SIZE) VALUES(?,?,?,?)";
                 preparedStatement = connection.prepareStatement(sql2,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 preparedStatement.setString(1,idUser);
                 preparedStatement.setString(2,idSanPham);
                 preparedStatement.setInt(3,soLuong);
+                preparedStatement.setString(4,size);
                 preparedStatement.executeUpdate();
 
             }
