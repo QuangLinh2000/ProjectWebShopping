@@ -197,12 +197,7 @@ function checkSelect(list){
     return enought
 }
 function select(element){
-
-
-    for (var i=0;i<listSelect;i++){
-        listSelect[i].classList.remove("action");
-    }
-    element.querySelector(".select-image").classList.add("action")
+    element.querySelector(".select-image").classList.toggle("action")
 
 }
 function activeForm(){
