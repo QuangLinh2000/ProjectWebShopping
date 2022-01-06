@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
@@ -207,6 +208,7 @@ public class Product implements Serializable {
                 ", listUrlImg=" + listUrlImg +
                 '}';
     }
+
     public void addProduct(ResultSet resultSet) throws SQLException {
         String maSP = resultSet.getString("MASP");
         String tenSP = resultSet.getString("TENSP");
