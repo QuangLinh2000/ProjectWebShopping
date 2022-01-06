@@ -42,7 +42,7 @@ public class SigninController extends HttpServlet {
            Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
            if(cartMap != null){
                for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {
-                   CartDao.getInstance().addGioHang(user.getId(),entry.getKey(), entry.getValue().getQuantity());
+                   CartDao.getInstance().addGioHang(user.getId(),entry.getValue().getIdProduct(), entry.getValue().getQuantity(), entry.getValue().getSize());
                }
                request.removeAttribute("cartMap");
            }

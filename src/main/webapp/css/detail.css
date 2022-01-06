@@ -49,12 +49,15 @@ li {
     }
 }
 
-.text-center {
+.text-center  {
     text-align: center;
 }
-.action {
+.text-center.active .select-image{
     display: block !important;
+
 }
+
+
 .action-flex {
     display: flex !important;
 }
