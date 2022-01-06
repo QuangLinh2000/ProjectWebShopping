@@ -52,8 +52,20 @@ public class CartController extends HttpServlet {
        //get the cart from ajax
         String id = request.getParameter("id");
         String arrSize = request.getParameter("size");
+        String quantityDetail = request.getParameter("quantity");
+
         // convert json to list
         List<String> listSize = new Gson().fromJson(arrSize, List.class);
+
+        List<String> listQuantity = new ArrayList<>();
+        if(quantityDetail == null){
+            for ( int i = 0; i < listSize.size(); i++) {
+                listQuantity.add("1");
+            }
+        }else {
+            listQuantity = new Gson().fromJson(quantityDetail, List.class);
+        }
+
         //get name from session
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLognin");
@@ -64,14 +76,15 @@ public class CartController extends HttpServlet {
                 cartMap = new HashMap<>();
             }
 
-
-            for (String size : listSize) {
+            for (int i =0 ;i< listSize.size();i++){
+                String size = listSize.get(i);
+                int quantity = Integer.parseInt(listQuantity.get(i));
                 if(cartMap.containsKey(id+size)){
-                    cartMap.get(id+size).setQuantity(cartMap.get(id+size).getQuantity() + 1);
+                    cartMap.get(id+size).setQuantity(cartMap.get(id+size).getQuantity() + quantity);
                 }else{
                     Cart cart = new Cart();
                     cart.setIdProduct(id);
-                    cart.setQuantity(1);
+                    cart.setQuantity(quantity);
                     cart.setSize(size);
                     cartMap.put(id+size, cart);
                 }
@@ -89,9 +102,10 @@ public class CartController extends HttpServlet {
 
 
         }else{
-
-            for (String size : listSize) {
-                CartDao.getInstance().addGioHang(user.getId(), id,1,size);
+            for (int i =0 ;i< listSize.size();i++){
+                String size = listSize.get(i);
+                int quantity = Integer.parseInt(listQuantity.get(i));
+                CartDao.getInstance().addGioHang(user.getId(), id,quantity,size);
             }
             int quantity =  CartDao.getInstance().getSizeCart(user.getId());
 

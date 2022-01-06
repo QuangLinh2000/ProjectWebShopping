@@ -166,12 +166,45 @@ return {x : x, y : y};
 
 imageZoom();
 
+function convertPrice(price){
+    var priceCoppy=price;
+    var str="";
 
+    if((priceCoppy-priceCoppy%1000000)/1000000>0){
+
+        str=(priceCoppy-priceCoppy%1000000)/1000000+",";
+        //chỉ lấy phần nguyên
+        priceCoppy=priceCoppy%1000000;
+    }
+    if((priceCoppy-priceCoppy%1000)/1000>0){
+        var ex=(priceCoppy-priceCoppy%1000)/1000
+
+        for(var i=0;i<3-ex.toString().length;i++){
+            str+="0"
+
+        }
+        str+=ex+","
+        priceCoppy=priceCoppy%1000;
+    }
+
+    if((priceCoppy-priceCoppy%1)/1>0){
+        var ex=(priceCoppy-priceCoppy%1)/1
+        for(var i=0;i<3-ex.toString().length;i++){
+            str+="0"
+        }
+        str+=ex
+    }
+    else str+="000"
+    return str+"₫";
+}
 function checkSelect(list){
 
     var enought=false;
     for(var i=0;i<list.length;i++){
-        if(list[i].classList.contains("active")) enought=true;
+        if(list[i].classList.contains("active")) {
+            enought=true;
+            break;
+        }
     }
     if(enought===false)
         pushNotify('warning','Vui lòng chọn size','chọn size');
@@ -179,8 +212,7 @@ function checkSelect(list){
     return enought
 }
 function select(element){
-
-    element.querySelector(".select-image").classList.add("action")
+    element.querySelector(".select-image").classList.toggle("action")
 
 
 }

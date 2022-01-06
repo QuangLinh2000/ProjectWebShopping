@@ -30,7 +30,7 @@
 <div class="container">
 <section class="detail">
     <div class="detail__image">
-        <div id="image__right">
+        <div id="image__right" <%if(product.getListUrlImg().size()==1){%>style="width: 100%"<%}%>>
 
             <div id="image__right__element">
                 <img id="image__right__element--img"
@@ -41,7 +41,8 @@
             <div class="img-zoom-result">
             </div>
         </div>
-        <div id="image__left">
+
+        <div id="image__left"  <%if(product.getListUrlImg().size()==1){%>style="display: none"<%}%>>
             <ul class="image__left__list">
 
                 <%for (int i = 0; i < product.getListUrlImg().size(); i++) {%>
@@ -59,6 +60,7 @@
                     class="fas fa-angle-down"></i></div>
         </div>
 
+
     </div>
     <div class="detail__infor">
         <div class="infor__head">
@@ -73,10 +75,10 @@
                 <c:choose>
                     <c:when test="<%=product.getSell()>0%>">
                             <span class="product__price__sale">
-                               <%=ProductManager.getInstance().formatPrice(product.getGia() - (product.getGia() * product.getSell()))%>đ
+                               <%=ProductManager.getInstance().formatPrice(product.getGia() - (product.getGia() * product.getSell()))%>₫
                             </span>
                         <div class="product__price-origin">
-                              <s>  <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ</s>
+                              <s>  <%=ProductManager.getInstance().formatPrice(product.getGia())%>₫</s>
                         </div>
                         <div class='product__percent__sale' >
                             <span><%=product.getSell() * 100%>%</span>
@@ -84,7 +86,7 @@
                     </c:when>
                     <c:otherwise>
                             <span class="product__price__sale" style="color: #000">
-                                <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ
+                                <%=ProductManager.getInstance().formatPrice(product.getGia())%>₫
                             </span>
                     </c:otherwise>
                 </c:choose>
@@ -100,13 +102,13 @@
                         <div class="product__size__elements">
                             <div class="product__size__element">
                                 <%if (product.getS() > 0) {%>
-                                <label class="text-center" >
+                                <label class="text-center label__size" >
                                     <strong>S</strong>
                                     <img class="sold-out-image select-image"
                                          src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
                                 </label>
                                 <%} else {%>
-                                <label class="text-center" >
+                                <label class="text-center label__size" >
                                     <strong>S</strong>
                                     <img class="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png"
                                          alt="">
@@ -114,39 +116,39 @@
                                 <%}%>
 
                                 <%if (product.getM() > 0) {%>
-                                <label class="text-center" >
+                                <label class="text-center label__size" >
                                     <strong>M</strong>
                                     <img class="sold-out-image select-image"
                                          src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
                                 </label>
                                 <%} else {%>
-                                <label class="text-center" >
+                                <label class="text-center label__size" >
                                     <strong>M</strong>
                                     <img class="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png"
                                          alt="">
                                 </label>
                                 <%}%>
                                 <%if (product.getL() > 0) {%>
-                                <label class="text-center" >
+                                <label class="text-center label__size" >
                                     <strong>L</strong>
                                     <img class="sold-out-image select-image"
                                          src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
                                 </label>
                                 <%} else {%>
-                                <label class="text-center" >
+                                <label class="text-center label__size" >
                                     <strong>L</strong>
                                     <img class="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png"
                                          alt="">
                                 </label>
                                 <%}%>
                                 <%if (product.getXL() > 0) {%>
-                                <label class="text-center" >
+                                <label class="text-center label__size" >
                                     <strong>XL</strong>
                                     <img class="sold-out-image select-image"
                                          src="<%=request.getContextPath()%>/img/icon/select.png" alt="">
                                 </label>
                                 <%} else {%>
-                                <label class="text-center" >
+                                <label class="text-center label__size" >
                                     <strong>XL</strong>
                                     <img class="sold-out-image" src="<%=request.getContextPath()%>/img/icon/soldout.png"
                                          alt="">
@@ -261,18 +263,18 @@
 
                                         <span class="curren-price">
 
-                                          <%=ProductManager.getInstance().formatPrice(product.getGia() - (product.getGia() * product.getSell()))%>đ
+                                          <%=ProductManager.getInstance().formatPrice(product.getGia() - (product.getGia() * product.getSell()))%>₫
 
                                         </span>
                                         <span class="origin-price">
-                                      <s>  <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ</s>
+                                      <s>  <%=ProductManager.getInstance().formatPrice(product.getGia())%>₫</s>
 
                         </span>
                                     </c:when>
                                     <c:otherwise>
                                       <span class="curren-price" style="color: #000">
 
-                                <%=ProductManager.getInstance().formatPrice(product.getGia())%>đ
+                                <%=ProductManager.getInstance().formatPrice(product.getGia())%>₫
 
                         </span>
                                     </c:otherwise>
@@ -292,7 +294,7 @@
 </div>
 <div class="form">
     <div class="form__content">
-        <div class="delete-form" onclick="activeForm()">
+        <div class="delete-form" onclick="closeForm()">
             <i class="fas fa-times-circle"></i>
         </div>
         <div class="form__title"><h3>Giỏ hàng của bạn (Đang có <%=listNumber.size()%> sản phẩm)</h3></div>
@@ -316,18 +318,13 @@
         </div>
         <div class="form__footer">
             <div class="form__footer__left">
-                <textarea name="" class="footer__note" cols="30" rows="5" placeholder="Ghi chú"></textarea>
                 <a href="" class="return-shop">
                     <i class="fas fa-reply"></i>
                     Tiếp tục mua hàng
                 </a>
             </div>
             <div class="form__footer__right">
-                <div class="summary-price"><h3>TỔNG: 2,986,000₫</h3></div>
-                <div class="save-price">Tiết kiệm: 899,000₫</div>
-                <button class="update-cart">CẬP NHẬT GIỎ HÀNG</button>
 
-                <a href="" class="pay-button">TIẾN HÀNH THANH TOÁN</a>
             </div>
         </div>
     </div>
@@ -336,36 +333,23 @@
 <script src="<%=request.getContextPath()%>/script/detail.js"></script>
 
 <script>
+
     //click text-center add active
-    document.querySelectorAll('.text-center').forEach(function (item) {
+    let form = document.querySelector(".form")
+    let arrNumber;
+    document.querySelectorAll('.label__size').forEach(function (item) {
         item.addEventListener('click', function () {
             item.classList.toggle('active');
         })
     })
-    let listSelect=document.querySelectorAll(".text-center");
-
+    let listSelect=document.querySelectorAll(".label__size");
     function activeForm(){
         if(checkSelect(listSelect)) {
-            let form = document.querySelector(".form")
-
-            if (form.classList.contains("action-flex")) {
-                form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
-                setTimeout(function () {
-                    form.classList.remove("action-flex")
-                }, 400)
-
-            }
-
-            else{
-                form.firstElementChild.style.animation="modalFadeIn  ease-in 0.4s"
-                form.classList.add("action-flex")
-            }
-
             var array = document.querySelectorAll(".select-image");
             var  arrSize =[];
             $('.row-product').html('');
             var sizegioHang = document.querySelector(".cart-count.color-red").innerHTML;
-            console.log(sizegioHang);
+            let totalNumber=2;
             $('.form__title').text('GIỎ HÀNG CỦA BẠN (ĐANG CÓ '+sizegioHang+' SẢN PHẨM)');
             for (var i = 0; i < array.length; i++) {
                var parent = array[i].closest('.text-center');
@@ -374,30 +358,32 @@
                     arrSize.push(size);
                     var input = '';
                     if(size === 'S'){
-                        input = '<input type="number" min="1" value ="1" max="<%=product.getS()%>">';
+                        input = '<input class="quantity" type="number" min="1" value ="1" max="<%=product.getS()%>">';
                     }
                     if(size === 'M'){
-                        input = '<input type="number" min="1" value ="1" max="<%=product.getM()%>">';
+                        input = '<input  class="quantity" type="number" min="1" value ="1" max="<%=product.getM()%>">';
 
                     }
                     if(size === 'L'){
-                        input = '<input type="number" min="1" value ="1" max="<%=product.getL()%>">';
+                        input = '<input class="quantity" type="number" min="1" value ="1" max="<%=product.getL()%>">';
 
                     }
                     if(size === 'XL'){
-                        input = '<input type="number" min="1" value ="1" max="<%=product.getXL()%>">';
+                        input = '<input class="quantity" type="number" min="1" value ="1" max="<%=product.getXL()%>">';
 
                     }
+
+                    <%--/console.log((parseInt(document.getElementById('quantity').value))*((<%=product.getGia()-product.getGia()*product.getSell()%>)))--%>
                     $('.row-product').append('<tr >'+
                         '<td class="table__image-decription"><a href=""><img'+
                     ' src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt=""></a></td>'+
                     '<td class="table__infor-decription ">'+
                         '<a href="" class="bold-text"><h5><%=product.getTenSP()+" "+product.getMaSP()%></h5></a> <br>'+
-                    '<span>Phiên bản: Size '+size+' <%=product.getMau()%> </span><br>'+
+                    '<span class = "size-product" size = "'+size+'">Phiên bản: Size '+size+' <%=product.getMau()%> </span><br>'+
                     '<span>Bộ sưu tập: <%=bst.getName()%></span></td>'+
-                    '<td class="table__price-bill bold-text"><%=ProductManager.getInstance().formatPrice(product.getGia())%>đ</td>'+
+                    '<td class="table__price-bill bold-text"><%=ProductManager.getInstance().formatPrice(product.getGia()-product.getGia()*product.getSell())%>₫</td>'+
                     '<td class="table__amount">'+input+'</td>'+
-                    '<td class="table__price bold-text"><%=ProductManager.getInstance().formatPrice(product.getGia())%>đ</td>'+
+                    '<td class="table__price bold-text">'+convertPrice((<%=product.getGia()-product.getGia()*product.getSell()%>))+'</td>'+
                     '<td class="table__delete-element"><i class="fas fa-trash-alt"></i></td>'+
                   '</tr>');
 
@@ -405,16 +391,129 @@
 
 
             }
+             arrNumber=document.querySelectorAll('.quantity')
+            totalNumber=arrNumber.length
+            let footerTable=document.querySelector('.form__footer__right');
 
 
+            footerTable.innerHTML=` <div class="summary-price"><h3>
+TỔNG: `+convertPrice( arrNumber.length*(<%=product.getGia()-product.getGia()*product.getSell()%>))+`</h3></div>
+                <div class="save-price">Tiết kiệm: `+convertPrice(arrNumber.length*(<%=product.getGia()*product.getSell()%>))+`</div>
+                <button class="update-cart">CẬP NHẬT GIỎ HÀNG</button>
 
+                <a href="" class="pay-button">TIẾN HÀNH THANH TOÁN</a>`
+            let form = document.querySelector(".form")
 
+            form.firstElementChild.style.animation="modalFadeIn  ease-in 0.4s"
+            form.classList.add("action-flex")
+            $('.quantity').change(function (){
+                arrNumber=document.querySelectorAll('.quantity')
+                totalNumber=0;
+                for(var i=0;i<arrNumber.length;i++){
+                    totalNumber+=parseInt(arrNumber[i].value)
+                }
+
+                $(this).parent().siblings('.table__price.bold-text').text(convertPrice( parseInt(this.value)*(<%=product.getGia()-product.getGia()*product.getSell()%>)))
+               $('.summary-price').html(`<h3>TỔNG: `+convertPrice( totalNumber*(<%=product.getGia()-product.getGia()*product.getSell()%>))+`</h3>`)
+
+                $('.save-price').text( `Tiết kiệm: `+convertPrice(totalNumber*(<%=product.getGia()*product.getSell()%>)))
+            })
+            $('.table__delete-element').click(function (){
+                $(this).parent().remove()
+                arrNumber=document.querySelectorAll('.quantity')
+                totalNumber=0;
+                for(var i=0;i<arrNumber.length;i++){
+                    totalNumber+=parseInt(arrNumber[i].value)
+                }
+                $('.summary-price').html(`<h3>TỔNG: `+convertPrice( totalNumber*(<%=product.getGia()-product.getGia()*product.getSell()%>))+`</h3>`)
+
+                $('.save-price').text( `Tiết kiệm: `+convertPrice(totalNumber*(<%=product.getGia()*product.getSell()%>)))
+
+            })
+        }
+
+        //click cap nhat gio hang
+        $('.update-cart').click(function (){
+            let arrNumber=document.querySelectorAll('.size-product');
+            let arrQuantity=document.querySelectorAll('.quantity');
+            var arrayQuantity=[]
+            //get attribute size
+            let arrSize=[];
+            for(var i=0;i<arrNumber.length;i++){
+                arrSize.push(arrNumber[i].getAttribute('size'));
+            }
+            //get quantity
+            for (var i=0;i<arrQuantity.length;i++){
+                arrayQuantity.push(arrQuantity[i].value)
+            }
+            addCart(arrSize,arrayQuantity);
+
+        })
+
+    }
+    function closeForm(){
+
+        if (form.classList.contains("action-flex")) {
+            form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
+            setTimeout(function () {
+                form.classList.remove("action-flex")
+            }, 400)
 
         }
     }
 
 
 
+    function addCart(arrSize,arrayQuantity) {
+        var id = '<%=product.getMaSP()%>';
+        //convert array to json
+        var size = JSON.stringify(arrSize);
+        var quantity = JSON.stringify(arrayQuantity);
+        //ajax
+        $.ajax({
+            url: '<%=request.getContextPath()%>/cart',
+            type: 'POST',
+            data: {
+                id: id,
+                size: size,
+                quantity: quantity
+            },
+            success: function (data) {
+                //get json
+                var json = JSON.parse(data);
+                if (json.success === 'true') {
+                    $('.cart-count.color-red').text(json.quantity);
+                    pushNotify('success','thêm vào giỏi hàng thành công','Thêm Sản phẩm');
+                    closeForm();
+
+                } else {
+                    pushNotify('error','thêm vào giỏi hàng thất bại','Thêm Sản phẩm');
+
+                }
+            }
+        });
+
+    }
+    function pushNotify(status, message, title) {
+        new Notify({
+            status: status,
+            title: title,
+            text: message,
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 2000,
+            gap: 20,
+            distance: 20,
+            type: 1,
+            position: 'right bottom',
+            customWrapper: '',
+        })
+    }
 
 </script>
 
