@@ -30,7 +30,7 @@ else {
    replaceClassWrap("wrap__element-mobile") ;
    numWrapSlide=1;}
 }
-resizeWindow();
+;
 // điều chỉnh khu vực các sản phẩm liên quan dựa vào class name
 function replaceClassWrap(className){
     let wrapElement=slideWrap.getElementsByTagName('li');
@@ -83,6 +83,7 @@ function changeImage(index1,length){
 // sự kiện pull up(down) trong danh sách ảnh
 function showList(index1){
     var listImage=document.getElementsByClassName("image__left__item");
+    if(listImage.length>1){
     var i;
     if(index1<0) indexOfImage=0;
     if(index1 >= (listImage.length)-1) indexOfImage=listImage.length-2;
@@ -91,7 +92,7 @@ function showList(index1){
     }
     listImage[indexOfImage].style.display="block";
     listImage[indexOfImage+1].style.display="block";
-}
+}}
 
     // thiết lập righ Image nhờ url
 function leftToRightSupport(url){

@@ -5,7 +5,12 @@
 <%@ page import="com.example.projectwebshopping.dto.client.DetailProduct" %>
 <%@ page import="com.example.projectwebshopping.model.client.ProductManager" %>
 <%@ page import="java.util.ArrayList" %>
+<<<<<<< HEAD
 <%@ page import="com.example.projectwebshopping.data.DataString" %>
+=======
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.ZoneId" %>
+>>>>>>> 1a13f3dcc889d4e947212fbaaee8aecf39de8636
 
 
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
@@ -15,12 +20,7 @@
     Product product = detailProduct.getProduct();
     BoSuaTap bst = detailProduct.getBoSuaTap();
     List<Product> listRelateds = detailProduct.getRelated();
-    List<Integer> listNumber=new ArrayList<>();
-    listNumber.add(5);
-    listNumber.add(3);
-    List<String> listSize=new ArrayList<>();
-    listSize.add("M");
-    listSize.add("XL");
+    double oleSale=product.getSell();
 
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css">
@@ -28,10 +28,10 @@
 <script>
 
 </script>
-<div class="container">
+<div class="container" >
 <section class="detail">
     <div class="detail__image">
-        <div id="image__right" <%if(product.getListUrlImg().size()==1){%>style="width: 100%"<%}%>>
+        <div id="image__right" <%if(product.getListUrlImg().size()==1){%>style="width: 85%"<%}%>>
 
             <div id="image__right__element">
                 <img id="image__right__element--img"
@@ -297,7 +297,7 @@
         <div class="delete-form" onclick="closeForm()">
             <i class="fas fa-times-circle"></i>
         </div>
-        <div class="form__title"><h3>Giỏ hàng của bạn (Đang có <%=listNumber.size()%> sản phẩm)</h3></div>
+        <div class="form__title"><h3>Giỏ hàng của bạn (Đang có 0vsản phẩm)</h3></div>
         <div class="form__table">
             <table>
                 <thead>
@@ -373,8 +373,7 @@
 
                     }
 
-                    <%--/console.log((parseInt(document.getElementById('quantity').value))*((<%=product.getGia()-product.getGia()*product.getSell()%>)))--%>
-                    $('.row-product').append('<tr >'+
+                     $('.row-product').append('<tr >'+
                         '<td class="table__image-decription"><a href=""><img'+
                     ' src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt=""></a></td>'+
                     '<td class="table__infor-decription ">'+
@@ -450,20 +449,26 @@ TỔNG: `+convertPrice( arrNumber.length*(<%=product.getGia()-product.getGia()*p
 
         })
 
-    }
+    
     function closeForm(){
 
         if (form.classList.contains("action-flex")) {
             form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
-            setTimeout(function () {
-                form.classList.remove("action-flex")
-            }, 400)
-
         }
     }
+    function responsive(){
 
+        if(window.innerWidth<=739){
+            $('#image__right').insertAfter('.product__price')
+        }
+        else $('#image__right').insertBefore('#image__left')
 
+    }
 
+    responsive();
+
+    document.getElementsByTagName("BODY")[0].onresize = function() {resizeWindow();
+        responsive();}
     function addCart(arrSize,arrayQuantity) {
         var id = '<%=product.getMaSP()%>';
         //convert array to json
