@@ -1,16 +1,13 @@
 package com.example.projectwebshopping.model.client;
 
 import com.example.projectwebshopping.dao.client.ProductDao;
+import com.example.projectwebshopping.data.DataString;
 
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+
 import java.util.List;
 import java.util.Random;
 
@@ -240,7 +237,13 @@ public class Product implements Serializable {
         setIdBoST(idBoSuaTap2);
         setMoTa(moTa);
         setGia(donGia);
-        setSell(sell);
+        setNgayBatDausell(ngayBatDauSell);
+        setNgayHetHansell(ngayHetHanSell);
+        if(DataString.isBetween(ngayBatDauSell,ngayHetHanSell)){
+            setSell(sell);
+        }else{
+            setSell(0);
+        }
         setMau(mau);
         setLoaiSP(loaiSP);
         setTrangThai(trangThai);
@@ -250,8 +253,7 @@ public class Product implements Serializable {
         setL(L);
         setXL(XL);
         setNayNhap(ngayNhap);
-        setNgayBatDausell(ngayBatDauSell);
-        setNgayHetHansell(ngayHetHanSell);
+
     }
     //format tiền
     public static String formatMoney(Double money){

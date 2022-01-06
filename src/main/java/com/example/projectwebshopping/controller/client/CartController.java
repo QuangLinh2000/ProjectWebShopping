@@ -43,7 +43,6 @@ public class CartController extends HttpServlet {
         request.setAttribute("cartList", cartProductList);
         request.setAttribute("container_view","/views/cart.jsp");
 
-        System.out.println("cartList: " + cartProductList.size());
 
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }

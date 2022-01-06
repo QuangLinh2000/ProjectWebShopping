@@ -47,6 +47,7 @@ public class SigninController extends HttpServlet {
                request.removeAttribute("cartMap");
            }
 
+
            response.sendRedirect("/Shopping/home");
 
        }else{

@@ -164,21 +164,19 @@ public class CartProduct {
         }
     }
 
-    public void addCartProduct(ResultSet rs,String size,int soLuong) {
+    public void addCartProductSesstion(ResultSet rs) {
         try {
             this.setId(rs.getString("MASP"));
             this.setName(rs.getString("TENSP"));
             this.setPrice(rs.getDouble("DONGIA"));
             this.setSale(rs.getDouble("SALE"));
             this.setMau(rs.getString("MAU"));
-            this.setSoLuong(soLuong);
             this.setImage(rs.getString("URL"));
             this.setS(rs.getInt("S"));
             this.setM(rs.getInt("M"));
             this.setL(rs.getInt("L"));
             this.setXL(rs.getInt("XL"));
             this.setTrangThai(rs.getInt("TRANGTHAI"));
-            this.setSize(size);
         } catch (Exception e) {
             e.printStackTrace();
         }

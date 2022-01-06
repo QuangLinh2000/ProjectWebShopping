@@ -5,6 +5,7 @@
 <%@ page import="com.example.projectwebshopping.dto.client.DetailProduct" %>
 <%@ page import="com.example.projectwebshopping.model.client.ProductManager" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.projectwebshopping.data.DataString" %>
 
 
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
@@ -200,7 +201,6 @@
             <div class="decriptions">
                 <p><strong><%=bst.getName()%>
                 </strong></p>
-
                 <p><%=bst.getMota()%>
                 </p>
                 <%if(product.getMoTa()!=null){%>
