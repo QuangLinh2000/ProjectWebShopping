@@ -820,34 +820,6 @@
 </div>
 <script src="<%=request.getContextPath()%>/script/home.js"></script>
 <script>
-    $(document).ready(function () {
-       //click btn-img-cart
-        $('.btn-img-cart').click(function () {
-            //get attr
-            var id = $(this).attr('idSP');
-           //ajax
-            $.ajax({
-                url: '<%=request.getContextPath()%>/cart',
-                type: 'POST',
-                data: {
-                    id: id
-                },
-                success: function (data) {
-                    //get json
-                    var json = JSON.parse(data);
-                    if (json.success === 'true') {
-                            $('.cart-count.color-red').text(json.quantity);
-                        pushNotify('success','thêm vào giỏi hàng thành công','Thêm Sản phẩm');
-
-                    } else {
-                        pushNotify('error','thêm vào giỏi hàng thất bại','Thêm Sản phẩm');
-
-                    }
-                }
-            });
-        });
-
-    });
 
     function pushNotify(status, message, title) {
         new Notify({
@@ -873,7 +845,7 @@
     //----------xem thêm san pham ---------
     //set attr
 
-    //click btn btn-tab
+    //click btn btn-tab load sp
     $('.btn.btn-tab').click(function () {
         //set attr
 
@@ -1032,19 +1004,40 @@
   //   data-product-size-xl
   // data-product-color
     function openModal(element) {
-        let id =element.getAttribute('data-product-id');
-        let name =element.getAttribute('data-product-name');
-        let price =element.getAttribute('data-product-price');
-        let img =element.getAttribute('data-product-img');
-        let sell =element.getAttribute('data-product-sell');
-        let sizeS =element.getAttribute('data-product-size-s');
-        let sizeL =element.getAttribute('data-product-size-l');
-        let sizeM =element.getAttribute('data-product-size-m');
-        let sizeXL =element.getAttribute('data-product-size-xl');
-        let color =element.getAttribute('data-product-color');
-        // alert(sizeS+" "+sizeM+" "+sizeL+" "+sizeXL);
 
+        $('.product-list-sizes .product-list-size').removeClass('crossed');
         $('.product-list-sizes .product-list-size').removeClass('active');
+
+
+        var id =element.getAttribute('data-product-id');
+        var name =element.getAttribute('data-product-name');
+        var price =element.getAttribute('data-product-price');
+        var img =element.getAttribute('data-product-img');
+        var sell =element.getAttribute('data-product-sell');
+        var sizeS =element.getAttribute('data-product-size-s');
+        var sizeL =element.getAttribute('data-product-size-l');
+        var sizeM =element.getAttribute('data-product-size-m');
+        var sizeXL =element.getAttribute('data-product-size-xl');
+        var color =element.getAttribute('data-product-color');
+         // alert(sizeS+" "+sizeM+" "+sizeL+" "+sizeXL);
+
+        var listbtnSize = document.getElementsByClassName('product-list-size');
+        if(parseInt(sizeS) <= 0) {
+            listbtnSize[0].classList.add('crossed');
+
+
+        }
+        if(parseInt(sizeM) <= 0) {
+            listbtnSize[1].classList.add('crossed');
+        }
+        if(parseInt(sizeL) <= 0) {
+            listbtnSize[2].classList.add('crossed');
+        }
+        if(parseInt(sizeXL) <= 0) {
+            listbtnSize[3].classList.add('crossed');
+        }
+
+
 
 
         $('.modal-img').attr('src','<%=request.getContextPath()%>'+img);
@@ -1060,7 +1053,28 @@
         $('.product-color').text(color);
         modalCart.style.display = "flex";
 
+
+
     }
+  // click thêm  sp vào giỏ hàng
+
+    $('.btn-modal').click(function () {
+        var sizes = document.getElementsByClassName('product-list-size');
+        //get class active
+        var arrSize = [];
+        for (var i = 0; i < sizes.length; i++) {
+            if (sizes[i].classList.contains('active') && sizes[i].classList.contains('crossed') == false) {
+                var size = sizes[i].innerText;
+                arrSize.push(size);
+            }
+        }
+        if(arrSize.length == 0){
+            pushNotify('warning','Vui lòng chọn size','chọn size');
+            return;
+        }
+        addCart( arrSize);
+
+    });
 
     //modal close over modal
     //modal close on click outside
@@ -1099,5 +1113,35 @@
             });
         });
     }
+
+    function addCart(arrSize) {
+        var id = $('.modal-id').text();
+        closeModal();
+        //convert array to json
+        var size = JSON.stringify(arrSize);
+        //ajax
+        $.ajax({
+            url: '<%=request.getContextPath()%>/cart',
+            type: 'POST',
+            data: {
+                id: id,
+                size: size
+            },
+            success: function (data) {
+                //get json
+                var json = JSON.parse(data);
+                if (json.success === 'true') {
+                    $('.cart-count.color-red').text(json.quantity);
+                    pushNotify('success','thêm vào giỏi hàng thành công','Thêm Sản phẩm');
+
+                } else {
+                    pushNotify('error','thêm vào giỏi hàng thất bại','Thêm Sản phẩm');
+
+                }
+            }
+        });
+
+    }
+
 
 </script>

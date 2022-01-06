@@ -1,5 +1,7 @@
 package com.example.projectwebshopping.model.client;
 
+import com.example.projectwebshopping.dao.client.ProductDao;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -224,6 +226,13 @@ public class Product implements Serializable {
         int M = resultSet.getInt("M");
         int L = resultSet.getInt("L");
         int XL = resultSet.getInt("XL");
+        Date ngayNhap = resultSet.getDate("NGAYNHAP");
+        Date ngayBatDauSell = resultSet.getDate("NGAYBATDAUSALE");
+        Date ngayHetHanSell = resultSet.getDate("NGAYKETTHUCSALE");
+
+       //get date local now
+//        Date date = LocalDateTime.now().toLocalDate().;
+
 
         setMaSP(maSP);
         setTenSP(tenSP);
@@ -239,6 +248,9 @@ public class Product implements Serializable {
         setM(M);
         setL(L);
         setXL(XL);
+        setNayNhap(ngayNhap);
+        setNgayBatDausell(ngayBatDauSell);
+        setNgayHetHansell(ngayHetHanSell);
     }
     //format tiền
     public static String formatMoney(Double money){

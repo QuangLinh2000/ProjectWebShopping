@@ -1,6 +1,7 @@
 package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.dao.client.CartDao;
+import com.example.projectwebshopping.dto.client.CartProduct;
 import com.example.projectwebshopping.model.client.Cart;
 import com.example.projectwebshopping.model.client.User;
 import com.google.gson.Gson;
@@ -22,27 +23,27 @@ public class CartController extends HttpServlet {
         //get name from session
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLognin");
+        List<CartProduct> cartProductList = new ArrayList<>();
         List<Cart> cartList = new ArrayList<>();
         if(user == null){
             //get the Map cart from session
             Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
             if (cartMap != null) {
-                //convert map to list
-                for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {
-                    cartList.add(entry.getValue());
-                }
-
+                cartProductList = CartDao.getInstance().getCartsBySession(cartMap);
             }
 
         }else{
-
+            //get cart from database
+            cartProductList = CartDao.getInstance().getCarts(user.getId());
 
 
 
         }
 
-        request.setAttribute("cartList", cartList);
+        request.setAttribute("cartList", cartProductList);
         request.setAttribute("container_view","/views/cart.jsp");
+
+        System.out.println("cartList: " + cartProductList.size());
 
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
@@ -52,8 +53,20 @@ public class CartController extends HttpServlet {
        //get the cart from ajax
         String id = request.getParameter("id");
         String arrSize = request.getParameter("size");
+        String quantityDetail = request.getParameter("quantity");
+
         // convert json to list
         List<String> listSize = new Gson().fromJson(arrSize, List.class);
+
+        List<String> listQuantity = new ArrayList<>();
+        if(quantityDetail == null){
+            for ( int i = 0; i < listSize.size(); i++) {
+                listQuantity.add("1");
+            }
+        }else {
+            listQuantity = new Gson().fromJson(quantityDetail, List.class);
+        }
+
         //get name from session
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLognin");
@@ -64,14 +77,15 @@ public class CartController extends HttpServlet {
                 cartMap = new HashMap<>();
             }
 
-
-            for (String size : listSize) {
+            for (int i =0 ;i< listSize.size();i++){
+                String size = listSize.get(i);
+                int quantity = Integer.parseInt(listQuantity.get(i));
                 if(cartMap.containsKey(id+size)){
-                    cartMap.get(id+size).setQuantity(cartMap.get(id+size).getQuantity() + 1);
+                    cartMap.get(id+size).setQuantity(cartMap.get(id+size).getQuantity() + quantity);
                 }else{
                     Cart cart = new Cart();
                     cart.setIdProduct(id);
-                    cart.setQuantity(1);
+                    cart.setQuantity(quantity);
                     cart.setSize(size);
                     cartMap.put(id+size, cart);
                 }
@@ -89,9 +103,10 @@ public class CartController extends HttpServlet {
 
 
         }else{
-
-            for (String size : listSize) {
-                CartDao.getInstance().addGioHang(user.getId(), id,1,size);
+            for (int i =0 ;i< listSize.size();i++){
+                String size = listSize.get(i);
+                int quantity = Integer.parseInt(listQuantity.get(i));
+                CartDao.getInstance().addGioHang(user.getId(), id,quantity,size);
             }
             int quantity =  CartDao.getInstance().getSizeCart(user.getId());
 

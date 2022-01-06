@@ -340,7 +340,6 @@
         })
     })
     let listSelect=document.querySelectorAll(".label__size");
-    var htmlString='';
     function activeForm(){
         if(checkSelect(listSelect)) {
             var array = document.querySelectorAll(".select-image");
@@ -371,19 +370,18 @@
 
                     }
 
-                    document.querySelector('.row-product').innerHTML=htmlString+'<tr >'+
+                     $('.row-product').append('<tr >'+
                         '<td class="table__image-decription"><a href=""><img'+
                     ' src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt=""></a></td>'+
                     '<td class="table__infor-decription ">'+
                         '<a href="" class="bold-text"><h5><%=product.getTenSP()+" "+product.getMaSP()%></h5></a> <br>'+
-                    '<span>Phiên bản: Size '+size+' <%=product.getMau()%> </span><br>'+
+                    '<span class = "size-product" size = "'+size+'">Phiên bản: Size '+size+' <%=product.getMau()%> </span><br>'+
                     '<span>Bộ sưu tập: <%=bst.getName()%></span></td>'+
                     '<td class="table__price-bill bold-text"><%=ProductManager.getInstance().formatPrice(product.getGia()-product.getGia()*product.getSell())%>₫</td>'+
                     '<td class="table__amount">'+input+'</td>'+
                     '<td class="table__price bold-text">'+convertPrice((<%=product.getGia()-product.getGia()*product.getSell()%>))+'</td>'+
                     '<td class="table__delete-element"><i class="fas fa-trash-alt"></i></td>'+
-                  '</tr>';
-                    htmlString=document.querySelector('.row-product').innerHTML
+                  '</tr>');
 
                 }
 
@@ -391,7 +389,9 @@
             }
              arrNumber=document.querySelectorAll('.quantity')
             totalNumber=arrNumber.length
-            let footerTable=document.querySelector('.form__footer__right')
+            let footerTable=document.querySelector('.form__footer__right');
+
+
             footerTable.innerHTML=` <div class="summary-price"><h3>
 TỔNG: `+convertPrice( arrNumber.length*(<%=product.getGia()-product.getGia()*product.getSell()%>))+`</h3></div>
                 <div class="save-price">Tiết kiệm: `+convertPrice(arrNumber.length*(<%=product.getGia()*product.getSell()%>))+`</div>
@@ -427,7 +427,26 @@ TỔNG: `+convertPrice( arrNumber.length*(<%=product.getGia()-product.getGia()*p
 
             })
         }
-    }
+
+        //click cap nhat gio hang
+        $('.update-cart').click(function (){
+            let arrNumber=document.querySelectorAll('.size-product');
+            let arrQuantity=document.querySelectorAll('.quantity');
+            var arrayQuantity=[]
+            //get attribute size
+            let arrSize=[];
+            for(var i=0;i<arrNumber.length;i++){
+                arrSize.push(arrNumber[i].getAttribute('size'));
+            }
+            //get quantity
+            for (var i=0;i<arrQuantity.length;i++){
+                arrayQuantity.push(arrQuantity[i].value)
+            }
+            addCart(arrSize,arrayQuantity);
+
+        })
+
+    
     function closeForm(){
 
         if (form.classList.contains("action-flex")) {
@@ -442,10 +461,61 @@ TỔNG: `+convertPrice( arrNumber.length*(<%=product.getGia()-product.getGia()*p
         else $('#image__right').insertBefore('#image__left')
 
     }
+
     responsive();
 
     document.getElementsByTagName("BODY")[0].onresize = function() {resizeWindow();
         responsive();}
+    function addCart(arrSize,arrayQuantity) {
+        var id = '<%=product.getMaSP()%>';
+        //convert array to json
+        var size = JSON.stringify(arrSize);
+        var quantity = JSON.stringify(arrayQuantity);
+        //ajax
+        $.ajax({
+            url: '<%=request.getContextPath()%>/cart',
+            type: 'POST',
+            data: {
+                id: id,
+                size: size,
+                quantity: quantity
+            },
+            success: function (data) {
+                //get json
+                var json = JSON.parse(data);
+                if (json.success === 'true') {
+                    $('.cart-count.color-red').text(json.quantity);
+                    pushNotify('success','thêm vào giỏi hàng thành công','Thêm Sản phẩm');
+                    closeForm();
+
+                } else {
+                    pushNotify('error','thêm vào giỏi hàng thất bại','Thêm Sản phẩm');
+
+                }
+            }
+        });
+
+    }
+    function pushNotify(status, message, title) {
+        new Notify({
+            status: status,
+            title: title,
+            text: message,
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 2000,
+            gap: 20,
+            distance: 20,
+            type: 1,
+            position: 'right bottom',
+            customWrapper: '',
+        })
+    }
 
 </script>
 
