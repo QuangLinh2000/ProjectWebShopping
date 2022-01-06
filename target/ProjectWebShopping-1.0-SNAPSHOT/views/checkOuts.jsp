@@ -27,8 +27,6 @@
         </div>
 
         <div class="bar-top bar-top-1"></div>
-
-
       </div>
 
       <div class="icon-top-container">
