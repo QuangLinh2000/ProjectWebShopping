@@ -1,12 +1,17 @@
 package com.example.projectwebshopping.dao.client;
 
 import com.example.projectwebshopping.connection.DataSourceConnection;
+import com.example.projectwebshopping.dto.client.CartProduct;
+import com.example.projectwebshopping.model.client.Cart;
 import com.example.projectwebshopping.model.client.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class CartDao {
     //pattern singleton
@@ -84,5 +89,85 @@ public class CartDao {
             e.printStackTrace();
         }
         return 0;
+    }
+    public List<CartProduct> getCarts(String idUser) {
+        List<CartProduct> cartProducts = new ArrayList<>();
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            String sql = "SELECT p.MASP,p.TENSP,p.DONGIA,p.SALE,p.MAU,g.SOLUONG,h.URL,p.S,p.L,p.M,p.XL,p.TRANGTHAI,g.SIZE " +
+                    " FROM giohang g JOIN products p ON g.IDSP = p.MASP JOIN hinhanh h ON h.IDSP = p.MASP " +
+                    "WHERE IDUSER = ?"+
+                    " GROUP BY  p.MASP,p.TENSP,p.DONGIA,p.SALE,p.MAU,p.S,p.L,p.M,p.XL,p.TRANGTHAI,g.SIZE";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,idUser);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+              CartProduct cartProduct = new CartProduct();
+              cartProduct.addCartProduct(resultSet);
+              cartProducts.add(cartProduct);
+
+
+
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cartProducts;
+    }
+
+    //get cart by session
+    public List<CartProduct> getCartsBySession(Map<String, Cart> session) {
+        List<CartProduct> cartProducts = new ArrayList<>();
+        List<Cart> carts = new ArrayList<>();
+        for (Map.Entry<String, Cart> entry : session.entrySet()) {
+            carts.add(entry.getValue());
+        }
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            String where = "";
+            for (int i = 0; i < carts.size(); i++) {
+                if(i == 0){
+                    where += " WHERE MASP = ?";
+                }else{
+                    where += " OR MASP = ?";
+                }
+            }
+
+            String sql = "SELECT p.MASP,p.TENSP,p.DONGIA,p.SALE,p.MAU,h.URL,p.S,p.L,p.M,p.XL,p.TRANGTHAI\n" +
+                    " from products p JOIN hinhanh h ON h.IDSP = p.MASP  " + where+
+                    " GROUP BY   p.MASP,p.TENSP,p.DONGIA,p.SALE,p.MAU,p.S,p.L,p.M,p.XL,p.TRANGTHAI";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            for (int i = 0; i < carts.size(); i++) {
+                Cart cart = carts.get(i);
+                preparedStatement.setString(i+1,cart.getIdProduct());
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int i = 0;
+            while(resultSet.next()){
+                CartProduct cartProduct = new CartProduct();
+                cartProduct.addCartProduct(resultSet,carts.get(i).getSize(),carts.get(i).getQuantity());
+                cartProducts.add(cartProduct);
+                i++;
+                if(i == carts.size()){
+                    break;
+                }
+
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cartProducts;
     }
 }

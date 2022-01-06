@@ -1,6 +1,7 @@
 package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.dao.client.CartDao;
+import com.example.projectwebshopping.dto.client.CartProduct;
 import com.example.projectwebshopping.model.client.Cart;
 import com.example.projectwebshopping.model.client.User;
 import com.google.gson.Gson;
@@ -22,27 +23,27 @@ public class CartController extends HttpServlet {
         //get name from session
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLognin");
+        List<CartProduct> cartProductList = new ArrayList<>();
         List<Cart> cartList = new ArrayList<>();
         if(user == null){
             //get the Map cart from session
             Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
             if (cartMap != null) {
-                //convert map to list
-                for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {
-                    cartList.add(entry.getValue());
-                }
-
+                cartProductList = CartDao.getInstance().getCartsBySession(cartMap);
             }
 
         }else{
-
+            //get cart from database
+            cartProductList = CartDao.getInstance().getCarts(user.getId());
 
 
 
         }
 
-        request.setAttribute("cartList", cartList);
+        request.setAttribute("cartList", cartProductList);
         request.setAttribute("container_view","/views/cart.jsp");
+
+        System.out.println("cartList: " + cartProductList.size());
 
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
