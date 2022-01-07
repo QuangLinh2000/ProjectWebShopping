@@ -60,6 +60,7 @@ public class CartController extends HttpServlet {
         // convert json to list
         List<String> listSize = new Gson().fromJson(arrSize, List.class);
 
+
         List<String> listQuantity = new ArrayList<>();
         if(quantityDetail == null){
             for ( int i = 0; i < listSize.size(); i++) {
@@ -92,7 +93,6 @@ public class CartController extends HttpServlet {
                     cartMap.put(id+size, cart);
                 }
             }
-
 
             session.setAttribute("cartMap", cartMap);
             //get quantity   from map

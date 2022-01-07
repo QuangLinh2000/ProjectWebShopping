@@ -837,7 +837,7 @@
             gap: 20,
             distance: 20,
             type: 1,
-            position: 'right bottom',
+            position: 'right top',
             customWrapper: '',
         })
     }

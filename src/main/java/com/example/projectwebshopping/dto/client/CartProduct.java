@@ -1,5 +1,7 @@
 package com.example.projectwebshopping.dto.client;
 
+import com.google.gson.Gson;
+
 import java.sql.ResultSet;
 
 public class CartProduct {
@@ -181,4 +183,27 @@ public class CartProduct {
             e.printStackTrace();
         }
     }
+    //conver t to string
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id:'" + id + '\'' +
+                ", name:'" + name + '\'' +
+                ", price:" + price +
+                ", sale:" + sale +
+                ", mau:'" + mau + '\'' +
+                ", soLuong:" + soLuong +
+                ", image:'" + image + '\'' +
+                ", S:" + S +
+                ", M:" + M +
+                ", L:" + L +
+                ", XL:" + XL +
+                ", trangThai':" + trangThai +
+                ", 'size':'" + size + '\'' +
+                '}';
+    }
+
+
 }
+
