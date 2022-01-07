@@ -37,7 +37,20 @@
                    for (int i = 0; i< cartProductList.size(); i++) {
                      CartProduct cartProduct = cartProductList.get(i);
                   %>
-                  <li class="cart-item">
+                  <li class="cart-item"
+                      data-cart-id="<%=cartProduct.getId()%>"
+                      data-cart-name="<%=cartProduct.getName()%>"
+                      data-cart-price="<%=cartProduct.getPrice()%>"
+                      data-cart-img="<%=cartProduct.getImage()%>"
+                      data-cart-sell="<%=cartProduct.getSale()%>"
+                      data-cart-size-s="<%=cartProduct.getS()%>"
+                      data-cart-size-l="<%=cartProduct.getL()%>"
+                      data-cart-size-m="<%=cartProduct.getM()%>"
+                      data-cart-size-xl="<%=cartProduct.getXL()%>"
+                      data-cart-color="<%=cartProduct.getMau()%>"
+                      data-cart-size="<%=cartProduct.getSize()%>"
+                    data-cart-status="<%=cartProduct.getTrangThai()%>"
+                    >
                     <div class="cart-item-holder">
                       <div class="wrapper-checkbox">
                         <label class="checkbox path">
@@ -133,7 +146,7 @@
                 <h2 class="check-title">Tóm tắt đơn hàng</h2>
                 <div class="sub-total">
                   <span class="cart-total-title">Tổng cộng</span>
-                  <span class="cart-total-price">195,000đ</span>
+                  <span class="cart-total-price">19,000đ</span>
                 </div>
                 <a href="" class="btn-cart btn-total-checkout">Đặt hàng</a>
                 <a href="" class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>

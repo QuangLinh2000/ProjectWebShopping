@@ -37,7 +37,20 @@
                    for (int i = 0; i< cartProductList.size(); i++) {
                      CartProduct cartProduct = cartProductList.get(i);
                   %>
-                  <li class="cart-item">
+                  <li class="cart-item"
+                      data-product-id="<%=cartProduct.getId()%>"
+                      data-product-name="<%=cartProduct.getName()%>"
+                      data-product-price="<%=cartProduct.getPrice()%>"
+                      data-product-img="<%=cartProduct.getImage()%>"
+                      data-product-sell="<%=cartProduct.getSale()%>"
+                      data-product-size-s="<%=cartProduct.getS()%>"
+                      data-product-size-l="<%=cartProduct.getL()%>"
+                      data-product-size-m="<%=cartProduct.getM()%>"
+                      data-product-size-xl="<%=cartProduct.getXL()%>"
+                      data-product-color="<%=cartProduct.getMau()%>"
+                      data-product-size="<%=cartProduct.getSize()%>"
+                      data-product-status="<%=cartProduct.getTrangThai()%>"
+                    >
                     <div class="cart-item-holder">
                       <div class="wrapper-checkbox">
                         <label class="checkbox path">
@@ -67,7 +80,10 @@
                             <div class="size">
                               <select name="size" class="size-select">
                                 <%if(cartProduct.getSize().equals("S")){%>
-                                <option selected  value="s">S</option>
+                                <%if(cartProduct.getS()<=0){%>
+                                <option selected  value="s" >S</option>
+                                <%}%>
+
                                 <option value="m">M</option>
                                 <option value="l">L</option>
                                 <option value="xl">XL</option>
@@ -121,7 +137,7 @@
                 </ul>
                 <div class="sub-total-1-holder">
                   <span class="sub-total-title-1">Tổng cộng</span>
-                  <span class="cart-total-price-1">195,000đ</span>
+                  <span class="cart-total-price-1" id="total-price-all">195,000đ</span>
 
                 </div>
               </div>
@@ -133,7 +149,7 @@
                 <h2 class="check-title">Tóm tắt đơn hàng</h2>
                 <div class="sub-total">
                   <span class="cart-total-title">Tổng cộng</span>
-                  <span class="cart-total-price">195,000đ</span>
+                  <span class="cart-total-price" id="total-price-checkout">0đ</span>
                 </div>
                 <a href="" class="btn-cart btn-total-checkout">Đặt hàng</a>
                 <a href="" class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
@@ -167,6 +183,26 @@
         });
       }
     });
+
+    const listCart = document.querySelectorAll('.cart-item');
+    listCart.forEach(function (item) {
+      // option select
+      let productId = item.getAttribute('data-product-id');
+      let productName = item.getAttribute('data-product-name');
+      let productPrice = item.getAttribute('data-product-price');
+      let productImg = item.getAttribute('data-product-img');
+      let productSell = item.getAttribute('data-product-sell');
+      let productSizeS = item.getAttribute('data-product-size-s');
+      let productSizeL = item.getAttribute('data-product-size-l');
+      let productSizeM = item.getAttribute('data-product-size-m');
+      let productSizeXL = item.getAttribute('data-product-size-xl');
+      let productColor = item.getAttribute('data-product-color');
+      let productQuantity = item.getAttribute('data-product-quantity');
+      let productSize = item.getAttribute('data-product-size');
+      let productStatus = item.getAttribute('data-product-status');
+
+    });
+
   </script>
   <script src="<%=request.getContextPath()%>/script/cart.js"></script>
 
