@@ -2,6 +2,7 @@ package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.dao.client.ProductDao;
 import com.example.projectwebshopping.model.client.BoSuaTap;
+import com.example.projectwebshopping.model.client.LogninManager;
 import com.example.projectwebshopping.model.client.Product;
 import com.example.projectwebshopping.service.client.HomeSerVice;
 import com.example.projectwebshopping.service.client.IHomeService;
@@ -31,6 +32,9 @@ public class HomeController extends HttpServlet {
         String idBoSTRight = listBoSuaTap.get(1).getId();
         request.setAttribute("listBoSTLeft",iHomeService.getAllProductByBSTId(idBoSTLeft,10));
         request.setAttribute("listBoSTRight",iHomeService.getAllProductByBSTId(idBoSTRight,10));
+
+        LogninManager.getInstance().setURLCookies(request, response);
+
 
         request.setAttribute("container_view","/views/index.jsp");
 

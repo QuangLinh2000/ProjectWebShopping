@@ -1,5 +1,6 @@
 package com.example.projectwebshopping.controller.client;
 
+import com.example.projectwebshopping.model.client.LogninManager;
 import com.example.projectwebshopping.model.client.Product;
 import com.example.projectwebshopping.service.client.HomeSerVice;
 import com.example.projectwebshopping.service.client.IHomeService;
@@ -32,6 +33,7 @@ public class SearchController extends HttpServlet {
         request.setAttribute("size", getCount(productList.size(),12));
         request.setAttribute("soLuongSP", productList.size());
 
+        LogninManager.getInstance().setURLCookies(request, response);
 
         request.setAttribute("container_view","/views/search.jsp");
         request.getRequestDispatcher("index.jsp").forward(request, response);

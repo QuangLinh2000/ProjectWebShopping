@@ -16,7 +16,7 @@ public class DataString {
 
 
     public static boolean isBetween(Date start, Date end) {
-           
+
       LocalDate localDate = LocalDate.now();
       LocalDate l = LocalDate.of(start.getYear()+1900,start.getMonth()+1,start.getDate());
       LocalDate l2 = LocalDate.of(end.getYear()+1900,end.getMonth()+1,end.getDate());

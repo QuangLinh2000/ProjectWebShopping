@@ -19,6 +19,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% IHomeService iHomeService = new HomeSerVice();
     List<LoaiSP> listLoaiSP = (List<LoaiSP>) request.getAttribute("listLoaiSP");
+    //get cookie
+
+
 %>
 <%
     int quantity = 0;
@@ -395,5 +398,24 @@
 
     });
     $('.cart-count.color-red').text(<%=quantity%>);
+
+    //click dropdown-item text-danger
+    $(".dropdown-item.text-danger").click(function () {
+        //set attr
+        //ajax sign out
+        $.ajax({
+            url: "<%=request.getContextPath()%>/signout",
+            type: "POST",
+            data: {
+                "signout": "signout"
+            },
+            success: function (data) {
+                //set attr
+                $(".dropdown-item.text-danger").attr("href", "<%=request.getContextPath()%>/signin");
+                //set text
+
+            }
+        });
+    });
 
 </script>

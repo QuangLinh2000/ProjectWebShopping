@@ -3,6 +3,7 @@ package com.example.projectwebshopping.controller.client;
 import com.example.projectwebshopping.dao.client.CartDao;
 import com.example.projectwebshopping.dto.client.CartProduct;
 import com.example.projectwebshopping.model.client.Cart;
+import com.example.projectwebshopping.model.client.LogninManager;
 import com.example.projectwebshopping.model.client.User;
 import com.google.gson.Gson;
 
@@ -39,6 +40,8 @@ public class CartController extends HttpServlet {
 
 
         }
+
+        LogninManager.getInstance().setURLCookies(request, response);
 
         request.setAttribute("cartList", cartProductList);
         request.setAttribute("container_view","/views/cart.jsp");
