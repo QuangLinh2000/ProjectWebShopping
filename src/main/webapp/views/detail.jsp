@@ -443,7 +443,7 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
             addCart(arrSize, arrayQuantity);
 
 
-        })}
+        })
 
     }
         function closeForm() {
@@ -451,7 +451,7 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
         if (form.classList.contains("action-flex")) {
             form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
             form.classList.remove("action-flex")
-        }
+        }}
 
         function responsive() {
 

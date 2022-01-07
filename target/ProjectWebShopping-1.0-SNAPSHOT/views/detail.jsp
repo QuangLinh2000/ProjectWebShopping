@@ -344,13 +344,8 @@
             var arrSize = [];
             $('.row-product').html('');
             var sizegioHang = document.querySelector(".cart-count.color-red").innerHTML;
-<<<<<<< HEAD
             let totalNumber=2;
             $('.form__title h3').text('GIỎ HÀNG CỦA BẠN (ĐANG CÓ '+sizegioHang+' SẢN PHẨM)');
-=======
-            let totalNumber = 2;
-            $('.form__title').text('GIỎ HÀNG CỦA BẠN (ĐANG CÓ ' + sizegioHang + ' SẢN PHẨM)');
->>>>>>> 1eeca64c2e3f923f6ab7ea02a6e11d15887dc7de
             for (var i = 0; i < array.length; i++) {
                 var parent = array[i].closest('.text-center');
                 if (parent.classList.contains('active')) {
@@ -448,22 +443,15 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
             addCart(arrSize, arrayQuantity);
 
 
-        })}
+        })
 
     }
         function closeForm() {
 
-<<<<<<< HEAD
         if (form.classList.contains("action-flex")) {
             form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
             form.classList.remove("action-flex")
-=======
-            if (form.classList.contains("action-flex")) {
-                form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
-                form.classList.remove("action-flex")
-            }
->>>>>>> 1eeca64c2e3f923f6ab7ea02a6e11d15887dc7de
-        }
+        }}
 
         function responsive() {
 
