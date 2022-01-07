@@ -1,7 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.projectwebshopping.model.client.Cart" %>
 <%@ page import="com.example.projectwebshopping.dto.client.CartProduct" %>
-<%@ page import="com.google.gson.Gson" %><%--
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: trong
   Date: 29/12/2021
@@ -67,43 +68,45 @@
                             <span class="cart-item-color"><%=cartProduct.getMau()%></span>
                             <div class="size">
                               <select name="size" class="size-select">
-                                <%if(cartProduct.getSize().equals("S")){%>
-                                <option selected  value="s">S</option>
-                                <option value="m">M</option>
-                                <option value="l">L</option>
-                                <option value="xl">XL</option>
-                                <%}%>
-                                <%if(cartProduct.getSize().equals("M")){%>
-                                <option   value="s">S</option>
-                                <option selected value="m">M</option>
-                                <option value="l">L</option>
-                                <option value="xl">XL</option>
-                                <%}%>
-                                <%if(cartProduct.getSize().equals("L")){%>
-                                <option   value="s">S</option>
-                                <option value="m">M</option>
-                                <option selected value="l">L</option>
-                                <option value="xl">XL</option>
-                                <%}%>
-                                <%if(cartProduct.getSize().equals("XL")){%>
-                                <option   value="s">S</option>
-                                <option value="m">M</option>
-                                <option value="l">L</option>
-                                <option selected value="xl">XL</option>
-                                <%}%>
+
+                                <%Map<String, Integer> mapSize=cartProduct.getMapSize();
+                                int quantyti = 0;
+                                %>
+                                <%for (String key: mapSize.keySet()) {
+
+                                  if (key.equals(cartProduct.getSize())) {
+                                    quantyti = mapSize.get(key);
+                                  }
+
+                                if(mapSize.get(key)>0) {
+                                    if (key.equals(cartProduct.getSize())) {%>
+                                <option value="<%=key%>" selected><%=key%></option>
+                                <%} else {%>
+
+                                 <option value="<%=key%>"><%=key%></option>
+                                <%}}else{%>
+                                <% if (key.equals(cartProduct.getSize())) {%>
+                                <option value="<%=key%>" selected disabled><%=key%></option>
+                                <%} %>
+                                <%}}%>
 
                               </select>
                             </div>
-                            <div class="cart-item-qty-holder">
+                            <%if(quantyti>0) {%>
+                            <div class="cart-item-qty-holder" data-cart-id="<%=cartProduct.getId()%>" data-cart-size="<%=cartProduct.getSize()%>">
                               <div class="qty-minus btn-qty">
                                 <i class="fa-solid fa-minus"></i>
                               </div>
                               <input type="number" class="cart-item-qty" value="<%=cartProduct.getSoLuong()%>"
-                                     min="1" max="<%=cartProduct.getS()%>">
+                                     min="1">
                               <div class="qty-plus btn-qty">
                                 <i class="fa-solid fa-plus"></i>
                               </div>
                             </div>
+                            <%}else{%>
+                            <h4>Het hang</h4>
+                            <%}%>
+
                           </div>
                         </div>
                         <div class="cart-item-save">
@@ -155,6 +158,7 @@
 
   </section>
   <script>
+
     const checkAll = document.getElementById("check-all");
     const check = document.querySelectorAll('.cart-item input[type="checkbox"]');
     checkAll.addEventListener("click", function () {
@@ -168,7 +172,78 @@
         });
       }
     });
+    //plus minus quality
+    const listMinus = document.querySelectorAll(".qty-minus");
+    const listPlus = document.querySelectorAll(".qty-plus");
+    listMinus.forEach((element) => {
+      element.addEventListener("click", () => {
+        let quantity = element.parentElement.querySelector(".cart-item-qty");
+        if (quantity.value > 1) {
+          quantity.value--;
+        }
+        //get atribute parent quantity class  cart-item-qty-holder
+        let id = element.parentElement.getAttribute("data-cart-id");
+        let size = element.parentElement.getAttribute("data-cart-size");
+        //ajax jquery
+        $.ajax({
+          url: "<%=request.getContextPath()%>/CartServiceController",
+          type: "POST",
+          data: {
+            id: id,
+            size: size,
+            quantity: quantity.value
+          },
+          success: function (data) {
+            if (data!=null){
+              var result = JSON.parse(data);
+              var status = result.status;
 
+              if (status == "outsize"||status == "success") {
+                var soluong = result.quantity;
+                quantity.value = soluong;
+              }
+              if (status == "error") {
+                quantity.value++;
+              }
+            }
+          }
+        });
+      });
+    });
+    listPlus.forEach((element) => {
+      element.addEventListener("click", () => {
+        let quantity = element.parentElement.querySelector(".cart-item-qty");
+        if (quantity.value ) {
+          quantity.value++;
+        }
+        let id = element.parentElement.getAttribute("data-cart-id");
+        let size = element.parentElement.getAttribute("data-cart-size");
+        //ajax jquery
+        $.ajax({
+          url: "<%=request.getContextPath()%>/CartServiceController",
+          type: "POST",
+          data: {
+            id: id,
+            size: size,
+            quantity: quantity.value
+          },
+          success: function (data) {
+            if (data!=null){
+              var result = JSON.parse(data);
+              var status = result.status;
+
+              if (status == "outsize"||status == "success") {
+                var soluong = result.quantity;
+                quantity.value = soluong;
+              }
+              if (status == "error") {
+                quantity.value--;
+              }
+            }
+          }
+        });
+      });
+    });
 
     function pushNotify(status, message, title) {
       new Notify({
@@ -190,7 +265,39 @@
         customWrapper: '',
       })
     }
+    //event jquery out focus
+    $(".cart-item-qty").focusout(function () {
+      let id = $(this).parent().attr("data-cart-id");
+      let size = $(this).parent().attr("data-cart-size");
+      let quantity = $(this).val();
+      if (quantity<=0){
+        quantity=1;
+      }
+      var soluongtruoc = $(this);
+      $.ajax({
+        url: "<%=request.getContextPath()%>/CartServiceController",
+        type: "POST",
+        data: {
+          id: id,
+          size: size,
+          quantity: quantity
+        },
+        success: function (data) {
+          if (data!=null){
+            var result = JSON.parse(data);
+            var status = result.status;
+            if (status == "outsize"||status == "success") {
+              var soluong = result.quantity;
+              soluongtruoc.val(soluong);
+            }
 
+            if (status == "error") {
+              soluongtruoc.val(quantity);
+            }
+          }
+        }
+      });
+    });
   </script>
   <script src="<%=request.getContextPath()%>/script/cart.js"></script>
 

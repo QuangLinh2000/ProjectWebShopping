@@ -3,6 +3,8 @@ package com.example.projectwebshopping.dto.client;
 import com.google.gson.Gson;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CartProduct {
     private String id;
@@ -202,6 +204,14 @@ public class CartProduct {
                 ", trangThai':" + trangThai +
                 ", 'size':'" + size + '\'' +
                 '}';
+    }
+    public Map<String, Integer> getMapSize() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("S", S);
+        map.put("M", M);
+        map.put("L", L);
+        map.put("XL", XL);
+        return map;
     }
 
 

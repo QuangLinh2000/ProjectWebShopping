@@ -12,23 +12,7 @@ listSave.forEach((element) => {
     element.querySelector(".fa-heart").className = "fa-regular fa-heart";
   });
 });
-//plus minus quality
-const listMinus = document.querySelectorAll(".qty-minus");
-const listPlus = document.querySelectorAll(".qty-plus");
-listMinus.forEach((element) => {
-  element.addEventListener("click", () => {
-    let quantity = element.parentElement.querySelector(".cart-item-qty");
-    if (quantity.value > 1) {
-      quantity.value--;
-    }
-  });
-});
-listPlus.forEach((element) => {
-  element.addEventListener("click", () => {
-    let quantity = element.parentElement.querySelector(".cart-item-qty");
-    quantity.value++;
-  });
-});
+
 //animation remove item
 let listBtnRemove = document.querySelectorAll(".btn-remover");
 listBtnRemove.forEach((element) => {
