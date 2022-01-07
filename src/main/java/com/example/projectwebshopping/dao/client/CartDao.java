@@ -124,6 +124,8 @@ public class CartDao {
     //get cart by session
     public List<CartProduct> getCartsBySession(Map<String, Cart> session) {
         List<CartProduct> cartProducts = new ArrayList<>();
+        List<CartProduct> resultList = new ArrayList<>();
+
         List<Cart> carts = new ArrayList<>();
         for (Map.Entry<String, Cart> entry : session.entrySet()) {
             carts.add(entry.getValue());
@@ -148,16 +150,24 @@ public class CartDao {
                 preparedStatement.setString(i+1,cart.getIdProduct());
             }
             ResultSet resultSet = preparedStatement.executeQuery();
-            int i = 0;
             while(resultSet.next()){
                 CartProduct cartProduct = new CartProduct();
-                cartProduct.addCartProduct(resultSet,carts.get(i).getSize(),carts.get(i).getQuantity());
+                cartProduct.addCartProductSesstion(resultSet);
                 cartProducts.add(cartProduct);
-                i++;
-                if(i == carts.size()){
-                    break;
-                }
 
+            }
+
+            for ( Cart cart : carts) {
+                String idProduct = cart.getIdProduct();
+                for ( CartProduct c : cartProducts) {
+                    if(c.getId().equals(idProduct)){
+                        c.setSize(cart.getSize());
+                        c.setSoLuong(cart.getQuantity());
+                        resultList.add(c);
+                        break;
+                    }
+
+                }
             }
 
             resultSet.close();
@@ -168,6 +178,6 @@ public class CartDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return cartProducts;
+        return resultList;
     }
 }

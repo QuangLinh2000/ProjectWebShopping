@@ -2,6 +2,7 @@ package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.dao.client.CartDao;
 import com.example.projectwebshopping.model.client.Cart;
+import com.example.projectwebshopping.model.client.LogninManager;
 import com.example.projectwebshopping.model.client.User;
 import com.example.projectwebshopping.service.client.IUserService;
 import com.example.projectwebshopping.service.client.UserService;
@@ -39,6 +40,9 @@ public class SigninController extends HttpServlet {
            HttpSession session = request.getSession();
            session.setAttribute("userLognin", user);
 
+
+
+
            Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
            if(cartMap != null){
                for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {
@@ -47,7 +51,7 @@ public class SigninController extends HttpServlet {
                request.removeAttribute("cartMap");
            }
 
-           response.sendRedirect("/Shopping/home");
+           response.sendRedirect(LogninManager.getInstance().getURLCookies(request));
 
        }else{
            request.setAttribute("login_err","login fall");

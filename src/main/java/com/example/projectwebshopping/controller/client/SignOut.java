@@ -5,17 +5,21 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "ProductController", value = "/product")
-public class ProductController extends HttpServlet {
+@WebServlet(name = "SignOut", value = "/signout")
+public class SignOut extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("container_view","/views/product.jsp");
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        //get parameter signout
+        String signout = request.getParameter("signout");
+        System.out.println(signout);
+        //if signout is not null
+        if (signout != null) {
+            request.getSession().invalidate();
+        }
     }
 }
