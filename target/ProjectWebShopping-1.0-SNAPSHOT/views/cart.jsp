@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.projectwebshopping.model.client.Cart" %>
-<%@ page import="com.example.projectwebshopping.dto.client.CartProduct" %><%--
+<%@ page import="com.example.projectwebshopping.dto.client.CartProduct" %>
+<%@ page import="com.google.gson.Gson" %><%--
   Created by IntelliJ IDEA.
   User: trong
   Date: 29/12/2021
@@ -54,7 +55,7 @@
                     <div class="cart-item-holder">
                       <div class="wrapper-checkbox">
                         <label class="checkbox path">
-                          <input type="checkbox" >
+                          <input class="choose-product" value="<%=cartProduct.toString()%>" type="checkbox" >
                           <svg viewBox="0 0 21 21">
                             <path
                                     d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186">
@@ -148,8 +149,8 @@
                   <span class="cart-total-title">Tổng cộng</span>
                   <span class="cart-total-price">19,000đ</span>
                 </div>
-                <a href="" class="btn-cart btn-total-checkout">Đặt hàng</a>
-                <a href="" class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
+                <a class="btn-cart btn-total-checkout">Đặt hàng</a>
+                <a  class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
 
               </div>
               <div class="bag-payment-options">
@@ -180,6 +181,29 @@
         });
       }
     });
+
+
+    function pushNotify(status, message, title) {
+      new Notify({
+        status: status,
+        title: title,
+        text: message,
+        effect: 'fade',
+        speed: 300,
+        customClass: '',
+        customIcon: '',
+        showIcon: true,
+        showCloseButton: true,
+        autoclose: true,
+        autotimeout: 2000,
+        gap: 20,
+        distance: 20,
+        type: 1,
+        position: 'right bottom',
+        customWrapper: '',
+      })
+    }
+
   </script>
   <script src="<%=request.getContextPath()%>/script/cart.js"></script>
 

@@ -21,7 +21,6 @@ public class DetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idSP=request.getParameter("id");
         //get full url and parameter
-        String url=request.getRequestURL().toString();
         IHomeService homeService = new HomeSerVice();
         DetailProduct detailProduct =  homeService.getProduct(idSP);
         List<Product> list = homeService.getProducts(detailProduct.getProduct().getLoaiSP(),4);

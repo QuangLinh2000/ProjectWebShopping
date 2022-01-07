@@ -32,7 +32,10 @@ public class LogninManager {
                 c.setValue(null);
             }
         }
-            Cookie cookie = new Cookie("url", url+"?"+param);
+           if(param!=null){
+               url=url+"?"+param;
+           }
+            Cookie cookie = new Cookie("url", url);
             response.addCookie(cookie);
 
     }

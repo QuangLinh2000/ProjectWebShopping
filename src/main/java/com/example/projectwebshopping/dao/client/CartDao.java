@@ -161,15 +161,28 @@ public class CartDao {
                 String idProduct = cart.getIdProduct();
                 for ( CartProduct c : cartProducts) {
                     if(c.getId().equals(idProduct)){
-                        c.setSize(cart.getSize());
-                        c.setSoLuong(cart.getQuantity());
-                        resultList.add(c);
+                        String id = c.getId();
+                         String name = c.getName();
+                         double price = c.getPrice();
+                         double sale = c.getSale();
+                         String mau = c.getMau();
+                         int soLuong= cart.getQuantity();
+                         String image= c.getImage();
+                         int S= c.getS();
+                         int M= c.getM();
+                         int L= c.getL();
+                         int XL= c.getXL();
+                         int trangThai= c.getTrangThai();
+                         String size = cart.getSize();
+
+                        CartProduct cartProduct = new CartProduct(id,name,price,sale,mau,soLuong,image,S,M,L,XL,trangThai,size);
+
+                        resultList.add(cartProduct);
                         break;
                     }
 
                 }
             }
-
             resultSet.close();
             preparedStatement.close();
             DataSourceConnection.returnConnection(connection);
