@@ -169,7 +169,7 @@
       }
     });
 
-  
+
     function pushNotify(status, message, title) {
       new Notify({
         status: status,

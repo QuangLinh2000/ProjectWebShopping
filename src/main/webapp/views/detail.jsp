@@ -451,12 +451,14 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
 
         function closeForm() {
 
+
             if (form.classList.contains("action-flex")) {
                 form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
                 form.classList.remove("action-flex")
             }
         }
             function responsive() {
+
 
                 if (window.innerWidth <= 739) {
                     $('#image__right').insertAfter('.product__price')
