@@ -294,7 +294,7 @@
         <div class="delete-form" onclick="closeForm()">
             <i class="fas fa-times-circle"></i>
         </div>
-        <div class="form__title"><h3>Giỏ hàng của bạn (Đang có 0vsản phẩm)</h3></div>
+        <div class="form__title"><h3>Giỏ hàng của bạn (Đang có 0 sản phẩm)</h3></div>
         <div class="form__table">
             <table>
                 <thead>
@@ -347,7 +347,7 @@
             $('.row-product').html('');
             var sizegioHang = document.querySelector(".cart-count.color-red").innerHTML;
             let totalNumber=2;
-            $('.form__title').text('GIỎ HÀNG CỦA BẠN (ĐANG CÓ '+sizegioHang+' SẢN PHẨM)');
+            $('.form__title h3').text('GIỎ HÀNG CỦA BẠN (ĐANG CÓ '+sizegioHang+' SẢN PHẨM)');
             for (var i = 0; i < array.length; i++) {
                var parent = array[i].closest('.text-center');
                 if(parent.classList.contains('active')){
@@ -444,13 +444,14 @@ TỔNG: `+convertPrice( arrNumber.length*(<%=product.getGia()-product.getGia()*p
             }
             addCart(arrSize,arrayQuantity);
 
-        })
+        })}
 
     
     function closeForm(){
 
         if (form.classList.contains("action-flex")) {
             form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
+            form.classList.remove("action-flex")
         }
     }
     function responsive(){

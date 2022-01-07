@@ -18,10 +18,6 @@
     List<Product> listRelateds = detailProduct.getRelated();
     double oleSale=product.getSell();
 
-    LocalDate localDate = LocalDate.now();
-
-
-
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail.css">
 
@@ -298,7 +294,7 @@
         <div class="delete-form" onclick="closeForm()">
             <i class="fas fa-times-circle"></i>
         </div>
-        <div class="form__title"><h3>Giỏ hàng của bạn (Đang có 0vsản phẩm)</h3></div>
+        <div class="form__title"><h3>Giỏ hàng của bạn (Đang có 0 sản phẩm)</h3></div>
         <div class="form__table">
             <table>
                 <thead>
@@ -351,7 +347,7 @@
             $('.row-product').html('');
             var sizegioHang = document.querySelector(".cart-count.color-red").innerHTML;
             let totalNumber=2;
-            $('.form__title').text('GIỎ HÀNG CỦA BẠN (ĐANG CÓ '+sizegioHang+' SẢN PHẨM)');
+            $('.form__title h3').text('GIỎ HÀNG CỦA BẠN (ĐANG CÓ '+sizegioHang+' SẢN PHẨM)');
             for (var i = 0; i < array.length; i++) {
                var parent = array[i].closest('.text-center');
                 if(parent.classList.contains('active')){
@@ -374,12 +370,7 @@
 
                     }
 
-<<<<<<< HEAD
-                    document.querySelector('.row-product').innerHTML=htmlString+'<tr >'+
-=======
-                    <%--/console.log((parseInt(document.getElementById('quantity').value))*((<%=product.getGia()-product.getGia()*product.getSell()%>)))--%>
-                    $('.row-product').append('<tr >'+
->>>>>>> f9e86670543242e56d638a00c297691bc6b131c9
+                     $('.row-product').append('<tr >'+
                         '<td class="table__image-decription"><a href=""><img'+
                     ' src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt=""></a></td>'+
                     '<td class="table__infor-decription ">'+
@@ -453,13 +444,14 @@ TỔNG: `+convertPrice( arrNumber.length*(<%=product.getGia()-product.getGia()*p
             }
             addCart(arrSize,arrayQuantity);
 
-        })
+        })}
 
-    }
+    
     function closeForm(){
 
         if (form.classList.contains("action-flex")) {
             form.firstElementChild.style.animation = "modalFadeOut ease 0.4s"
+            form.classList.remove("action-flex")
         }
     }
     function responsive(){
@@ -470,15 +462,11 @@ TỔNG: `+convertPrice( arrNumber.length*(<%=product.getGia()-product.getGia()*p
         else $('#image__right').insertBefore('#image__left')
 
     }
-<<<<<<< HEAD
+
     responsive();
 
     document.getElementsByTagName("BODY")[0].onresize = function() {resizeWindow();
         responsive();}
-=======
-
-
-
     function addCart(arrSize,arrayQuantity) {
         var id = '<%=product.getMaSP()%>';
         //convert array to json
@@ -529,7 +517,6 @@ TỔNG: `+convertPrice( arrNumber.length*(<%=product.getGia()-product.getGia()*p
             customWrapper: '',
         })
     }
->>>>>>> f9e86670543242e56d638a00c297691bc6b131c9
 
 </script>
 
