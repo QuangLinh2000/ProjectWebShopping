@@ -208,7 +208,7 @@ function checkSelect(list){
         }
     }
     if(enought===false)
-        pushNotify('warning','Vui lòng chọn size','chọn size');
+        pushNotify('warning','Vui lòng chọn Size','Chọn Size');
 
     return enought
 }

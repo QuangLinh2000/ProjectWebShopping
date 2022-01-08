@@ -22,7 +22,7 @@ body {
     color: #070707;
     font-weight: 300;
     font-size: var(--medium-font-size);
-    font-family: Arial, sans-serif;
+
 }
 
 li {
@@ -859,6 +859,7 @@ table__infor-decription{
     border-radius: 0.3125em;
     padding: 0 0.9375em;
     border: none;
+    cursor: pointer;
 }
 .form__footer__right .pay-button {
     display: inline-block;

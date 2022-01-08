@@ -23,7 +23,7 @@
 <script>
 
 </script>
-<div class="container" >
+<div class="container" style="font-family: Arial, sans-serif;">
 <section class="detail">
     <div class="detail__image">
         <div id="image__right" <%if(product.getListUrlImg().size()==1){%>style="width: 85%"<%}%>>
