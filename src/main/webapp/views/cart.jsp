@@ -361,44 +361,23 @@
     const allSelect = document.querySelectorAll('.size-select');
     allSelect.forEach(element => {
       element.addEventListener('change', function () {
-        alert('ok');
-        let getData=element.closest('.cart-item').querySelector('.cart-item-qty-holder');
+        let getData=this.closest('.cart-item').querySelector('.cart-item-qty-holder');
         let id = getData.getAttribute("data-cart-id");
         let sizeCurrent =getData.getAttribute("data-cart-size");
         // nhớ sửa atriibute data-cart-size
         let sizeName = element.value;
         let element = this;
+        alert('ok')
         $.ajax({
           url: "<%=request.getContextPath()%>/CartServiceController",
           type: "POST",
           data: {
             id: id,
             size: sizeName,
-            sizeCurrent: sizeCurrent,
             quantity: 1
           },
           success: function (data) {
-            if (data!=null){
-              var result = JSON.parse(data);
-              var status = result.status;
-              if (status == "outsize"){
-                var soluong = result.quantity;
-                element.parentElement.querySelector('.cart-item-qty').value = soluong;
-                element.style.pointerEvents = "none";
-                element.style.opacity= "0.5";
-              }
-              if (status == "success") {
-                var soluong = result.quantity;
-                element.parentElement.querySelector('.cart-item-qty').value = soluong;
-                element.style.pointerEvents = "auto";
-                element.style.opacity= "1";
-              }
-
-              if (status == "error") {
-                element.parentElement.querySelector('.cart-item-qty').value = quantity;
-              }
-              closeLoader(element);
-            }
+            alert('ok')
           }
         });
       });

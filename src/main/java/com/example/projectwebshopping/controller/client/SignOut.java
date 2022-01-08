@@ -16,7 +16,6 @@ public class SignOut extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //get parameter signout
         String signout = request.getParameter("signout");
-        System.out.println(signout);
         //if signout is not null
         if (signout != null) {
             request.getSession().invalidate();

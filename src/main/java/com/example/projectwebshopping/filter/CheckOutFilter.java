@@ -1,5 +1,7 @@
 package com.example.projectwebshopping.filter;
 
+import com.example.projectwebshopping.model.client.LogninManager;
+import com.example.projectwebshopping.model.client.ProductManager;
 import com.example.projectwebshopping.model.client.User;
 
 import javax.servlet.*;
@@ -20,12 +22,14 @@ public class CheckOutFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         //get session
         HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+
         User user = (User) httpRequest.getSession().getAttribute("userLognin");
         if(user != null){
             chain.doFilter(request, response);
 
         }else {
-            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            LogninManager.getInstance().setURLCookies(httpRequest,httpResponse);
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/signin");
         }
     }
