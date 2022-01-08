@@ -48,12 +48,10 @@ public class CartServiceController extends HttpServlet {
         if (user==null) {
             sizeDao = ProductDao.getInstance().getSizeProduct(id, size);
         }else{
-            System.out.println("login-out: "+sizeCurrent);
 
             if (sizeCurrent==null) {
                 sizeDao = ProductDao.getInstance().getSizeProduct(id,size,user.getId(),quantityInt);
             }else{
-                System.out.println("login: "+sizeCurrent);
                 sizeDao = ProductDao.getInstance().getSizeProduct(id,size,user.getId(),quantityInt,sizeCurrent);
             }
         }

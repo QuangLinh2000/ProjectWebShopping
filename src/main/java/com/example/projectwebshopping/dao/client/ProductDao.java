@@ -481,14 +481,10 @@ public class ProductDao {
                             int soluong = resultSet2.getInt("SOLUONG");
                             if(size>=(soluong+quantity)){
                                 resultSet2.updateInt("SOLUONG", soluong+quantity);
+                                resultSet2.updateRow();
                             }
 
-                            PreparedStatement preparedStatementRemove = connection.prepareStatement(sqlRemove);
-                            preparedStatementRemove.setString(1, idUser);
-                            preparedStatementRemove.setString(2, id);
-                            preparedStatementRemove.setString(3, sizeCurrent);
-                            preparedStatementRemove.executeUpdate();
-                            preparedStatementRemove.close();
+
 
                         }else {
                             String sql2 = "INSERT INTO giohang(IDUser,IDSP,SIZE,SOLUONG) VALUES(?,?,?,?)";
@@ -500,6 +496,13 @@ public class ProductDao {
                             preparedStatement3.executeUpdate();
                             preparedStatement3.close();
                         }
+                PreparedStatement preparedStatementRemove = connection.prepareStatement(sqlRemove);
+                preparedStatementRemove.setString(1, idUser);
+                preparedStatementRemove.setString(2, id);
+                preparedStatementRemove.setString(3, sizeCurrent);
+                preparedStatementRemove.executeUpdate();
+                preparedStatementRemove.close();
+
                         resultSet2.close();
 
                 preparedStatement2.close();
