@@ -33,5 +33,15 @@ public class Cart {
     public void setSize(String size) {
         this.size = size;
     }
+    //toString
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "idUser='" + idUser + '\'' +
+                ", idProduct='" + idProduct + '\'' +
+                ", quantity=" + quantity +
+                ", size='" + size + '\'' +
+                '}';
+    }
 
 }

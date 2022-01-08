@@ -403,8 +403,58 @@ public class ProductDao {
         }
         return detailProduct;
     }
-
-
+    public int getSizeProduct(String id,String sizeName) {
+        int size = 0;
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            String sql = "SELECT * FROM products WHERE MASP = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                size = resultSet.getInt(sizeName);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return size;
+    }
+    public int getSizeProduct(String id,String sizeName,String idUser, int quantity) {
+        int size = 0;
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            String sql = "SELECT * FROM products WHERE MASP = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String sql2 = "UPDATE  giohang SET SOLUONG = ? WHERE IDUser = ? AND IDSP = ? AND SIZE = ?";
+            if (resultSet.next()) {
+                size = resultSet.getInt(sizeName);
+                if (size >= quantity) {
+                    PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+                    preparedStatement2.setInt(1, quantity);
+                    preparedStatement2.setString(2, idUser);
+                    preparedStatement2.setString(3, id);
+                    preparedStatement2.setString(4, sizeName);
+                    preparedStatement2.executeUpdate();
+                    preparedStatement2.close();
+                }
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return size;
+    }
 
 //    public static void main(String[] args) {
 ////        List<String> list = new ArrayList<>();

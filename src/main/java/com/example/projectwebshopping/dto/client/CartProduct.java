@@ -1,6 +1,10 @@
 package com.example.projectwebshopping.dto.client;
 
+import com.google.gson.Gson;
+
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CartProduct {
     private String id;
@@ -181,4 +185,35 @@ public class CartProduct {
             e.printStackTrace();
         }
     }
+    //conver t to string
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id:'" + id + '\'' +
+                ", name:'" + name + '\'' +
+                ", price:" + price +
+                ", sale:" + sale +
+                ", mau:'" + mau + '\'' +
+                ", soLuong:" + soLuong +
+                ", image:'" + image + '\'' +
+                ", S:" + S +
+                ", M:" + M +
+                ", L:" + L +
+                ", XL:" + XL +
+                ", trangThai':" + trangThai +
+                ", 'size':'" + size + '\'' +
+                '}';
+    }
+    public Map<String, Integer> getMapSize() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("S", S);
+        map.put("M", M);
+        map.put("L", L);
+        map.put("XL", XL);
+        return map;
+    }
+
+
 }
+
