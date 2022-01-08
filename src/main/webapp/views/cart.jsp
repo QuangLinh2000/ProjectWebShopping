@@ -498,6 +498,7 @@
         pushNotify('error', 'Bạn chưa chọn sản phẩm nào','Lỗi');
       }
     })
+    //ok
   </script>
   <script src="<%=request.getContextPath()%>/script/cart.js"></script>
 
