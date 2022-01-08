@@ -23,7 +23,7 @@
 <script>
 
 </script>
-<div class="container" >
+<div class="container" style="font-family: Arial, sans-serif;">
 <section class="detail">
     <div class="detail__image">
         <div id="image__right" <%if(product.getListUrlImg().size()==1){%>style="width: 85%"<%}%>>
@@ -487,11 +487,11 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
                     var json = JSON.parse(data);
                     if (json.success === 'true') {
                         $('.cart-count.color-red').text(json.quantity);
-                        pushNotify('success', 'thêm vào giỏi hàng thành công', 'Thêm Sản phẩm');
+                        pushNotify('success', 'Thêm vào giỏi hàng thành công', 'Thêm Sản phẩm');
                         closeForm();
 
                     } else {
-                        pushNotify('error', 'thêm vào giỏi hàng thất bại', 'Thêm Sản phẩm');
+                        pushNotify('error', 'Thêm vào giỏi hàng thất bại', 'Thêm Sản phẩm');
 
                     }
                 }
