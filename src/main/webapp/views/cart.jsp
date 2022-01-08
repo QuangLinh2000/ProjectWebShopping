@@ -14,6 +14,7 @@
   List<CartProduct> cartProductList = (List<CartProduct>) request.getAttribute("cartList");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cart.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/loader.css">
   <section id="cart" class="margin-top-mobile">
     <div class="container">
       <div class="cart-holder">
@@ -119,6 +120,14 @@
                         <i class="fa-solid fa-xmark"></i>
                       </a>
                     </div>
+                    <div class="wrapper-loader">
+                      <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    </div>
                   </li>
                   <%}%>
 
@@ -178,6 +187,8 @@
     listMinus.forEach((element) => {
       element.addEventListener("click", () => {
         let quantity = element.parentElement.querySelector(".cart-item-qty");
+        openLoader(quantity);
+
         if (quantity.value > 1) {
           quantity.value--;
         }
@@ -198,13 +209,25 @@
               var result = JSON.parse(data);
               var status = result.status;
 
-              if (status == "outsize"||status == "success") {
+              if (status == "success") {
                 var soluong = result.quantity;
                 quantity.value = soluong;
+                // turn off click element div
+
+                element.parentNode.querySelector('.qty-plus').style.pointerEvents = "auto";
+                element.parentNode.querySelector('.qty-plus').style.opacity= "1";
+
+              }
+              if (status == "outsize"){
+                var soluong = result.quantity;
+                quantity.value = soluong;
+
               }
               if (status == "error") {
                 quantity.value++;
               }
+              closeLoader(quantity);
+
             }
           }
         });
@@ -213,6 +236,8 @@
     listPlus.forEach((element) => {
       element.addEventListener("click", () => {
         let quantity = element.parentElement.querySelector(".cart-item-qty");
+        openLoader(quantity);
+
         if (quantity.value ) {
           quantity.value++;
         }
@@ -231,14 +256,24 @@
             if (data!=null){
               var result = JSON.parse(data);
               var status = result.status;
-
-              if (status == "outsize"||status == "success") {
+              if (status == "success"){
                 var soluong = result.quantity;
                 quantity.value = soluong;
+                // turn off click element div
+                element.style.pointerEvents = "auto";
+                element.style.opacity= "1";
+
+              }
+              if (status == "outsize") {
+                var soluong = result.quantity;
+                quantity.value = soluong;
+                element.style.pointerEvents = "none";
+                element.style.opacity= "0.5";
               }
               if (status == "error") {
                 quantity.value--;
               }
+              closeLoader(quantity);
             }
           }
         });
@@ -270,6 +305,8 @@
       let id = $(this).parent().attr("data-cart-id");
       let size = $(this).parent().attr("data-cart-size");
       let quantity = $(this).val();
+      let element = this;
+      openLoader(element);
       if (quantity<=0){
         quantity=1;
       }
@@ -286,16 +323,84 @@
           if (data!=null){
             var result = JSON.parse(data);
             var status = result.status;
-            if (status == "outsize"||status == "success") {
+            if (status == "outsize"){
               var soluong = result.quantity;
               soluongtruoc.val(soluong);
+
+              element.parentNode.querySelector('.qty-plus').style.pointerEvents = "none";
+              element.parentNode.querySelector('.qty-plus').style.opacity= "0.5";
+
+            }
+            if (status == "success") {
+              var soluong = result.quantity;
+              soluongtruoc.val(soluong);
+              element.parentNode.querySelector('.qty-plus').style.pointerEvents = "auto";
+              element.parentNode.querySelector('.qty-plus').style.opacity= "1";
+
             }
 
             if (status == "error") {
               soluongtruoc.val(quantity);
             }
+            closeLoader(element);
           }
         }
+      });
+    });
+    function openLoader(element){
+      element.closest('.cart-item').querySelector('.wrapper-loader').classList.add('active');
+
+    }
+    function closeLoader(element){
+      setTimeout(function (){
+        element.closest('.cart-item').querySelector('.wrapper-loader').classList.remove('active');
+
+      },2000);
+    }
+    // event option element
+    const allSelect = document.querySelectorAll('.size-select');
+    allSelect.forEach(element => {
+      element.addEventListener('change', function () {
+        alert('ok');
+        let getData=element.closest('.cart-item').querySelector('.cart-item-qty-holder');
+        let id = getData.getAttribute("data-cart-id");
+        let sizeCurrent =getData.getAttribute("data-cart-size");
+        // nhớ sửa atriibute data-cart-size
+        let sizeName = element.value;
+        let element = this;
+        $.ajax({
+          url: "<%=request.getContextPath()%>/CartServiceController",
+          type: "POST",
+          data: {
+            id: id,
+            size: sizeName,
+            sizeCurrent: sizeCurrent,
+            quantity: 1
+          },
+          success: function (data) {
+            if (data!=null){
+              var result = JSON.parse(data);
+              var status = result.status;
+              if (status == "outsize"){
+                var soluong = result.quantity;
+                element.parentElement.querySelector('.cart-item-qty').value = soluong;
+                element.style.pointerEvents = "none";
+                element.style.opacity= "0.5";
+              }
+              if (status == "success") {
+                var soluong = result.quantity;
+                element.parentElement.querySelector('.cart-item-qty').value = soluong;
+                element.style.pointerEvents = "auto";
+                element.style.opacity= "1";
+              }
+
+              if (status == "error") {
+                element.parentElement.querySelector('.cart-item-qty').value = quantity;
+              }
+              closeLoader(element);
+            }
+          }
+        });
       });
     });
   </script>

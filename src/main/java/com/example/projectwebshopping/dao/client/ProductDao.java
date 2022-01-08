@@ -405,6 +405,7 @@ public class ProductDao {
     }
     public int getSizeProduct(String id,String sizeName) {
         int size = 0;
+
         try {
             Connection connection = DataSourceConnection.getConnection();
             String sql = "SELECT * FROM products WHERE MASP = ?";
@@ -426,6 +427,7 @@ public class ProductDao {
     }
     public int getSizeProduct(String id,String sizeName,String idUser, int quantity) {
         int size = 0;
+
         try {
             Connection connection = DataSourceConnection.getConnection();
             String sql = "SELECT * FROM products WHERE MASP = ?";
@@ -444,6 +446,61 @@ public class ProductDao {
                     preparedStatement2.executeUpdate();
                     preparedStatement2.close();
                 }
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return size;
+    }
+    // update product and countdown size current
+    public int getSizeProduct(String id,String sizeName,String idUser, int quantity,String sizeCurrent) {
+        int size = 0;
+
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            String sql = "SELECT * FROM products WHERE MASP = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String sqlRemove = "DELETE FROM giohang WHERE IDUser = ? AND IDSP = ? AND SIZE = ?";
+            String sqlGioHang= "select * from giohang where IDUser = ? and IDSP = ? and SIZE = ?";
+            if (resultSet.next()) {
+                // size moi trong cua hang con bao nhieu
+                size = resultSet.getInt(sizeName);
+
+                    PreparedStatement preparedStatement2 = connection.prepareStatement(sqlGioHang,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        preparedStatement2.setString(1, idUser);
+                        preparedStatement2.setString(2, id);
+                        preparedStatement2.setString(3, sizeName);
+                        ResultSet resultSet2 = preparedStatement2.executeQuery();
+                        if (resultSet2.next()) {
+                            int soluong = resultSet2.getInt("SOLUONG");
+                            if(size>=(soluong+quantity)){
+                                resultSet2.updateInt("SOLUONG", soluong+quantity);
+                            }
+                        }else {
+                            String sql2 = "INSERT INTO giohang(IDUser,IDSP,SIZE,SOLUONG) VALUES(?,?,?,?)";
+                            PreparedStatement preparedStatement3 = connection.prepareStatement(sql2);
+                            preparedStatement3.setString(1, idUser);
+                            preparedStatement3.setString(2, id);
+                            preparedStatement3.setString(3, sizeName);
+                            preparedStatement3.setInt(4, quantity);
+                            preparedStatement3.executeUpdate();
+                            preparedStatement3.close();
+                        }
+                        resultSet2.close();
+                PreparedStatement preparedStatementRemove = connection.prepareStatement(sqlRemove);
+                preparedStatementRemove.setString(1, idUser);
+                preparedStatementRemove.setString(2, id);
+                preparedStatementRemove.setString(3, sizeCurrent);
+                preparedStatementRemove.executeUpdate();
+                preparedStatement2.close();
+
             }
             resultSet.close();
             preparedStatement.close();
