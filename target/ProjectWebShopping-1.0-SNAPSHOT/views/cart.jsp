@@ -2,7 +2,8 @@
 <%@ page import="com.example.projectwebshopping.model.client.Cart" %>
 <%@ page import="com.example.projectwebshopping.dto.client.CartProduct" %>
 <%@ page import="com.google.gson.Gson" %>
-<%@ page import="java.util.Map" %><%--
+<%@ page import="java.util.Map" %>
+<%@ page import="com.example.projectwebshopping.model.client.ProductManager" %><%--
   Created by IntelliJ IDEA.
   User: trong
   Date: 29/12/2021
@@ -53,14 +54,17 @@
                         </label>
                       </div>
                       <div class="cart-item-img">
-                        <img src="<%=request.getContextPath()%><%=cartProduct.getImage()%>" alt="">
+                        <a href="<%=request.getContextPath()%>/detail?id=<%=cartProduct.getId()%>">
+                          <img src="<%=request.getContextPath()%><%=cartProduct.getImage()%>" alt="">
+                        </a>
                       </div>
                       <div class="cart-item-content">
                         <div class="cart-item-warper">
                           <div class="cart-item-price-holder">
                             <span class="cart-item-price">
-                              <%=cartProduct.getPrice()-cartProduct.getPrice()*cartProduct.getSale()%>
-                              đ</span>
+                              <%= ProductManager.getInstance().formatPrice(cartProduct.getPrice()-cartProduct.getPrice()*cartProduct.getSale())%>
+                              đ
+                              </span>
                           </div>
                           <p class="cart-item-name">
                             <%=cartProduct.getName()%>
@@ -94,7 +98,7 @@
                               </select>
                             </div>
                             <%if(quantyti>0) {%>
-                            <div class="cart-item-qty-holder" data-cart-id="<%=cartProduct.getId()%>" data-cart-size="<%=cartProduct.getSize()%>">
+                            <div class="cart-item-qty-holder" data-cart-price="<%=cartProduct.getPrice()-cartProduct.getPrice()*cartProduct.getSale()%>" data-cart-id="<%=cartProduct.getId()%>" data-cart-size="<%=cartProduct.getSize()%>">
                               <div class="qty-minus btn-qty">
                                 <i class="fa-solid fa-minus"></i>
                               </div>
@@ -105,16 +109,17 @@
                               </div>
                             </div>
                             <%}else{%>
-                            <h4>Het hang</h4>
+                            <h4 class="outsize-cart">Het hang</h4>
+                            <div style="display: none;" class="cart-item-qty-holder" data-cart-price="<%=cartProduct.getPrice()-cartProduct.getPrice()*cartProduct.getSale()%>" data-cart-id="<%=cartProduct.getId()%>" data-cart-size="<%=cartProduct.getSize()%>">
+                            </div>
                             <%}%>
 
                           </div>
                         </div>
-                        <div class="cart-item-save">
-                          <i class="fa-regular fa-heart">
-                          </i>
-                          <span>Lưu lại sau</span>
-                        </div>
+                        <a class="cart-item-save" href="<%=request.getContextPath()%>/detail?id=<%=cartProduct.getId()%>">
+                          <i class="fa-solid fa-link"></i>
+                          <span>Xem chi tiết</span>
+                        </a>
                       </div>
                       <a class="btn-remover">
                         <i class="fa-solid fa-xmark"></i>
@@ -134,7 +139,7 @@
                 </ul>
                 <div class="sub-total-1-holder">
                   <span class="sub-total-title-1">Tổng cộng</span>
-                  <span class="cart-total-price-1">195,000đ</span>
+                  <span class="cart-total-price-1">đ</span>
 
                 </div>
               </div>
@@ -167,19 +172,24 @@
 
   </section>
   <script>
-
+    sumTotal();
     const checkAll = document.getElementById("check-all");
     const check = document.querySelectorAll('.cart-item input[type="checkbox"]');
     checkAll.addEventListener("click", function () {
       if (checkAll.checked) {
         check.forEach(function (item) {
-          item.checked = true;
+          if (item.disabled){
+            item.checked = false;
+          }else {
+            item.checked = true;
+          }
         });
       } else {
         check.forEach(function (item) {
           item.checked = false;
         });
       }
+      sumTotal();
     });
     //plus minus quality
     const listMinus = document.querySelectorAll(".qty-minus");
@@ -227,6 +237,7 @@
                 quantity.value++;
               }
               closeLoader(quantity);
+              sumTotal();
 
             }
           }
@@ -274,6 +285,7 @@
                 quantity.value--;
               }
               closeLoader(quantity);
+              sumTotal();
             }
           }
         });
@@ -343,6 +355,7 @@
               soluongtruoc.val(quantity);
             }
             closeLoader(element);
+            sumTotal();
           }
         }
       });
@@ -358,16 +371,17 @@
       },2000);
     }
     // event option element
+
     const allSelect = document.querySelectorAll('.size-select');
-    allSelect.forEach(element => {
-      element.addEventListener('change', function () {
-        alert('ok');
-        let getData=element.closest('.cart-item').querySelector('.cart-item-qty-holder');
+    allSelect.forEach(e => {
+      e.addEventListener('change', function () {
+        let getData=this.closest('.cart-item').querySelector('.cart-item-qty-holder');
         let id = getData.getAttribute("data-cart-id");
         let sizeCurrent =getData.getAttribute("data-cart-size");
         // nhớ sửa atriibute data-cart-size
-        let sizeName = element.value;
+        let sizeName = this.value;
         let element = this;
+        openLoader(element);
         $.ajax({
           url: "<%=request.getContextPath()%>/CartServiceController",
           type: "POST",
@@ -378,31 +392,112 @@
             quantity: 1
           },
           success: function (data) {
-            if (data!=null){
-              var result = JSON.parse(data);
-              var status = result.status;
-              if (status == "outsize"){
-                var soluong = result.quantity;
-                element.parentElement.querySelector('.cart-item-qty').value = soluong;
-                element.style.pointerEvents = "none";
-                element.style.opacity= "0.5";
-              }
-              if (status == "success") {
-                var soluong = result.quantity;
-                element.parentElement.querySelector('.cart-item-qty').value = soluong;
-                element.style.pointerEvents = "auto";
-                element.style.opacity= "1";
-              }
-
-              if (status == "error") {
-                element.parentElement.querySelector('.cart-item-qty').value = quantity;
-              }
-              closeLoader(element);
-            }
+            closeLoader(element);
+            location.reload();
+            //load (url [, data] [, complete])
           }
         });
       });
     });
+    //animation remove item
+    let listBtnRemove = document.querySelectorAll(".btn-remover");
+    listBtnRemove.forEach((element) => {
+      element.addEventListener("click", () => {
+        let getData=element.closest('.cart-item').querySelector('.cart-item-qty-holder');
+        let id = getData.getAttribute("data-cart-id");
+        let sizeName =getData.getAttribute("data-cart-size");
+        $.ajax({
+          url: "<%=request.getContextPath()%>/CartRemoveController",
+          type: "POST",
+          data: {
+            id: id,
+            size: sizeName,
+          },
+          success: function (data) {
+            if (data!=null&&data==="success"){
+              element.closest(".cart-item").classList.add("products--delete");
+              setTimeout(() => {
+                element.closest(".cart-item").remove();
+              }, 1000);
+              document.querySelectorAll('.products--delete').forEach((element) => {
+                element.remove();
+              });
+            }else {
+              pushNotify('error', 'Có lỗi xảy ra, vui lòng thử lại sau','Lỗi');
+            }
+            sumTotal();
+          }
+        });
+      });
+    });
+    //function sum total
+    function sumTotal(){
+      // get list checkbox checked caculator this
+      let listCheckboxChecked = document.querySelectorAll(".choose-product:checked");
+      let total = 0;
+      listCheckboxChecked.forEach((element) => {
+        let getData=element.closest('.cart-item').querySelector('.cart-item-qty-holder');
+        let price = getData.getAttribute("data-cart-price");
+        let quantity = element.closest('.cart-item').querySelector('.cart-item-qty').value;
+        total += parseInt(price) * parseInt(quantity);
+
+      });
+      document.querySelector(".cart-total-price").innerHTML = formatPrice(total)+'đ';
+      document.querySelector(".cart-total-price-1").innerHTML = formatPrice(total)+'đ';
+
+    }
+    //function format price vietnamese
+    function formatPrice(price){
+      let priceFormat = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+      return priceFormat;
+    }
+
+    document.querySelectorAll('.outsize-cart').forEach(function (element){
+      element.closest('.cart-item').querySelector('.choose-product').disabled = true;
+    })
+    document.querySelectorAll('.choose-product').forEach(function (element){
+      element.addEventListener('click',sumTotal)
+    })
+    //funtion get data all checkbox
+    function getDataCheckbox(){
+      let listCheckboxChecked = document.querySelectorAll(".choose-product:checked");
+
+      let listData = [];
+      listCheckboxChecked.forEach((element) => {
+        let getData=element.closest('.cart-item').querySelector('.cart-item-qty-holder');
+        let id = getData.getAttribute("data-cart-id");
+        let sizeName =getData.getAttribute("data-cart-size");
+        listData.push({
+          id: id,
+          size: sizeName,
+        });
+      });
+      return listData;
+    }
+    document.querySelector('.btn-total-checkout').addEventListener('click',function () {
+      let data = getDataCheckbox();
+      if (data.length>0){
+
+        // ajax transform data to json
+        let dataJson = JSON.stringify(data);
+        $.ajax({
+          url: "<%=request.getContextPath()%>/DoCheckout",
+          type: "POST",
+          data: {
+            data: dataJson
+          },
+          success: function (data) {
+            if (data!=null&&data==="success"){
+              location.href = "<%=request.getContextPath()%>/check-outs";
+            }else {
+              pushNotify('error', 'Có lỗi xảy ra, vui lòng thử lại sau','Lỗi');
+            }
+          }
+        });
+      }else {
+        pushNotify('error', 'Bạn chưa chọn sản phẩm nào','Lỗi');
+      }
+    })
   </script>
   <script src="<%=request.getContextPath()%>/script/cart.js"></script>
 

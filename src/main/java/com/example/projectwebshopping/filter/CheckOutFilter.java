@@ -23,7 +23,6 @@ public class CheckOutFilter implements Filter {
         User user = (User) httpRequest.getSession().getAttribute("userLognin");
         if(user != null){
             chain.doFilter(request, response);
-
         }else {
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/signin");

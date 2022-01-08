@@ -193,4 +193,24 @@ public class CartDao {
         }
         return resultList;
     }
+    public int deleteCart(String idUser,String idProduct,String size){
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            String sqlRemove = "DELETE FROM giohang WHERE IDUser = ? AND IDSP = ? AND SIZE = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlRemove);
+            preparedStatement.setString(1,idUser);
+            preparedStatement.setString(2,idProduct);
+            preparedStatement.setString(3,size);
+            int result = preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return result;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

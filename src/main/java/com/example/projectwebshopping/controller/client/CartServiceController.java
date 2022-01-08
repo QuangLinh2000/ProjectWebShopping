@@ -26,7 +26,6 @@ public class CartServiceController extends HttpServlet {
         User user = (User) request.getSession().getAttribute("userLognin");
         HttpSession session = request.getSession();
         Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
-        System.out.println(cartMap.size());
         if (user==null&&cartMap != null && sizeCurrent != null&&id!=null&&size!=null) {
             if (cartMap.containsKey(id+sizeCurrent)) {
                 cartMap.remove(id+sizeCurrent);
