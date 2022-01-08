@@ -335,3 +335,6 @@ input[type="number"]::-webkit-inner-spin-button {
         padding: 5px;
     }
 }
+.cart-total-price-1{
+    text-transform: lowercase;
+}

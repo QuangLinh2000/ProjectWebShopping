@@ -460,7 +460,6 @@ public class ProductDao {
     // update product and countdown size current
     public int getSizeProduct(String id,String sizeName,String idUser, int quantity,String sizeCurrent) {
         int size = 0;
-
         try {
             Connection connection = DataSourceConnection.getConnection();
             String sql = "SELECT * FROM products WHERE MASP = ?";
@@ -483,6 +482,14 @@ public class ProductDao {
                             if(size>=(soluong+quantity)){
                                 resultSet2.updateInt("SOLUONG", soluong+quantity);
                             }
+
+                            PreparedStatement preparedStatementRemove = connection.prepareStatement(sqlRemove);
+                            preparedStatementRemove.setString(1, idUser);
+                            preparedStatementRemove.setString(2, id);
+                            preparedStatementRemove.setString(3, sizeCurrent);
+                            preparedStatementRemove.executeUpdate();
+                            preparedStatementRemove.close();
+
                         }else {
                             String sql2 = "INSERT INTO giohang(IDUser,IDSP,SIZE,SOLUONG) VALUES(?,?,?,?)";
                             PreparedStatement preparedStatement3 = connection.prepareStatement(sql2);
@@ -494,11 +501,7 @@ public class ProductDao {
                             preparedStatement3.close();
                         }
                         resultSet2.close();
-                PreparedStatement preparedStatementRemove = connection.prepareStatement(sqlRemove);
-                preparedStatementRemove.setString(1, idUser);
-                preparedStatementRemove.setString(2, id);
-                preparedStatementRemove.setString(3, sizeCurrent);
-                preparedStatementRemove.executeUpdate();
+
                 preparedStatement2.close();
 
             }

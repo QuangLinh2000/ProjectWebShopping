@@ -27,7 +27,6 @@ public class CheckOutFilter implements Filter {
         User user = (User) httpRequest.getSession().getAttribute("userLognin");
         if(user != null){
             chain.doFilter(request, response);
-
         }else {
             LogninManager.getInstance().setURLCookies(httpRequest,httpResponse);
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/signin");

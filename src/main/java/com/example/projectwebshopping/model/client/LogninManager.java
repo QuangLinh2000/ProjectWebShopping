@@ -52,6 +52,7 @@ public class LogninManager {
                     isExist = true;
                     break;
                 }
+
             }
         }
         if (!isExist) {
