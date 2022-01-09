@@ -368,7 +368,7 @@
 
                     }
 
-                    $('.row-product').append('<tr >' +
+                    $('.row-product').append('<tr class="row-data" data-product-id="<%=product.getMaSP()%>" data-product-size="'+size.toUpperCase()+'" data-product-img="<%=product.getListUrlImg().get(0)%>">' +
                         '<td class="table__image-decription"><a href=""><img' +
                         ' src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt=""></a></td>' +
                         '<td class="table__infor-decription ">' +
@@ -395,7 +395,7 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
                 <div class="save-price">Tiết kiệm: ` + convertPrice(arrNumber.length * (<%=product.getGia()*product.getSell()%>)) + `</div>
                 <button class="update-cart">CẬP NHẬT GIỎ HÀNG</button>
 
-                <a href="" class="pay-button">TIẾN HÀNH THANH TOÁN</a>`
+                <a class="pay-button" onClick="transformCheckout()">TIẾN HÀNH THANH TOÁN</a>`
             let form = document.querySelector(".form")
 
             form.firstElementChild.style.animation = "modalFadeIn  ease-in 0.4s"
@@ -525,7 +525,48 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
             customWrapper: '',
         })
     }
+    // get data to checkout
+    function getDataCheckbox(){
+        let listRow =   document.querySelectorAll('.row-data');
 
+        let listData = [];
+        listRow.forEach((element) => {
+            let id = element.getAttribute("data-product-size");
+            let sizeName=element.getAttribute('data-product-id');
+            let img = element.getAttribute('data-product-img');
+            listData.push({
+                id: id,
+                size: sizeName,
+                quantity: element.querySelector('.quantity').value,
+                name:element.querySelector('.bold-text>h5').innerText,
+                img:img,
+            });
+        });
+        return listData;
+    }
+    function transformCheckout(){
+        let data = getDataCheckbox();
+        if (data.length>0){
+            // ajax transform data to json
+            let dataJson = JSON.stringify(data);
+            $.ajax({
+                url: "<%=request.getContextPath()%>/DoCheckout",
+                type: "POST",
+                data: {
+                    data: dataJson
+                },
+                success: function (data) {
+                    if (data!=null&&data==="success"){
+                        location.href = "<%=request.getContextPath()%>/check-outs";
+                    }else {
+                        pushNotify('error', 'Có lỗi xảy ra, vui lòng thử lại sau','Lỗi');
+                    }
+                }
+            });
+        }else {
+            pushNotify('error', 'Bạn chưa chọn sản phẩm nào','Lỗi');
+        }
+    }
 
 </script>
 
