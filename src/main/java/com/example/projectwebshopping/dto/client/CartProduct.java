@@ -1,9 +1,11 @@
 package com.example.projectwebshopping.dto.client;
 
+import com.example.projectwebshopping.model.client.Cart;
 import com.google.gson.Gson;
 
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CartProduct {
@@ -167,6 +169,8 @@ public class CartProduct {
             e.printStackTrace();
         }
     }
+
+
 
     public void addCartProductSesstion(ResultSet rs) {
         try {

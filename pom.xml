@@ -25,6 +25,13 @@
             <version>2.8.9</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.episode6.hackit.mockspresso/mockspresso-reflect-guava -->
+        <dependency>
+            <groupId>com.episode6.hackit.mockspresso</groupId>
+            <artifactId>mockspresso-reflect-guava</artifactId>
+            <version>27.1-android</version>
+        </dependency>
+
         <dependency>
             <groupId>com.fasterxml.uuid</groupId>
             <artifactId>java-uuid-generator</artifactId>

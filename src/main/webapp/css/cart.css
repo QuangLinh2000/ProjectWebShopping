@@ -101,6 +101,7 @@
     padding: 10px;
     text-align: center;
     border: solid 1px #222222;
+    cursor: pointer;
 }
 .btn-total-checkout:hover {
     opacity: 0.8;

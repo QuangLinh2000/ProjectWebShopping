@@ -1,5 +1,6 @@
 package com.example.projectwebshopping.controller.client;
 
+import com.episode6.hackit.mockspresso.reflect.TypeToken;
 import com.example.projectwebshopping.model.client.CartJson;
 import com.google.gson.Gson;
 
@@ -20,10 +21,12 @@ public class DoCheckout extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String data = request.getParameter("data");
         if (data!=null) {
-            List<CartJson> listCartJson = new Gson().fromJson(data, List.class);
+            List<CartJson> listCartJson = new Gson().fromJson(data, new TypeToken<List<CartJson>>() {}.getType());
+            for (CartJson cartJson : listCartJson) {
+                System.out.println(cartJson);
+            }
             HttpSession session = request.getSession();
             session.setAttribute("cartCheckout", listCartJson);
-            System.out.println(listCartJson);
             response.getWriter().write("success");
         }
     }

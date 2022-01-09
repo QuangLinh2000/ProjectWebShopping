@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.projectwebshopping.dto.client.CartProduct" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 12/29/2021
@@ -7,7 +8,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/checkOuts.css">
-
+<%
+  List<CartProduct> cartProducts = (List<CartProduct>) request.getAttribute("list_cart");
+  System.out.println(cartProducts);
+%>
 
 <div class="container">
   <div class="top">
@@ -53,12 +57,6 @@
   <div class="end-container-bottom">
     <div class="content-left">
       <p class="title-content-left">Thông tin thanh toán</p>
-
-      <div class="login-box">
-        <p class="introduce-sign">Bạn đã có tài khoản?</p>
-        <a href="" class="sign-content-left">Đăng nhập</a>
-
-      </div>
       <div class="box-content-left">
         <div class="input-item-content-box">
           <input  class="input-item" placeholder="Họ và Nhập tại đây" type="text">

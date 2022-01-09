@@ -89,12 +89,7 @@
     font-weight: bold;
 }
 
-.login-box{
-    display: flex;
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 500;
-}
+
 .sign-content-left{
     margin-left: 10px;
     color: blue;
@@ -102,6 +97,7 @@
 
 .box-content-left{
     width: 100%;
+    margin-top: 30px;
 
 }
 .input-item-content-box{

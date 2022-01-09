@@ -1,6 +1,9 @@
 package com.example.projectwebshopping.controller.client;
 
+import com.example.projectwebshopping.dao.client.CartDao;
+import com.example.projectwebshopping.dto.client.CartProduct;
 import com.example.projectwebshopping.model.client.CartJson;
+import com.example.projectwebshopping.model.client.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -14,8 +17,13 @@ public class CheckOutsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLognin");
         List<CartJson> cart = (List<CartJson>) session.getAttribute("cartCheckout");
-        System.out.println(cart);
+        List<CartProduct> cartProducts = CartDao.getInstance().getCartsCheckOust(cart,user.getId());
+        if (cart != null) {
+            request.setAttribute("list_cart", cartProducts);
+            session.removeAttribute("cartCheckout");
+        }
         request.setAttribute("container_view","/views/checkOuts.jsp");
 
         request.getRequestDispatcher("index.jsp").forward(request, response);

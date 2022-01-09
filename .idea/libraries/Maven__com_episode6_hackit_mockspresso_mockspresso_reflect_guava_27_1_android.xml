@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.episode6.hackit.mockspresso:mockspresso-reflect-guava:27.1-android">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/episode6/hackit/mockspresso/mockspresso-reflect-guava/27.1-android/mockspresso-reflect-guava-27.1-android.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/episode6/hackit/mockspresso/mockspresso-reflect-guava/27.1-android/mockspresso-reflect-guava-27.1-android-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/episode6/hackit/mockspresso/mockspresso-reflect-guava/27.1-android/mockspresso-reflect-guava-27.1-android-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
