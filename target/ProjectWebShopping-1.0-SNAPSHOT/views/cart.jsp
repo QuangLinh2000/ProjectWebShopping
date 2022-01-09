@@ -40,6 +40,9 @@
                  <%
                    for (int i = 0; i< cartProductList.size(); i++) {
                      CartProduct cartProduct = cartProductList.get(i);
+                     if (cartProduct.getTrangThai()!=1){
+                       continue;
+                     }
                   %>
                   <li class="cart-item">
                     <div class="cart-item-holder">
@@ -158,7 +161,7 @@
                   <span class="cart-total-price">195,000đ</span>
                 </div>
                 <a class="btn-cart btn-total-checkout">Đặt hàng</a>
-                <a  class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
+                <a href="<%=request.getContextPath()%>/home"  class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
 
               </div>
               <div class="bag-payment-options">
