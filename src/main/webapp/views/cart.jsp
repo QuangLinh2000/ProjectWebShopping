@@ -40,6 +40,9 @@
                  <%
                    for (int i = 0; i< cartProductList.size(); i++) {
                      CartProduct cartProduct = cartProductList.get(i);
+                     if (cartProduct.getTrangThai()!=1){
+                       continue;
+                     }
                   %>
                   <li class="cart-item">
                     <div class="cart-item-holder">
@@ -98,7 +101,9 @@
                               </select>
                             </div>
                             <%if(quantyti>0) {%>
-                            <div class="cart-item-qty-holder" data-cart-price="<%=cartProduct.getPrice()-cartProduct.getPrice()*cartProduct.getSale()%>" data-cart-id="<%=cartProduct.getId()%>" data-cart-size="<%=cartProduct.getSize()%>">
+                            <div class="cart-item-qty-holder" data-cart-price="<%=cartProduct.getPrice()-cartProduct.getPrice()*cartProduct.getSale()%>"
+                                 data-cart-id="<%=cartProduct.getId()%>" data-cart-size="<%=cartProduct.getSize()%>" data-cart-img="<%=cartProduct.getImage()%>"
+                                 data-cart-name="<%=cartProduct.getName()%>">
                               <div class="qty-minus btn-qty">
                                 <i class="fa-solid fa-minus"></i>
                               </div>
@@ -110,7 +115,9 @@
                             </div>
                             <%}else{%>
                             <h4 class="outsize-cart">Het hang</h4>
-                            <div style="display: none;" class="cart-item-qty-holder" data-cart-price="<%=cartProduct.getPrice()-cartProduct.getPrice()*cartProduct.getSale()%>" data-cart-id="<%=cartProduct.getId()%>" data-cart-size="<%=cartProduct.getSize()%>">
+                            <div style="display: none;" class="cart-item-qty-holder" data-cart-price="<%=cartProduct.getPrice()-cartProduct.getPrice()*cartProduct.getSale()%>" data-cart-id="<%=cartProduct.getId()%>"
+                                 data-cart-size="<%=cartProduct.getSize()%> " data-cart-img="<%=cartProduct.getImage()%>"
+                                 data-cart-name="<%=cartProduct.getName()%>">
                             </div>
                             <%}%>
 
@@ -154,7 +161,7 @@
                   <span class="cart-total-price">195,000đ</span>
                 </div>
                 <a class="btn-cart btn-total-checkout">Đặt hàng</a>
-                <a  class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
+                <a href="<%=request.getContextPath()%>/home"  class="btn-cart btn-continue-shopping">Tiếp tục mua hàng</a>
 
               </div>
               <div class="bag-payment-options">
@@ -417,15 +424,17 @@
             if (data!=null&&data==="success"){
               element.closest(".cart-item").classList.add("products--delete");
               setTimeout(() => {
-                element.closest(".cart-item").remove();
+                // element.closest(".cart-item").remove();
+                document.querySelectorAll('.products--delete').forEach((element) => {
+                  element.remove();
+                  sumTotal();
+                });
               }, 1000);
-              document.querySelectorAll('.products--delete').forEach((element) => {
-                element.remove();
-              });
+
             }else {
               pushNotify('error', 'Có lỗi xảy ra, vui lòng thử lại sau','Lỗi');
             }
-            sumTotal();
+
           }
         });
       });
@@ -467,9 +476,15 @@
         let getData=element.closest('.cart-item').querySelector('.cart-item-qty-holder');
         let id = getData.getAttribute("data-cart-id");
         let sizeName =getData.getAttribute("data-cart-size");
+        let quantity= element.closest('.cart-item').querySelector('.cart-item-qty').value;
+        let name = getData.getAttribute("data-cart-name");
+        let img = getData.getAttribute("data-cart-img");
         listData.push({
           id: id,
           size: sizeName,
+          quantity:quantity,
+          name:name,
+          img:img
         });
       });
       return listData;
