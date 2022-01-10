@@ -1,0 +1,416 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<!-- Mirrored from www.ecommerce-admin.com/demo/page-sellers-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 02:39:00 GMT -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Sample title - Ecommerce admin dashboard template</title>
+
+  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+  <link href="css/bootstrapf9e3.css?v=1.1" rel="stylesheet" type="text/css"/>
+
+  <link rel="stylesheet" href="fonts/material-icon/css/round.css"/>
+
+  <!-- custom style -->
+  <link href="css/uif9e3.css?v=1.1" rel="stylesheet" type="text/css"/>
+  <link href="css/responsivef9e3.css?v=1.1" rel="stylesheet" />
+
+</head>
+<body>
+
+<b class="screen-overlay"></b>
+
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+      <a href="page-index-1.html" class="brand-wrap">
+        <img src="images/logo.svg" height="46" class="logo" alt="Ecommerce dashboard template">
+      </a>
+      <div>
+        <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+      </div>
+    </div> <!-- aside-top.// -->
+
+    <nav>
+      <ul class="menu-aside">
+        <li class="menu-item active">
+          <a class="menu-link" href="page-index-1.html"> <i class="icon material-icons md-home"></i>
+            <span class="text">Bảng điều khiển</span>
+          </a>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
+            <span class="text">Sản phẩm</span>
+          </a>
+          <div class="submenu">
+            <a href="page-products-list.html">Xem dạng danh sách</a>
+            <a href="page-products-table.html">Xem dạng bảng</a>
+            <a href="page-products-grid.html">Xem dạng lưới</a>
+            <a href="page-categories.html">Thể loại</a>
+            <a href="page-form-product-3.html">Thêm sản phẩm</a>
+          </div>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-orders-1.html"> <i class="icon material-icons md-shopping_cart"></i>
+            <span class="text">Đơn hàng</span>
+          </a>
+          <div class="submenu">
+            <a href="page-orders-2.html">Danh sách đơn hàng</a>
+            <a href="page-orders-detail.html">Chi tiết đơn hàng</a>
+          </div>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
+            <span class="text">Nhân viên</span>
+          </a>
+          <div class="submenu">
+            <a href="page-sellers-cards.html">Thẻ nhân viên</a>
+            <a href="page-sellers-list.html">Danh sách nhân viên</a>
+            <a href="page-seller-detail.html">Hồ sơ nhân viên</a>
+            <a href="page-account-register.html">Thêm nhân viên</a>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-transactions-B.html"> <i class="icon material-icons md-monetization_on"></i>
+            <span class="text">Giao dịch</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+            <span class="text">Nhận xét</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+            <span class="text">Thương hiệu</span> </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+            <span class="text">Thống kê</span>
+          </a>
+        </li>
+      </ul>
+      <hr>
+      <ul class="menu-aside">
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+            <span class="text">Cài đặt</span>
+          </a>
+          <div class="submenu">
+            <a href="page-settings-1.html">Cài đặt tài khoản</a>
+            <a href="page-settings-2.html">Cài đặt trang web</a>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-0-blank.html"> <i class="icon material-icons md-local_offer"></i>
+            <span class="text"> Thông tin liên hệ </span>
+          </a>
+        </li>
+      </ul>
+      <br>
+      <br>
+    </nav>
+    </aside>
+<main class="main-wrap">
+    <header class="main-header navbar">
+        <div class="col-search">
+            <form class="searchform">
+                <div class="input-group">
+                  <input list="search_terms" type="text" class="form-control" placeholder="Tìm kiếm...">
+                  <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i> </button>
+                </div>
+                <datalist id="search_terms">
+                  <option value="Products">
+                  <option value="New orders">
+                  <option value="Apple iphone">
+                  <option value="Ahmed Hassan">
+                </datalist>
+            </form>
+        </div>
+        <div class="col-nav">
+           <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="md-28 material-icons md-menu"></i> </button>
+           <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link btn-icon" onclick="darkmode(this)" title="Dark mode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-icon" href="#"> <i class="material-icons md-notifications_active"></i> </a>
+            </li>
+            <li class="dropdown nav-item">
+              <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#"> <img class="img-xs rounded-circle" src="images/people/avatar1.jpg" alt="User"></a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
+                <a class="dropdown-item" href="page-settings-1.html">Cài đặt</a>
+                <a class="dropdown-item text-danger" href="#">Đăng xuất</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+    </header>
+
+<section class="content-main">
+
+    <div class="content-header">
+        <h2 class="content-title">Nhân viên (Dạng danh sách)</h2>
+        <div>
+            <a href="#" class="btn btn-primary"><i class="material-icons md-plus"></i> Tạo mới</a>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <header class="card-header">
+            <div class="row gx-3">
+                <div class="col-lg-4 col-md-6 me-auto">
+                    <input type="text" placeholder="Tìm kiếm..." class="form-control">
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <select class="form-select">
+                        <option>Trạng thái</option>
+                        <option>Còn hàng</option>
+                        <option>Chưa hoạt động</option>
+                        <option>Hiện tất cả</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <select class="form-select">
+                        <option>Show 20</option>
+                        <option>Show 30</option>
+                        <option>Show 40</option>
+                    </select>
+                </div>
+            </div>
+        </header> <!-- card-header end// -->
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Người bán</th>
+                            <th>Email</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày đăng ký</th>
+                            <th class="text-end"> Hành động </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar1.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Eleanor Pena</h6>
+                                        <small class="text-muted">Mã người bán: #439</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>eleanor2020@example.com</td>
+                            <td><span class="badge rounded-pill alert-success">Còn hàng</span></td>
+                            <td>08.07.2020</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar2.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Mary Monasa</h6>
+                                        <small class="text-muted">Mã người bán: #129</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>monalisa@example.com</td>
+                            <td><span class="badge rounded-pill alert-success">Còn hàng</span></td>
+                            <td>11.07.2020</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar3.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Jonatan Ive</h6>
+                                        <small class="text-muted">Mã người bán: #400</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>mrjohn@example.com</td>
+                            <td><span class="badge rounded-pill alert-success">Còn hàng</span></td>
+                            <td>08.07.2020</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar4.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Eleanor Pena</h6>
+                                        <small class="text-muted">Mã người bán: #439</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>eleanor2020@example.com</td>
+                            <td><span class="badge rounded-pill alert-danger">Inactive</span></td>
+                            <td>08.07.2020</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar1.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Albert Pushkin</h6>
+                                        <small class="text-muted">Mã người bán: #439</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>someone@mymail.com</td>
+                            <td><span class="badge rounded-pill alert-success">Còn hàng</span></td>
+                            <td>20.11.2019</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar2.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Alexandra Pena</h6>
+                                        <small class="text-muted">Mã người bán: #439</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>eleanor2020@example.com</td>
+                            <td><span class="badge rounded-pill alert-danger">Inactive</span></td>
+                            <td>08.07.2020</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar3.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Eleanor Pena</h6>
+                                        <small class="text-muted">Mã người bán: #439</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>eleanor2020@example.com</td>
+                            <td><span class="badge rounded-pill alert-danger">Inactive</span></td>
+                            <td>08.07.2020</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar4.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Alex Pushkina</h6>
+                                        <small class="text-muted">Mã người bán: #439</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>alex@gmail.org</td>
+                            <td><span class="badge rounded-pill alert-success">Còn hàng</span></td>
+                            <td>08.07.2020</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar1.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Eleanor Pena</h6>
+                                        <small class="text-muted">Mã người bán: #439</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>eleanor2020@example.com</td>
+                            <td><span class="badge rounded-pill alert-success">Còn hàng</span></td>
+                            <td>08.07.2020</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="40%">
+                                <a href="#" class="itemside">
+                                    <div class="left">
+                                        <img src="images/people/avatar2.jpg" class="img-sm img-avatar" alt="Userpic">
+                                    </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">Eleanor Pena</h6>
+                                        <small class="text-muted">Mã người bán: #439</small>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>eleanor2020@example.com</td>
+                            <td><span class="badge rounded-pill alert-success">Còn hàng</span></td>
+                            <td>08.07.2020</td>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-light">View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> <!-- table-responsive.// -->
+            </div>
+
+        </div> <!-- card-body end// -->
+    </div> <!-- card end// -->
+
+
+</section> <!-- content-main end// -->
+</main>
+
+<script type="text/javascript">
+    if(localStorage.getItem("darkmode")){
+        var body_el = document.body;
+        body_el.className += 'dark';
+    }
+</script>
+
+<script src="js/jquery-3.5.0.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script src="js/scriptc619.js?v=1.0" type="text/javascript"></script>
+
+</body>
+
+<!-- Mirrored from www.ecommerce-admin.com/demo/page-sellers-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 02:39:00 GMT -->
+</html>

@@ -49,6 +49,33 @@ public class KhachHangDao {
     }
 
     public int suaKhachHang(KhachHang khachHang) {
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            //sql update
+            String sql = "UPDATE khachhang SET" +
+                    " HoTen = ?, DienThoai = ?," +
+                    " DiaChi = ?, TinhTP = ?, " +
+                    "QuanHuyen = ?, PhuongXa = ?" +
+                    " WHERE IDUSER = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, khachHang.getTenKH());
+            preparedStatement.setString(2, khachHang.getSdt());
+            preparedStatement.setString(3, khachHang.getDiaChi());
+            preparedStatement.setString(4, khachHang.getTinhTP());
+            preparedStatement.setString(5, khachHang.getQuanHuyen());
+            preparedStatement.setString(6, khachHang.getPhuongXa());
+            preparedStatement.setString(7, khachHang.getMaKH());
+
+            int result = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return result;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 

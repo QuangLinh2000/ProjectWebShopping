@@ -27,9 +27,10 @@ public class HomeController extends HttpServlet {
 
         request.setAttribute("listSPMoi",iHomeService.getSanPhamNoiBat(1,8));
         request.setAttribute("listSPKM",iHomeService.getSanPhamNoiBat(2,8));
-
+        request.setAttribute("listSPBanChay",iHomeService.getSanPhamNoiBat(3,8));
         String idBoSTLeft = listBoSuaTap.get(0).getId();
         String idBoSTRight = listBoSuaTap.get(1).getId();
+
         request.setAttribute("listBoSTLeft",iHomeService.getAllProductByBSTId(idBoSTLeft,10));
         request.setAttribute("listBoSTRight",iHomeService.getAllProductByBSTId(idBoSTRight,10));
 
@@ -46,7 +47,6 @@ public class HomeController extends HttpServlet {
         //get parameter int so and int size
         int so = Integer.parseInt(request.getParameter("so"));
         int size = Integer.parseInt(request.getParameter("size"));
-        IHomeService iHomeService = new HomeSerVice();
         if(size >= 8) {
             List<Product> listSP = ProductDao.getInstance().getSanPhamNoiBat(so,4,size-1);
             if(listSP != null){

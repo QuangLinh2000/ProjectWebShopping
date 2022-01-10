@@ -48,7 +48,7 @@ public class CheckOutsController extends HttpServlet {
         boolean check = Boolean.parseBoolean(request.getParameter("check"));
         HttpSession session = request.getSession();
         List<CartJson> cart = (List<CartJson>) session.getAttribute("cartCheckout");
-//       System.out.println(name + " " + phone + " " + address + " " + email + " " + tinhTP + " " + quanHuyen + " " + phuongXa + " " + check);
+       System.out.println(name + " " + phone + " " + address + " " + email + " " + tinhTP + " " + quanHuyen + " " + phuongXa + " " + check);
         User user = (User) session.getAttribute("userLognin");
 
        if(!check){

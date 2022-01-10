@@ -289,7 +289,6 @@
     <%if(khachHang!=null){%>
     $("#name-customer").val("<%=khachHang.getTenKH()%>");
     $("#phone-customer").val("<%=khachHang.getSdt()%>");
-    $("#email-customer").val("<%=khachHang.getEmail()%>");
     $("#address-customer").val("<%=khachHang.getDiaChi()%>");
 
 
