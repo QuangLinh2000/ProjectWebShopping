@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.projectwebshopping.dto.client.CartProduct" %>
 <%@ page import="com.example.projectwebshopping.model.client.CartJson" %>
@@ -394,3 +395,5 @@
 
 </script>
 </html>
+=======
+>>>>>>> 2b819c5a93529932662037116bcd0126ebf77166
