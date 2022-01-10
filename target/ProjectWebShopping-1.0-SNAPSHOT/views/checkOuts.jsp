@@ -16,6 +16,7 @@
 <%
   List<CartJson> carts= (List<CartJson>) request.getAttribute("list_cart");
     KhachHang khachHang= (KhachHang) request.getAttribute("khachHang");
+    User user= (User) request.getSession().getAttribute("userLognin");
   if (carts==null) {
     carts=new ArrayList<>();
   }
@@ -77,8 +78,10 @@
                     </div>
                 </div>
                 <div class="input-item-content-box">
-                    <input id="email-customer"  class="input-item" placeholder="Email" type="email">
-
+                    <input id="email-customer"  class="input-item" value="<%=user.getEmail()%>" placeholder="Email" type="email">
+                    <div class="error-box">
+                        <p class="error-text">Email không được để trống</p>
+                    </div>
                 </div>
                 <div class="input-item-content-box">
                     <input id="phone-customer"  class="input-item" placeholder="Điện Thoại" type="number">
@@ -248,6 +251,8 @@
 
   });
   document.getElementsByClassName('billing_address_2')[0].addEventListener('click', function () {
+      clickDatHang();
+
     document.querySelectorAll('.input-item-content-box .input-item').forEach(function (item) {
       let err = item.closest('.input-item-content-box').querySelector('.error-box')
       if(err) {
@@ -280,7 +285,6 @@
   });
 
   <%if(khachHang!=null){%>
-  console.log(array);
   $("#name-customer").val("<%=khachHang.getTenKH()%>");
   $("#phone-customer").val("<%=khachHang.getSdt()%>");
   $("#email-customer").val("<%=khachHang.getEmail()%>");
@@ -288,6 +292,63 @@
 
 
   <%}%>
+
+    function clickDatHang() {
+        var check = true;
+        <%if(khachHang==null){%>
+        check = false;
+        <%}%>
+        var name = $("#name-customer").val();
+        var phone = $("#phone-customer").val();
+        var email = $("#email-customer").val();
+        var address = $("#address-customer").val();
+        var tinhTP = $("#tinh-thanh-pho").val();
+        var quanHuyen = $("#quan-huyen").val();
+        var phuongXa = $("#phuong-xa").val();
+        if(name.trim().length > 0 && phone.trim().length > 0
+            && checkEmail(email)
+            &&checkPhone(phone)
+            && address.trim().length > 0
+            && tinhTP.trim().length > 0
+            && quanHuyen.trim().length > 0 && phuongXa.trim().length > 0) {
+
+            //ajax
+            $.ajax({
+                url: "<%=request.getContextPath()%>/check-outs",
+                type: "POST",
+                data: {
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    address: address,
+                    tinhTP: tinhTP,
+                    quanHuyen: quanHuyen,
+                    phuongXa: phuongXa,
+                    check: check
+                },
+                success: function (data) {
+                    if (data.trim() === "success") {
+                        alert("Đặt hàng thành công");
+                        <%--window.location.href = "<%=request.getContextPath()%>/dat-hang-thanh-cong";--%>
+                    } else {
+                        alert("Đặt hàng thất bại");
+                    }
+                }
+            });
+        }
+
+    }
+    //check format email
+    function checkEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    //check format phone
+    function checkPhone(phone) {
+        var re = /^[0-9]{10,11}$/;
+        return re.test(String(phone).toLowerCase());
+    }
+
     <%}%>
 
 </script>
