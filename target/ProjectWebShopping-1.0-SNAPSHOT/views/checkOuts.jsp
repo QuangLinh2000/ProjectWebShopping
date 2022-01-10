@@ -72,28 +72,54 @@
             <div class="box-content-left">
                 <div class="input-item-content-box">
                     <input  class="input-item" placeholder="Họ và Nhập tại đây" type="text">
+                    <div class="error-box">
+                        <p class="error-text">Họ và tên không được để trống</p>
+                    </div>
                 </div>
                 <div class="input-item-content-box">
                     <input  class="input-item" placeholder="Email" type="email">
+
                 </div>
                 <div class="input-item-content-box">
                     <input  class="input-item" placeholder="Điện Thoại" type="number">
+                    <div class="error-box">
+                        <p class="error-text">Số điện thoại không được để trống</p>
+                    </div>
                 </div>
                 <div class="input-item-content-box">
                     <input  class="input-item" placeholder="Địa chỉ" type="text">
+                    <div class="error-box">
+                        <p class="error-text">Địa chỉ không được để trống</p>
+                    </div>
                 </div>
 
                 <div class="dia-diem">
+                    <div class="input-item-content-box">
                     <select class="diem-diem-item" onChange="clickTinhThanhPho(this)" id="tinh-thanh-pho" >
                         <option value="">Tỉnh/Thành Phố</option>
                     </select>
+                        <div class="error-box">
+                            <p class="error-text">không được để trống</p>
+                        </div>
+                    </div>
+                    <div class="input-item-content-box">
                     <select class="diem-diem-item" onchange="clickQuanHuyen(this)"   id="quan-huyen" >
                         <option value="">Quận/Huyện</option>
                     </select>
+                        <div class="error-box">
+                            <p class="error-text">không được để trống</p>
+                        </div>
+                    </div>
+                    <div class="input-item-content-box">
 
                     <select class="diem-diem-item" id="phuong-xa" >
                         <option value="">Phường/xã</option>
                     </select>
+                        <div class="error-box">
+                            <p class="error-text">không được để trống</p>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="button-click">
                     <a href="<%=request.getContextPath()%>/cart"><input class="billing_address billing_address_1" type="button" value="Giỏ hàng"></a>
@@ -198,8 +224,54 @@
       $("#phuong-xa").append('<option value="">' + element.name + "</option>");
     });
   }
+  //get element class name billing_address_2 envent click
+  document.querySelectorAll('.input-item-content-box .input-item').forEach(function (item) {
+    item.addEventListener('keyup', function () {
+      let err = item.closest('.input-item-content-box').querySelector('.error-box')
 
-  //add thong tin khach hang
+      if (err) {
+        if (item.value.trim() === '') {
+          err.classList.add('active');
+        } else {
+          err.classList.remove('active');
+        }
+      }
+    });
+
+  });
+
+  document.getElementsByClassName('billing_address_2')[0].addEventListener('click', function () {
+    document.querySelectorAll('.input-item-content-box .input-item').forEach(function (item) {
+      let err = item.closest('.input-item-content-box').querySelector('.error-box')
+      if(err) {
+        if (item.value.trim() === '') {
+          err.classList.add('active');
+        } else {
+          err.classList.remove('active');
+        }
+      }
+    });
+    document.querySelectorAll('.dia-diem .diem-diem-item').forEach(function (item) {
+      select_event(item);
+    });
+  });
+  //fuction event select != index 1
+  function select_event(select) {
+    let index = select.selectedIndex;
+    let err = select.closest('.input-item-content-box').querySelector('.error-box')
+    // get index select
+    if (index===0) {
+      err.classList.add('active');
+    }else {
+      err.classList.remove('active');
+    }
+  }
+  document.querySelectorAll('.dia-diem .diem-diem-item').forEach(function (item) {
+    item.addEventListener('change', function () {
+      select_event(item);
+    });
+  });
+
   <%if(khachHang!=null){%>
   $("#name-customer").val("<%=khachHang.getTenKH()%>");
   $("#phone-customer").val("<%=khachHang.getSdt()%>");
