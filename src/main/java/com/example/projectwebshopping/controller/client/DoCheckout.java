@@ -1,8 +1,8 @@
 package com.example.projectwebshopping.controller.client;
 
-import com.episode6.hackit.mockspresso.reflect.TypeToken;
 import com.example.projectwebshopping.model.client.CartJson;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

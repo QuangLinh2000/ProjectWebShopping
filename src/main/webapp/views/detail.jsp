@@ -401,6 +401,13 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
 
             form.firstElementChild.style.animation = "modalFadeIn  ease-in 0.4s"
             form.classList.add("action-flex")
+            $('.quantity').focusout(function (){
+                var min=parseInt(this.min)
+                var max=parseInt(this.max)
+                if(parseInt($(this).val())>max) $(this).val(max)
+                else if(parseInt($(this).val())<min) $(this).val(min)
+                $(this).change();
+            })
             $('.quantity').change(function () {
                 arrNumber = document.querySelectorAll('.quantity')
                 totalNumber = 0;
@@ -570,6 +577,8 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
             pushNotify('error', 'Bạn chưa chọn sản phẩm nào','Lỗi');
         }
     }
+
+
 
 </script>
 

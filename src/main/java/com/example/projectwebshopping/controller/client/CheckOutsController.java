@@ -67,10 +67,10 @@ public class CheckOutsController extends HttpServlet {
         if (cart != null && user != null) {
            String mess = ProductDao.getInstance().checkOut(user.getId(), cart);
            //send ajax
-            response.getWriter().write(mess);
             if(mess.equals("success")){
                 session.removeAttribute("cartCheckout");
             }
+            response.getWriter().write(mess);
 
         }else{
             response.getWriter().write("false");

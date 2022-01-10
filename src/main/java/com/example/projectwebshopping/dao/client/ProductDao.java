@@ -614,11 +614,12 @@ public class ProductDao {
     }
     public int insertHoaDon(String idUser,Connection connection,String idHoaDon) {
         try {
-            String sql = "INSERT INTO hoadon(MAHOADON,IDUSER,NgayDatHang) VALUES(?,?,?)";
+            String sql = "INSERT INTO hoadon(MAHOADON,IDUSER,NgayDatHang,TrangThai) VALUES(?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, idHoaDon);
             preparedStatement.setString(2, idUser);
             preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
+            preparedStatement.setInt(4, 0);
             preparedStatement.executeUpdate();
             preparedStatement.close();
             return 1;
