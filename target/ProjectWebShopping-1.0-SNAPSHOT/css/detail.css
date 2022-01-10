@@ -871,6 +871,7 @@ table__infor-decription{
     border-radius: 0.3125em;
     padding: 0 0.9375em;
     border: none;
+    cursor: pointer;
 }
 /* Tablet & mobile */
 @media only screen and (max-width: 63.9375em) {

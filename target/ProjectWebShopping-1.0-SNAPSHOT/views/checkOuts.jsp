@@ -71,17 +71,19 @@
             <p class="title-content-left">Thông tin thanh toán</p>
             <div class="box-content-left">
                 <div class="input-item-content-box">
-                    <input  class="input-item" placeholder="Họ và Nhập tại đây" type="text">
+                    <input onkeyup="checkName(this)" class="input-item" placeholder="Họ và Nhập tại đây" type="text" pattern="^((\s*[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+\s*)+)$">
                     <div class="error-box">
                         <p class="error-text">Họ và tên không được để trống</p>
                     </div>
                 </div>
-                <div class="input-item-content-box">
-                    <input  class="input-item" placeholder="Email" type="email">
-
+                <div class="input-item-content-box" >
+                    <input onkeyup="checkEmail(this)" class="input-item" placeholder="Email" type="email" pattern="^(\w+@gmail.com)$">
+                    <div class="error-box">
+                        <p class="error-text">Email không được để trống</p>
+                    </div>
                 </div>
-                <div class="input-item-content-box">
-                    <input  class="input-item" placeholder="Điện Thoại" type="number">
+                <div  class="input-item-content-box">
+                    <input onkeyup="checkPhone(this)" class="input-item" placeholder="Điện Thoại" type="number" pattern="^(^0\d{8,})$">
                     <div class="error-box">
                         <p class="error-text">Số điện thoại không được để trống</p>
                     </div>
@@ -230,10 +232,12 @@
       let err = item.closest('.input-item-content-box').querySelector('.error-box')
 
       if (err) {
-        if (item.value.trim() === '') {
+        if (item.value.trim() === '' || checkPattern(item)===false) {
           err.classList.add('active');
+
         } else {
           err.classList.remove('active');
+
         }
       }
     });
@@ -281,6 +285,45 @@
   $("#quan-huyen").val("<%=khachHang.getQuanHuyen()%>");
   $("#phuong-xa").val("<%=khachHang.getPhuongXa()%>");
   <%}%>
-
+// handled input form
+  function checkPattern(element){
+      let patterns=new RegExp(element.pattern);
+      let check=(patterns).test(element.value);
+      return check
+  }
+  function checkName(element) {
+     let check=checkPattern(element)
+      let err = element.closest('.input-item-content-box').querySelector('.error-box')
+      if(check==false) {
+          element.style.border="2px solid red"
+          err.innerHTML="<p class='error-text'>Họ và Tên chỉ gồm chữ và khoảng trắng</p>"
+      }
+      else {
+          element.style.border="1px solid rgb(197, 192, 192)"
+          err.innerHTML="<p class='error-text'></p>"
+      }
+  }
+  function checkEmail(element) {
+      let check=checkPattern(element)
+      let err = element.closest('.input-item-content-box').querySelector('.error-box')
+      if (check == false) {
+          element.style.border = "2px solid red"
+          err.innerHTML="<p class='error-text'>Email không đúng định dạng</p>"
+      } else {
+          element.style.border = "1px solid rgb(197, 192, 192)"
+          err.innerHTML="<p class='error-text'></p>"
+      }
+  }
+  function checkPhone(element) {
+      let check=checkPattern(element)
+      let err = element.closest('.input-item-content-box').querySelector('.error-box')
+      if (check == false) {
+          element.style.border = "2px solid red"
+          err.innerHTML="<p class='error-text'>Chúng tôi không thể định dạng được số điện thoại này. Vui lòng nhập lại !</p>"
+      } else {
+          element.style.border = "1px solid rgb(197, 192, 192)"
+          err.innerHTML="<p class='error-text'></p>"
+      }
+  }
 </script>
 </html>
