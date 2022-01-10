@@ -24,7 +24,7 @@ public class CheckOutsController extends HttpServlet {
         }
         if (cart != null) {
             request.setAttribute("list_cart", cart);
-            session.removeAttribute("cartCheckout");
+//            session.removeAttribute("cartCheckout");
         }
         if (khachHang != null) {
             request.setAttribute("khachHang", khachHang);

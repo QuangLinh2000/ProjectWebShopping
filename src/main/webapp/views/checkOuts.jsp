@@ -71,23 +71,23 @@
             <p class="title-content-left">Thông tin thanh toán</p>
             <div class="box-content-left">
                 <div class="input-item-content-box">
-                    <input  class="input-item" placeholder="Họ và Nhập tại đây" type="text">
+                    <input id="name-customer" class="input-item" placeholder="Họ và Nhập tại đây" type="text">
                     <div class="error-box">
                         <p class="error-text">Họ và tên không được để trống</p>
                     </div>
                 </div>
                 <div class="input-item-content-box">
-                    <input  class="input-item" placeholder="Email" type="email">
+                    <input id="email-customer"  class="input-item" placeholder="Email" type="email">
 
                 </div>
                 <div class="input-item-content-box">
-                    <input  class="input-item" placeholder="Điện Thoại" type="number">
+                    <input id="phone-customer"  class="input-item" placeholder="Điện Thoại" type="number">
                     <div class="error-box">
                         <p class="error-text">Số điện thoại không được để trống</p>
                     </div>
                 </div>
                 <div class="input-item-content-box">
-                    <input  class="input-item" placeholder="Địa chỉ" type="text">
+                    <input id="address-customer"  class="input-item" placeholder="Địa chỉ" type="text">
                     <div class="error-box">
                         <p class="error-text">Địa chỉ không được để trống</p>
                     </div>
@@ -96,7 +96,7 @@
                 <div class="dia-diem">
                     <div class="input-item-content-box">
                     <select class="diem-diem-item" onChange="clickTinhThanhPho(this)" id="tinh-thanh-pho" >
-                        <option value="">Tỉnh/Thành Phố</option>
+                        <option   value="">Tỉnh/Thành Phố</option>
                     </select>
                         <div class="error-box">
                             <p class="error-text">không được để trống</p>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="input-item-content-box">
                     <select class="diem-diem-item" onchange="clickQuanHuyen(this)"   id="quan-huyen" >
-                        <option value="">Quận/Huyện</option>
+                        <option   value="">Quận/Huyện</option>
                     </select>
                         <div class="error-box">
                             <p class="error-text">không được để trống</p>
@@ -113,7 +113,7 @@
                     <div class="input-item-content-box">
 
                     <select class="diem-diem-item" id="phuong-xa" >
-                        <option value="">Phường/xã</option>
+                        <option   value="">Phường/xã</option>
                     </select>
                         <div class="error-box">
                             <p class="error-text">không được để trống</p>
@@ -174,7 +174,9 @@
 </div>
 
 <script >
-  var array;
+    <%if(carts.size()>0){%>
+
+    var array;
   var valueTinhThanhPho = "Tỉnh/Thành Phố";
   var arrayQuanHuyen;
   var valueQuanHUyen = "Quận / Huyện";
@@ -189,6 +191,12 @@
               '<option value="' + element.name + '">' + element.name + "</option>"
       );
     });
+      <%if(khachHang!=null){%>
+      $("#tinh-thanh-pho").val("<%=khachHang.getTinhTP()%>").change();
+      clickTinhThanhPho(document.getElementById("tinh-thanh-pho"));
+      $("#quan-huyen").val("<%=khachHang.getQuanHuyen()%>").change();
+      $("#phuong-xa").val("<%=khachHang.getPhuongXa()%>").change();
+      <%}%>
   });
   function clickTinhThanhPho(sel) {
     valueTinhThanhPho = sel.options[sel.selectedIndex].text;
@@ -204,7 +212,7 @@
     $("#phuong-xa").html('<option value="">Phường/xã</option>');
 
     arrayQuanHuyen.forEach((element) => {
-      $("#quan-huyen").append('<option value="">' + element.name + "</option>");
+      $("#quan-huyen").append('<option value="' + element.name + '">' + element.name + "</option>");
     });
   }
 
@@ -221,7 +229,7 @@
 
     $("#phuong-xa").html('<option value="">Phường/xã</option>');
     arrayPhuongXa.forEach((element) => {
-      $("#phuong-xa").append('<option value="">' + element.name + "</option>");
+      $("#phuong-xa").append('<option value="' + element.name + '">' + element.name + "</option>");
     });
   }
   //get element class name billing_address_2 envent click
@@ -239,7 +247,6 @@
     });
 
   });
-
   document.getElementsByClassName('billing_address_2')[0].addEventListener('click', function () {
     document.querySelectorAll('.input-item-content-box .input-item').forEach(function (item) {
       let err = item.closest('.input-item-content-box').querySelector('.error-box')
@@ -273,14 +280,15 @@
   });
 
   <%if(khachHang!=null){%>
+  console.log(array);
   $("#name-customer").val("<%=khachHang.getTenKH()%>");
   $("#phone-customer").val("<%=khachHang.getSdt()%>");
   $("#email-customer").val("<%=khachHang.getEmail()%>");
   $("#address-customer").val("<%=khachHang.getDiaChi()%>");
-  $("#tinh-thanh-pho").val("<%=khachHang.getTinhTP()%>");
-  $("#quan-huyen").val("<%=khachHang.getQuanHuyen()%>");
-  $("#phuong-xa").val("<%=khachHang.getPhuongXa()%>");
+
+
   <%}%>
+    <%}%>
 
 </script>
 </html>
