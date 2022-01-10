@@ -319,7 +319,7 @@
       let err = element.closest('.input-item-content-box').querySelector('.error-box')
       if (check == false) {
           element.style.border = "2px solid red"
-          err.innerHTML="<p class='error-text'>Chúng tôi không thể định dạng được số điện thoại này. Vui lòng nhập lại !</p>"
+          err.innerHTML="<p class='error-text'>Chúng tôi không thể định dạng được số điện thoại này, ít nhất 8 số. Vui lòng nhập lại !</p>"
       } else {
           element.style.border = "1px solid rgb(197, 192, 192)"
           err.innerHTML="<p class='error-text'></p>"
