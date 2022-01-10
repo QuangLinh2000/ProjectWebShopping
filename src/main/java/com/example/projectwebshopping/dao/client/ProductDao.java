@@ -555,6 +555,7 @@ public class ProductDao {
                             cartJsonList.remove(i);
                         }else{
                             connection.rollback();
+                            connection.setAutoCommit(true);
                             DataSourceConnection.returnConnection(connection);
 
                             return "Sản phẩm "+name+" không đủ số lượng";
@@ -575,15 +576,20 @@ public class ProductDao {
                     connection.commit();
                 }else{
                     connection.rollback();
+                    connection.setAutoCommit(true);
+
                     DataSourceConnection.returnConnection(connection);
                     return "Đặt hàng thất bại";
                 }
             }else{
                 connection.rollback();
-                DataSourceConnection.returnConnection(connection);
+                connection.setAutoCommit(true);
 
+                DataSourceConnection.returnConnection(connection);
                 return "Đặt hàng thất bại";
             }
+            connection.setAutoCommit(true);
+
             DataSourceConnection.returnConnection(connection);
             return "success";
         } catch (ClassNotFoundException e) {
