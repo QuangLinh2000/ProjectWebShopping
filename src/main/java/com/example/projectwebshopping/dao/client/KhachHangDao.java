@@ -23,6 +23,27 @@ public class KhachHangDao {
     }
 
     public int themKhachHang(KhachHang khachHang) {
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            String sql = "INSERT INTO khachhang(IDUSER, HoTen, DienThoai, DiaChi, TinhTP, QuanHuyen, PhuongXa) VALUES(?,?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, khachHang.getMaKH());
+            preparedStatement.setString(2, khachHang.getTenKH());
+            preparedStatement.setString(3, khachHang.getSdt());
+            preparedStatement.setString(4, khachHang.getDiaChi());
+            preparedStatement.setString(5, khachHang.getTinhTP());
+            preparedStatement.setString(6, khachHang.getQuanHuyen());
+            preparedStatement.setString(7, khachHang.getPhuongXa());
+            int result = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return result;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
 
     }

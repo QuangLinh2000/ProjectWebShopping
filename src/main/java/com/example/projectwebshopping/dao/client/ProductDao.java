@@ -3,17 +3,14 @@ package com.example.projectwebshopping.dao.client;
 import com.example.projectwebshopping.connection.DataSourceConnection;
 import com.example.projectwebshopping.dto.client.DetailProduct;
 import com.example.projectwebshopping.model.client.BoSuaTap;
+import com.example.projectwebshopping.model.client.CartJson;
+import com.example.projectwebshopping.model.client.KhachHang;
 import com.example.projectwebshopping.model.client.Product;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.*;
+import java.sql.Date;
+import java.util.*;
 
 public class ProductDao {
     //pattern singleton
@@ -519,32 +516,142 @@ public class ProductDao {
         return size;
     }
 
-//    public static void main(String[] args) {
-////        List<String> list = new ArrayList<>();
-////
-////        try {
-////            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\t.txt")));
-////            String line;
-////            while ((line =bufferedReader.readLine())!=null){
-////                list.add(line);
-////            }
-////        } catch (Exception e) {
-////            e.printStackTrace();
-////        }
-//        Map<String,String> map = new HashMap<>();
-//        try {
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\demo.txt")));
-//            String line;
-//            while ((line =bufferedReader.readLine())!=null){
-//              if(map.containsKey(line)){
-//                  System.out.println(line);
-//              }
-//              map.put(line,line);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public String checkOut(String idUser, List<CartJson> cartJsonList) {
+        List<CartJson> cartJsonList1 = new ArrayList<>();
+        cartJsonList1.addAll(cartJsonList);
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            connection.setAutoCommit(false);
+            String where ="";
+            for (int i = 0; i < cartJsonList.size(); i++) {
+                if(i==0){
+                    where = " where MASP = ?";
+                }else{
+                    where = where+" or MASP = ?";
+                }
+            }
+            String sql = "SELECT * FROM products "+where;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            for (int i = 0; i < cartJsonList.size(); i++) {
+                preparedStatement.setString(i+1, cartJsonList.get(i).getId());
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String id = resultSet.getString("MASP");
+                String name = resultSet.getString("TENSP");
+                for (int i = 0; i < cartJsonList.size(); i++) {
+
+                    if(cartJsonList.get(i).getId().equals(id)) {
+                        //số lượng muốn mua
+                        int quantity = cartJsonList.get(i).getQuantity();
+                        String size = cartJsonList.get(i).getSize();
+                        //số lượng của size có trong cửa hàng
+                        int soluong = resultSet.getInt(size);
+
+                        if(soluong>=quantity){
+                            resultSet.updateInt(size, soluong-quantity);
+                            resultSet.updateRow();
+                            cartJsonList.remove(i);
+                        }else{
+                            connection.rollback();
+                            connection.setAutoCommit(true);
+                            DataSourceConnection.returnConnection(connection);
+
+                            return "Sản phẩm "+name+" không đủ số lượng";
+                        }
+
+                    }
+
+                }
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            if(cartJsonList.size()==0){
+                String idHoaDon = UUID.randomUUID().toString();
+                if(deleteCart(idUser,cartJsonList1,connection) ==1
+                && insertHoaDon(idUser,connection,idHoaDon)==1
+                && insertCTHoaDon(idHoaDon,cartJsonList1,connection)==1) {
+                    connection.commit();
+                }else{
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+
+                    DataSourceConnection.returnConnection(connection);
+                    return "Đặt hàng thất bại";
+                }
+            }else{
+                connection.rollback();
+                connection.setAutoCommit(true);
+
+                DataSourceConnection.returnConnection(connection);
+                return "Đặt hàng thất bại";
+            }
+            connection.setAutoCommit(true);
+
+            DataSourceConnection.returnConnection(connection);
+            return "success";
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "success";
+    }
+
+   public int deleteCart(String idUser,List<CartJson> cartJsonList ,Connection connection) {
+        try {
+            String sql = "DELETE FROM giohang WHERE IDUSER = ? AND IDSP = ? AND SIZE = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            for (int i = 0; i < cartJsonList.size(); i++) {
+                preparedStatement.setString(1, idUser);
+                preparedStatement.setString(2, cartJsonList.get(i).getId());
+                preparedStatement.setString(3, cartJsonList.get(i).getSize());
+                preparedStatement.executeUpdate();
+            }
+            preparedStatement.close();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public int insertHoaDon(String idUser,Connection connection,String idHoaDon) {
+        try {
+            String sql = "INSERT INTO hoadon(MAHOADON,IDUSER,NgayDatHang,TrangThai) VALUES(?,?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, idHoaDon);
+            preparedStatement.setString(2, idUser);
+            preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
+            preparedStatement.setInt(4, 0);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public int insertCTHoaDon(String idHoaDon,List<CartJson> cartJsonList,Connection connection) {
+        try {
+            String sql = "INSERT INTO cthoadon(MaHD,PRICE,SoLuong,MaSP) VALUES(?,?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            for (int i = 0; i < cartJsonList.size(); i++) {
+                preparedStatement.setString(1, idHoaDon);
+                preparedStatement.setDouble(2, cartJsonList.get(i).getPrice());
+                preparedStatement.setInt(3, cartJsonList.get(i).getQuantity());
+                preparedStatement.setString(4, cartJsonList.get(i).getId());
+                preparedStatement.executeUpdate();
+            }
+            preparedStatement.close();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
 
 }
