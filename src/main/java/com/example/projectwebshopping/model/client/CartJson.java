@@ -6,15 +6,17 @@ public class CartJson {
     private int quantity;
     private String name;
     private String img;
+    private double price;
     //empty constructor
     public CartJson(){}
     //constructor
-    public CartJson(String id, String size, int quantity, String name, String img) {
+    public CartJson(String id, String size, int quantity, String name, String img, double price) {
         this.id = id;
         this.size = size;
         this.quantity = quantity;
         this.name = name;
         this.img = img;
+        this.price = price;
     }
     //getters and setters
     public String getId() {
@@ -56,6 +58,15 @@ public class CartJson {
     public void setImg(String img) {
         this.img = img;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     //toString
     @Override
     public String toString() {

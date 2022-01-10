@@ -368,7 +368,8 @@
 
                     }
 
-                    $('.row-product').append('<tr class="row-data" data-product-id="<%=product.getMaSP()%>" data-product-size="'+size.toUpperCase()+'" data-product-img="<%=product.getListUrlImg().get(0)%>">' +
+                    $('.row-product').append('<tr class="row-data" data-product-price = "<%=product.getGia()-product.getGia()* product.getSell()%>"' +
+                        ' data-product-id="<%=product.getMaSP()%>" data-product-size="'+size.toUpperCase()+'" data-product-img="<%=product.getListUrlImg().get(0)%>">' +
                         '<td class="table__image-decription"><a href=""><img' +
                         ' src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt=""></a></td>' +
                         '<td class="table__infor-decription ">' +
@@ -534,12 +535,14 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
             let id = element.getAttribute("data-product-size");
             let sizeName=element.getAttribute('data-product-id');
             let img = element.getAttribute('data-product-img');
+            let price = element.getAttribute('data-product-price');
             listData.push({
                 id: id,
                 size: sizeName,
                 quantity: element.querySelector('.quantity').value,
                 name:element.querySelector('.bold-text>h5').innerText,
                 img:img,
+                price:price
             });
         });
         return listData;

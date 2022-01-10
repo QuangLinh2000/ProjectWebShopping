@@ -214,46 +214,5 @@ public class CartDao {
         }
         return 0;
     }
-    //get cart by session
-    public List<CartProduct> getCartsCheckOust(List<CartJson> carts, String idUser) {
-        List<CartProduct> cartProducts = new ArrayList<>();
-
-        try {
-            Connection connection = DataSourceConnection.getConnection();
-            String sql = "SELECT p.MASP,p.TENSP,p.DONGIA,p.SALE,p.MAU,g.SOLUONG,h.URL,p.S,p.L,p.M,p.XL,p.TRANGTHAI,g.SIZE " +
-                    " FROM giohang g JOIN products p ON g.IDSP = p.MASP JOIN hinhanh h ON h.IDSP = p.MASP " +
-                    "WHERE IDUSER = ?" +
-                    " GROUP BY  p.MASP,p.TENSP,p.DONGIA,p.SALE,p.MAU,p.S,p.L,p.M,p.XL,p.TRANGTHAI,g.SIZE";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, idUser);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                String idSP = resultSet.getString("MASP");
-                String size = resultSet.getString("SIZE");
-
-                for (int i = 0; i < carts.size(); i++) {
-                    CartJson cart = carts.get(i);
-                    if (cart.getId().equals(idSP) && cart.getSize().equals(size)) {
-                        CartProduct cartProduct = new CartProduct();
-                        cartProduct.addCartProduct(resultSet);
-                        cartProducts.add(cartProduct);
-                        carts.remove(i);
-                        break;
-
-                    }
-                }
-
-            }
-
-            resultSet.close();
-            preparedStatement.close();
-            DataSourceConnection.returnConnection(connection);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return cartProducts;
-    }
 
 }

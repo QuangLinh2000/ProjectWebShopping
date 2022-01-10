@@ -479,12 +479,14 @@
         let quantity= element.closest('.cart-item').querySelector('.cart-item-qty').value;
         let name = getData.getAttribute("data-cart-name");
         let img = getData.getAttribute("data-cart-img");
+        let price = getData.getAttribute("data-cart-price");
         listData.push({
           id: id,
           size: sizeName,
           quantity:quantity,
           name:name,
-          img:img
+          img:img,
+          price:price
         });
       });
       return listData;

@@ -22,9 +22,6 @@ public class DoCheckout extends HttpServlet {
         String data = request.getParameter("data");
         if (data!=null) {
             List<CartJson> listCartJson = new Gson().fromJson(data, new TypeToken<List<CartJson>>() {}.getType());
-            for (CartJson cartJson : listCartJson) {
-                System.out.println(cartJson);
-            }
             HttpSession session = request.getSession();
             session.setAttribute("cartCheckout", listCartJson);
             response.getWriter().write("success");

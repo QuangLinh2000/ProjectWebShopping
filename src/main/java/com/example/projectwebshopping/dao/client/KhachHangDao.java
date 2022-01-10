@@ -1,0 +1,66 @@
+package com.example.projectwebshopping.dao.client;
+
+import com.example.projectwebshopping.connection.DataSourceConnection;
+import com.example.projectwebshopping.model.client.KhachHang;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class KhachHangDao {
+    //pattern singleton
+    private static KhachHangDao instance;
+
+    private KhachHangDao() {
+    }
+
+    public static KhachHangDao getInstance() {
+        if (instance == null) {
+            instance = new KhachHangDao();
+        }
+        return instance;
+    }
+
+    public int themKhachHang(KhachHang khachHang) {
+        return 0;
+
+    }
+
+    public int suaKhachHang(KhachHang khachHang) {
+        return 0;
+    }
+
+    public int xoaKhachHang(String idUser) {
+        return 0;
+    }
+
+    public KhachHang getKhachHangByUserId(String idUser) {
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            String sql = "SELECT * FROM users u JOIN khachhang k ON u.ID = k.IDUSER WHERE u.ID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            preparedStatement.setString(1, idUser);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                KhachHang khachHang = new KhachHang();
+                khachHang.addKhachHang(resultSet);
+                resultSet.close();
+                preparedStatement.close();
+                DataSourceConnection.returnConnection(connection);
+                return khachHang;
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+}
