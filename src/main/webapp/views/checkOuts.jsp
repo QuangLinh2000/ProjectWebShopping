@@ -175,7 +175,23 @@
     </div>
     <%}%>
 </div>
+<!--clear fix-->
+<div class="return-home">
+    <div class="feedback">
+        <div class="feedback__body">
+            <img class="thank-logo" src="<%=request.getContextPath()%>/img/thankyou.png" alt="">
+            <a class="return-home__button" href="">
+                <button>Trở Lại Trang Chủ</button>
+            </a>
+            <strong>OR</strong>
+            <a class="orders-page__button" href="">
+                <button>Xem Đơn Mua</button>
+            </a>
+        </div>
 
+    </div>
+
+</div>
 <script >
     <%if(carts.size()>0){%>
 
