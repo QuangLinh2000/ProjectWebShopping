@@ -1,0 +1,623 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<!-- Mirrored from www.ecommerce-admin.com/demo/page-form-product-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 02:39:00 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Sample title - Ecommerce admin dashboard template</title>
+
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+    <link href="css/bootstrapf9e3.css?v=1.1" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="fonts/material-icon/css/round.css"/>
+
+    <!-- custom style -->
+    <link href="css/uif9e3.css?v=1.1" rel="stylesheet" type="text/css"/>
+    <link href="css/responsivef9e3.css?v=1.1" rel="stylesheet" />
+
+</head>
+<body>
+
+<b class="screen-overlay"></b>
+
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+      <a href="page-index-1.html" class="brand-wrap">
+        <img src="images/logo.svg" height="46" class="logo" alt="Ecommerce dashboard template">
+      </a>
+      <div>
+        <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+      </div>
+    </div> <!-- aside-top.// -->
+
+    <nav>
+      <ul class="menu-aside">
+        <li class="menu-item active">
+          <a class="menu-link" href="page-index-1.html"> <i class="icon material-icons md-home"></i>
+            <span class="text">Bảng điều khiển</span>
+          </a>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
+            <span class="text">Sản phẩm</span>
+          </a>
+          <div class="submenu">
+            <a href="page-products-list.html">Xem dạng danh sách</a>
+            <a href="page-products-table.html">Xem dạng bảng</a>
+            <a href="page-products-grid.html">Xem dạng lưới</a>
+            <a href="page-categories.html">Thể loại</a>
+            <a href="page-form-product-3.html">Thêm sản phẩm</a>
+          </div>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-orders-1.html"> <i class="icon material-icons md-shopping_cart"></i>
+            <span class="text">Đơn hàng</span>
+          </a>
+          <div class="submenu">
+            <a href="page-orders-2.html">Danh sách đơn hàng</a>
+            <a href="page-orders-detail.html">Chi tiết đơn hàng</a>
+          </div>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
+            <span class="text">Nhân viên</span>
+          </a>
+          <div class="submenu">
+            <a href="page-sellers-cards.html">Thẻ nhân viên</a>
+            <a href="page-sellers-list.html">Danh sách nhân viên</a>
+            <a href="page-seller-detail.html">Hồ sơ nhân viên</a>
+            <a href="page-account-register.html">Thêm nhân viên</a>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-transactions-B.html"> <i class="icon material-icons md-monetization_on"></i>
+            <span class="text">Giao dịch</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+            <span class="text">Nhận xét</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+            <span class="text">Thương hiệu</span> </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+            <span class="text">Thống kê</span>
+          </a>
+        </li>
+      </ul>
+      <hr>
+      <ul class="menu-aside">
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+            <span class="text">Cài đặt</span>
+          </a>
+          <div class="submenu">
+            <a href="page-settings-1.html">Cài đặt tài khoản</a>
+            <a href="page-settings-2.html">Cài đặt trang web</a>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-0-blank.html"> <i class="icon material-icons md-local_offer"></i>
+            <span class="text"> Thông tin liên hệ </span>
+          </a>
+        </li>
+      </ul>
+      <br>
+      <br>
+    </nav>
+    </aside>
+<main class="main-wrap">
+    <header class="main-header navbar">
+        <div class="col-search">
+            <form class="searchform">
+                <div class="input-group">
+                    <input list="search_terms" type="text" class="form-control" placeholder="Tìm kiếm...">
+                    <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i> </button>
+                </div>
+                <datalist id="search_terms">
+                    <option value="Products">
+                    <option value="New orders">
+                    <option value="Apple iphone">
+                    <option value="Ahmed Hassan">
+                </datalist>
+            </form>
+        </div>
+        <div class="col-nav">
+            <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
+                    class="md-28 material-icons md-menu"></i> </button>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link btn-icon" onclick="darkmode(this)" title="Dark mode" href="#"> <i
+                            class="material-icons md-nights_stay"></i> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-icon" href="#"> <i class="material-icons md-notifications_active"></i> </a>
+                </li>
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" href="#"> <img class="img-xs rounded-circle"
+                            src="images/people/avatar1.jpg" alt="User"></a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
+                        <a class="dropdown-item" href="page-settings-1.html">Cài đặt</a>
+                        <a class="dropdown-item text-danger" href="#">Đăng xuất</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="content-main">
+
+        <div class="content-header">
+            <h2 class="content-title">Sản phẩm</h2>
+            <div>
+                <a href="#" class="btn btn-light">Xuất file</a>
+                <a href="#" class="btn btn-primary">Lưu</a>
+            </div>
+        </div>
+
+        <div class="card" id="content-wrapper">
+            <div class="card-body accordion" id="accordionExample">
+                <div class="row gx-5">
+                    <aside class="col-lg-3 border-end h-100 sticky-top pt-2" style="z-index: 1;">
+                        <nav class="nav nav-pills flex-lg-column mb-4">
+                            <a class="nav-link accordion-button border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                                <span class="text">Tổng quan</span>
+                            </a>
+                            <a class="nav-link accordion-button border-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                                <span class="text">Số lượng</span>
+                            </a>
+
+
+                            <a class="nav-link accordion-button border-0 collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                <span class="text">Giảm giá</span>
+                            </a>
+                            <a class="nav-link accordion-button border-0 collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                <span class="text">Link</span>
+                            </a>
+                            <a class="nav-link accordion-button border-0 collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                <span class="text">Hình ảnh</span>
+                            </a>
+                        </nav>
+
+                    </aside>
+                    <div class="col-lg-9">
+                        <section class="content-body p-xl-4">
+                            <!-- ------------dialog remove   start------------------   -->
+                            <!-- * modal delete -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Xoá sản phẩm</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Bạn có chắc chắn muốn xoá không?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Thoát</button>
+                                            <button type="button" class="btn btn-primary bg-danger">Đồng ý</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ----------------- end ------------------------->
+                            <form >
+                                <div id="collapseOne" class="accordion-collapse collapse show border-0" aria-labelledby="headingOne"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="row  mb-4">
+                                        <div class="col-md-12 form-group">
+                                            <label for="product_name" class="form-label">Tên sản phẩm</label>
+                                            <input type="text" placeholder="Tên sản phẩm" class="form-control" id="product_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-md-12 form-group">
+                                            <label for="product_id" class="form-label">Mã sản phẩm</label>
+                                            <input type="text" placeholder="Mã sản phẩm" class="form-control" id="product_id" readonly required>
+                                        </div>
+                                    </div>
+                                    <div class="rows">
+                                        <div class="col-md-12 form-group  mb-4">
+                                            <label for="product_brand" class="form-label">Nhãn hiệu</label>
+                                            <input type="text" placeholder="Nhập tại đây" class="form-control" id="product_brand">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 form-group  mb-4">
+                                            <label class="form-label" for="product-status">Trạng thái</label>
+                                            <select class="form-select" id="product-status" name="product-status">
+                                                <option>Còn hàng</option>
+                                                <option>Hết hàng</option>
+                                                <option>Hàng lỗi</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group ">
+                                            <label for="product_quantity" class="form-label">Số lượng</label>
+                                            <input type="number" min="0" class="form-control" id="product_quantity" value="40" readonly>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 form-group  mb-4" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Các màu ngăn cách bằng dấu ,">
+                                            <label for="product_color" class="form-label">Màu</label>
+                                            <input type="text" placeholder="Màu" class="form-control" id="product_color" value="đỏ, cam">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 form-group mb-4">
+                                            <label for="product_price" class="form-label">Giá gốc</label>
+                                            <div class="input-group">
+                                                <input type="text" placeholder="Giá gốc" class="form-control" id="product_price" value="500000">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">vnđ</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group ">
+                                            <label for="product_price_sale" class="form-label">Giá sale</label>
+                                            <div class="input-group">
+                                                <input type="text" placeholder="Giá sale" class="form-control" id="product_price_sale" value="400000"
+                                                    readonly>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">vnđ</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4 ">
+                                        <div class="form-group " >
+                                            <label for="product_description" class="form-label">Mô tả</label>
+                                            <textarea id="product_description" placeholder="Mô tả" class="form-control" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div> <!-- row.// -->
+
+
+
+                                <div id="collapseTwo" class="accordion-collapse collapse  border-0" aria-labelledby="headingTwo"
+                                    data-bs-parent="#accordionExample">
+
+                                    <table class="table table-hover table-bordered ">
+                                        <thead class="table-light">
+                                            <tr >
+                                                <th scope="col">#</th>
+                                                <th scope="col" >Kích cỡ</th>
+                                                <th scope="col" width="20%">Số lượng</th>
+                                                <th scope="col" >Trạng thái</th>
+                                                <th scope="col" class="text-end"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td class="md">
+                                                    S
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" min="0" value="3">
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" id="size-status">
+                                                        <option>Vô hiệu</option>
+                                                        <option>Hoạt động</option>
+                                                    </select>
+                                                </td>
+                                                <td class="text-end">
+                                                    <button type="button"  class="btn btn-danger"> <i class="material-icons md-minus"> </i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="d-flex justify-content-end">
+
+                                        <a href="#" class="btn btn-primary ml-auto  me-2"><i class="material-icons md-plus"></i>
+                                        </a>
+                                    </div>
+                                </div> <!-- row.// -->
+
+                                <div id="collapseThree" class=" accordion-collapse collapse  border-0" aria-labelledby="headingThree"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="table-responsive">
+
+                                        <table class="table  table-hover table-bordered " style="width: 100%">
+
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col" >Giảm giá</th>
+                                                    <th scope="col" >Giá sale</th>
+
+                                                    <th scope="col ">Ngày bắt đầu</th>
+                                                    <th scope="col" >Ngày kết thúc</th>
+                                                    <th scope="col" class="text-end"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        <div class="input-group" style="width: 70px;">
+                                                            <input type="number" class="form-control" min="0" max="100" value="0" step="1">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+
+                                                        <input type="text" style="width: 110px;" placeholder="Giá sale" class="form-control"value="400000" >
+
+                                                    </td>
+                                                    <td>
+
+                                                        <input type="date"  style="width: 165px;" class="form-control" min="2020-02-01" width="480">
+
+                                                    </td>
+                                                    <td>
+
+
+                                                        <input type="date"  style="width: 165px;" name="" id="" class="form-control " min="2020-02-01">
+
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <button type="button" class="btn btn-danger"> <i class="material-icons md-minus"> </i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+
+                                        <a href="#" class="btn btn-primary ml-auto  me-2"><i class="material-icons md-plus"></i>
+                                        </a>
+                                    </div>
+                                </div> <!-- row.// -->
+                                <div id="collapseFour" class=" accordion-collapse collapse  border-0" aria-labelledby="headingFour"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="mb-4" id="tag-content">
+                                        <h5 class="mb-3">Thẻ</h5>
+                                        <!-- <div class="mb-1">
+                                            <input type="text" placeholder="Nhập tại đây" class="form-control">
+                                        </div> -->
+                                        <div class="input-group mb-1">
+                                            <input type="text" placeholder="Nhập tại đây" class="form-control" id="input-create-tag">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" id="btn-create-tag" type="button">Tạo</button>
+                                            </div>
+                                        </div>
+                                        <a href="#" class="btn btn-sm btn-light mb-1">Woman
+                                        <i class="material-icons md-close tag-delete"></i></a>
+                                        <a href="#" class="btn btn-sm btn-light mb-1">Summer
+                                        <i class="material-icons md-close tag-delete"></i></a>
+                                        <a href="#" class="btn btn-sm btn-light mb-1">Woman
+                                        <i class="material-icons md-close tag-delete"></i></a>
+                                        <a href="#" class="btn btn-sm btn-light mb-1">Summer
+                                        <i class="material-icons md-close tag-delete"></i></a>
+                                        <a href="#" class="btn btn-sm btn-light mb-1">Summer
+                                            <i class="material-icons md-close tag-delete"></i></a>
+                                    </div>
+                                    <div >
+                                        <h5 class="mb-3">Bộ sưu tập</h5>
+                                        <div class="mb-4 form-group">
+                                            <input type="text" placeholder="Nhập tại đây" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="product_type">
+                                        <h5 class="mb-3">Thể loại</h5>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="product-cat">
+                                            <label class="form-check-label" for="product-cat"> Áo sơ mi </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="product-cat-1">
+                                            <label class="form-check-label" for="product-cat-1"> Áo thun </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="product-cat-2">
+                                            <label class="form-check-label" for="product-cat-2"> Giày thể thao (Sneakers) </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="product-cat-3">
+                                            <label class="form-check-label" for="product-cat-3"> Đồ thể thao </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="product-cat-4">
+                                            <label class="form-check-label" for="product-cat-4"> Áo Vests </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="product-cat-5">
+                                            <label class="form-check-label" for="product-cat-5"> Quần áo dệt kim (Vải Knit) </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="product-cat-8">
+                                            <label class="form-check-label" for="product-cat-8"> Quần Shorts </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="collapseFive" class=" accordion-collapse collapse  border-0" aria-labelledby="headingFive"
+                                    data-bs-parent="#accordionExample">
+                                    <div id="container-image">
+                                        <div class="card mb-3"  id="card-image-0">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label for="file-image-0">
+                                                        <img  src="../img/collection1_slide_product_1.jpg" class="card-img img-thumbnail" alt="...">
+                                                    </label>
+                                                    <input class="d-none" id="file-image-0" type="file"  accept="image/*" />
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <div class="card-body">
+                                                        <div class="input-group card-title">
+                                                            <label class="input-group-text ">Mã hình ảnh</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4 form-group">
+                                                                <div class="input-group card-title m-0">
+                                                                    <label class="input-group-text ">Vị trí</label>
+                                                                    <input type="number" class="form-control" value="1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="card-title  input-group m-0">
+                                                                    <label class="input-group-text" for="product-img-status">Trạng thái</label>
+                                                                    <select class="form-select" id="product-img-status" name="product-status">
+                                                                        <option>Vô hiệu</option>
+                                                                        <option>Kích hoạt</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-1 d-flex align-items-center justify-content-center">
+                                                    <a href="#" class="btn btn-danger">Xoá</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <label for="create-image" class="btn btn-primary ml-auto  mt-3">
+                                            <i class="material-icons md-plus"></i>
+                                        </label>
+                                            <input class="d-none" id="create-image" type="file" accept="image/*" multiple/>
+
+                                    </div>
+                                </div>
+                            </form>
+
+                        </section> <!-- content-body .// -->
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+
+            </div> <!-- card-body .//end -->
+        </div> <!-- card .//end -->
+
+
+    </section> <!-- content-main end// -->
+</main>
+
+<script>
+    if(localStorage.getItem("darkmode")){
+        var body_el = document.body;
+        body_el.className += 'dark';
+    }
+    const tagDeletes = document.querySelectorAll('.tag-delete');
+    tagDeletes.forEach(tagDelete => {
+        tagDelete.addEventListener('click', removeTag);
+    });
+    function removeTag(params) {
+        params.preventDefault();
+        this.parentElement.remove();
+    }
+    const createTag = document.getElementById('btn-create-tag');
+    const inputTag = document.getElementById('input-create-tag');
+    createTag.addEventListener('click', function(e){
+        e.preventDefault();
+        if(inputTag.value.trim()){
+            // console.log(inputTag.value.split(','));
+            inputTag.value.split(',').forEach(function(inputSplit){
+                const tagEl = document.createElement('a');
+                tagEl.href = '#';
+                tagEl.className = 'btn btn-sm btn-light mb-1 me-1';
+                tagEl.innerHTML = inputSplit + '<i class="material-icons md-close tag-delete"></i>';
+                document.querySelector('#tag-content').appendChild(tagEl);
+                tagEl.querySelector('.tag-delete').addEventListener('click', removeTag);
+            });
+            inputTag.value = '';
+        }
+    });
+    const inputCreateImage =document.getElementById('create-image');
+    // event change input file inputCreateImage
+    const indexImage = 1;
+    inputCreateImage.addEventListener('change',function(e) {
+        // console.log(e.target.files);
+        for (const file of e.target.files) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // console.log(e.target.result);
+                const imageEl = document.createElement('img');
+                imageEl.src = e.target.result;
+                imageEl.className = 'card-img img-thumbnail';
+                imageEl.alt = '...';
+                const cardEl = document.createElement('div');
+                cardEl.id = 'card';
+                cardEl.className = 'card mb-3';
+                cardEl.innerHTML = `
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="file-image-${indexImage}">
+                            <img  src="${e.target.result}" class="card-img img-thumbnail" alt="...">
+                        </label>
+                        <input class="d-none" id="file-image-${indexImage}" type="file"  accept="image/*" />
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="card-body">
+                            <div class="input-group card-title">
+                                <label class="input-group-text ">Mã hình ảnh</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <div class="input-group card-title m-0">
+                                        <label class="input-group-text ">Vị trí</label>
+                                        <input type="number" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-title  input-group m-0">
+                                        <label class="input-group-text" for="product-img-status">Trạng thái</label>
+                                        <select class="form-select" id="product-img-status" name="product-status">
+                                            <option>Vô hiệu</option>
+                                            <option>Kích hoạt</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 d-flex align-items-center justify-content-center">
+                        <a href="#" class="btn btn-danger">Xoá</a>
+                    </div>
+                </div>
+                `;
+                document.querySelector('#container-image').appendChild(cardEl);
+                i++;
+            };
+            reader.readAsDataURL(file);
+
+        }
+
+    });
+</script>
+
+<script src="js/jquery-3.5.0.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- Custom JS -->
+<script src="js/scriptc619.js?v=1.0"></script>
+
+</body>
+
+<!-- Mirrored from www.ecommerce-admin.com/demo/page-form-product-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 02:39:00 GMT -->
+</html>

@@ -100,7 +100,12 @@ public class ProductDao {
                             "  ORDER BY SALE DESC  LIMIT ?) as p ON h.IDSP = p.MASP ORDER BY SALE DESC");
                     break;
                 case 3:
-                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products where  TRANGTHAI = ? ORDER BY NGAYNHAP DESC LIMIT ?) as p ON h.IDSP = p.MASP ORDER BY NGAYNHAP DESC");
+                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN (SELECT p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                            "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL,SUM(ct.SOLUONG) soLuong" +
+                            " FROM products p JOIN cthoadon ct ON p.MASP = ct.MaSP" +
+                            " WHERE p.TRANGTHAI = ?" +
+                            " GROUP BY p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                            "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL ORDER BY SOLUONG DESC LIMIT ?) as p ON h.IDSP = p.MASP ");
                     break;
 
                 default:
@@ -160,7 +165,12 @@ public class ProductDao {
                             "  ORDER BY SALE DESC  LIMIT ?,?) as p ON h.IDSP = p.MASP ORDER BY SALE DESC");
                     break;
                 case 3:
-                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products where  TRANGTHAI = ? ORDER BY NGAYNHAP DESC LIMIT ?,?) as p ON h.IDSP = p.MASP ORDER BY NGAYNHAP DESC");
+                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN (SELECT p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                                                        "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL,SUM(ct.SOLUONG) soLuong" +
+                                                       " FROM products p JOIN cthoadon ct ON p.MASP = ct.MaSP" +
+                                                        " WHERE p.TRANGTHAI = ?" +
+                                                       " GROUP BY p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                                                     "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL ORDER BY SOLUONG DESC LIMIT ?,?) as p ON h.IDSP = p.MASP ");
                     break;
 
                 default:
@@ -226,7 +236,12 @@ public class ProductDao {
                     preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products WHERE LOAISP = ? AND TRANGTHAI = ?  ORDER BY NGAYNHAP DESC  LIMIT ? ) as p ON h.IDSP = p.MASP ");
                     break;
                 case 2:
-                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products WHERE LOAISP = ? AND TRANGTHAI = ?  ORDER BY DONGIA DESC  LIMIT ? ) as p ON h.IDSP = p.MASP ");
+                    preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN (SELECT p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                            "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL,SUM(ct.SOLUONG) soLuong" +
+                            " FROM products p JOIN cthoadon ct ON p.MASP = ct.MaSP" +
+                            " WHERE  p.LOAISP = ? AND p.TRANGTHAI = ?" +
+                            " GROUP BY p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                            "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL ORDER BY SOLUONG DESC LIMIT ?) as p ON h.IDSP = p.MASP ");
                     break;
 
                 case 3:
@@ -290,7 +305,7 @@ public class ProductDao {
     public List<Product> getProducts(String idLoai, int loaiSlected) {
         Map<String, Product> map = new HashMap<>();
         List<Product> products = new ArrayList<>();
-        String sqlStart = "SELECT * FROM hinhanh AS h INNER JOIN  (SELECT * FROM products ";
+        String sqlStart = "SELECT * FROM hinhanh AS h INNER JOIN  ( SELECT * FROM products";
         String sqlWhere = " WHERE LOAISP = ? AND TRANGTHAI = ?  ";
         String sqlOrderBy = "";
         String sqlEnd = "  ) as p ON h.IDSP = p.MASP";
@@ -300,7 +315,12 @@ public class ProductDao {
                 break;
             case 1: sqlOrderBy += " ORDER BY NGAYNHAP DESC";
                 break;
-            case 2: sqlOrderBy += " ORDER BY DONGIA DESC";
+            case 2: sqlOrderBy += " SELECT * FROM hinhanh AS h INNER JOIN (SELECT p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                    "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL,SUM(ct.SOLUONG) soLuong" +
+                    " FROM products p JOIN cthoadon ct ON p.MASP = ct.MaSP" +
+                    " WHERE  LOAISP = ? AND TRANGTHAI = ? " +
+                    " GROUP BY p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                    "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL ORDER BY SOLUONG DESC LIMIT 8) as p ON h.IDSP = p.MASP";
                 break;
 
             case 3: sqlOrderBy += " ORDER BY SALE DESC";
@@ -315,8 +335,11 @@ public class ProductDao {
 
         try {
             Connection connection = DataSourceConnection.getConnection();
-
             String sql = sqlStart + sqlWhere + sqlOrderBy + sqlEnd;
+
+            if(loaiSlected == 2){
+                sql = sqlOrderBy;
+            }
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -553,6 +576,7 @@ public class ProductDao {
                             resultSet.updateInt(size, soluong-quantity);
                             resultSet.updateRow();
                             cartJsonList.remove(i);
+                            i--;
                         }else{
                             connection.rollback();
                             connection.setAutoCommit(true);
@@ -568,25 +592,29 @@ public class ProductDao {
             }
             resultSet.close();
             preparedStatement.close();
+
             if(cartJsonList.size()==0){
                 String idHoaDon = UUID.randomUUID().toString();
-                if(deleteCart(idUser,cartJsonList1,connection) ==1
-                && insertHoaDon(idUser,connection,idHoaDon)==1
-                && insertCTHoaDon(idHoaDon,cartJsonList1,connection)==1) {
+                int delete = deleteCart(idUser,cartJsonList1,connection);
+                int ínert = insertHoaDon(idUser,connection,idHoaDon);
+                int ctInsert = insertCTHoaDon(idHoaDon,cartJsonList1,connection);
+                if(delete >=1
+                && ínert>=1
+                && ctInsert>=1) {
                     connection.commit();
                 }else{
                     connection.rollback();
                     connection.setAutoCommit(true);
 
                     DataSourceConnection.returnConnection(connection);
-                    return "Đặt hàng thất bại";
+                    return "Đặt hàng thất bại 1";
                 }
             }else{
                 connection.rollback();
                 connection.setAutoCommit(true);
 
                 DataSourceConnection.returnConnection(connection);
-                return "Đặt hàng thất bại";
+                return "Đặt hàng thất bại 2";
             }
             connection.setAutoCommit(true);
 

@@ -1,4 +1,4 @@
-package com.example.projectwebshopping.filter;
+package com.example.projectwebshopping.filter.client;
 
 import com.example.projectwebshopping.model.client.LogninManager;
 import com.example.projectwebshopping.model.client.ProductManager;

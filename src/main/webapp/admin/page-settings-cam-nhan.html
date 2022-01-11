@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<!-- Mirrored from www.ecommerce-admin.com/demo/page-settings-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 02:39:05 GMT -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Sample title - Ecommerce admin dashboard template</title>
+
+  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+  <link href="css/bootstrapf9e3.css?v=1.1" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="fonts/material-icon/css/round.css" />
+
+  <!-- custom style -->
+  <link href="css/uif9e3.css?v=1.1" rel="stylesheet" type="text/css" />
+  <link href="css/responsivef9e3.css?v=1.1" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <b class="screen-overlay"></b>
+
+  <aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+      <a href="page-index-1.html" class="brand-wrap">
+        <img src="images/logo.svg" height="46" class="logo" alt="Ecommerce dashboard template">
+      </a>
+      <div>
+        <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+        </button>
+      </div>
+    </div> <!-- aside-top.// -->
+
+    <nav>
+      <ul class="menu-aside">
+        <li class="menu-item active">
+          <a class="menu-link" href="page-index-1.html"> <i class="icon material-icons md-home"></i>
+            <span class="text">Bảng điều khiển</span>
+          </a>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
+            <span class="text">Sản phẩm</span>
+          </a>
+          <div class="submenu">
+            <a href="page-products-list.html">Xem dạng danh sách</a>
+            <a href="page-products-table.html">Xem dạng bảng</a>
+            <a href="page-products-grid.html">Xem dạng lưới</a>
+            <a href="page-categories.html">Thể loại</a>
+            <a href="page-form-product-3.html">Thêm sản phẩm</a>
+          </div>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-orders-1.html"> <i class="icon material-icons md-shopping_cart"></i>
+            <span class="text">Đơn hàng</span>
+          </a>
+          <div class="submenu">
+            <a href="page-orders-2.html">Danh sách đơn hàng</a>
+            <a href="page-orders-detail.html">Chi tiết đơn hàng</a>
+          </div>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
+            <span class="text">Nhân viên</span>
+          </a>
+          <div class="submenu">
+            <a href="page-sellers-cards.html">Thẻ nhân viên</a>
+            <a href="page-sellers-list.html">Danh sách nhân viên</a>
+            <a href="page-seller-detail.html">Hồ sơ nhân viên</a>
+            <a href="page-account-register.html">Thêm nhân viên</a>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-transactions-B.html"> <i class="icon material-icons md-monetization_on"></i>
+            <span class="text">Giao dịch</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+            <span class="text">Nhận xét</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+            <span class="text">Thương hiệu</span> </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+            <span class="text">Thống kê</span>
+          </a>
+        </li>
+      </ul>
+      <hr>
+      <ul class="menu-aside">
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+            <span class="text">Cài đặt</span>
+          </a>
+          <div class="submenu">
+            <a href="page-settings-1.html">Cài đặt tài khoản</a>
+            <a href="page-settings-2.html">Cài đặt trang web</a>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-0-blank.html"> <i class="icon material-icons md-local_offer"></i>
+            <span class="text"> Thông tin liên hệ </span>
+          </a>
+        </li>
+      </ul>
+      <br>
+      <br>
+    </nav>
+  </aside>
+  <main class="main-wrap">
+    <header class="main-header navbar">
+      <div class="col-search">
+        <form class="searchform">
+          <div class="input-group">
+            <input list="search_terms" type="text" class="form-control" placeholder="Tìm kiếm...">
+            <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i> </button>
+          </div>
+          <datalist id="search_terms">
+            <option value="Products">
+            <option value="New orders">
+            <option value="Apple iphone">
+            <option value="Ahmed Hassan">
+          </datalist>
+        </form>
+      </div>
+      <div class="col-nav">
+        <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
+            class="md-28 material-icons md-menu"></i> </button>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link btn-icon" onclick="darkmode(this)" title="Dark mode" href="#"> <i
+                class="material-icons md-nights_stay"></i> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn-icon" href="#"> <i class="material-icons md-notifications_active"></i> </a>
+          </li>
+          <li class="dropdown nav-item">
+            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#"> <img class="img-xs rounded-circle"
+                src="images/people/avatar1.jpg" alt="User"></a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
+              <a class="dropdown-item" href="page-settings-1.html">Cài đặt</a>
+              <a class="dropdown-item text-danger" href="#">Đăng xuất</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="content-main">
+
+      <div class="content-header">
+        <h2 class="content-title">Site settings </h2>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="row gx-5">
+            <aside class="col-lg-3 border-end" style="position: sticky;
+      position: -webkit-sticky;
+      top: 10px; height: 450px;">
+
+              <nav class="nav nav-pills flex-lg-column mb-4">
+                <ul class="menu-aside">
+                  <li class="menu-item  active">
+                    <a class="menu-link" href="page-settings-2.html">
+                      <span class="text">Tổng quan</span>
+                    </a>
+                  </li>
+                  <li class="menu-item has-submenu">
+                    <a class="menu-link" style="cursor: pointer;">
+                      <span class="text">Cài đặt Trang chủ</span>
+                    </a>
+                    <div class="submenu">
+                      <a href="page-settings-slide-qc.html">Silde quảng cáo</a>
+                      <a href="page-settings-bo-suu-tap.html">Bộ sưu tập</a>
+                      <a href="page-settings-cam-nhan.html">Nhận xét</a>
+                      <a href="page-settings-tin-tuc.html">Tin tức</a>
+                    </div>
+                  </li>
+
+                  <li class="menu-item ">
+                    <a class="menu-link" href="page-settings-product.html">
+                      <span class="text">Cài đặt trang sản phẩm</span>
+                    </a>
+                  </li>
+                  <li class="menu-item ">
+                    <a class="menu-link" href="page-settings-footer.html">
+                      <span class="text">Cài đặt footer</span>
+                    </a>
+                  </li>
+                  <li class="menu-item ">
+                    <a class="menu-link" href="page-settings-chekcOuts.html">
+                      <span class="text">Cài đặt thanh toán</span>
+                    </a>
+                  </li>
+
+                </ul>
+
+              </nav>
+
+            </aside>
+            <div class="col-lg-9">
+              <section class="content-body p-xl-4">
+
+<!-- ------------dialog remove   start------------------   -->
+<!-- * modal delete -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Xoá sản phẩm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc chắn muốn xoá không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+        <button type="button" class="btn btn-primary bg-danger">Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ----------------- end ------------------------->
+                <form>
+                  <div class="row border-bottom mb-4 pb-4 box-parent">
+                    <div class="col-md-5">
+                      <h5>Tiêu đề</h5>
+                      <p class="text-muted" style="max-width:90%">
+                        Tiêu đề sẽ được áp dụng cho trang web khi thay thế</p>
+                    </div> <!-- col.// -->
+
+
+                    <div class="col-md-7">
+
+                      <div class="mb-3">
+                        <label class="form-label">Tiêu đề</label>
+                        <div class="pb-4">
+                          <input class="form-control " type="text" name="" placeholder="Type here">
+
+                        </div>
+                        <a class="btn btn-sm btn-light btn-light-edit">
+                          <i class="material-icons md-edit"></i> Chỉnh sửa
+                        </a>
+                      </div>
+
+
+
+                    </div> <!-- col.// -->
+                  </div> <!-- row.// -->
+                  <div class="row border-bottom mb-4 box-parent ">
+                    <div class="col-md-5">
+                      <h5>Thêm Nhận xét</h5>
+
+                    </div> <!-- col.// -->
+
+
+                    <div class="row col-md-7">
+                      <div class="col-xl-8"></div>
+                      <input class="col-xl-4 btn btn-primary" id="add-cam-nhan" type="button" value="Thêm"></input>
+                      &nbsp;
+
+                    </div> <!-- col.// -->
+                  </div> <!-- row.// -->
+                  <div class="mb-4" id="box-them-cam-nhan"></div>
+
+                  <div class="row border-bottom mb-4 pb-2 box-parent">
+                    <div class="col-md-5">
+                      <h5>Nhận xét đang có </h5>
+                    </div> <!-- col.// -->
+
+                  </div> <!-- row.// -->
+
+                  <div class="row  pb-4">
+
+
+                    <div class="row border-bottom pb-4 mt-4 box-parent">
+                      <div class="col-md-5">
+
+                        <div class="row" style="margin-top: 40px;">
+
+                          <div class="col-xl-10">
+                            <div class="col">
+                              <div class="card card-product-grid">
+                                <a style="height: 340px;" href="#" class="img-wrap"> <img id = "img-cam-nhan"
+                                    src="../img/home_customer_img1.jpg" alt="Product"> </a>
+
+                              </div> <!-- card-product  end// -->
+                            </div> <!-- col.// -->
+                          </div>
+
+                        </div>
+                      </div> <!-- col.// -->
+
+
+                      <div class="col-md-7">
+
+                        <div class="mb-3 pb-1">
+                          <label class="form-label pb-2 col-xl-5 pb-4">Tên khách hàng</label>
+                          <a class="btn btn-sm btn-light  btn-light-edit">
+                            <i class="material-icons md-edit"></i> Chỉnh sửa
+                          </a>
+                          <a  data-toggle="modal" data-target="#exampleModalCenter" class="btn col-xl-3 btn-sm btn-outline-danger" style="margin-left: 10px;">
+                            <i class="material-icons md-delete_forever"></i> xóa
+                          </a>
+                          <input class="form-control" type="text" name="" placeholder="Type here">
+                        </div>
+
+                        <div class="mb-3 ">
+                          <label class="form-label pb-2">Nghề nghiệp</label>
+                          <input class="form-control" type="text" name="" placeholder="Type here">
+                        </div>
+
+                        <div class="mb-3 pb-2">
+                          <label class="form-label pb-2">Nhận xét khách hàng</label>
+                          <textarea type="text" class="form-control pb-4"></textarea>
+                        </div>
+
+                        <div class="mb-3 ">
+                          <input class="form-control file-upload" id="file-upload" accept=".jpg, .png" type="file">
+                        </div>
+
+                      </div> <!-- col.// -->
+
+                    </div>
+                    <div class="row border-bottom pb-4 mt-4 box-parent">
+                      <div class="col-md-5">
+
+                        <div class="row" style="margin-top: 40px;">
+
+                          <div class="col-xl-10">
+                            <div class="col">
+                              <div class="card card-product-grid">
+                                <a style="height: 340px;" href="#" class="img-wrap"> <img id = "img-cam-nhan"
+                                    src="../img/home_customer_img1.jpg" alt="Product"> </a>
+
+                              </div> <!-- card-product  end// -->
+                            </div> <!-- col.// -->
+                          </div>
+
+                        </div>
+                      </div> <!-- col.// -->
+
+
+                      <div class="col-md-7">
+
+                        <div class="mb-3 pb-1">
+                          <label class="form-label pb-2 col-xl-5 pb-4">Tên khách hàng</label>
+                          <a class="btn btn-sm btn-light  btn-light-edit">
+                            <i class="material-icons md-edit"></i> Chỉnh sửa
+                          </a>
+                          <a  data-toggle="modal" data-target="#exampleModalCenter" class="btn col-xl-3 btn-sm btn-outline-danger" style="margin-left: 10px;">
+                            <i class="material-icons md-delete_forever"></i> xóa
+                          </a>
+                          <input class="form-control" type="text" name="" placeholder="Type here">
+                        </div>
+
+                        <div class="mb-3 ">
+                          <label class="form-label pb-2">Nghề nghiệp</label>
+                          <input class="form-control" type="text" name="" placeholder="Type here">
+                        </div>
+
+                        <div class="mb-3 pb-2">
+                          <label class="form-label pb-2">Nhận xét khách hàng</label>
+                          <textarea type="text" class="form-control pb-4"></textarea>
+                        </div>
+
+                        <div class="mb-3 ">
+                          <input class="form-control file-upload" id="file-upload" accept=".jpg, .png" type="file">
+                        </div>
+
+                      </div> <!-- col.// -->
+
+                    </div>
+                 
+
+                  </div> <!-- row.// -->
+                  <button class="btn btn-primary" type="submit">Xem demo</button> &nbsp;
+                  <button class="btn btn-primary" type="submit">Lưu tất cả thay đổi</button> &nbsp;
+                  <button class="btn btn-outline-danger" type="reset">Cài lại</button>
+
+                </form>
+
+              </section> <!-- content-body .// -->
+            </div> <!-- col.// -->
+          </div> <!-- row.// -->
+
+        </div> <!-- card-body .//end -->
+      </div> <!-- card .//end -->
+
+
+    </section> <!-- content-main end// -->
+  </main>
+
+  <script type="text/javascript">
+    if (localStorage.getItem("darkmode")) {
+      var body_el = document.body;
+      body_el.className += 'dark';
+    }
+  </script>
+
+  <script src="js/jquery-3.5.0.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="js/scriptc619.js?v=1.0" type="text/javascript"></script>
+  <script src="js/cam_nhan.js"></script>
+
+</body>
+
+<!-- Mirrored from www.ecommerce-admin.com/demo/page-settings-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 02:39:05 GMT -->
+
+</html>

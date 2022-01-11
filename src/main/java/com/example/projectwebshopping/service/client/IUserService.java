@@ -8,7 +8,7 @@ public interface IUserService {
 
     //send mail
     void sendMail(String email, String subject, String text);
-
+    void sendMailHtml(String email, String s, String mainText);
     boolean isVerification(String idUser, String verificationCode);
 
     boolean insertUser(String username, String password, String mail, String vetificationCode, String idUser);
@@ -16,4 +16,7 @@ public interface IUserService {
     User checkLogin(String username, String password);
 
 
+    User getUserByUsername(String userName, String vetificationCode);
+
+    int updatePassword(String userName, String password, String code, String newCode);
 }

@@ -82,8 +82,8 @@
                             <i class="fa-solid fa-caret-down "></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end" id="drop-top">
-                            <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
-                            <a class="dropdown-item" href="page-settings-1.html">Giỏ hàng</a>
+                            <a class="dropdown-item" href="<%=request.getContextPath()%>/account">Tài khoản</a>
+                            <a class="dropdown-item" href="<%=request.getContextPath()%>/cart">Giỏ hàng</a>
                             <a class="dropdown-item text-danger" href="#">Đăng xuất</a>
                         </div>
                     </div>
@@ -273,9 +273,9 @@
                             <i class="fa-solid fa-caret-down "></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end" class="drop-top">
-                            <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
-                            <a class="dropdown-item" href="page-settings-1.html">Giỏ hàng</a>
-                            <a class="dropdown-item text-danger" href="#">Đăng xuất</a>
+                            <a class="dropdown-item" href="<%=request.getContextPath()%>/account">Tài khoản</a>
+                            <a class="dropdown-item" href="<%=request.getContextPath()%>/cart">Giỏ hàng</a>
+                            <a class="dropdown-item text-danger">Đăng xuất</a>
                         </div>
                     </div>
                     <%}%>
