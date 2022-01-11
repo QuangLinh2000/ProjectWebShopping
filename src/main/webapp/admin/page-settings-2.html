@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<!-- Mirrored from www.ecommerce-admin.com/demo/page-settings-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 02:39:05 GMT -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Sample title - Ecommerce admin dashboard template</title>
+
+  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+  <link href="css/bootstrapf9e3.css?v=1.1" rel="stylesheet" type="text/css"/>
+
+  <link rel="stylesheet" href="fonts/material-icon/css/round.css"/>
+
+  <!-- custom style -->
+  <link href="css/uif9e3.css?v=1.1" rel="stylesheet" type="text/css"/>
+  <link href="css/responsivef9e3.css?v=1.1" rel="stylesheet" />
+
+</head>
+<body>
+
+<b class="screen-overlay"></b>
+
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+      <a href="page-index-1.html" class="brand-wrap">
+        <img src="images/logo.svg" height="46" class="logo" alt="Ecommerce dashboard template">
+      </a>
+      <div>
+        <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+      </div>
+    </div> <!-- aside-top.// -->
+
+    <nav>
+      <ul class="menu-aside">
+        <li class="menu-item active">
+          <a class="menu-link" href="page-index-1.html"> <i class="icon material-icons md-home"></i>
+            <span class="text">Bảng điều khiển</span>
+          </a>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
+            <span class="text">Sản phẩm</span>
+          </a>
+          <div class="submenu">
+            <a href="page-products-list.html">Xem dạng danh sách</a>
+            <a href="page-products-table.html">Xem dạng bảng</a>
+            <a href="page-products-grid.html">Xem dạng lưới</a>
+            <a href="page-categories.html">Thể loại</a>
+            <a href="page-form-product-3.html">Thêm sản phẩm</a>
+          </div>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-orders-1.html"> <i class="icon material-icons md-shopping_cart"></i>
+            <span class="text">Đơn hàng</span>
+          </a>
+          <div class="submenu">
+            <a href="page-orders-2.html">Danh sách đơn hàng</a>
+            <a href="page-orders-detail.html">Chi tiết đơn hàng</a>
+          </div>
+        </li>
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
+            <span class="text">Nhân viên</span>
+          </a>
+          <div class="submenu">
+            <a href="page-sellers-cards.html">Thẻ nhân viên</a>
+            <a href="page-sellers-list.html">Danh sách nhân viên</a>
+            <a href="page-seller-detail.html">Hồ sơ nhân viên</a>
+            <a href="page-account-register.html">Thêm nhân viên</a>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-transactions-B.html"> <i class="icon material-icons md-monetization_on"></i>
+            <span class="text">Giao dịch</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+            <span class="text">Nhận xét</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+            <span class="text">Thương hiệu</span> </a>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+            <span class="text">Thống kê</span>
+          </a>
+        </li>
+      </ul>
+      <hr>
+      <ul class="menu-aside">
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+            <span class="text">Cài đặt</span>
+          </a>
+          <div class="submenu">
+            <a href="page-settings-1.html">Cài đặt tài khoản</a>
+            <a href="page-settings-2.html">Cài đặt trang web</a>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a class="menu-link" href="page-0-blank.html"> <i class="icon material-icons md-local_offer"></i>
+            <span class="text"> Thông tin liên hệ </span>
+          </a>
+        </li>
+      </ul>
+      <br>
+      <br>
+    </nav>
+    </aside>
+<main class="main-wrap">
+    <header class="main-header navbar">
+        <div class="col-search">
+            <form class="searchform">
+                <div class="input-group">
+                  <input list="search_terms" type="text" class="form-control" placeholder="Tìm kiếm...">
+                  <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i> </button>
+                </div>
+                <datalist id="search_terms">
+                  <option value="Products">
+                  <option value="New orders">
+                  <option value="Apple iphone">
+                  <option value="Ahmed Hassan">
+                </datalist>
+            </form>
+        </div>
+        <div class="col-nav">
+           <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="md-28 material-icons md-menu"></i> </button>
+           <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link btn-icon" onclick="darkmode(this)" title="Dark mode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-icon" href="#"> <i class="material-icons md-notifications_active"></i> </a>
+            </li>
+            <li class="dropdown nav-item">
+              <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#"> <img class="img-xs rounded-circle" src="images/people/avatar1.jpg" alt="User"></a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
+                <a class="dropdown-item" href="page-settings-1.html">Cài đặt</a>
+                <a class="dropdown-item text-danger" href="#">Đăng xuất</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+    </header>
+
+<section class="content-main">
+
+  <div class="content-header">
+    <h2 class="content-title">Tùy chỉnh trang </h2>
+  </div>
+
+<div class="card">
+  <div class="card-body">
+    <div class="row gx-5">
+      <aside class="col-lg-3 border-end">
+
+        <nav class="nav nav-pills flex-lg-column mb-4">
+
+          <ul class="menu-aside">
+            <li class="menu-item  active">
+              <a class="menu-link" href="page-settings-2.html">
+                <span class="text">Tổng quan</span>
+              </a>
+            </li>
+            <li class="menu-item has-submenu">
+              <a class="menu-link" style="cursor: pointer;"> 
+                <span class="text">Cài đặt Trang chủ</span>
+              </a>
+              <div class="submenu">
+                <a href="page-settings-slide-qc.html">Silde quảng cáo</a>
+                <a href="page-settings-bo-suu-tap.html">Bộ sưu tập</a>
+                <a href="page-settings-cam-nhan.html">Cảm nhận</a>
+                <a href="page-settings-tin-tuc.html">Tin tức</a>
+              </div>
+            </li>
+           
+            <li class="menu-item ">
+              <a class="menu-link" href="page-settings-product.html"> 
+                <span class="text">Cài đặt trang sản phẩm</span>
+              </a>
+            </li>
+            <li class="menu-item ">
+              <a class="menu-link" href="page-settings-footer.html"> 
+                <span class="text">Cài đặt footer</span>
+              </a>
+            </li>
+            <li class="menu-item ">
+              <a class="menu-link" href="page-settings-chekcOuts.html">
+                <span class="text">Cài đặt thanh toán</span>
+              </a>
+            </li>
+           
+          </ul>
+
+        </nav>
+
+      </aside>
+      <div class="col-lg-9">
+        <section class="content-body p-xl-4">
+
+
+          <form>
+
+          <div class="row border-bottom mb-4 pb-4">
+            <div class="col-md-5">
+
+              <h5>Tên trang web</h5>
+
+              <p class="text-muted" style="max-width:90%">
+                Các ngôn ngữ được hỗ trợ của tất cả các trang bao gồm từng sản phẩm</p>
+            </div> <!-- col.// -->
+
+            
+            <div class="col-md-7">
+
+                <div class="mb-3">
+                  <label class="form-label">Tiêu đề trang chủ</label>
+                  <input class="form-control" type="text" name="" placeholder="Type here">
+
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Mô tả</label>
+                  <textarea type="text" class="form-control"></textarea>
+                </div>
+
+            </div> <!-- col.// -->
+          </div> <!-- row.// -->
+          <div class="row border-bottom mb-4 pb-4">
+            <div class="col-md-5">
+              <h5>Logo trang web </h5>
+              <p class="text-muted" style="max-width:90%">Logo được thiết lập cho toàn bộ trang web</p>
+            </div> <!-- col.// -->
+            <div class="col-md-7">
+              <div class="mb-3">
+                <label class="form-label">Chọn hình ảnh từ thiết bị (180x40)</label>
+                <input class="form-control" type="file">
+              </div>
+              <!-- <img src="" alt="" style="width: 180px; height: 40px;"> -->
+          
+            </div> <!-- col.// -->
+          </div> <!-- row.// -->
+
+          <div class="row border-bottom mb-4 pb-4">
+            <div class="col-md-5">
+
+              <h5>Truy cập </h5>
+              <p class="text-muted" style="max-width:90%">Cấp quyền truy cập vào tất cả các trang bao gồm từng sản phẩm</p>
+
+            </div> <!-- col.// -->
+            <div class="col-md-7">
+
+              <label class="mb-2 form-check">
+                  <input class="form-check-input" checked="" name="mycheck_a1" type="radio">
+
+                  <span class="form-check-label"> Tất cả đăng ký  được kích hoạt </span>
+              </label>
+              <label class="mb-2 form-check">
+                  <input class="form-check-input" name="mycheck_a1" type="radio">
+                  <span class="form-check-label"> Chỉ nhân viên được kích hoạt</span>
+              </label>
+               <label class="mb-2 form-check">
+                  <input class="form-check-input" name="mycheck_a1" type="radio">
+                  <span class="form-check-label"> chỉ admin được kích hoạt </span>
+              </label>
+               <label class="mb-2 form-check">
+                  <input class="form-check-input" name="mycheck_a1" type="radio">
+                  <span class="form-check-label">  Tạm ngừng kinh doanh cửa hàng </span>
+
+              </label>
+
+            </div> <!-- col.// -->
+          </div> <!-- row.// -->
+
+
+
+          <div class="row border-bottom mb-4 pb-4">
+            <div class="col-md-5">
+
+              <h5>Thông báo  </h5>
+
+              <p class="text-muted" style="max-width:90%">
+              cài đặt thông báo cho admin khi có yêu cầu khách hàng </p>
+            </div>
+            <div class="col-md-7">
+
+
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="mycheck_notify" checked>
+                <label class="form-check-label" for="mycheck_notify">
+                  Gửi thông báo về mỗi lần đăng ký người dùng
+                </label>
+              </div>
+
+              <div class="mb-3">
+                <input class="form-control" placeholder="Text">
+              </div>
+
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="mycheck_notify" checked>
+                <label class="form-check-label" for="mycheck_notify">
+                Gửi thông báo về mỗi khi có người đặt hàng
+
+                </label>
+              </div>
+
+              <div class="mb-3">
+                <input class="form-control" placeholder="Nhập">
+              </div>
+
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="mycheck_notify" checked>
+                <label class="form-check-label" for="mycheck_notify">
+                  Gửi thông báo về mỗi khi có người  muốn hủy đơn hàng
+                </label>
+              </div>
+
+              <div class="mb-3">
+                <input class="form-control" placeholder="Text">
+              </div>
+            </div> <!-- col.// -->
+          </div> <!-- row.// -->
+
+
+          <div class="row border-bottom mb-4 pb-4">
+            <div class="col-md-5">
+
+              <h5>Tiền tệ</h5>
+              <p class="text-muted" style="max-width:90%">Tiền tệ được sử dụng trong trang web</p>
+
+            </div> <!-- col.// -->
+            <div class="col-md-7">
+
+              <div class="mb-3" style="max-width: 200px">
+
+                <label class="form-label">Tiền tệ chính</label>
+
+                <select class="form-select">
+                  <option>US Dollar</option>
+                  <option>EU Euro</option>
+                  <option>RU Ruble</option>
+                  <option>Việt nam đồng</option>
+                </select>
+              </div>
+
+              <div class="mb-3" style="max-width: 200px">
+                <label class="form-label">Tiền tệ thay thế</label>
+
+                <select class="form-select">
+                  <option>US dollar</option>
+                  <option>RUBG russia</option>
+                  <option>INR india</option>
+                  <option>Việt nam đồng</option>
+
+                </select>
+              </div>
+
+            </div> <!-- col.// -->
+          </div> <!-- row.// -->
+
+          <button class="btn btn-primary" type="submit">Xem demo</button>  &nbsp;
+          <button class="btn btn-primary" type="submit">Lưu tất cả thay đổi</button>  &nbsp;
+          <button class="btn btn-outline-danger" type="reset">Cài lại</button>
+
+
+          </form>
+
+        </section> <!-- content-body .// -->
+      </div> <!-- col.// -->
+    </div> <!-- row.// -->
+
+  </div> <!-- card-body .//end -->
+</div> <!-- card .//end -->
+
+
+</section> <!-- content-main end// -->
+</main>
+
+<script type="text/javascript">
+  if(localStorage.getItem("darkmode")){
+    var body_el = document.body;
+    body_el.className += 'dark';
+  }
+</script>
+
+<script src="js/jquery-3.5.0.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script src="js/scriptc619.js?v=1.0" type="text/javascript"></script>
+
+
+</body>
+
+<!-- Mirrored from www.ecommerce-admin.com/demo/page-settings-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 02:39:05 GMT -->
+</html>

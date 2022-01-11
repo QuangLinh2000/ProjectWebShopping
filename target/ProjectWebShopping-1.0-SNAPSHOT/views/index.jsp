@@ -445,96 +445,78 @@
 
         <div id="list-tab2">
             <div class="list-tab-content list-tab-content3">
+
+                <%List<Product> productList7 = (List<Product>) request.getAttribute("listSPBanChay");
+                    for ( Product p : productList7) {%>
+
                 <div class="slide-collection">
                     <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <a href="/Shopping/detail?id=<%=p.getMaSP()%>">
+                            <img class="collection-slide-image" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(0)%>" alt="">
                         </a>
                         <div class="btn-img">
                             <div class="btn-img-search">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                             <div class="btn-img-buy">
-                                <span>mua ngay</span>
+                                <a href="/Shopping/detail?id=<%=p.getMaSP()%>">mua ngay</a>
                             </div>
-                            <div class="btn-img-cart" onclick="openModal('1')">
+                            <div class="btn-img-cart" idSP =<%=p.getMaSP()%>  onclick="openModal(this)"
+                                 data-product-id="<%=p.getMaSP()%>"
+                                 data-product-name="<%=p.getTenSP()%>"
+                                 data-product-price="<%=p.getGia()%>"
+                                 data-product-img="<%=p.getListUrlImg().get(0)%>"
+                                 data-product-sell="<%=p.getSell()%>"
+                                 data-product-size-s="<%=p.getS()%>"
+                                 data-product-size-l="<%=p.getL()%>"
+                                 data-product-size-m="<%=p.getM()%>"
+                                 data-product-size-xl="<%=p.getXL()%>"
+                                 data-product-color="<%=p.getMau()%>">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
+                        <%if(p.getSell() > 0){%>
                         <div class="colection-tag">
                             <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
+                         <span><%String giasel =((int)(p.getSell()*100))+"%";%>
+                                    <%=giasel%></span>                            </div>
                             <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
                         </div>
+                        <%}%>
                     </div>
                     <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
+                        <%for ( int j = 0; j < p.getListUrlImg().size(); j++ ) {%>
+                        <% if(j >= limitImageSmall)break;%>
+                        <img class="img-item-hov" src="<%=request.getContextPath()%><%=p.getListUrlImg().get(j)%>" alt="">
+                        <%}%>
                     </div>
                     <div class="text-content-collection">
                         <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
+                            <%=p.getTenSP()%>
                         </h3>
                         <div>
                                 <span class="slide-collection-price">
-                                    847,000đ
+                                    <%double giaSell = p.getGia()- p.getSell()*p.getGia();%>
+                                <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=giaSell%>"/>đ
+
                                 </span>
+
+                            <%if(p.getSell() > 0){%>
                             <span class="current-price">
-                                    941,000đ
+                                    <fmt:formatNumber type = "number" maxFractionDigits  = "3" value = "<%=p.getGia()%>"/>đ
                                 </span>
+                            <%}%>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="slide-collection">
-                    <div class="collection-slide-div">
-                        <a href="#">
-                            <img class="collection-slide-image" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        </a>
-                        <div class="btn-img">
-                            <div class="btn-img-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="btn-img-buy">
-                                <span>mua ngay</span>
-                            </div>
-                            <div class="btn-img-cart" onclick="openModal('1')">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                        </div>
-                        <div class="colection-tag">
-                            <div class="tag-saleoff">
-                                <span>-10%</span>
-                            </div>
-                            <img src="<%=request.getContextPath()%>/img/img-sale.png" alt="" class="img-sale">
-                        </div>
-                    </div>
-                    <div class="list-image-hover">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_2.jpg" alt="">
-                        <img class="img-item-hov" src="<%=request.getContextPath()%>/img/collection1_slide_product_1.jpg" alt="">
-                    </div>
-                    <div class="text-content-collection">
-                        <h3 class="slide-collection-title">
-                            Áo Ngắn Tay Seven.AM Chất Liệu Vải Thun Kiểu Dáng Thêu Viền Tay &amp; Vải Thun Kiểu Dáng Thêu Viền Tay
-                        </h3>
-                        <div>
-                                <span class="slide-collection-price">
-                                    847,000đ
-                                </span>
-                            <span class="current-price">
-                                    941,000đ
-                                </span>
-                        </div>
-                    </div>
-                </div>
 
+                <%}%>
 
             </div>
             <div class="div-btn-tab">
-                <a class="btn btn-tab" so="3" size ="4" >xem thêm</a>
+                <a class="btn btn-tab" so="3" size ="<%=productList7.size()%>">xem thêm</a>
             </div>
 
         </div>
