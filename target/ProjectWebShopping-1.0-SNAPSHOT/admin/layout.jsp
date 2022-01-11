@@ -52,7 +52,12 @@
     </div>
 </div>
 <jsp:include page="lefmenu.jsp"></jsp:include>
-<jsp:include page="${container_view}"></jsp:include>
+<main class="main-wrap">
+    <jsp:include page="header.jsp"></jsp:include>
+    <jsp:include page="${container_view}"></jsp:include>
+
+</main>
+
 <script type="text/javascript">
     if(localStorage.getItem("darkmode")){
         var body_el = document.body;

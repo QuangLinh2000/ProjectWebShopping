@@ -19,7 +19,7 @@
     <nav>
         <ul class="menu-aside">
             <li class="menu-item active">
-                <a class="menu-link" href="page-index-1.html"> <i class="icon material-icons md-home"></i>
+                <a class="menu-link" href="<%=request.getContextPath()%>/home-admin"> <i class="icon material-icons md-home"></i>
                     <span class="text">Bảng điều khiển</span>
                 </a>
             </li>
