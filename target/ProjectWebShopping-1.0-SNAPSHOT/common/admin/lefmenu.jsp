@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    System.out.println("lefmenu.jsp");
+%>
 <aside class="navbar-aside" id="offcanvas_aside">
     <div class="aside-top">
         <a href="page-index-1.html" class="brand-wrap">
@@ -24,7 +27,7 @@
                 </a>
             </li>
             <li class="menu-item has-submenu">
-                <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
+                <a class="menu-link" href=""> <i class="icon material-icons md-shopping_bag"></i>
                     <span class="text">Sản phẩm</span>
                 </a>
                 <div class="submenu">
@@ -56,7 +59,7 @@
                 </div>
             </li>
             <li class="menu-item">
-                <a class="menu-link" href="page-transactions-B.html"> <i class="icon material-icons md-monetization_on"></i>
+                <a class="menu-link" href="<%=request.getContextPath()%>/admin-list-view-product"> <i class="icon material-icons md-monetization_on"></i>
                     <span class="text">Giao dịch</span>
                 </a>
             </li>
@@ -96,3 +99,12 @@
         <br>
     </nav>
 </aside>
+<script>
+    $(document).ready(function () {
+        //click menu menu-item
+        $('.menu-item').click(function () {
+            $('.menu-item').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+</script>

@@ -24,16 +24,17 @@ public class AdminfFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         User user = (User) req.getSession().getAttribute("userLognin");
         String url = req.getRequestURL().toString();
-        if(url.contains("/admin")){
-            if (user != null && user.getRole() ==0 ) {
-                chain.doFilter(request, response);
-            } else {
-                resp.sendRedirect(req.getContextPath() +"/signin");
-            }
-        }else{
-            chain.doFilter(request, response);
-
-        }
+        chain.doFilter(request, response);
+//        if(url.contains("/admin")){
+//            if (user != null && user.getRole() ==0 ) {
+//                chain.doFilter(request, response);
+//            } else {
+//                resp.sendRedirect(req.getContextPath() +"/signin");
+//            }
+//        }else{
+//            chain.doFilter(request, response);
+//
+//        }
 
     }
 }
