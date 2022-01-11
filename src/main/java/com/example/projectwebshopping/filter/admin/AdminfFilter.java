@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "AdminfFilter", urlPatterns = {"/views/admin/*"})
+@WebFilter(filterName = "AdminfFilter", urlPatterns = {"/views/admin/*","/*"})
 public class AdminfFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }

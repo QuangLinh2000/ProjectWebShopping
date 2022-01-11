@@ -57,7 +57,7 @@
 
                 <input type="password" placeholder="Mật khẩu" name="pass" class="input" id="password1"
                        title="Vui Lòng nhập password" required/>
-                <a href="#" class="link">Quên mật khẩu</a>
+                <a href="<%=request.getContextPath()%>/reset" class="link">Quên mật khẩu</a>
                 <!-- <button class="btn">Đăng nhập</button> -->
                 <input type="submit" class="register btn" value="Đăng Nhập">
             </form>

@@ -124,6 +124,7 @@ public class UserDAO {
                 user.setId(resultSet.getString("id"));
                 user.setEmail(resultSet.getString("usermail"));
                 user.setUsername(resultSet.getString("username"));
+                user.setRole(resultSet.getInt("role"));
                 resultSet.close();
                 preparedStatement.close();
                 DataSourceConnection.returnConnection(connection);
@@ -160,4 +161,59 @@ public class UserDAO {
     }
 
 
+    public User getUserByUsername(String userName, String vetificationCode) {
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where username = ?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            preparedStatement.setString(1,userName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                User user = new User();
+                user.setId(resultSet.getString("id"));
+                user.setEmail(resultSet.getString("usermail"));
+                user.setUsername(resultSet.getString("username"));
+                if (resultSet.getInt("ISVIRIFICATION") == 0){
+                    resultSet.updateString("VERICAIONCODE",vetificationCode);
+                    resultSet.updateRow();
+                }
+                user.setVerificationCode(resultSet.getString("VERICAIONCODE"));
+                resultSet.close();
+                preparedStatement.close();
+                DataSourceConnection.returnConnection(connection);
+                return user;
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public int updatePassword(String userName, String password, String code, String newCode) {
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            String sql = "update users set USERPASSWORD = ?,VERICAIONCODE = ? where username = ? and VERICAIONCODE = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,hashPassword(password));
+            preparedStatement.setString(2,newCode);
+            preparedStatement.setString(3,userName);
+            preparedStatement.setString(4,code);
+            int result = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return result;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
