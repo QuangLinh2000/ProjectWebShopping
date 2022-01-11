@@ -576,6 +576,7 @@ public class ProductDao {
                             resultSet.updateInt(size, soluong-quantity);
                             resultSet.updateRow();
                             cartJsonList.remove(i);
+                            i--;
                         }else{
                             connection.rollback();
                             connection.setAutoCommit(true);
@@ -591,25 +592,29 @@ public class ProductDao {
             }
             resultSet.close();
             preparedStatement.close();
+
             if(cartJsonList.size()==0){
                 String idHoaDon = UUID.randomUUID().toString();
-                if(deleteCart(idUser,cartJsonList1,connection) ==1
-                && insertHoaDon(idUser,connection,idHoaDon)==1
-                && insertCTHoaDon(idHoaDon,cartJsonList1,connection)==1) {
+                int delete = deleteCart(idUser,cartJsonList1,connection);
+                int ínert = insertHoaDon(idUser,connection,idHoaDon);
+                int ctInsert = insertCTHoaDon(idHoaDon,cartJsonList1,connection);
+                if(delete >=1
+                && ínert>=1
+                && ctInsert>=1) {
                     connection.commit();
                 }else{
                     connection.rollback();
                     connection.setAutoCommit(true);
 
                     DataSourceConnection.returnConnection(connection);
-                    return "Đặt hàng thất bại";
+                    return "Đặt hàng thất bại 1";
                 }
             }else{
                 connection.rollback();
                 connection.setAutoCommit(true);
 
                 DataSourceConnection.returnConnection(connection);
-                return "Đặt hàng thất bại";
+                return "Đặt hàng thất bại 2";
             }
             connection.setAutoCommit(true);
 
