@@ -33,7 +33,7 @@
                     <a href="<%=request.getContextPath()%>/admin-list-view-product">Xem dạng danh sách</a>
                     <a href="<%=request.getContextPath()%>/admin-products-table">Xem dạng bảng</a>
                     <a href="<%=request.getContextPath()%>/admin-product-gird">Xem dạng lưới</a>
-                    <a href="page-categories.html">Thể loại</a>
+                    <a href="<%=request.getContextPath()%>/admin-categories">Thể loại</a>
                     <a href="page-form-product-3.html">Thêm sản phẩm</a>
                 </div>
             </li>

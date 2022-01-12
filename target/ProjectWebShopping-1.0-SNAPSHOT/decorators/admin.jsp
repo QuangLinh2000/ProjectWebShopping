@@ -20,6 +20,8 @@
 
     <!-- iconfont -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/fonts/material-icon/css/round.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/notify/simple-notify.min.css">
+
     <decorator:head/>
 </head>
 <body>
@@ -55,6 +57,28 @@
         var body_el = document.body;
         body_el.className += 'dark';
     }
+
+    function pushNotify(status, message, title) {
+        new Notify({
+            status: status,
+            title: title,
+            text: message,
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 2000,
+            gap: 20,
+            distance: 20,
+            type: 1,
+            position: 'right top',
+            customWrapper: '',
+        })
+    }
+
 </script>
 </body>
 
@@ -68,4 +92,6 @@
 
 <!-- Custom JS -->
 <script src="<%=request.getContextPath()%>/admin/js/scriptc619.js?v=1.0" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/assets/notify/simple-notify.min.js"></script>
+
 </html>
