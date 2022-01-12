@@ -84,22 +84,22 @@
                                                     <label class="form-label">Địa chỉ</label>
                                                     <input id="address-customer" class="form-control" type="text" placeholder="Nhập tại đây">
                                                 </div> <!-- col .// -->
-                                                <div class="col-lg-12 row dia-diem">
-                                                    <div  class="input-item-content-box col-lg-4 row ">
-                                                        <select class="diem-diem-item col-lg-12 pb-3" onChange="clickTinhThanhPho(this)" id="tinh-thanh-pho" >
+                                                <div class="col-lg-12 dia-diem">
+                                                    <div  class="input-item-content-box col-lg-4">
+                                                        <select class="diem-diem-item col-lg-12" onChange="clickTinhThanhPho(this)" id="tinh-thanh-pho" >
                                                             <option   value="">Tỉnh/Thành Phố</option>
                                                         </select>
 
                                                     </div>
-                                                    <div class="input-item-content-box col-lg-4 row ">
-                                                        <select class="diem-diem-item col-lg-12 pb-3" onchange="clickQuanHuyen(this)"   id="quan-huyen" >
+                                                    <div class="input-item-content-box col-lg-4 ">
+                                                        <select class="diem-diem-item col-lg-12" onchange="clickQuanHuyen(this)"   id="quan-huyen" >
                                                             <option   value="">Quận/Huyện</option>
                                                         </select>
 
                                                     </div>
-                                                    <div class="input-item-content-box col-lg-4 row ">
+                                                    <div class="input-item-content-box col-lg-4">
 
-                                                        <select class="diem-diem-item col-lg-12 pb-3" id="phuong-xa" >
+                                                        <select class="diem-diem-item col-lg-12" id="phuong-xa" >
                                                             <option   value="">Phường/xã</option>
                                                         </select>
                                                     </div>

@@ -21,7 +21,18 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset-pass.css">
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/loader.css">
+    <style>
+        .wrapper-loader{
+            position: fixed;
 
+            background-color: rgba(255, 255, 255, 0.6);
+            z-index: 9999;
+        }
+        .lds-ellipsis {
+            transform: scale(1.5);
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -32,6 +43,14 @@
         </h1>
     </div>
 </header>
+<div class="wrapper-loader" id="load-1">
+    <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
 <section id="resetpass">
     <div class="container resetpass-wrapper">
         <div class="modal">
@@ -62,6 +81,7 @@
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
+    const load = document.querySelector('#load-1');
     function pushNotify(status, message, title) {
         new Notify({
             status: status,
@@ -87,7 +107,7 @@
     const btnSend = document.getElementById('btn-send');
     btnSend.addEventListener('click', function (e) {
         if (userName.value.trim().length != 0) {
-            btnSend.style.pointerEvents = 'none';
+            load.classList.add('active');
             $.ajax({
                 url: '<%=request.getContextPath()%>/reset',
                 type: 'POST',
@@ -98,6 +118,7 @@
                     // res get status
                     // parse data
                     const dataParse = JSON.parse(data);
+                    console.log(dataParse);
                     if (data!=null&&dataParse.status === 'success') {
                         <%--window.location.href = '<%=request.getContextPath()%>/resetpass/' + res.data.id;--%>
                         pushNotify('success', 'Tên đăng nhập hợp lệ', 'Để tiếp tục vui lòng vào email để đặt lại mật khẩu');
@@ -105,7 +126,6 @@
                                 <br>Vui lòng xác minh.
                             </p>`)
                         btnSend.innerText="ok";
-                        btnSend.style.pointerEvents = 'auto';
                         //redirect  page signin
                         btnSend.addEventListener('click', function (e) {
                             window.location.href = '<%=request.getContextPath()%>/signin';
@@ -113,13 +133,14 @@
 
                     } else {
                         pushNotify('error', 'Tên đăng nhập không hợp lệ', 'Vui lòng kiểm tra lại thông tin');
-                        btnSend.style.pointerEvents = 'auto';
                     }
+                    load.classList.remove('active');
+
                 }
             });
         } else {
             userName.parentElement.classList.add('err');
-            btnSend.style.pointerEvents = 'auto';
+            load.classList.remove('active');
         }
 
     });

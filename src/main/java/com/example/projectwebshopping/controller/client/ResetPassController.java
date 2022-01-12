@@ -44,7 +44,8 @@ public class ResetPassController extends HttpServlet {
                 response.getWriter().write(data);
                 userService.sendMailHtml(user.getEmail(), "Thiet lap lai mat khau dang nhap shop ITYSUKI", mainText);
             } else {
-                response.getWriter().write("fail");
+                // status fail
+                response.getWriter().write("{\"status\":\"fail\"}");
             }
         }
 
