@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.UUID;
 
 public class DataString {
@@ -32,14 +33,37 @@ public class DataString {
       }
       return false;
     }
-
-    public static void main(String[] args) throws IOException {
-        //read from file
-        FileInputStream fis = new FileInputStream("D:\\t.txt");
-        BufferedReader br = new BufferedReader(new java.io.InputStreamReader(fis));
-        String line = null;
-        while ((line = br.readLine()) != null) {
-            System.out.println("'"+line+"'+");
+//convert img to base64
+    public static String convertToBase64(String path) {
+        String base64 = "";
+        try {
+            FileInputStream fileInputStreamReader = new FileInputStream(path);
+            int bytes;
+            byte[] buffer = new byte[8192];
+            while ((bytes = fileInputStreamReader.read(buffer)) != -1) {
+                byte[] bytes2 = new byte[bytes];
+                System.arraycopy(buffer, 0, bytes2, 0, bytes);
+                base64 = Base64.getEncoder().encodeToString(bytes2);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return base64;
     }
+//    public static void main(String[] args) throws IOException {
+//        //read from file
+//        FileInputStream fis = new FileInputStream("D:\\t.txt");
+//        BufferedReader br = new BufferedReader(new java.io.InputStreamReader(fis));
+//        String line = null;
+//        while ((line = br.readLine()) != null) {
+//            System.out.println("'"+line+"'+");
+//        }
+//    }
+
+public static void main(String[] args) {
+    System.out.println(convertToBase64("C:\\Users\\QUANGLINH\\Downloads\\Product - Copy (1)\\product\\1_1.jpg"));
+}
+
 }
