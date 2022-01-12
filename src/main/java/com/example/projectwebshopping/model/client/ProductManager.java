@@ -78,7 +78,12 @@ public class ProductManager {
     }
 
 
-
+    public int getPageCount(int pageSize,int total) {
+        if(total % pageSize == 0) {
+            return total / pageSize;
+        }
+        return total / pageSize + 1;
+    }
 
 
 }

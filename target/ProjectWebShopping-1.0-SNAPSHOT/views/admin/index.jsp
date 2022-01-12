@@ -1,4 +1,9 @@
-<%--
+<%@ page import="com.example.projectwebshopping.dao.client.HoaDonDao" %>
+<%@ page import="com.example.projectwebshopping.model.client.ProductManager" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.projectwebshopping.model.client.Product" %>
+<%@ page import="com.example.projectwebshopping.model.admin.Order" %>
+<%@ page import="java.sql.Date" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 1/11/2022
@@ -6,6 +11,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    double tongDoanhThu = (double) request.getAttribute("tongDoanhThu");
+    int tongSoHoaDon = (int) request.getAttribute("tongSoHoaDon");
+    int tongSoSanPham = (int) request.getAttribute("tongSoSanPham");
+    int tongSoKhachHang = (int) request.getAttribute("tongSoKhachHang");
+    List<Product> listProduct = (List<Product>) request.getAttribute("listSPBanChay");
+    List<Order> listOrder = (List<Order>) request.getAttribute("listOder");
+%>
 <html>
 <head>
     <title>Bảng điều khiển</title>
@@ -24,7 +37,7 @@
                 <article class="icontext">
                     <span class="icon icon-sm rounded-circle bg-primary-light"><i class="text-primary material-icons md-monetization_on"></i></span>
                     <div class="text">
-                        <h6 class="mb-1">Tổng doanh thu</h6>  <span>19,626,058.20đ</span>
+                        <h6 class="mb-1">Tổng doanh thu</h6>  <span><%=ProductManager.getInstance().formatPrice(tongDoanhThu)%>đ</span>
                     </div>
                 </article>
 
@@ -35,7 +48,7 @@
                 <article class="icontext">
                     <span class="icon icon-sm rounded-circle bg-success-light"><i class="text-success material-icons md-local_shipping"></i></span>
                     <div class="text">
-                        <h6 class="mb-1">Tổng đơn hàng</h6> <span>87790</span>
+                        <h6 class="mb-1">Tổng đơn hàng</h6> <span><%=ProductManager.getInstance().formatPrice(tongSoHoaDon)%></span>
                     </div>
                 </article>
             </div> <!-- card end// -->
@@ -45,7 +58,7 @@
                 <article class="icontext">
                     <span class="icon icon-sm rounded-circle bg-warning-light"><i class="text-warning material-icons md-shopping_basket"></i></span>
                     <div class="text">
-                        <h6 class="mb-1">Tổng sản phẩm</h6>  <span>5678</span>
+                        <h6 class="mb-1">Tổng sản phẩm</h6>  <span><%=ProductManager.getInstance().formatPrice(tongSoSanPham)%></span>
 
                     </div>
                 </article>
@@ -56,7 +69,7 @@
                 <article class="icontext">
                     <span class="icon icon-sm rounded-circle bg-warning-light"><i class="text-danger material-icons md-supervised_user_circle"></i></span>
                     <div class="text">
-                        <h6 class="mb-1">Tổng khách hàng</h6>  <span>5678</span>
+                        <h6 class="mb-1">Tổng khách hàng</h6>  <span><%=ProductManager.getInstance().formatPrice(tongSoKhachHang)%></span>
                     </div>
                 </article>
             </div> <!--  end// -->
@@ -73,81 +86,27 @@
                     <h5 class="card-title">Sản phẩm bán chạy</h5>
 
                     <div class="card-body-main">
+                        <%for (int i = 0; i < listProduct.size() ; i++){
+                            Product product = listProduct.get(i);
+                        %>
                         <article class="itemlist">
                             <div class="row align-items-center">
                                 <div class="col-lg-8 col-sm-8 col-8 flex-grow-1 col-name">
                                     <a class="itemside" href="#">
                                         <div class="left">
-                                            <img src="<%=request.getContextPath()%>/admin/images/items/2.jpg" class="img-sm img-thumbnail" alt="Item">
+                                            <img src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" class="img-sm img-thumbnail" alt="Item">
                                         </div>
                                         <div class="info">
-                                            <h6 class="mb-0">Helionic Hooded Down Jacket</h6>
+                                            <h6 class="mb-0"><%=product.getTenSP()%></h6>
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-lg-4 col-sm-4 col-4 col-price"> <span>1.000.000đ</span> </div>
+                                <div class="col-lg-4 col-sm-4 col-4 col-price"> <span><%=ProductManager.getInstance().formatPrice(product.getGia()-product.getGia()*product.getSell())%>đ</span> </div>
                             </div> <!-- row .// -->
                         </article>  <!-- itemlist  .// -->
-                        <article class="itemlist">
-                            <div class="row align-items-center">
-                                <div class="col-lg-8 col-sm-8 col-8 flex-grow-1 col-name">
-                                    <a class="itemside" href="#">
-                                        <div class="left">
-                                            <img src="<%=request.getContextPath()%>/admin/images/items/2.jpg" class="img-sm img-thumbnail" alt="Item">
-                                        </div>
-                                        <div class="info">
-                                            <h6 class="mb-0">Helionic Hooded Down Jacket</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-sm-4 col-4 col-price"> <span>1.000.000đ</span> </div>
-                            </div> <!-- row .// -->
-                        </article>  <!-- itemlist  .// -->
-                        <article class="itemlist">
-                            <div class="row align-items-center">
-                                <div class="col-lg-8 col-sm-8 col-8 flex-grow-1 col-name">
-                                    <a class="itemside" href="#">
-                                        <div class="left">
-                                            <img src="<%=request.getContextPath()%>/admin/images/items/2.jpg" class="img-sm img-thumbnail" alt="Item">
-                                        </div>
-                                        <div class="info">
-                                            <h6 class="mb-0">Helionic Hooded Down Jacket</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-sm-4 col-4 col-price"> <span>1.000.000đ</span> </div>
-                            </div> <!-- row .// -->
-                        </article>  <!-- itemlist  .// -->
-                        <article class="itemlist">
-                            <div class="row align-items-center">
-                                <div class="col-lg-8 col-sm-8 col-8 flex-grow-1 col-name">
-                                    <a class="itemside" href="#">
-                                        <div class="left">
-                                            <img src="<%=request.getContextPath()%>/admin/images/items/2.jpg" class="img-sm img-thumbnail" alt="Item">
-                                        </div>
-                                        <div class="info">
-                                            <h6 class="mb-0">Helionic Hooded Down Jacket</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-sm-4 col-4 col-price"> <span>1.000.000đ</span> </div>
-                            </div> <!-- row .// -->
-                        </article>  <!-- itemlist  .// -->
-                        <article class="itemlist">
-                            <div class="row align-items-center">
-                                <div class="col-lg-8 col-sm-8 col-8 flex-grow-1 col-name">
-                                    <a class="itemside" href="#">
-                                        <div class="left">
-                                            <img src="<%=request.getContextPath()%>/admin/images/items/2.jpg" class="img-sm img-thumbnail" alt="Item">
-                                        </div>
-                                        <div class="info">
-                                            <h6 class="mb-0">Helionic Hooded Down Jacket</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-sm-4 col-4 col-price"> <span>1.000.000đ</span> </div>
-                            </div> <!-- row .// -->
-                        </article>  <!-- itemlist  .// -->
+
+                        <%}%>
+
                     </div>
                     <!-- <a href="#" class="btn btn-light">Open analytics <i class="material-icons md-open_in_new"></i> </a> -->
                 </article> <!-- card-body end// -->
@@ -171,13 +130,17 @@
             <h5 class="card-title">Đơn hàng mới nhất</h5>
             <div class="table-responsive">
                 <table class="table table-hover">
+                    <%for (int i = 0; i < listOrder.size() ; i++){
+                        Order order = listOrder.get(i);
+                    %>
                     <tr>
-                        <td>2323</td>
-                        <td><b>Devon Lane</b></td>
-                        <td>devon@example.com</td>
-                        <td>$778.35</td>
-                        <td><span class="badge rounded-pill alert-success">Đã giao</span></td>
-                        <td>07.05.2020</td>
+                        <td><%=i+1%></td>
+                        <td><b><%=order.getName()%></b></td>
+                        <td><%=order.getEmail()%></td>
+                        <td><%=ProductManager.getInstance().formatPrice(order.getTotalPrice())%></td>
+                        <td><span class="badge rounded-pill <%=order.getClassTrangThai()%>"><%=order.getTrangThai()%></span></td>
+                        <%Date ngayNhap = order.getOrderDate();%>
+                        <td><%=ngayNhap.getDate()+"/"+(ngayNhap.getMonth()+1)+"/"+(ngayNhap.getYear()+1900)%></td>
                         <td class="text-end">
                             <a href="#" class="btn btn-light">Chi tiết</a>
                             <div class="dropdown">
@@ -190,121 +153,9 @@
                             </div> <!-- dropdown //end -->
                         </td>
                     </tr>
-                    <tr>
-                        <td>2323</td>
-                        <td><b>Darrell Steward</b></td>
-                        <td>stew123@mysite.com</td>
-                        <td>$980.90</td>
-                        <td><span class="badge rounded-pill alert-warning">Chờ xác nhận</span></td>
-                        <td>12.02.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-light">Chi tiết</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                    <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#exampleModalCenter">Xoá</a>
-                                </div>
-                            </div>
-                            <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9053</td>
-                        <td><b>Mike Jonatan</b></td>
-                        <td>mike@somename.com</td>
-                        <td>$778.35</td>
-                        <td><span class="badge rounded-pill alert-warning">Chờ xác nhận</span></td>
-                        <td>07.05.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-light">Chi tiết</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                    <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#exampleModalCenter">Xoá</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1234</td>
-                        <td><b>Ahmed Hassan</b></td>
-                        <td>devon@example.com</td>
-                        <td>1.000.000đ</td>
-                        <td><span class="badge rounded-pill alert-danger">Đã huỷ</span></td>
-                        <td>02.01.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-light">Chi tiết</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                    <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#exampleModalCenter">Xoá</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7532</td>
-                        <td><b>Abdul Mohammad</b></td>
-                        <td>abdu@example.com</td>
-                        <td>$190.15</td>
-                        <td><span class="badge rounded-pill alert-success">Đã giao</span></td>
-                        <td>17.02.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-light">Chi tiết</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                    <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#exampleModalCenter">Xoá</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2323</td>
-                        <td><b>Devon Lane</b></td>
-                        <td>devon@example.com</td>
-                        <td>$778.35</td>
-                        <td><span class="badge rounded-pill alert-success">Đã giao</span></td>
-                        <td>07.05.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-light">Chi tiết</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                    <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#exampleModalCenter">Xoá</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4521</td>
-                        <td><b>Alex Pushkin</b></td>
-                        <td>myphkin@company.com</td>
-                        <td>$708.35</td>
-                        <td><span class="badge rounded-pill alert-success">Đã giao</span></td>
-                        <td>01.05.2019</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-light">Chi tiết</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                    <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#exampleModalCenter">Xoá</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
+
+                    <%}%>
+
                 </table>
             </div> <!-- table-responsive end// -->
         </div> <!-- card-body end// -->

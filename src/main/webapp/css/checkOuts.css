@@ -313,7 +313,7 @@
     background-size: cover;
     z-index: 2000;
     animation: slideInBack 1s ease-in-out;
-    /*display: none;*/
+    display: none;
 
 }
 .feedback{

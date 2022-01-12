@@ -1,10 +1,11 @@
 package com.example.projectwebshopping.dao.client;
 
 import com.example.projectwebshopping.connection.DataSourceConnection;
+import com.example.projectwebshopping.model.admin.Order;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HoaDonDao {
     //pattern Singleton
@@ -24,10 +25,15 @@ public class HoaDonDao {
         double sum = 0;
         try {
             Connection connection = DataSourceConnection.getConnection();
-            String sql = "SELECT SUM(PRICE * SOLUONG) FROM cthoadon";
+            String sql = "SELECT *  FROM hoadon";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-           sum = preparedStatement.executeQuery().getDouble(1);
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                if(resultSet.getInt("trangthai") == 3) {
+                    sum += resultSet.getDouble("tongtien");
+                }
+            }
+            resultSet.close();
             preparedStatement.close();
             DataSourceConnection.returnConnection(connection);
         } catch (ClassNotFoundException e) {
@@ -42,10 +48,15 @@ public class HoaDonDao {
         int sum = 0;
         try {
             Connection connection = DataSourceConnection.getConnection();
-            String sql = "SELECT COUNT(*) FROM hoadon";
+            String sql = "SELECT *  FROM hoadon";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            sum = preparedStatement.executeQuery().getInt(1);
-
+             ResultSet resultSet = preparedStatement.executeQuery();
+             while (resultSet.next()) {
+                 if(resultSet.getInt("trangthai") == 3) {
+                     sum++;
+                 }
+             }
+            resultSet.close();
             preparedStatement.close();
             DataSourceConnection.returnConnection(connection);
         } catch (ClassNotFoundException e) {
@@ -60,9 +71,14 @@ public class HoaDonDao {
         int sum = 0;
         try {
             Connection connection = DataSourceConnection.getConnection();
-            String sql = "SELECT SUM(S+L+M+XL) FROM products";
+            String sql = "SELECT SUM(S+L+M+XL) tong FROM products";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            sum = preparedStatement.executeQuery().getInt(1);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                sum = resultSet.getInt("tong");
+            }
+            resultSet.close();
 
             preparedStatement.close();
             DataSourceConnection.returnConnection(connection);
@@ -73,5 +89,55 @@ public class HoaDonDao {
         }
         return sum;
     }
-    
+   //total client
+    public int getTotalClient() {
+        int sum = 0;
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            String sql = "SELECT COUNT(*) tong FROM users";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                sum = resultSet.getInt("tong");
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sum;
+    }
+
+    //get all bill
+    public List<Order> getNewBell(int limit) {
+        List<Order> orders = new ArrayList<>();
+
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            String sql = "SELECT h.MAHOADON,h.IDUSER,h.NgayDatHang,h.TrangThai,h.ngayNhanHang,h.SoNgayDuKien,h.tongTien,\n" +
+                    "u.USERMAIL,k.HoTen,k.DiaChi,k.TinhTP,k.QuanHuyen,k.PhuongXa FROM hoadon h JOIN users u ON u.ID = h.IDUSER\n" +
+                    "JOIN khachhang k ON u.ID = k.IDUSER ORDER BY h.NgayDatHang DESC LIMIT ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, limit);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Order order = new Order();
+                order.addOrder(resultSet);
+                orders.add(order);
+
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
 }

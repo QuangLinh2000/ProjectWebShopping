@@ -31,8 +31,8 @@
                 </a>
                 <div class="submenu">
                     <a href="<%=request.getContextPath()%>/admin-list-view-product">Xem dạng danh sách</a>
-                    <a href="page-products-table.html">Xem dạng bảng</a>
-                    <a href="page-products-grid.html">Xem dạng lưới</a>
+                    <a href="<%=request.getContextPath()%>/admin-products-table">Xem dạng bảng</a>
+                    <a href="<%=request.getContextPath()%>/admin-product-gird">Xem dạng lưới</a>
                     <a href="page-categories.html">Thể loại</a>
                     <a href="page-form-product-3.html">Thêm sản phẩm</a>
                 </div>
@@ -98,12 +98,3 @@
         <br>
     </nav>
 </aside>
-<script>
-    $(document).ready(function () {
-        //click menu menu-item
-        $('.menu-item').click(function () {
-            $('.menu-item').removeClass('active');
-            $(this).addClass('active');
-        });
-    });
-</script>

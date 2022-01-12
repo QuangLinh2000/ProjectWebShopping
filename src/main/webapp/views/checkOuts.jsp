@@ -180,7 +180,7 @@
     <div class="feedback">
         <div class="feedback__body">
             <img class="thank-logo" src="<%=request.getContextPath()%>/img/thankyou.png" alt="">
-            <a class="return-home__button" href="">
+            <a class="return-home__button" href="<%=request.getContextPath()%>/home">
                 <button>Trở Lại Trang Chủ</button>
             </a>
             <strong>OR</strong>
@@ -345,16 +345,37 @@
                 },
                 success: function (data) {
                     if (data.trim() === "success") {
-                        alert("Đặt hàng thành công");
+                        $('.return-home').css('display', 'block');
                         <%--window.location.href = "<%=request.getContextPath()%>/dat-hang-thanh-cong";--%>
                     } else {
-                        alert("Đặt hàng thất bại");
+                        pushNotify('error', 'Đặt hàng thất bại','Đặt hàng');
                     }
                 }
             });
         }
 
     }
+    function pushNotify(status, message, title) {
+        new Notify({
+            status: status,
+            title: title,
+            text: message,
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 2000,
+            gap: 20,
+            distance: 20,
+            type: 1,
+            position: 'right top',
+            customWrapper: '',
+        })
+    }
+
     //check format email
     function checkEmailp(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

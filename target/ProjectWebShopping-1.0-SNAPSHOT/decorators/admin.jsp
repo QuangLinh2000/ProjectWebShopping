@@ -58,7 +58,7 @@
 </script>
 </body>
 
-<script src="<%=request.getContextPath()%>/admin/js/jquery-3.5.0.min.js"></script>
+<script src="<%=request.getContextPath()%>/script/jquery-3.5.0.min.js"></script>
 <script src="<%=request.getContextPath()%>/admin/js/bootstrap.bundle.min.js"></script>
 
 

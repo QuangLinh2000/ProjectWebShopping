@@ -6,19 +6,12 @@ import java.util.List;
 public class LoaiSP implements Serializable {
     private String maLoai;
     private String tenLoai;
-    private String moTa;
     List<List<Product>> listProduct;
     //emty constructor
     public LoaiSP(){
 
     }
-    //constructor
-    public LoaiSP(String maLoai, String tenLoai, String moTa, List<List<Product>> listProduct) {
-        this.maLoai = maLoai;
-        this.tenLoai = tenLoai;
-        this.moTa = moTa;
-        this.listProduct = listProduct;
-    }
+
 
     //getter and setter
     public String getMaLoai() {
@@ -37,13 +30,6 @@ public class LoaiSP implements Serializable {
         this.tenLoai = tenLoai;
     }
 
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
 
     public List<List<Product>> getListProduct() {
         return listProduct;
