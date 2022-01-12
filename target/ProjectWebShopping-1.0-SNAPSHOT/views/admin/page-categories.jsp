@@ -109,7 +109,6 @@
     function clickThem(){
         var name = $("#product_name").val();
         var mota = $("#product_mota").val();
-        console.log(arr);
 
         if(name.length == 0){
             pushNotify('warning','Tên loại không được trống','Thêm loại');
@@ -127,7 +126,8 @@
             type: "POST",
             data: {
                 name: name,
-                mota: mota
+                mota: mota,
+                action: 'add'
             },
             success: function(data){
                 if(data == 'success') {
