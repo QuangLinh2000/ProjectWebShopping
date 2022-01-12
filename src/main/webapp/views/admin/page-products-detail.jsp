@@ -1,5 +1,8 @@
 <%@ page import="com.example.projectwebshopping.dto.client.DetailProduct" %>
-<%@ page import="com.example.projectwebshopping.model.client.Product" %><%--
+<%@ page import="com.example.projectwebshopping.model.client.Product" %>
+<%@ page import="com.example.projectwebshopping.model.client.BoSuaTap" %>
+<%@ page import="com.example.projectwebshopping.model.client.LoaiSP" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 1/11/2022
@@ -10,6 +13,8 @@
 <%
     DetailProduct detailProduct = (DetailProduct) request.getAttribute("detailProduct");
     Product product = detailProduct.getProduct();
+    List<BoSuaTap> list = (List<BoSuaTap>) request.getAttribute("boSuaTaps");
+    List<LoaiSP> listLoai = (List<LoaiSP>) request.getAttribute("loaiSPS");
 %>
 <html>
 <head>

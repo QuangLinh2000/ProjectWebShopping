@@ -52,6 +52,32 @@ public class BoSuaTapDao {
         }
         return boSuaTaps;
     }
+    public List<BoSuaTap> getALLBST(){
+        List<BoSuaTap> boSuaTaps = new ArrayList<>();
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from bosutap");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                BoSuaTap boSuaTap = new BoSuaTap();
+                boSuaTap.setId(resultSet.getString("idbst"));
+                boSuaTap.setName(resultSet.getString("name"));
+                boSuaTap.setTieuDe(resultSet.getString("tieude"));
+                boSuaTap.setMota(resultSet.getString("motaBST"));
+                boSuaTap.setHinhAnh(resultSet.getString("img"));
+                boSuaTaps.add(boSuaTap);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return boSuaTaps;
+    }
 
 
 
