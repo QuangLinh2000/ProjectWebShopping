@@ -35,7 +35,7 @@ footer {
     -moz-appearance: none;
     appearance: none;
     border-radius: .25rem;
-    box-shadow: 0;
+    box-shadow: none;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
 }
