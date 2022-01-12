@@ -48,27 +48,28 @@ public class CheckOutsController extends HttpServlet {
         boolean check = Boolean.parseBoolean(request.getParameter("check"));
         HttpSession session = request.getSession();
         List<CartJson> cart = (List<CartJson>) session.getAttribute("cartCheckout");
-       System.out.println(name + " " + phone + " " + address + " " + email + " " + tinhTP + " " + quanHuyen + " " + phuongXa + " " + check);
+//       System.out.println(name + " " + phone + " " + address + " " + email + " " + tinhTP + " " + quanHuyen + " " + phuongXa + " " + check);
         User user = (User) session.getAttribute("userLognin");
 
-       if(!check){
-           KhachHang khachHang = new KhachHang();
-           khachHang.setTenKH(name);
-           khachHang.setMaKH(user.getId());
-           khachHang.setSdt(phone);
-           khachHang.setDiaChi(address);
-           khachHang.setEmail(email);
-           khachHang.setTinhTP(tinhTP);
-           khachHang.setQuanHuyen(quanHuyen);
-           khachHang.setPhuongXa(phuongXa);
-           KhachHangDao.getInstance().themKhachHang(khachHang);
-       }
+
 
         if (cart != null && user != null) {
            String mess = ProductDao.getInstance().checkOut(user.getId(), cart);
            //send ajax
             if(mess.equals("success")){
                 session.removeAttribute("cartCheckout");
+                if(!check){
+                    KhachHang khachHang = new KhachHang();
+                    khachHang.setTenKH(name);
+                    khachHang.setMaKH(user.getId());
+                    khachHang.setSdt(phone);
+                    khachHang.setDiaChi(address);
+                    khachHang.setEmail(email);
+                    khachHang.setTinhTP(tinhTP);
+                    khachHang.setQuanHuyen(quanHuyen);
+                    khachHang.setPhuongXa(phuongXa);
+                    KhachHangDao.getInstance().themKhachHang(khachHang);
+                }
             }
             response.getWriter().write(mess);
 

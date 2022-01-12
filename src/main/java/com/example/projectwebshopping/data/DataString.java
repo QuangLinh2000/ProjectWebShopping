@@ -1,5 +1,9 @@
 package com.example.projectwebshopping.data;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -27,5 +31,15 @@ public class DataString {
           return true;
       }
       return false;
+    }
+
+    public static void main(String[] args) throws IOException {
+        //read from file
+        FileInputStream fis = new FileInputStream("D:\\t.txt");
+        BufferedReader br = new BufferedReader(new java.io.InputStreamReader(fis));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            System.out.println("'"+line+"'+");
+        }
     }
 }

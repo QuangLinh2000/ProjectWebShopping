@@ -541,6 +541,10 @@ public class ProductDao {
 
     public String checkOut(String idUser, List<CartJson> cartJsonList) {
         List<CartJson> cartJsonList1 = new ArrayList<>();
+        int sumMoney = 0;
+        for ( CartJson cartJson : cartJsonList) {
+             sumMoney+= cartJson.getPrice()*cartJson.getQuantity();
+        }
         cartJsonList1.addAll(cartJsonList);
         try {
             Connection connection = DataSourceConnection.getConnection();
@@ -576,6 +580,7 @@ public class ProductDao {
                             resultSet.updateInt(size, soluong-quantity);
                             resultSet.updateRow();
                             cartJsonList.remove(i);
+                            i--;
                         }else{
                             connection.rollback();
                             connection.setAutoCommit(true);
@@ -591,25 +596,29 @@ public class ProductDao {
             }
             resultSet.close();
             preparedStatement.close();
+
             if(cartJsonList.size()==0){
                 String idHoaDon = UUID.randomUUID().toString();
-                if(deleteCart(idUser,cartJsonList1,connection) ==1
-                && insertHoaDon(idUser,connection,idHoaDon)==1
-                && insertCTHoaDon(idHoaDon,cartJsonList1,connection)==1) {
+                int delete = deleteCart(idUser,cartJsonList1,connection);
+                int ínert = insertHoaDon(idUser,connection,idHoaDon,sumMoney);
+                int ctInsert = insertCTHoaDon(idHoaDon,cartJsonList1,connection);
+                if(delete >=1
+                && ínert>=1
+                && ctInsert>=1) {
                     connection.commit();
                 }else{
                     connection.rollback();
                     connection.setAutoCommit(true);
 
                     DataSourceConnection.returnConnection(connection);
-                    return "Đặt hàng thất bại";
+                    return "Đặt hàng thất bại 1";
                 }
             }else{
                 connection.rollback();
                 connection.setAutoCommit(true);
 
                 DataSourceConnection.returnConnection(connection);
-                return "Đặt hàng thất bại";
+                return "Đặt hàng thất bại 2";
             }
             connection.setAutoCommit(true);
 
@@ -623,7 +632,6 @@ public class ProductDao {
         }
         return "success";
     }
-
    public int deleteCart(String idUser,List<CartJson> cartJsonList ,Connection connection) {
         try {
             String sql = "DELETE FROM giohang WHERE IDUSER = ? AND IDSP = ? AND SIZE = ?";
@@ -641,14 +649,15 @@ public class ProductDao {
         }
         return 0;
     }
-    public int insertHoaDon(String idUser,Connection connection,String idHoaDon) {
+    public int insertHoaDon(String idUser,Connection connection,String idHoaDon,double tongTien) {
         try {
-            String sql = "INSERT INTO hoadon(MAHOADON,IDUSER,NgayDatHang,TrangThai) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO hoadon(MAHOADON,IDUSER,NgayDatHang,TrangThai,tongTien) VALUES(?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, idHoaDon);
             preparedStatement.setString(2, idUser);
             preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
             preparedStatement.setInt(4, 0);
+            preparedStatement.setDouble(5, tongTien);
             preparedStatement.executeUpdate();
             preparedStatement.close();
             return 1;
@@ -676,5 +685,126 @@ public class ProductDao {
         return 0;
     }
 
+    //get page product
+    public List<Product> getProductsAdmin(String idLoai,Date ngayNhap,int status,int start, int limit) {
+        Map<String, Product> map = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+        String where = "";
+        String sqlStart = "SELECT * FROM hinhanh AS h INNER JOIN (  SELECT * FROM products ps " +
+                "JOIN loaisp l ON l.IDLOAI = ps.LOAISP WHERE 1 = 1";
+        String sqlEnd =  " LIMIT ?,?) as p ON h.IDSP = p.MASP";
+        if(idLoai != null){
+           where += " AND ps.LOAISP = ? ";
+        }
+        if(ngayNhap != null){
+            where += " AND ps.NGAYNHAP = ? ";
+        }
+        if (status != -1){
+            where += " AND ps.TRANGTHAI = ? ";
+        }
+        try {
+            String sql = sqlStart + where + sqlEnd;
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            int i = 1;
+            if(idLoai != null){
+                preparedStatement.setString(i, idLoai);
+                i++;
+
+            }
+            if(ngayNhap != null){
+                preparedStatement.setDate(i, ngayNhap);
+                i++;
+            }
+            if (status != -1){
+                preparedStatement.setInt(i, status);
+                i++;
+            }
+            preparedStatement.setInt(i, start);
+            preparedStatement.setInt(i + 1, limit);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String maSP = resultSet.getString("MASP");
+                String url = resultSet.getString("URL");
+                String nameLoai = resultSet.getString("NAMELOAI");
+                Product product = new Product();
+                product.setNamLoaiSP(nameLoai);
+                product.addProduct(resultSet);
+                if (map.containsKey(maSP)) {
+                    List<String> listURL = map.get(maSP).getListUrlImg();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                } else {
+                    List<String> listURL = new ArrayList<>();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                }
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //convert map to list
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
+            products.add(entry.getValue());
+        }
+        return products;
+    }
+
+     public int getCountProductAdmin(String idLoai,Date ngayNhap,int status) {
+         int count = 0;
+        String where = "";
+         String sqlStart = "SELECT COUNT(*) tong FROM products WHERE 1 = 1";
+         if(idLoai != null){
+             where += " AND LOAISP = ? ";
+         }
+         if(ngayNhap != null){
+             where += " AND NGAYNHAP = ? ";
+         }
+         if (status != -1){
+             where += " AND TRANGTHAI = ? ";
+         }
+         try {
+             String sql = sqlStart + where;
+             Connection connection = DataSourceConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             int i = 1;
+             if(idLoai != null){
+                 preparedStatement.setString(i, idLoai);
+                 i++;
+
+             }
+             if(ngayNhap != null){
+                 preparedStatement.setDate(i, ngayNhap);
+                 i++;
+             }
+             if (status != -1){
+                 preparedStatement.setInt(i, status);
+             }
+
+             ResultSet resultSet = preparedStatement.executeQuery();
+             if (resultSet.next()) {
+                 count = resultSet.getInt("tong");
+
+             }
+             resultSet.close();
+             preparedStatement.close();
+             DataSourceConnection.returnConnection(connection);
+         } catch (ClassNotFoundException e) {
+             e.printStackTrace();
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+
+         return count;
+     }
 
 }

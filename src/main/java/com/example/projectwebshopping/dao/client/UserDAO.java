@@ -124,6 +124,7 @@ public class UserDAO {
                 user.setId(resultSet.getString("id"));
                 user.setEmail(resultSet.getString("usermail"));
                 user.setUsername(resultSet.getString("username"));
+                user.setRole(resultSet.getInt("role"));
                 resultSet.close();
                 preparedStatement.close();
                 DataSourceConnection.returnConnection(connection);

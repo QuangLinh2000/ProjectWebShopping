@@ -28,28 +28,9 @@ public class Product implements Serializable {
     private int M;
     private int L;
     private int XL;
+    private String namLoaiSP;
     //emty constructor
     public Product() {
-    }
-    //constructor
-    public Product(String maSP, String tenSP, String idBoST, String moTa, double gia, double sell, String mau, Date nayNhap, Date ngayBatDausell, Date ngayHetHansell, String loaiSP, int trangThai, List<String> listUrlImg, int s, int m, int l, int xl) {
-        this.maSP = maSP;
-        this.tenSP = tenSP;
-        this.idBoST = idBoST;
-        this.moTa = moTa;
-        this.gia = gia;
-        this.sell = sell;
-        this.mau = mau;
-        this.nayNhap = nayNhap;
-        this.ngayBatDausell = ngayBatDausell;
-        this.ngayHetHansell = ngayHetHansell;
-        this.loaiSP = loaiSP;
-        this.trangThai = trangThai;
-        this.listUrlImg = listUrlImg;
-        this.S = s;
-        this.M = m;
-        this.L = l;
-        this.XL = xl;
     }
 
 
@@ -189,6 +170,14 @@ public class Product implements Serializable {
         XL = xl;
     }
 
+    public String getNamLoaiSP() {
+        return namLoaiSP;
+    }
+    public void setNamLoaiSP(String namLoaiSP) {
+        this.namLoaiSP = namLoaiSP;
+    }
+
+
  //toString
     @Override
     public String toString() {
@@ -207,6 +196,32 @@ public class Product implements Serializable {
                 ", trangThai=" + trangThai +
                 ", listUrlImg=" + listUrlImg +
                 '}';
+    }
+    public String getTrangThaiProduct() {
+        switch (trangThai) {
+            case 0:
+                return "Hết hàng";
+            case 1:
+                return "Còn hàng";
+            case 2:
+                return "Tạm ngừng";
+            default:
+                return "";
+        }
+    }
+
+
+    public String getClassTrangThai() {
+        switch (trangThai) {
+            case 0:
+                return "alert-danger";
+            case 1:
+                return "alert-success";
+            case 2:
+                return "alert-warning";
+            default:
+                return "";
+        }
     }
 
     public void addProduct(ResultSet resultSet) throws SQLException {
