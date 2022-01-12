@@ -10,7 +10,6 @@
 <%
     DetailProduct detailProduct = (DetailProduct) request.getAttribute("detailProduct");
     Product product = detailProduct.getProduct();
-    System.out.println(product);
 %>
 <html>
 <head>
@@ -47,32 +46,6 @@
 
                     <div class="col-lg-12">
                         <section class="content-body p-xl-4">
-                            <!-- ------------dialog remove   start------------------   -->
-                            <!-- * modal delete -->
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Xoá sản phẩm</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Bạn có chắc chắn muốn xoá không?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Thoát
-                                            </button>
-                                            <button type="button" class="btn btn-primary bg-danger">Đồng ý</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- ----------------- end ------------------------->
                             <form>
                                 <div id="collapseOne" class=" row accordion-collapse collapse show border-0"
@@ -85,14 +58,14 @@
                                                     <div class="col-md-12 form-group">
                                                         <label for="product_name" class="form-label">Tên sản phẩm</label>
                                                         <input type="text" placeholder="Tên sản phẩm" class="form-control"
-                                                               id="product_name" required>
+                                                               id="product_name" value="<%=product.getTenSP()%>" required>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-4">
                                                     <div class="col-md-12 form-group">
                                                         <label for="product_id" class="form-label">Mã sản phẩm</label>
                                                         <input type="text" placeholder="Mã sản phẩm" class="form-control"
-                                                               id="product_id" readonly required>
+                                                               value="<%=product.getMaSP()%>" id="product_id"  required>
                                                     </div>
                                                 </div>
 
@@ -100,21 +73,22 @@
                                                     <div class="col-md-3 form-group mb-4">
                                                         <label for="product_quantity_s" class="form-label">Số lượng S</label>
                                                         <input type="number" min="0" class="form-control" id="product_quantity_s"
-                                                               value="40" readonly>
+                                                               value="<%=product.getS()%>" >
                                                     </div>
                                                     <div class="col-md-3 form-group mb-4">
                                                         <label for="product_quantity_l" class="form-label">Số lượng X</label>
                                                         <input type="number" min="0" class="form-control" id="product_quantity_l"
-                                                               value="40" readonly>
+                                                               value="<%=product.getL()%>" >
                                                     </div>
                                                     <div class="col-md-3 form-group mb-4">
                                                         <label for="product_quantity_m" class="form-label">Số lượng M</label>
                                                         <input type="number" min="0" class="form-control" id="product_quantity_m"
-                                                               value="40" readonly>
+                                                               value="<%=product.getM()%>" >
                                                     </div>
                                                     <div class="col-md-3 form-group mb-4">
                                                         <label for="product_quantity_xl" class="form-label">Số lượng XL</label>
-                                                        <input type="number" min="0" class="form-control" id="product_quantity_xl" value="40" readonly>
+                                                        <input type="number" min="0" class="form-control" id="product_quantity_xl"
+                                                               value="<%=product.getXL()%>" >
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -124,14 +98,13 @@
                                                         <label class="form-label" for="product-type">Loại</label>
                                                         <select class="form-select" id="product-type" name="product-type">
                                                             <option>Quần</option>
-                                                            <option>Áo</option>
+
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group  mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Các Loại quần áo">
                                                         <label class="form-label" for="product-colection">Bộ sưu tập</label>
                                                         <select class="form-select" id="product-colection" name="product-colection">
-                                                            <option>bst1</option>
-                                                            <option>bst2</option>
+
                                                         </select>
                                                     </div>
                                                 </div>
