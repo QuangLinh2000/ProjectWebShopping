@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.projectwebshopping.model.client.BoSuaTap" %>
+<%@ page import="com.example.projectwebshopping.model.client.LoaiSP" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 1/12/2022
@@ -6,6 +8,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    List<BoSuaTap> list = (List<BoSuaTap>) request.getAttribute("boSuaTaps");
+    List<LoaiSP> listLoai = (List<LoaiSP>) request.getAttribute("loaiSPS");
+%>
 <html>
 <head>
     <title>Thêm sản phẩm</title>
@@ -91,6 +97,9 @@
                                                 <div class="col-md-6 form-group  mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Các Loại quần áo">
                                                     <label class="form-label" for="product-colection">Bộ sưu tập</label>
                                                     <select class="form-select" id="product-colection" name="product-colection">
+                                                        <%
+
+                                                        %>
                                                         <option>bst1</option>
                                                         <option>bst2</option>
                                                     </select>
@@ -124,9 +133,9 @@
                                             <div class="mb-4">
                                                 <label class="form-label" for="product-status">Trạng thái</label>
                                                 <select class="form-select" id="product-status" name="product-status">
-                                                    <option>Còn hàng</option>
-                                                    <option>Hết hàng</option>
-                                                    <option>Tạm ngưng</option>
+                                                    <option value="1">Còn hàng</option>
+                                                    <option value="0">Hết hàng</option>
+                                                    <option value="2">Tạm ngưng</option>
                                                 </select>
                                             </div>
                                             <div class="mb-4">

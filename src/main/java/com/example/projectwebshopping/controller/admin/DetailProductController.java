@@ -13,7 +13,10 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
-
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2 ,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 50)
 @WebServlet(name = "DetailAdminController", value = "/admin-detail-product")
 public class DetailProductController extends HttpServlet {
     @Override
@@ -35,5 +38,7 @@ public class DetailProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println(request.getParameter("product_name"));
+        System.out.println(request.getParameter("product_price"));
     }
 }
