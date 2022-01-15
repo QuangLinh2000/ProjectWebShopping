@@ -807,4 +807,69 @@ public class ProductDao {
          return count;
      }
 
+     //INSERT INTO `products`(`MASP`, `TENSP`, `IDBoSuuTap`, `MOTA`, `DONGIA`, `SALE`, `MAU`, `NGAYNHAP`, `NGAYBATDAUSALE`, `NGAYKETTHUCSALE`, `LOAISP`, `TRANGTHAI`, `S`, `L`, `M`, `XL`) VALUES ()
+    //insert product
+    public boolean insertProduct(Product product) {
+        boolean result = false;
+        String sql = "INSERT INTO `products`(`MASP`, `TENSP`," +
+                " `IDBoSuuTap`, `MOTA`, `DONGIA`, `SALE`, `MAU`, `NGAYNHAP`," +
+                " `NGAYBATDAUSALE`, `NGAYKETTHUCSALE`, `LOAISP`, `TRANGTHAI`, " +
+                "`S`, `L`, `M`, `XL`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, product.getMaSP());
+            preparedStatement.setString(2, product.getTenSP());
+            preparedStatement.setString(3, product.getIdBoST());
+            preparedStatement.setString(4, product.getMoTa());
+            preparedStatement.setDouble(5, product.getGia());
+            preparedStatement.setDouble(6, product.getSell());
+            preparedStatement.setString(7, product.getMau());
+            preparedStatement.setDate(8, product.getNayNhap());
+            preparedStatement.setDate(9, product.getNgayBatDausell());
+            preparedStatement.setDate(10, product.getNgayHetHansell());
+            preparedStatement.setString(11, product.getLoaiSP());
+            preparedStatement.setInt(12, product.getTrangThai());
+            preparedStatement.setInt(13, product.getS());
+            preparedStatement.setInt(14, product.getL());
+            preparedStatement.setInt(15, product.getM());
+            preparedStatement.setInt(16, product.getXL());
+            int i = preparedStatement.executeUpdate();
+
+            //INSERT INTO `hinhanh`(`IDSP`, `URL`) VALUES ([value-1],[value-2])
+            String sqlStart = "INSERT INTO `hinhanh`(`IDSP`, `URL`) VALUES";
+            String values = "";
+            for (String url : product.getListUrlImg()) {
+                values += "(?,?),";
+
+            }
+            String sql2 = sqlStart + values.substring(0, values.length() - 1);
+
+            PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+            int j = 1;
+            for (String url : product.getListUrlImg()) {
+                preparedStatement2.setString(j, product.getMaSP());
+                preparedStatement2.setString(j + 1, url);
+                j += 2;
+
+            }
+            int k = preparedStatement2.executeUpdate();
+            if (i > 0 && k > 0) {
+                connection.commit();
+                connection.setAutoCommit(true);
+                result = true;
+
+            }
+            preparedStatement2.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }
