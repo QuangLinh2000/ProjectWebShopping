@@ -1,0 +1,337 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.select{
+    border-bottom: 4px solid #4f69d1;
+}
+.main-wrap {
+    margin-left: auto;
+}
+footer {
+    margin-top: 0;
+}
+.nav{
+    flex-direction: column;
+}
+@media screen and (max-width: 768px) {
+    .center-cus{
+        text-align: center!important;
+    }
+}
+
+.container-sm, .container {
+    max-width: initial;
+}
+.expand{
+    transform:rotate(-90deg);
+}
+
+.return-home{
+position: absolute;
+   background: url("../img/return.jpg");
+   min-width: 100%;
+   min-height: 100vh;
+   background-position: center;
+   background-size: cover;
+   z-index: 2000;
+   animation: slideIn 1.5s ease-in-out;
+   display: none;
+}
+.feedback{
+position: relative;
+display: flex;
+flex-direction: row-reverse;
+align-items: center;
+font-family: "Quicksand", sans-serif;
+
+}
+.feedback__body{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    align-items: center;
+}
+.feedback__body img{
+width: 300px;
+height: 300px;
+object-fit: contain;
+}
+.return-home__button, .orders-page__button{
+    display: block;
+    text-decoration: none;
+    margin: 5px 0;
+    
+    
+}
+.return-home__button button{
+    display: block;
+    padding:10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px #ccc ;
+}
+.return-home__button:hover button{
+    color: #fff;
+    background-color: rgb(204, 41, 41);
+}
+
+.orders-page__button button{
+    display: block;
+    padding:10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0px 2px 5px #ccc ;
+}
+.orders-page__button:hover button{
+    color: #fff;
+    background-color: rgb(204, 41, 41);
+}
+@keyframes slideIn{
+    from {
+        opacity: 0;
+        transform: translateY(-120%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* orders css */
+.status-bar{
+    background-color: #f8f9fa;
+    display: flex;
+    margin-bottom: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.status-bar a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #000;
+    width: calc(100% / 6);
+}
+.status-bar a:hover{
+    background-color: #4f69d1;
+    color: #fff;
+}
+.search{
+    position: relative;
+    display: flex;
+    margin-bottom: 10px;
+}
+.search__icon{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+.search__icon i{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+}
+.search__input{
+    padding: 6px 40px;
+    width: 100%;
+    border: 1px solid ;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.search__button{
+    position: absolute;
+    background-color: #3167eb;
+    color: #fff;
+    text-align: center;
+    line-height: 38px;
+    right: 0;
+    padding: 0 10px;
+    cursor: pointer;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.search__button:hover{
+background-color: rgb(212, 66, 66);
+}
+.list-orders{
+padding-left: 0;
+}
+.list-orders .order{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border: solid 1px #ccc;
+    list-style: none;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 15px;   
+}
+.order .order-status{
+    display: flex;
+    margin: 0px 10px 0 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+}
+.show .order-status i{
+    transform:rotate(-90deg);
+}
+.order-status i{
+    transition: transform 0.5s;
+}
+.show .order-details  {
+    display: block !important;
+    animation: expand 0.5s ease-in-out !important;
+}
+
+.order-status-infor{
+    display: flex;
+}
+.order-status-infor .status-image{
+width: 20px;
+height: 20px;
+margin-right: 10px;
+}
+.order-status-infor .status__text{
+    margin-bottom: 0;
+    line-height: 20px;
+}
+.order .order-body{
+    overflow: hidden;
+}
+.order .order-details{
+    transition: transform 1s ease-in-out;
+    display: none;
+    margin: 0 10px;
+
+}
+.order-details .order-detail{
+
+display: flex;
+justify-content: space-between;
+padding: 10px 0;
+border-bottom: 1px solid #ccc;
+align-items: center;
+
+}
+@keyframes expand{
+    from{
+        transform: translateY(-100%);
+
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+.product-infor{
+    display: flex;
+    
+}
+.product-image{
+    width: 60px;
+    height: 80px;
+}
+.product-info-general{
+margin-left: 15px;
+}
+.product-info-general p{
+margin-bottom: 0;
+font-size: 14px;
+}
+ .order-summary{
+    margin: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.order-infor{
+    margin-top: 20px;
+}
+.order-infor p{
+    margin-bottom: 0;
+    font-size: 14px;
+    color: rgb(109, 109, 109);
+}
+.order-total-price{
+    margin: 15px 0;
+    font-weight: 500;
+    color: rgb(255, 0, 0);
+}
+.order-footer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.button-group{
+    display: flex;
+}
+.button-group a{
+text-decoration: none;
+display: inline-block;
+background-color: #fff;
+margin: 0 10px 10px 0;
+border-radius: 5px;
+padding: 5px 15px;
+color: #fff;
+}
+
+.button-group .buy-again{
+    background-color: rgba(49, 103, 235, 0.7);
+}
+.button-group .buy-again:hover{
+    background-color: rgba(49, 103, 235, 1);
+
+}
+.button-group .cancel-button{
+    position: relative;
+    border: 1px solid #000;
+    color: #000;
+    padding-left: 30px;
+}
+.button-group .cancel-button img{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    margin-left: 5px;
+}
+.button-group .cancel-button:hover{
+    background-color: rgb(221, 221, 221);
+
+}
+
+/* ---------------- */
+.pagination {
+    width: 100%;
+    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+  }
+  .pagination a {
+    display: block;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+   
+  .pagination a.active {
+      background-color: gray;
+      color: white;
+  }
+   
+  .pagination a:hover:not(.active) {
+    background-color: #ddd;
+  }

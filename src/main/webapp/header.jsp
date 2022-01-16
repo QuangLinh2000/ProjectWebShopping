@@ -58,8 +58,70 @@
                 </div>
 
                 <div class="header-top-list">
+
+                    <!--Icon chuông-->
                     <div class="nav-item">
-                        <a class="nav-link btn-icon" href="#"> <i class="fa-regular fa-bell icon-header"></i></a>
+                        <i class="fa-regular fa-bell icon-header"></i>
+                        <div class="nofification">
+                            <div class="notify-header">
+                                <div class="notify-title">
+                                    <h4>Thông Báo</h4> <a href="">Mở Thông Báo</a>
+                                </div>
+                                <div class="notify-filter">
+                                    <a href="" class="notify-all">Tất Cả</a>
+                                    <a href="" class="notify-orders">Đơn Hàng</a>
+                                    <a href="" class="notify-sale">Khuyến Mãi</a>
+                                    <a href="" class="notify-system">Hệ Thống</a>
+                                </div>
+                            </div>
+                            <div class="notifys">
+                                <!--Thông báo 1-->
+                                <div class="notify">
+                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
+                                    <div class="notify-contents">
+                                        <p class="notify-subject">Giảm Giá Lớn !</p>
+                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
+                                        <p class="notify-time">12-01-2022</p>
+                                    </div>
+                                </div>
+                                <!--Thông báo 2-->
+                                <div class="notify">
+                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
+                                    <div class="notify-contents">
+                                        <p class="notify-subject">Giảm Giá Lớn !</p>
+                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
+                                        <p class="notify-time">12-01-2022</p>
+                                    </div>
+                                </div>
+                                <!--Thông báo 3-->
+                                <div class="notify">
+                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
+                                    <div class="notify-contents">
+                                        <p class="notify-subject">Giảm Giá Lớn !</p>
+                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
+                                        <p class="notify-time">12-01-2022</p>
+                                    </div>
+                                </div>
+                                <!--Thông báo 4-->
+                                <div class="notify">
+                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
+                                    <div class="notify-contents">
+                                        <p class="notify-subject">Giảm Giá Lớn !</p>
+                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
+                                        <p class="notify-time">12-01-2022</p>
+                                    </div>
+                                </div>
+                                <!--Thông báo 5-->
+                                <div class="notify">
+                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
+                                    <div class="notify-contents">
+                                        <p class="notify-subject">Giảm Giá Lớn !</p>
+                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
+                                        <p class="notify-time">12-01-2022</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <a href="<%=request.getContextPath()%>/cart">
@@ -254,6 +316,7 @@
                     </ul>
                 </nav>
                 <div class="header-top-list">
+                    <i class="fa-regular fa-bell icon-header"></i>
                     <div>
                         <i class="fa-solid fa-magnifying-glass search-icon"></i>
                     </div>
@@ -417,5 +480,18 @@
             }
         });
     });
+// bật tắt thông báo
+    let notifycations=$('.nofification')
+    let notifyButton=$('.fa-regular.fa-bell')
+    $(document).click(function(e){
+        if(notifyButton.is(e.target)){
 
+            notifycations.toggleClass('flex')
+
+        }
+
+        else if(notifycations.has(e.target).length==0 || !notifycations.is(e.target)){
+            notifycations.removeClass('flex')
+        }
+    })
 </script>

@@ -224,6 +224,7 @@ html body {
 #header-first .header-top-list {
     width: 350px;
     gap: 10px;
+    position: relative;
 }
 
 .header-top-list {
@@ -563,4 +564,110 @@ html body {
     .margin-top-mobile {
         margin-top: 80px;
     }
+}
+/*css notification*/
+.btn-icon:hover i{
+    background-color: rgb(235, 231, 21);
+
+}
+.nofification{
+    border:1px solid rgb(228, 222, 222);
+    position:fixed;
+    display: none;
+    flex-direction: column;
+    padding: 0 10px 15px 10px;
+    min-width: 300px;
+    width: 400px;
+    z-index: 1000;
+    top: 7.5%;
+    right:15%;
+    background-color: #fff;
+    animation: showdown 0.2s ease-in ;
+    transform-origin:top ;
+
+
+}
+@keyframes showdown{
+    from{
+
+        transform: scaleY(0);
+
+    }
+    to{
+
+        transform: scaleY(1);
+    }
+}
+.notify-header{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.notify-title{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+
+}
+.notify-title a{
+    color: red !important;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 5px;
+}
+.notify-title a:hover{
+    background-color: #e7e5e2;
+}
+.notify-filter{
+    display: flex;
+}
+.notify-filter a{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    margin-right: 5px;
+    border-radius: 10px;
+
+    padding: 5px;
+}
+.notify-filter a:hover{
+    background-color: #e7e5e2;
+}
+.notifys{
+
+}
+.notifys .notify .notify-icon{
+    width: 40px;
+    height: 40px;
+}
+.notify{
+    display: flex;
+    margin-top: 5px;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+    transition: 0.25s ease-out;
+
+}
+.notify:hover{
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.notify p{
+    margin-bottom: 2px;
+}
+
+.notify-subject{
+    font-weight: bold;
+
+}
+.notify-content{
+    text-transform: none;
+
+}
+.notify-time{
+    opacity: 0.7;
+}
+.flex{
+    display: flex !important;
 }
