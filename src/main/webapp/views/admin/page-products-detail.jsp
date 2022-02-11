@@ -21,6 +21,14 @@
     <title>Chi tiết sản phẩm</title>
 </head>
 <body>
+<style>
+    #container-image-add {
+        /* margin: 0; */
+        padding-bottom: 30px;
+        border-bottom: 1px solid #9e9b9b;
+        margin-bottom: 20px;
+    }
+</style>
     <section class="content-main">
 
         <div class="content-header">
@@ -56,7 +64,8 @@
                     <div class="col-lg-12">
                         <section class="content-body p-xl-4">
                             <!-- ----------------- end ------------------------->
-                            <form id="form-update" method="post" action="<%=request.getContextPath()%>/admin-detail-product" enctype="multipart/form-data">
+                            <form id="form-update" method="post" action="<%=request.getContextPath()%>/admin-detail-product" enctype="multipart/form-data" novalidate>
+                                <button type="submit" value="Send Request" id="button_form" style="display: none"></button>
                                 <div id="collapseOne" class=" row accordion-collapse collapse show border-0"
                                      aria-labelledby="headingOne"
                                      data-bs-parent="#accordionExample">
@@ -106,7 +115,6 @@
                                                          title="Các Loại quần áo">
                                                         <label class="form-label" for="product_type">Loại</label>
                                                         <select class="form-select" id="product_type" name="product_type">
-                                                            // for listLoai java
                                                             <%for (int i = 0; i < listLoai.size(); i++) {%>
                                                             <option value="<%=listLoai.get(i).getMaLoai()%>"
                                                                     <%if (product.getLoaiSP() == listLoai.get(i).getMaLoai()) {%>
@@ -227,17 +235,18 @@
                                                 </label>
                                                 <input class="d-none" id="create-image" name="file" type="file" accept="image/*" multiple />
                                             </div>
+                                            <div id="container-image-add" class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
+
+                                            </div>
+                                            <p class="fs-3 text-center text-capitalize">Ảnh đã lưu</p>
                                             <div id="container-image" class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
                                                 <% for (int i = 0; i < product.getListUrlImg().size(); i++) { %>
-                                                <div class="col">
+                                                <div class="col img-product-item">
                                                     <div class="card card-product_grid">
-                                                        <label for="file-image-<%=i%>">
-                                                            <img src="<%=request.getContextPath()%><%=product.getListUrlImg().get(i)%>" class="card-img img-thumbnail" alt="<%=product.getTenSP()%>">
-                                                        </label>
-                                                        <input class="d-none" id="file-image-<%=i%>" type="file" accept="image/*" />
-                                                        <div class="info-wrap">
-                                                            <a href="#" class="title text-truncate"><%=product.getListUrlImg().get(i)%></a>
-                                                            <a href="#" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-outline-danger">
+                                                        <img src="<%=request.getContextPath()%><%=product.getListUrlImg().get(i)%>" class="card-img img-thumbnail" alt="<%=product.getTenSP()%>">
+                                                        <div class="info-wrap text-center">
+<%--                                                            <a href="#" class="title text-truncate"><%=product.getListUrlImg().get(i)%></a>--%>
+                                                            <a href="#" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-outline-danger delete-img" data-img-url="<%=product.getListUrlImg().get(i)%>">
                                                                 <i class="material-icons md-delete_forever"></i> Xóa
                                                             </a>
                                                         </div>
@@ -249,7 +258,6 @@
                                     </div>
 
                                 </div>
-                                <input  type="submit" value="Send Request" id="button_form">
 
                             </form>
 
@@ -262,15 +270,21 @@
 
 
     </section> <!-- content-main end// -->
+
     <script>
+        const lablecreateImg = document.querySelector('label[for="create-image"]');
         //disable all input vs textarea vs select document
-        // disableAll();
+        disableAll();
         function disableAll() {
-            var input = document.getElementsByTagName("input");
-            var textarea = document.getElementsByTagName("textarea");
-            var select = document.getElementsByTagName("select");
+            var input = document.querySelector("#content-wrapper").getElementsByTagName("input");
+            var textarea = document.querySelector("#content-wrapper").getElementsByTagName("textarea");
+            var select = document.querySelector("#content-wrapper").getElementsByTagName("select");
+            lablecreateImg.style.visibility = "hidden";
+            document.getElementById('container-image-add').style.display = "none";
             for (var i = 0; i < input.length; i++) {
-                input[i].disabled = true;
+                if(input[i].type != "submit"){
+                    input[i].disabled = true;
+                }
             }
             for (var i = 0; i < textarea.length; i++) {
                 textarea[i].disabled = true;
@@ -278,14 +292,21 @@
             for (var i = 0; i < select.length; i++) {
                 select[i].disabled = true;
             }
+
         }
 
         function enableAll() {
+            document.getElementById('container-image-add').style.display = "flex";
             var input = document.getElementsByTagName("input");
             var textarea = document.getElementsByTagName("textarea");
             var select = document.getElementsByTagName("select");
+            lablecreateImg.style.visibility = "visible";
             for (var i = 0; i < input.length; i++) {
-                if (input[i]!==document.getElementById("create-image")) {
+                if (input[i]==document.getElementById("product_id")) {
+                    //read only
+                    input[i].disabled = false;
+                    input[i].readOnly = true;
+                }else {
                     input[i].disabled = false;
                 }
 
@@ -297,34 +318,137 @@
                 select[i].disabled = false;
             }
         }
-        // upload file image form ajax document
-        document.getElementById("form-update").addEventListener("submit", function (e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            console.log("submit");
 
-            var formData = new FormData(this);
-            console.log(formData);
-
-            //  enctype utf-8 vs file multipart/form-data
-            $.ajax({
-                url: '<%=request.getContextPath()%>/admin-detail-product',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (data) {
-                    // if(data == 'success'){
-                    //     pushNotify('success', 'Thêm sản phẩm thành công','Thêm sản phẩm');
-                    // }else{
-                    //     pushNotify('danger', 'Thêm sản phẩm thất bại','Thêm sản phẩm');
-                    // }
+        var arr_image = [];
+        document.querySelector("#create-image").addEventListener("change", function() {
+            var files = this.files;
+            var filesArr = Array.prototype.slice.call(files);
+            // add all files to arr_image
+            // console.log(files);
+            // console.log(arr_image);
+            for (let i = 0; i < filesArr.length; i++) {
+                let f= filesArr[i];
+                if (!f.type.match("image.*")) {
+                    pushNotify('warning', '','Chỉ chấp nhận file ảnh');
+                    continue;
                 }
+                // file size must be less than 10mb
+                if (f.size > 10485760) {
+                    pushNotify('warning', '','Kích thước file quá lớn');
+                    continue;
+                }
+                arr_image.push(f);
+                console.log(f);
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let html = "<div class='col img-product-item' data-time=\'"+f.lastModified+"\'>" +
+                        "<div class='card card-product-grid'>" +
+                        "<img src='" + e.target.result + "' class='card-img img-thumbnail' alt='...'>" +
+                        "<div class='info-wrap text-center'>" +
+                        "<a href='#' class='btn btn-sm btn-outline-danger delete-img' onclick='removeImgTime(this)'>" +
+                        "<i class='material-icons md-delete_forever'></i> Xóa" +
+                        "</a>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>";
+                    $('#container-image-add').append(html);
+                }
+                reader.readAsDataURL(f);
+            }
+        });
+        // remove file by file time modified
+        function removeImgTime(e) {
+            let itemImg =e.closest('.img-product-item');
+            let time = itemImg.getAttribute('data-time');
+            // console.log(time);
+            for (let i = 0; i < arr_image.length; i++) {
+                if (arr_image[i].lastModified == time) {
+                    arr_image.splice(i, 1);
+                    break;
+                }
+            }
+            // console.log(arr_image);
+            itemImg.remove();
+
+        }
+        // method hide modal
+        function hideModal(idElement) {
+                $(idElement).removeClass("in");
+                $(".modal-backdrop").remove();
+                $('body').removeClass('modal-open');
+                $('body').css('padding-right', '');
+                $(idElement).hide();
+            }
+        // delete image when click delete and modal ok accept
+        // document onload
+        //windows onload
+        const idProduct = document.getElementById('product_id').value;
+        window.addEventListener('load', function () {
+            // upload file image form ajax document
+            document.getElementById("form-update").addEventListener("submit", function (e) {
+                // console.log("ok")
+                e.preventDefault(); // avoid to execute the actual submit of the form.
+                var formData = new FormData(this);
+                formData.append('action', 'update-product');
+                // remove file
+                formData.delete('file');
+                //add image to form data
+                for (let i = 0; i < arr_image.length; i++) {
+                    formData.append('file', arr_image[i]);
+                }
+                // formData add file
+                // for (var [key, value] of formData.entries()) {
+                //     console.log(key, value);
+                // }
+                $.ajax({
+                    url: '<%=request.getContextPath()%>/admin-detail-product',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        if(data == 'success'){
+                            pushNotify('success', 'Cập nhật sản phẩm  thành công','Cập nhật');
+                        }else{
+                            pushNotify('danger', 'Cập nhật sản phẩm thất bại','Câp nhật');
+                        }
+                    }
+                });
+            });
+            $('#exampleModalCenter').on('show.bs.modal', function(e) {
+                $(this).find('.btn-accept').click(function() {
+                    $(this).off('click');
+                    hideModal("#exampleModalCenter");
+                    const url = '<%=request.getContextPath()%>/admin-detail-product';
+                    if($('#container-image .img-product-item').length>=2){
+                        $.ajax({
+                            url: url,
+                            type: 'POST',
+                            data: {
+                                action: 'delete-img',
+                                idProduct: idProduct,
+                                idImg: $(e.relatedTarget).data('img-url')
+                            },
+                            success: function (data) {
+                                if(data == 'success'){
+                                    pushNotify('success', 'Xóa ảnh thành công','Xóa');
+                                    // $('#' + id).remove();
+                                    $(e.relatedTarget).closest('.img-product-item').remove();
+                                }else{
+                                    pushNotify('warning', 'Không thể xóa ảnh','Xóa');
+                                }
+                            }
+                        });
+                    }else{
+                        pushNotify('warning', 'Không thể xóa ảnh','Xóa');
+                    }
+                });
+
             });
 
-
-
         });
+
 
 
 
