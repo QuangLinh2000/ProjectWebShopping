@@ -67,7 +67,7 @@
                                 mota = category.getMota();
                             }
                         %>
-                        <tr>
+                        <tr idtype="<%=category.getIdLoai()%>">
                             <td>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" />

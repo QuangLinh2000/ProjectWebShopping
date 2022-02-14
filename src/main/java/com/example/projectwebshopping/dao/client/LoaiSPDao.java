@@ -121,4 +121,27 @@ public class LoaiSPDao {
         }
         return false;
     }
+    //lay loai sp
+    public LoaiSPAdmin getLoaiSp(String id){
+        LoaiSPAdmin loaiSP=new LoaiSPAdmin();
+        try {
+            Connection connection=DataSourceConnection.getConnection();
+            String sql = "SELECT loaisp.NameLoai, loaisp.Mota FROM loaisp WHERE idloai = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                loaiSP.setNameLoai(resultSet.getString("NameLoai"));
+                loaiSP.setMota(resultSet.getString("Mota"));
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+return loaiSP;
+    }
 }
