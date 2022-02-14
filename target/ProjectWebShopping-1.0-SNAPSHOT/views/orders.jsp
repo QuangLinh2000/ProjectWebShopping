@@ -1,335 +1,679 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.projectwebshopping.model.admin.Order" %>
+<%@ page import="com.example.projectwebshopping.model.client.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <link href="<%=request.getContextPath()%>/css/bootstrapf9e3.css?v=1.1" rel="stylesheet"/>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/fonts/material-icon/css/round.css" />
-    <!-- custom style -->
-    <link href="<%=request.getContextPath()%>/css/uif9e3.css?v=1.1" rel="stylesheet"  />
-    <link href="<%=request.getContextPath()%>/css/responsivef9e3.css?v=1.1" rel="stylesheet" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/orders.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<%
+    List<Order> orders = (List<Order>) request.getAttribute("orders");
+    int pagenumber = (int) request.getAttribute("page");
+    String xemTrangThaiDonHang = (String) request.getAttribute("xemTrangThaiDonHang");
+%>
+
+<link href="<%=request.getContextPath()%>/css/bootstrapf9e3.css?v=1.1" rel="stylesheet"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/admin/fonts/material-icon/css/round.css"/>
+<!-- custom style -->
+<link href="<%=request.getContextPath()%>/css/uif9e3.css?v=1.1" rel="stylesheet"/>
+<link href="<%=request.getContextPath()%>/css/responsivef9e3.css?v=1.1" rel="stylesheet"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/orders.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 
-    <b class="screen-overlay"></b>
-    <main class="main-wrap container">
-        <section class="content-main">
+<b class="screen-overlay"></b>
+<main class="main-wrap container">
+    <section class="content-main">
 
-            <div class="content-header">
-                <h2 class="content-title">Tủy chỉnh hồ sơ </h2>
-            </div>
+        <div class="content-header">
+            <h2 class="content-title">Tủy chỉnh hồ sơ </h2>
+        </div>
 
-            <div class="card">
-                <div class="card-body">
-                    <div class="row gx-5">
-                        <aside class="col-lg-3 border-end">
-                            <nav class="nav nav-pills flex-lg-column mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row gx-5">
+                    <jsp:include page="lefmenuaccount.jsp"></jsp:include>
+                    <div class="col-lg-9">
 
-                                <ul class="menu-aside">
-                                    <li class="menu-item  active">
-                                        <a class="menu-link" href="<%=request.getContextPath()%>/views/account.jsp">
-                                            <span class="text">Tài khoản của tôi</span>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item has-submenu">
-                                        <a class="menu-link" style="cursor: pointer;">
-                                            <span class="text">Thông báo</span>
-                                        </a>
-                                        <div class="submenu" style="display: block;">
-                                            <a href="<%=request.getContextPath()%>/views/notification.jsp">Tất Cả</a>
-                                            <a href="#">Cập nhật đơn hàng</a>
-                                            <a href="#">Khuyễn mãi</a>
-                                            <a href="#">Hệ thống</a>
-                                        </div>
-                                    </li>
-
-                                    <li class="menu-item ">
-                                        <a class="menu-link" href="<%=request.getContextPath()%>/views/orders.jsp">
-                                            <span class="text">Đơn mua</span>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item ">
-                                        <a class="menu-link" href="#">
-                                            <span class="text">Kho voucher</span>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                            </nav>
-                        </aside>
-                        <div class="col-lg-9">
-
-                            <section class="content-body p-xl-4 ">
-                                <div class="status-bar">
-                                    <a href="" class="select">Tất Cả</a>
-                                    <a href="" class="">Chờ Xác Nhận</a>
-                                    <a href="" class="">Đã Xác Nhận</a>
-                                    <a href="" class="">Đang Giao</a>
-                                    <a href="" class="">Đã Nhận</a>
-                                    <a href="" class="">Đã Hủy</a>
-                                </div>
-                                <div class="view-mode">
-                                    <div class="search col-lg-12">
-                                        <div class="search__icon">
-                                            <i class="fas fa-search"></i>
-                                        </div>
-                                        <input class="search__input col-lg-12" type="text" placeholder="Nhập Đơn Hàng Muốn Tìm Kiếm">
-                                        <div class="search__button">
-                                            Tìm Kiếm
-                                        </div>
+                        <section class="content-body p-xl-4 ">
+                            <div class="status-bar">
+                                <a href="<%=request.getContextPath()%>/order?status=all" class="status-bar-all">Tất Cả</a>
+                                <a href="<%=request.getContextPath()%>/order?status=0" class="status-bar-0">Chờ Xác Nhận</a>
+                                <a href="<%=request.getContextPath()%>/order?status=2" class="status-bar-2">Đã Xác Nhận</a>
+                                <a href="<%=request.getContextPath()%>/order?status=3" class="status-bar-3">Đang Giao</a>
+                                <a href="<%=request.getContextPath()%>/order?status=4" class="status-bar-4">Đã Nhận</a>
+                                <a href="<%=request.getContextPath()%>/order?status=1" class="status-bar-1">Đã Hủy</a>
+                            </div>
+                            <div class="view-mode">
+                                <div class="search col-lg-12">
+                                    <div class="search__icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <input class="search__input col-lg-12" type="text"
+                                           placeholder="Nhập Đơn Hàng Muốn Tìm Kiếm">
+                                    <div class="search__button">
+                                        Tìm Kiếm
                                     </div>
                                 </div>
-                                <ul class="list-orders col-lg-12">
-                                    <!--Đơn Hàng 1-->
-                                    <li class="order col-lg-12">
-                                        <div class="order-status">
-                                            <div class="order-status-infor">
-                                                <img src="<%=request.getContextPath()%>/img/package.png" alt="" class="status-image">
-                                                <p class="status__text">Đã Nhận Được Hàng</p>
-                                            </div>
-                                            <i class="fas fa-angle-left"></i>
+                            </div>
+                            <ul class="list-orders col-lg-12">
+                                <%
+                                    for (int i = 0; i < orders.size(); i++) {
+                                        Order order = orders.get(i);
+                                        if (order.getStatus() == 0) {
+                                %>
+                                <!--Đơn Hàng 3-->
+                                <li class="order col-lg-12">
+                                    <div class="order-status">
+                                        <div class="order-status-infor">
+
+                                            <img src="<%=request.getContextPath()%>/img/package-box.png" alt=""
+                                                 class="status-image">
+                                            <p class="status__text">Đang Xử Lý</p>
                                         </div>
-                                        <div class="order-body">
-                                            <div class="order-details">
-                                                <!--Sản Phẩm 1-->                                     
-                                                 <div class="order-detail">
-                                                    <div class="product-infor">
-                                                        <img src="<%=request.getContextPath()%>/img/AK62546/1.jpg" alt="" class="product-image">
-                                                        <div class="product-info-general">
-                                                            <p class="product-name">Đầm Tay Xoan</p>
-                                                            <p class="product-size">Size: L</p>
-                                                           <p class="product-quantity">Số Lượng: 2</p>
-                                                       </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>1,200,000 đ</span>
-                                                     </div>
-                                                 </div>
-                                                 <!--Sản Phẩm 2-->
-                                                 <div class="order-detail">
-                                                     <div class="product-infor">
-                                                         <img src="<%=request.getContextPath()%>/img/AK62546/1.jpg" alt="" class="product-image">
-                                                        <div class="product-info-general">
-                                                             <p class="product-name">Đầm Tay Xoan</p>
-                                                             <p class="product-size">Size: L</p>
-                                                             <p class="product-quantity">Số Lượng: 2</p>
-                                                         </div>
-                                                    </div>
-                                                     <div class="product-price">
-                                                        <span>1,200,000 đ</span>
-                                                     </div>
-                                                     </div>
-     
-                                             </div>
-                                        </div>
-                                        
-                                        <div class="order-summary">
-                                            <div class="order-infor">
-                                                <p class="order-date">Ngày Đặt Hàng: 11-01-2022</p>
-                                                <p class="order-receive-date">Ngày Nhận Hàng: 20-01-2022</p>
-                                                <p class="order-id">Mã Đơn Hàng: DX1003</p>
-                                            </div>
-                                            <div class="order-footer">
-                                                <div class="order-total-price">
-                                                    Tổng Tiền: <span>2,400,000 đ</span>
-                                                </div>
-                                                <div class="button-group">
-                                                    <a href="" class="buy-again">Mua Lại</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                     <!--Đơn Hàng 2-->
-                                    <li class="order col-lg-12">
-                                        <div class="order-status">
-                                            <div class="order-status-infor">
-                                                <img src="<%=request.getContextPath()%>/img/traffic-signal.png" alt="" class="status-image">
-                                                <p class="status__text">Đã Hủy</p>
-                                            </div>
-                                            <i class="fas fa-angle-left"></i>
+                                        <i class="fas fa-angle-left"></i>
+                                    </div>
+                                    <div class="order-body">
+
+                                        <div class="order-details">
 
                                         </div>
-                                        <div class="order-body">
-
-                                            <div class="order-details">
-                                                <div class="order-detail">
-                                                    <div class="product-infor">
-                                                        <img src="<%=request.getContextPath()%>/img/AK62546/1.jpg" alt="" class="product-image">
-                                                        <div class="product-info-general">
-                                                            <p class="product-name">Đầm Tay Xoan</p>
-                                                            <p class="product-size">Size: L</p>
-                                                            <p class="product-quantity">Số Lượng: 2</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>1,200,000 đ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="order-summary">
-                                            <div class="order-infor">
-                                                <p class="order-date">Ngày Đặt Hàng: 11-01-2022</p>
-                                                <p class="order-receive-date">Ngày Hủy: 12-01-2022</p>
-                                            </div>
-                                            <div class="order-footer">
-                                                <div class="order-total-price">
-                                                    Tổng Tiền: <s>2,400,000 đ</s>
-                                                </div>
-                                                <div class="button-group">
-                                                    <a href="" class="buy-again">
-                                                        Mua Lại</a>
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div class="order-summary">
+                                        <div class="order-infor">
+                                            <p class="order-date">Ngày Đặt
+                                                Hàng: <%=order.formatDate(order.getOrderDate())%>
+                                            </p>
+                                            <p class="order-id">Mã Đơn Hàng:
+                                            <p class="order-id-item"><%=order.getOrderId()%>
+                                            </p></p>
 
                                         </div>
-                                    </li>
-                                     <!--Đơn Hàng 3-->
-                                    <li class="order col-lg-12">
-                                        <div class="order-status">
-                                            <div class="order-status-infor">
-
-                                                <img src="<%=request.getContextPath()%>/img/package-box.png" alt="" class="status-image">
-                                                <p class="status__text">Đang Xử Lý</p>
+                                        <div class="order-footer">
+                                            <div class="order-total-price">
+                                                Tổng
+                                                Tiền: <%=Product.formatMoney(Double.parseDouble(order.getTotalPrice() + ""))%>
+                                                đ
                                             </div>
-                                            <i class="fas fa-angle-left"></i>
-                                        </div>
-                                        <div class="order-body">
-
-                                            <div class="order-details">
-    
-                                                <div class="order-detail">
-                                                    <div class="product-infor">
-                                                        <img src="<%=request.getContextPath()%>/img/AK62546/1.jpg" alt="" class="product-image">
-                                                        <div class="product-info-general">
-                                                            <p class="product-name">Đầm Tay Xoan</p>
-                                                            <p class="product-size">Size: L</p>
-                                                            <p class="product-quantity">Số Lượng: 2</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>1,200,000 đ</span>
-                                                    </div>
-                                                </div>
+                                            <div class="button-group">
+                                                <a href="" class="buy-again">Mua Lại</a>
+                                                <a href="" class="cancel-button">
+                                                    <img src="<%=request.getContextPath()%>/img/exclamation.png" alt="">
+                                                    Hủy</a>
                                             </div>
                                         </div>
-                                        <div class="order-summary">
-                                            <div class="order-infor">
-                                                <p class="order-date">Ngày Đặt Hàng: 11-01-2022</p>
-                                            </div>
-                                            <div class="order-footer">
-                                                <div class="order-total-price">
-                                                    Tổng Tiền: <span>2,400,000 đ</span>
-                                                </div>
-                                                <div class="button-group">
-                                                    <a href="" class="buy-again">Mua Lại</a>
-                                                    <a href="" class="cancel-button">
-                                                        <img src="<%=request.getContextPath()%>/img/exclamation.png" alt="">
-                                                        Hủy</a>
-                                                </div>
-                                            </div>
+
+                                    </div>
+                                </li>
+                                <%}%>
+
+                                <%if (order.getStatus() == 1) {%>
+                                <!--Đơn Hàng 2-->
+                                <li class="order col-lg-12">
+                                    <div class="order-status">
+                                        <div class="order-status-infor">
+                                            <img src="<%=request.getContextPath()%>/img/traffic-signal.png" alt=""
+                                                 class="status-image">
+                                            <p class="status__text">Đã Hủy</p>
+                                        </div>
+                                        <i class="fas fa-angle-left"></i>
+
+                                    </div>
+                                    <div class="order-body">
+
+                                        <div class="order-details">
+                                        </div>
+                                    </div>
+
+                                    <div class="order-summary">
+                                        <div class="order-infor">
+                                            <p class="order-date">Ngày Đặt
+                                                Hàng: <%=order.formatDate(order.getOrderDate())%>
+                                            </p>
+                                            <p class="order-receive-date">Ngày
+                                                Hủy: <%=order.formatDate(order.getNgayNhanHang())%>
+                                            </p>
+                                            <p class="order-id">Mã Đơn Hàng:
+                                            <p class="order-id-item"><%=order.getOrderId()%>
+                                            </p></p>
 
                                         </div>
-                                    </li>
-                                     <!--Đơn Hàng 4-->
-                                    <li class="order col-lg-12">
-                                        <div class="order-status">
-                                            <div class="order-status-infor">
-                                                <img src="<%=request.getContextPath()%>/img/fast-delivery.png" alt="" class="status-image">
-                                                <p class="status__text">Đang Vận Chuyển</p>
-
+                                        <div class="order-footer">
+                                            <div class="order-total-price">
+                                                Tổng Tiền:
+                                                <s><%=Product.formatMoney(Double.parseDouble(order.getTotalPrice() + ""))%>
+                                                    đ</s>
                                             </div>
-                                            <i class="fas fa-angle-left"></i>
-                                        </div>
-                                        <div class="order-body">
-
-                                            <div class="order-details">
-    
-                                                <div class="order-detail">
-                                                    <div class="product-infor">
-                                                        <img src="<%=request.getContextPath()%>/img/AK62546/1.jpg" alt="" class="product-image">
-                                                        <div class="product-info-general">
-                                                            <p class="product-name">Đầm Tay Xoan</p>
-                                                            <p class="product-size">Size: L</p>
-                                                            <p class="product-quantity">Số Lượng: 2</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>1,200,000 đ</span>
-                                                    </div>
-                                                </div>
+                                            <div class="button-group">
+                                                <a href="" class="buy-again">
+                                                    Mua Lại</a>
                                             </div>
                                         </div>
-                                        <div class="order-summary">
-                                            <div class="order-infor">
-                                                <p class="order-date">Ngày Đặt Hàng: 11-01-2022</p>
-                                                <p class="order-receive-date">Ngày Nhận Hàng Dự Kiến: 20-01-2022</p>
-                                                <p class="order-id">Mã Đơn Hàng: DX1003</p>
-                                            </div>
-                                            <div class="order-footer">
-                                                <div class="order-total-price">
-                                                    Tổng Tiền: <span>2,400,000 đ</span>
-                                                </div>
-                                                <div class="button-group">
-                                                    <a href="" class="buy-again">Mua Lại</a>
-                                                </div>
-                                            </div>
+
+                                    </div>
+                                </li>
+                                <%}%>
+                                <%if (order.getStatus() == 2) {%>
+                                <!--Đơn Hàng 4-->
+                                <li class="order col-lg-12">
+                                    <div class="order-status">
+                                        <div class="order-status-infor">
+                                            <img src="<%=request.getContextPath()%>/img/fast-delivery.png" alt=""
+                                                 class="status-image">
+                                            <p class="status__text">Đã xác nhận</p>
 
                                         </div>
-                                    </li>
+                                        <i class="fas fa-angle-left"></i>
+                                    </div>
+                                    <div class="order-body">
 
-                                </ul>
-                                <udiv class="more-order">
-                                    <div class="pagination">
-                                        <a href="#">&laquo;</a>
-                                        <a class="active" href="#">1</a>
-                                        <a  href="#">2</a>
-                                        <a href="#">3</a>
-                                        <a href="#">4</a>
-                                        <a href="#">5</a>
-                                        <a href="#">6</a>
-                                        <a href="#">7</a>
-                                        <a href="#">&raquo;</a>
-                                      </div>
-                                </udiv>
+                                        <div class="order-details">
+                                        </div>
+                                    </div>
+                                    <div class="order-summary">
+                                        <div class="order-infor">
+                                            <p class="order-date">Ngày Đặt
+                                                Hàng: <%=order.formatDate(order.getOrderDate())%>
+                                            </p>
+                                            <p class="order-receive-date">Ngày Nhận Hàng Dự
+                                                Kiến: <%=order.getSoNgayDuKien()%>
+                                            </p>
+                                            <p class="order-id">Mã Đơn Hàng:
+                                            <p class="order-id-item"><%=order.getOrderId()%>
+                                            </p></p>
+                                        </div>
+                                        <div class="order-footer">
+                                            <div class="order-total-price">
+                                                Tổng
+                                                Tiền: <%=Product.formatMoney(Double.parseDouble(order.getTotalPrice() + ""))%>
+                                                đ
+                                            </div>
+                                            <div class="button-group">
+                                                <a href="" class="buy-again">Mua Lại</a>
+                                            </div>
+                                        </div>
 
-                            </section> <!-- content-body .// -->
+                                    </div>
+                                </li>
+                                <%}%>
 
-                        </div> <!-- col.// -->
-                    </div> <!-- row.// -->
+                                <%if (order.getStatus() == 3) {%>
+                                <!--Đơn Hàng 4-->
+                                <li class="order col-lg-12">
+                                    <div class="order-status">
+                                        <div class="order-status-infor">
+                                            <img src="<%=request.getContextPath()%>/img/fast-delivery.png" alt=""
+                                                 class="status-image">
+                                            <p class="status__text">Đang Vận Chuyển</p>
 
-                </div> <!-- card body end// -->
-            </div> <!-- card end// -->
+                                        </div>
+                                        <i class="fas fa-angle-left"></i>
+                                    </div>
+                                    <div class="order-body">
+
+                                        <div class="order-details">
+
+                                        </div>
+                                    </div>
+                                    <div class="order-summary">
+                                        <div class="order-infor">
+                                            <p class="order-date">Ngày Đặt
+                                                Hàng: <%=order.formatDate(order.getOrderDate())%>
+                                            </p>
+                                            <p class="order-receive-date">Ngày Nhận Hàng Dự
+                                                Kiến: <%=order.getSoNgayDuKien()%>
+                                            </p>
+                                            <p class="order-id">Mã Đơn Hàng:
+                                            <p class="order-id-item"><%=order.getOrderId()%>
+                                            </p></p>
+                                        </div>
+                                        <div class="order-footer">
+                                            <div class="order-total-price">
+                                                Tổng
+                                                Tiền: <%=Product.formatMoney(Double.parseDouble(order.getTotalPrice() + ""))%>
+                                                đ
+                                            </div>
+                                            <div class="button-group">
+                                                <a href="" class="buy-again">Mua Lại</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>
+                                <%}%>
+
+                                <%if (order.getStatus() == 4) {%>
+                                <!--Đơn Hàng 1-->
+                                <li class="order col-lg-12">
+                                    <div class="order-status">
+                                        <div class="order-status-infor">
+                                            <img src="<%=request.getContextPath()%>/img/package.png" alt=""
+                                                 class="status-image">
+                                            <p class="status__text">Đã Nhận Được Hàng</p>
+                                        </div>
+                                        <i class="fas fa-angle-left"></i>
+                                    </div>
+                                    <div class="order-body">
+                                        <div class="order-details">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="order-summary">
+                                        <div class="order-infor">
+                                            <p class="order-date">Ngày Đặt
+                                                Hàng: <%=order.formatDate(order.getOrderDate())%>
+                                            </p>
+                                            <p class="order-receive-date">Ngày Nhận
+                                                Hàng: <%=order.formatDate(order.getNgayNhanHang())%>
+                                            </p>
+                                            <p class="order-id">Mã Đơn Hàng:
+                                            <p class="order-id-item"><%=order.getOrderId()%>
+                                            </p></p>
+                                        </div>
+                                        <div class="order-footer">
+                                            <div class="order-total-price">
+                                                Tổng
+                                                Tiền: <%=Product.formatMoney(Double.parseDouble(order.getTotalPrice() + ""))%>
+                                                đ
+                                            </div>
+                                            <div class="button-group">
+                                                <a href="" class="buy-again">Mua Lại</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <%}%>
+                                <%}%>
 
 
-        </section> <!-- content-main end// -->
-    </main>
-    <!-- ============================ COMPONENT END// ============================ -->
-    <script>
-        if (localStorage.getItem("darkmode")) {
-            var body_el = document.body;
-            body_el.className += 'dark';
-        }
-        let listShow=document.querySelectorAll('.order')
-        console.log(listShow.length)
-        for(var i=0;i<listShow.length;i++){
-            listShow[i].querySelector('.order-status').addEventListener('click',function(){
-                this.parentElement.classList.toggle('show')
-            })
-        }
-        
-        
-    </script>
+                            </ul>
+                            <div class="more-order">
+                                <div class="pagination">
+                                    <a class="page-item-pe" href="#">&laquo;</a>
+                                    <%for (int i = 1; i <= pagenumber;i++){
+                                        if(i == 1){
+                                    %>
+                                    <a class="active page-item" href="#"><%=i%></a>
+                                    <%}else{%>
+                                    <a href="#" class="page-item"><%=i%></a>
+                                    <%}%>
+                                    <%}%>
+                                    <a class="page-item-next" href="#">&raquo;</a>
+                                </div>
+                            </div>
 
-   <script>
+                        </section> <!-- content-body .// -->
+
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+
+            </div> <!-- card body end// -->
+        </div> <!-- card end// -->
+
+
+    </section> <!-- content-main end// -->
+</main>
+<!-- ============================ COMPONENT END// ============================ -->
+<script>
     if (localStorage.getItem("darkmode")) {
         var body_el = document.body;
         body_el.className += 'dark';
     }
-    </script>
-    <script src="/script/jquery-3.5.0.min.js"></script>
-    <script src="/script/bootstrap.bundle.min.js"></script>
+   show();
+    function show(){
+        let listShow = document.querySelectorAll('.order')
+        for (var i = 0; i < listShow.length; i++) {
+            listShow[i].querySelector('.order-status').addEventListener('click', function () {
+                var clickItemShow = this.parentElement.classList.toggle('show');
+                var parent = this.closest('.order').querySelector('.order-details');
+                var idHoaDon = this.closest('.order').querySelector('.order-id-item').innerHTML;
+                if (clickItemShow) {
+                    getItemOrderDetails(parent, idHoaDon);
+                }
+            })
+        }
+    }
 
-    <!-- Custom JS -->
-    <script src="/script/scriptc619.js?v=1.0"></script>
+    function getItemOrderDetails(parent, idHoaDon) {
+        parent.innerHTML = '';
+        //send ajax jquery
+            $.ajax({
+                url: '<%=request.getContextPath()%>/order',
+                type: 'POST',
+                data: {
+                    idHoaDon: idHoaDon
+                },
+                success: function (data) {
+                    // console.log(data);
+                    var listItem = data;
+
+                    for (var i = 0; i < listItem.length; i++) {
+                        var item = listItem[i];
+                        var itemHtml = '<div class="order-detail">' +
+                            '               <div class="product-infor">' +
+                            '                <img src="<%=request.getContextPath()%>'+item.urlImg+'" alt="" class="product-image">' +
+                            '                <div class="product-info-general">' +
+                            '                <p class="product-name">'+item.name+'</p>' +
+                            '                 <p class="product-size">Size: '+item.size+'</p>' +
+                            '                  <p class="product-quantity">Số Lượng: '+item.soLuong+'</p>' +
+                            '                  </div>' +
+                            '                   </div>' +
+                            '                    <div class="product-price">' +
+                            '                    <span>'+(formatPrice(item.gia))+' đ</span>' +
+                            '                    </div>' +
+                            '                     </div>';
+                        parent.innerHTML += itemHtml;
+                    }
+                }
+            });
+
+    }
+//format price
+    function formatPrice(price) {
+        return price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    }
+
+
+    //----------------click page -----------
+    let listPage = document.querySelectorAll('.page-item');
+    for (var i = 0; i < listPage.length; i++) {
+        listPage[i].addEventListener('click', function () {
+            var page = this.innerHTML;
+            var pageActive = document.querySelector('.page-item.active');
+            pageActive.classList.remove('active');
+            this.classList.add('active');
+
+            if(page != pageActive.innerHTML){
+                getOrder(page);
+            }
+        })
+    }
+    var pagenumber = <%=pagenumber%>;
+    var xemTrangThaiDonHang = '<%=xemTrangThaiDonHang%>';
+
+    document.querySelector('.status-bar-'+xemTrangThaiDonHang).classList.add('select');
+
+    if(pagenumber > 1){
+        //click class="page-item-pe"
+        document.querySelector('.page-item-pe').addEventListener('click', function () {
+            var pageActive = document.querySelector('.page-item.active');
+            var page = pageActive.innerHTML;
+            if(page != 1){
+                pageActive.classList.remove('active');
+                pageActive.previousElementSibling.classList.add('active');
+                getOrder(pageActive.previousElementSibling.innerHTML);
+            }
+        })
+        //click class="page-item-next"
+
+        document.querySelector('.page-item-next').addEventListener('click', function () {
+            var pageActive = document.querySelector('.page-item.active');
+            var page = pageActive.innerHTML;
+            if(page != pagenumber){
+                pageActive.classList.remove('active');
+                pageActive.nextElementSibling.classList.add('active');
+                getOrder(pageActive.nextElementSibling.innerHTML);
+            }
+        })
+    }
+
+
+    function getOrder(page) {
+        var listOrder = document.querySelector('.list-orders');
+        listOrder.innerHTML = '';
+        //send ajax jquery
+        $.ajax({
+            url: '<%=request.getContextPath()%>/order',
+            type: 'POST',
+            data: {
+                page: page,
+                xemTrangThaiDonHang:xemTrangThaiDonHang
+            },
+            success: function (data) {
+                 // console.log(data);
+                var listItem = data;
+                for (var i = 0; i < listItem.length; i++) {
+                    var order = listItem[i];
+                    var  status = order.status;
+                    var itemHtml = '';
+                    if (status == 0) {
+                        itemHtml=
+                        '<!--Đơn Hàng 3-->'+
+                        '<li class="order col-lg-12">'+
+                        '<div class="order-status">'+
+                        '<div class="order-status-infor">'+
+                        '<img src="<%=request.getContextPath()%>/img/package-box.png" alt=""'+
+                        'class="status-image">'+
+                        '<p class="status__text">Đang Xử Lý</p>'+
+                        '</div>'+
+                        '<i class="fas fa-angle-left"></i>'+
+                        '</div>'+
+                        '<div class="order-body">'+
+                        '<div class="order-details">'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="order-summary">'+
+                        '<div class="order-infor">'+
+                        '<p class="order-date">Ngày Đặt'+
+                        'Hàng: '+formatDate(order.orderDate)+
+                        '</p>'+
+                        '<p class="order-id">Mã Đơn Hàng:'+
+                        '<p class="order-id-item">'+order.orderId+
+                        '</p></p>'+
+                        '</div>'+
+                        '<div class="order-footer">'+
+                        '<div class="order-total-price">'+
+                        'Tổng'+
+                        'Tiền: '+formatPrice(order.totalPrice)+
+                        'đ'+
+                        '</div>'+
+                        '<div class="button-group">'+
+                        '<a href="" class="buy-again">Mua Lại</a>'+
+                        '<a href="" class="cancel-button">'+
+                        '<img src="<%=request.getContextPath()%>/img/exclamation.png" alt="">'+
+                        'Hủy</a>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>'
+                        }
+                    if (status == 1) {
+                        itemHtml+=
+                        '<!--Đơn Hàng 2-->'+
+                        '<li class="order col-lg-12">'+
+                        '<div class="order-status">'+
+                        '<div class="order-status-infor">'+
+                        '<img src="<%=request.getContextPath()%>/img/traffic-signal.png" alt=""'+
+                        'class="status-image">'+
+                        '<p class="status__text">Đã Hủy</p>'+
+                        '</div>'+
+                        '<i class="fas fa-angle-left"></i>'+
+                        '</div>'+
+                        '<div class="order-body">'+
+                        '<div class="order-details">'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="order-summary">'+
+                        '<div class="order-infor">'+
+                        '<p class="order-date">Ngày Đặt'+
+                            'Hàng: '+formatDate(order.orderDate)+
+                        '</p>'+
+                        '<p class="order-receive-date">Ngày'+
+                        'Hủy: '+formatDate(order.ngayNhanHang)+
+                        '</p>'+
+                        '<p class="order-id">Mã Đơn Hàng:'+
+                        '<p class="order-id-item">'+order.orderId+
+                        '</p></p>'+
+                        '</div>'+
+                        '<div class="order-footer">'+
+                        '<div class="order-total-price">'+
+                        'Tổng Tiền:'+
+                        '<s>Tiền: '+formatPrice(order.totalPrice)+
+                        'đ</s>'+
+                        '</div>'+
+                        '<div class="button-group">'+
+                        '<a href="" class="buy-again">'+
+                        'Mua Lại</a>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>'
+                        }
+                    if (status == 2) {
+                        itemHtml+=
+                        '<!--Đơn Hàng 4-->'+
+                        '<li class="order col-lg-12">'+
+                        '<div class="order-status">'+
+                        '<div class="order-status-infor">'+
+                        '<img src="<%=request.getContextPath()%>/img/fast-delivery.png" alt=""'+
+                        'class="status-image">'+
+                        '<p class="status__text">Đã xác nhận</p>'+
+                        '</div>'+
+                        '<i class="fas fa-angle-left"></i>'+
+                        '</div>'+
+                        '<div class="order-body">'+
+                        '<div class="order-details">'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="order-summary">'+
+                        '<div class="order-infor">'+
+                        '<p class="order-date">Ngày Đặt'+
+                            'Hàng: '+formatDate(order.orderDate)+
+                        '</p>'+
+                        '<p class="order-receive-date">Ngày Nhận Hàng Dự'+
+                        'Kiến: '+order.soNgayDuKien+
+                        '</p>'+
+                        '<p class="order-id">Mã Đơn Hàng:'+
+                        '<p class="order-id-item">'+order.orderId+
+                        '</p></p>'+
+                        '</div>'+
+                        '<div class="order-footer">'+
+                        '<div class="order-total-price">'+
+                        'Tổng'+
+                        'Tiền: '+formatPrice(order.totalPrice)+
+                        'đ'+
+                        '</div>'+
+                        '<div class="button-group">'+
+                        '<a href="" class="buy-again">Mua Lại</a>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>'
+                    }
+                    if (status == 3) {
+                        itemHtml+=
+                        '<!--Đơn Hàng 4-->'+
+                        '<li class="order col-lg-12">'+
+                        '<div class="order-status">'+
+                        '<div class="order-status-infor">'+
+                        '<img src="<%=request.getContextPath()%>/img/fast-delivery.png" alt=""'+
+                        'class="status-image">'+
+                        '<p class="status__text">Đang Vận Chuyển</p>'+
+                        '</div>'+
+                        '<i class="fas fa-angle-left"></i>'+
+                        '</div>'+
+                        '<div class="order-body">'+
+                        '<div class="order-details">'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="order-summary">'+
+                        '<div class="order-infor">'+
+                        '<p class="order-date">Ngày Đặt'+
+                            'Hàng: '+formatDate(order.orderDate)+
+                        '</p>'+
+                        '<p class="order-receive-date">Ngày Nhận Hàng Dự'+
+                        'Kiến: '+order.soNgayDuKien+
+                        '</p>'+
+                        '<p class="order-id">Mã Đơn Hàng:'+
+                            '<p class="order-id-item">'+order.orderId+
+                        '</p></p>'+
+                        '</div>'+
+                        '<div class="order-footer">'+
+                        '<div class="order-total-price">'+
+                        'Tổng'+
+                        'Tiền: '+formatPrice(order.totalPrice)+
+                        'đ'+
+                        '</div>'+
+                        '<div class="button-group">'+
+                        '<a href="" class="buy-again">Mua Lại</a>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>'
+                    }
+                    if (status == 4) {
+                        itemHtml+=
+                        '<!--Đơn Hàng 1-->'+
+                        '<li class="order col-lg-12">'+
+                        '<div class="order-status">'+
+                        '<div class="order-status-infor">'+
+                        '<img src="<%=request.getContextPath()%>/img/package.png" alt=""'+
+                        'class="status-image">'+
+                        '<p class="status__text">Đã Nhận Được Hàng</p>'+
+                        '</div>'+
+                        '<i class="fas fa-angle-left"></i>'+
+                        '</div>'+
+                        '<div class="order-body">'+
+                        '<div class="order-details">'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="order-summary">'+
+                        '<div class="order-infor">'+
+                        '<p class="order-date">Ngày Đặt'+
+                            'Hàng: '+formatDate(order.orderDate)+
+                        '</p>'+
+                        '<p class="order-receive-date">Ngày Nhận'+
+                        'Hàng: '+formatDate(order.ngayNhanHang)+
+                        '</p>'+
+                        '<p class="order-id">Mã Đơn Hàng:'+
+                            '<p class="order-id-item">'+order.orderId+
+                        '</p></p>'+
+                        '</div>'+
+                        '<div class="order-footer">'+
+                        '<div class="order-total-price">'+
+                        'Tổng'+
+                        'Tiền: '+formatPrice(order.totalPrice)+
+                        'đ'+
+                        '</div>'+
+                        '<div class="button-group">'+
+                        '<a href="" class="buy-again">Mua Lại</a>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>'
+                        }
+                    listOrder.innerHTML += itemHtml;
+                }
+                show();
+
+            }
+        });
+    }
+    //format date
+
+    function formatDate(date){
+        var date = new Date(date);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        return day + "/" + month + "/" + year;
+    }
+
+
+</script>
+
+<script>
+    if (localStorage.getItem("darkmode")) {
+        var body_el = document.body;
+        body_el.className += 'dark';
+    }
+</script>
+<script src="<%=request.getContextPath()%>/script/jquery-3.5.0.min.js"></script>
+<script src="<%=request.getContextPath()%>/script/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script src="<%=request.getContextPath()%>/script/scriptc619.js?v=1.0"></script>
+
 
 
    

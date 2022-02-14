@@ -11,6 +11,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,12 @@ public class AddProductController extends HttpServlet {
         String product_price_sale = request.getParameter("product_price_sale");
         String product_date_start = request.getParameter("product_date_start");
         String product_date_end = request.getParameter("product_date_end");
+
+        //convert from iso-8859-1 to utf-8
+
+        product_name = new String (product_name.getBytes (StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+
+        System.out.println(product_name);
 
 //        System.out.println("product_name: "+product_name);
 //        System.out.println("product_quantity_s: "+product_quantity_s);
