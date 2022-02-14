@@ -13,8 +13,34 @@
 
 %>
 <html>
+
 <head>
     <title>Thể loại</title>
+    <style>
+        .edit-form{
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%,0);
+            z-index: 4;
+            padding: 10px;
+            animation: slideIn 0.5s ease-in;
+            display: none;
+            min-width: 400px;
+            box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+            background-color: rgb(255, 255, 255);
+        }
+        @keyframes slideIn{
+            from{
+                transform: translate(-50%,-70%);
+            }
+            to{
+                transform: translate(-50%,0);
+            }
+        }
+        .card{
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 <section class="content-main">
@@ -84,7 +110,7 @@
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> <i class="material-icons md-more_horiz"></i> </a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                        <a class="dropdown-item" href="#">Chỉnh sửa</a>
+                                        <a onclick="clickSua()" class="dropdown-item" href="#">Chỉnh sửa</a>
                                         <a class="dropdown-item text-danger" href="#">Xóa</a>
                                     </div>
                                 </div>
@@ -93,7 +119,15 @@
                         </tr>
 
                         <%}%>
-
+                        <div class="edit-form">
+                            <div class="mb-1 "><b>Sửa Đổi</b></div>
+                            <label for="typename">Tên</label>
+                            <input type="text" id="typename" class="form-control mb-3">
+                            <label for="decription">Mô Tả</label>
+                            <input type="text" class="form-control mb-2" id="decription">
+                            <input type="button" value="Hủy" class="btn btn-light btn-cancel">
+                            <input type="submit" value="Sửa" class="btn btn-primary m-2 btn-submit">
+                        </div>
                         </tbody>
                     </table>
 
@@ -146,7 +180,13 @@
             }
         });
     }
+    function clickSua(){
+        var name = $("#product_name").val();
+        var mota = $("#product_mota").val();
+        var id=$(this).parent("tr").attr("idtype")
+        console.log(id);
 
+    }
 </script>
 </body>
 </html>

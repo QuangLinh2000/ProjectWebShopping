@@ -40,7 +40,7 @@ public class CategoriesController extends HttpServlet {
             }
         }
         else if(action.equals("edit")){
-            String id=request.getParameter("idLoaiSP");
+            String id=request.getParameter("idtype");
             LoaiSPAdmin loaisp=LoaiSPDao.getInstance().getLoaiSp(id);
             if(name == null || name.equals("")){
                 name=loaisp.getNameLoai();
