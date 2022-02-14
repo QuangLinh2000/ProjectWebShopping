@@ -101,8 +101,8 @@
                                 </div>
                             </td>
                             <td><%=i%></td>
-                            <td><b><%=category.getNameLoai()%></b></td>
-                            <td><%=mota%></td>
+                            <td class="typename"><b><%=category.getNameLoai()%></b></td>
+                            <td class="typedecription"><%=mota%></td>
                             <td><%=category.getSoluongSP()%></td>
                             <td><%=category.getSoluongSPBan()%></td>
                             <td class="text-end">
@@ -110,7 +110,7 @@
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> <i class="material-icons md-more_horiz"></i> </a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                        <a onclick="clickSua()" class="dropdown-item" href="#">Chỉnh sửa</a>
+                                        <a onclick="showForm(this)" class="edit-button dropdown-item" href="#">Chỉnh sửa</a>
                                         <a class="dropdown-item text-danger" href="#">Xóa</a>
                                     </div>
                                 </div>
@@ -121,12 +121,12 @@
                         <%}%>
                         <div class="edit-form">
                             <div class="mb-1 "><b>Sửa Đổi</b></div>
-                            <label for="typename">Tên</label>
-                            <input type="text" id="typename" class="form-control mb-3">
-                            <label for="decription">Mô Tả</label>
-                            <input type="text" class="form-control mb-2" id="decription">
+                            <label for="typename-new">Tên</label>
+                            <input type="text" id="typename-new" class="form-control mb-3">
+                            <label for="decription-new">Mô Tả</label>
+                            <input type="text" class="form-control mb-2" id="decription-new">
                             <input type="button" value="Hủy" class="btn btn-light btn-cancel">
-                            <input type="submit" value="Sửa" class="btn btn-primary m-2 btn-submit">
+                            <input  type="submit" value="Sửa" class="btn btn-primary m-2 btn-submit">
                         </div>
                         </tbody>
                     </table>
@@ -136,6 +136,20 @@
         </div> <!-- card body .// -->
     </div> <!-- card .// -->
 </section> <!-- content-main end// -->
+<script src="<%=request.getContextPath()%>/script/jquery-3.5.0.min.js"></script>
+<!--open form-->
+<script>
+    $('.btn-cancel').click(function(){
+        $('.edit-form').removeClass('d-block')
+    })
+
+    $('.btn-submit').click(function(){
+        $('.edit-form').removeClass('d-block')
+    })
+    $('.edit-button').click(function(){
+        $('.edit-form').addClass('d-block')
+    })
+</script>
 <script>
     var arr = [];
     <%for (int i = 0; i < categories.size();i++){%>
@@ -180,13 +194,44 @@
             }
         });
     }
-    function clickSua(){
-        var name = $("#product_name").val();
-        var mota = $("#product_mota").val();
-        var id=$(this).parent("tr").attr("idtype")
-        console.log(id);
+    function showForm(e){
+
+        var id=$(e).closest("tr").attr("idtype");
+        document.querySelector(".btn-submit").addEventListener("click",function (){
+            clickSua(id)
+        })
 
     }
+    function clickSua(id){
+        var name = document.getElementById("typename-new").value;
+        var mota = document.getElementById("decription-new").value;
+        alert(name)
+        $.ajax({
+            url: "<%=request.getContextPath()%>/admin-categories",
+            type: "POST",
+            data: {
+                name: name,
+                mota: mota,
+                action: 'edit',
+                idtype:id
+            },
+            success: function(data){
+                if(data == 'success') {
+                    pushNotify('success', 'Sửa thành công', 'Sửa loại');
+                    //settimeout
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1000);
+                }else{
+                    pushNotify('error', 'Sửa thất bại', 'Sửa loại');
+                }
+            },
+            error: function(data){
+                pushNotify('error', 'Sửa thất bại', 'Sửa loại');
+            }
+        });
+    }
 </script>
+
 </body>
 </html>

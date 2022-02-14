@@ -32,7 +32,6 @@ public class ForgotPasswordController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String code = request.getParameter("code");
-        System.out.println(userName + " " + email + " " + code);
         if (userName != null && email != null && password != null) {
             IUserService userService = new UserService();
             String newCode = UUID.randomUUID().toString();

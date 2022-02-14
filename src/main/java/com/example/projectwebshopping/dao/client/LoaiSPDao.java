@@ -102,7 +102,7 @@ public class LoaiSPDao {
     public boolean updateLoaiSP(String idLoai,String nameLoai,String motaLoai){
         try {
             Connection connection =  DataSourceConnection.getConnection();
-            String sql = "UPDATE loaisp SET nameLoai = ?,MOTATHELOAI = ? WHERE idloai = ?";
+            String sql = "UPDATE loaisp SET NameLoai = ?,MOTATHELOAI = ? WHERE idloai = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,nameLoai);
             preparedStatement.setString(2,motaLoai);
@@ -126,13 +126,13 @@ public class LoaiSPDao {
         LoaiSPAdmin loaiSP=new LoaiSPAdmin();
         try {
             Connection connection=DataSourceConnection.getConnection();
-            String sql = "SELECT loaisp.NameLoai, loaisp.Mota FROM loaisp WHERE idloai = ?";
+            String sql = "SELECT loaisp.NameLoai, loaisp.MOTATHELOAI FROM loaisp WHERE idloai = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 loaiSP.setNameLoai(resultSet.getString("NameLoai"));
-                loaiSP.setMota(resultSet.getString("Mota"));
+                loaiSP.setMota(resultSet.getString("MOTATHELOAI"));
             }
             resultSet.close();
             preparedStatement.close();

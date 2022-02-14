@@ -3,6 +3,7 @@ package com.example.projectwebshopping.model.admin;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 public class Order {
     private String orderId;
@@ -178,6 +179,30 @@ public class Order {
         this.setPhuongXa(PhuongXa);
 
     }
+    public void addOrderUser(ResultSet resultSet) throws SQLException {
+        String MAHOADON =resultSet.getString("MAHOADON");
+        String IDUSER =resultSet.getString("IDUSER");
+        Date NgayDatHang = resultSet.getDate("NgayDatHang");
+        int TrangThai = resultSet.getInt("TrangThai");
+        Date ngayNhanHang = resultSet.getDate("ngayNhanHang");
+        int SoNgayDuKien = resultSet.getInt("SoNgayDuKien");
+        double tongTien = resultSet.getDouble("tongTien");
+
+        this.setOrderId(MAHOADON);
+        this.setUserId(IDUSER);
+        this.setOrderDate(NgayDatHang);
+        this.setStatus(TrangThai);
+        this.setNgayNhanHang(ngayNhanHang);
+        this.setSoNgayDuKien(SoNgayDuKien);
+        this.setTotalPrice((int)tongTien);
+
+    }
+
+    public String formatDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(date);
+    }
+
 
 
 }
