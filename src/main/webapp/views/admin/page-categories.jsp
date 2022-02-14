@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<LoaiSPAdmin> categories = (List<LoaiSPAdmin>) request.getAttribute("categories");
+    System.out.println(categories.size());
 
 %>
 <html>

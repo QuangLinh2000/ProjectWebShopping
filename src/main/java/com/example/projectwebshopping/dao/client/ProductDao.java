@@ -872,4 +872,77 @@ public class ProductDao {
         return result;
     }
 
+    //update product
+    public boolean updateProduct(Product product) {
+        boolean result = false;
+        String sql = "UPDATE `products` SET `TENSP`=?,`IDBoSuuTap`=?,`MOTA`=?,`DONGIA`=?,`SALE`=?,`MAU`=?,`NGAYNHAP`=?," +
+                "`NGAYBATDAUSALE`=?,`NGAYKETTHUCSALE`=?,`LOAISP`=?,`TRANGTHAI`=?,`S`=?,`L`=?,`M`=?,`XL`=? WHERE `MASP`=?";
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, product.getTenSP());
+            preparedStatement.setString(2, product.getIdBoST());
+            preparedStatement.setString(3, product.getMoTa());
+            preparedStatement.setDouble(4, product.getGia());
+            preparedStatement.setDouble(5, product.getSell());
+            preparedStatement.setString(6, product.getMau());
+            preparedStatement.setDate(7, product.getNayNhap());
+            preparedStatement.setDate(8, product.getNgayBatDausell());
+            preparedStatement.setDate(9, product.getNgayHetHansell());
+            preparedStatement.setString(10, product.getLoaiSP());
+            preparedStatement.setInt(11, product.getTrangThai());
+            preparedStatement.setInt(12, product.getS());
+            preparedStatement.setInt(13, product.getL());
+            preparedStatement.setInt(14, product.getM());
+            preparedStatement.setInt(15, product.getXL());
+            preparedStatement.setString(16, product.getMaSP());
+            int k =0;
+            if (product.getListUrlImg().size() > 0) {
+                String sqlStart = "INSERT INTO `hinhanh`(`IDSP`, `URL`) VALUES(?,?)";
+                PreparedStatement preparedStatement2 = connection.prepareStatement(sqlStart);
+                for (String url : product.getListUrlImg()) {
+                    preparedStatement2.setString(1, product.getMaSP());
+                    preparedStatement2.setString(2, url);
+                    k+=preparedStatement2.executeUpdate();
+                }
+                preparedStatement2.close();
+            }
+
+            int i = preparedStatement.executeUpdate();
+            if (i > 0 && k==product.getListUrlImg().size()) {
+                connection.commit();
+                connection.setAutoCommit(true);
+                result = true;
+            }
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int removeImg(String idProduct, String idImg) {
+        String sql = "DELETE FROM `hinhanh` WHERE `IDSP`=? AND `URL`=?";
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, idProduct);
+            preparedStatement.setString(2, idImg);
+            int i = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return i;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return -1;
+   }
 }

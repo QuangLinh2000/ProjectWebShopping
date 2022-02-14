@@ -42,7 +42,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                <button type="button" class="btn btn-primary bg-danger">Đồng ý</button>
+                <button type="button" class="btn btn-primary bg-danger btn-accept">Đồng ý</button>
             </div>
         </div>
     </div>

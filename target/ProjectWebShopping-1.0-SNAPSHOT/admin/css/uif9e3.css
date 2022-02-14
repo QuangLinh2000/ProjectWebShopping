@@ -1029,6 +1029,11 @@ body.dark .card-product-grid .title {
 body.dark .accordion-button:not(.collapsed) {
     background-color: #29335d;
 }
+body.dark .input-group-text{
+    background-color: #29335d;
+    border-color: #29335d;
+    color: #fff;
+}
 /* =====================================================dashboard ============================================*/
 .card-body-main {
     overflow-y: auto;
