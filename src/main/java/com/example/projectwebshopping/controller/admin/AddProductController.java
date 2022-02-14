@@ -52,6 +52,7 @@ public class AddProductController extends HttpServlet {
 //        fd.append('product_date_end', product_date_end);
 
         String product_name = request.getParameter("product_name");
+
         String product_quantity_s = request.getParameter("product_quantity_s");
         String product_quantity_m = request.getParameter("product_quantity_m");
         String product_quantity_l = request.getParameter("product_quantity_l");
@@ -65,13 +66,7 @@ public class AddProductController extends HttpServlet {
         String product_price_sale = request.getParameter("product_price_sale");
         String product_date_start = request.getParameter("product_date_start");
         String product_date_end = request.getParameter("product_date_end");
-
-        //convert from iso-8859-1 to utf-8
-
-        product_name = new String (product_name.getBytes (StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
-
-        System.out.println(product_name);
-
+        product_name = new String(product_name.getBytes("iso-8859-1"), "utf-8");
 //        System.out.println("product_name: "+product_name);
 //        System.out.println("product_quantity_s: "+product_quantity_s);
 //        System.out.println("product_quantity_m: "+product_quantity_m);
@@ -97,6 +92,7 @@ public class AddProductController extends HttpServlet {
            if(fileName != null && fileName.length() > 0){
                String id = UUID.randomUUID().toString();
                String path = "/img/footer/"+id + fileName;
+               System.out.println(path);
                part.write(realPath + "/" +id+ fileName);
                listFileName.add(path);
 
@@ -130,6 +126,7 @@ public class AddProductController extends HttpServlet {
         product.setM(Integer.parseInt(product_quantity_m));
         product.setXL(Integer.parseInt(product_quantity_xl));
         product.setListUrlImg(listFileName);
+
         if(listFileName.size() > 0){
             boolean check = ProductDao.getInstance().insertProduct(product);
             if(check){

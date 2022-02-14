@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-lg-3 col-md-3 col-6">
                             <select id="status-product" class="form-select">
-                                <option >Trạng thái</option>
+                                <option value="-1">Trạng thái</option>
                                 <option value="0">Chờ xác nhận</option>
                                 <option value="2">Đã xác nhận</option>
                                 <option value="3">Đang giao hàng</option>

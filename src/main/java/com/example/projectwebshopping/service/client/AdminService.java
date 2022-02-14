@@ -1,0 +1,21 @@
+package com.example.projectwebshopping.service.client;
+
+import com.example.projectwebshopping.dao.client.ProductDao;
+
+import java.io.File;
+
+
+public class AdminService implements IAdminService {
+    @Override
+    public boolean removeImg(String idProduct, String idImg,String realPath) {
+        int result = ProductDao.getInstance().removeImg(idProduct, idImg);
+        if (result != -1) {
+            File file = new File(realPath + idImg);
+            if (file.exists()) {
+                file.delete();
+            }
+            return true;
+        }
+        return false;
+    }
+}
