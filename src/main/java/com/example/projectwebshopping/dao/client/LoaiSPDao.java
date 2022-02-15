@@ -102,7 +102,7 @@ public class LoaiSPDao {
     public boolean updateLoaiSP(String idLoai,String nameLoai,String motaLoai){
         try {
             Connection connection =  DataSourceConnection.getConnection();
-            String sql = "UPDATE loaisp SET nameLoai = ?,MOTATHELOAI = ? WHERE idloai = ?";
+            String sql = "UPDATE loaisp SET NameLoai = ?,MOTATHELOAI = ? WHERE idloai = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,nameLoai);
             preparedStatement.setString(2,motaLoai);
@@ -120,5 +120,28 @@ public class LoaiSPDao {
             e.printStackTrace();
         }
         return false;
+    }
+    //lay loai sp
+    public LoaiSPAdmin getLoaiSp(String id){
+        LoaiSPAdmin loaiSP=new LoaiSPAdmin();
+        try {
+            Connection connection=DataSourceConnection.getConnection();
+            String sql = "SELECT loaisp.NameLoai, loaisp.MOTATHELOAI FROM loaisp WHERE idloai = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                loaiSP.setNameLoai(resultSet.getString("NameLoai"));
+                loaiSP.setMota(resultSet.getString("MOTATHELOAI"));
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+return loaiSP;
     }
 }

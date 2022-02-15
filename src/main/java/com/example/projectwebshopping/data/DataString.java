@@ -52,18 +52,18 @@ public class DataString {
         }
         return base64;
     }
-//    public static void main(String[] args) throws IOException {
-//        //read from file
-//        FileInputStream fis = new FileInputStream("D:\\t.txt");
-//        BufferedReader br = new BufferedReader(new java.io.InputStreamReader(fis));
-//        String line = null;
-//        while ((line = br.readLine()) != null) {
-//            System.out.println("'"+line+"'+");
-//        }
-//    }
+    public static void main(String[] args) throws IOException {
+        //read from file
+        FileInputStream fis = new FileInputStream("D:\\t.txt");
+        BufferedReader br = new BufferedReader(new java.io.InputStreamReader(fis));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            if(line.trim().length()>0){
+                System.out.println("'"+line.trim()+"'+");
 
-public static void main(String[] args) {
-    System.out.println(convertToBase64("C:\\Users\\QUANGLINH\\Downloads\\Product - Copy (1)\\product\\1_1.jpg"));
-}
+            }
+        }
+    }
+
 
 }

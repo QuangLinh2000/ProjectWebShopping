@@ -668,13 +668,14 @@ public class ProductDao {
     }
     public int insertCTHoaDon(String idHoaDon,List<CartJson> cartJsonList,Connection connection) {
         try {
-            String sql = "INSERT INTO cthoadon(MaHD,PRICE,SoLuong,MaSP) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO cthoadon(MaHD,PRICE,SoLuong,MaSP,SIZE) VALUES(?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             for (int i = 0; i < cartJsonList.size(); i++) {
                 preparedStatement.setString(1, idHoaDon);
                 preparedStatement.setDouble(2, cartJsonList.get(i).getPrice());
                 preparedStatement.setInt(3, cartJsonList.get(i).getQuantity());
                 preparedStatement.setString(4, cartJsonList.get(i).getId());
+                preparedStatement.setString(5, cartJsonList.get(i).getSize());
                 preparedStatement.executeUpdate();
             }
             preparedStatement.close();

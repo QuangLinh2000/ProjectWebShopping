@@ -137,7 +137,7 @@
                         <td><%=i+1%></td>
                         <td><b><%=order.getName()%></b></td>
                         <td><%=order.getEmail()%></td>
-                        <td><%=ProductManager.getInstance().formatPrice(order.getTotalPrice())%></td>
+                        <td><%=ProductManager.getInstance().formatPrice(order.getTotalPrice())%>đ</td>
                         <td><span class="badge rounded-pill <%=order.getClassTrangThai()%>"><%=order.getTrangThai()%></span></td>
                         <%Date ngayNhap = order.getOrderDate();%>
                         <td><%=ngayNhap.getDate()+"/"+(ngayNhap.getMonth()+1)+"/"+(ngayNhap.getYear()+1900)%></td>

@@ -2,6 +2,7 @@ package com.example.projectwebshopping.controller.admin;
 
 import com.example.projectwebshopping.dao.client.LoaiSPDao;
 import com.example.projectwebshopping.dto.client.LoaiSPAdmin;
+import com.example.projectwebshopping.model.client.LoaiSP;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -33,6 +34,28 @@ public class CategoriesController extends HttpServlet {
             }
             boolean isAdd = LoaiSPDao.getInstance().addLoaiSP(id, name, description);
             if(isAdd){
+                response.getWriter().write("success");
+            }else{
+                response.getWriter().write("err");
+            }
+        }
+        else if(action.equals("edit")){
+            String id=request.getParameter("idtype");
+            LoaiSPAdmin loaisp=LoaiSPDao.getInstance().getLoaiSp(id);
+            System.out.println(loaisp.getNameLoai());
+            System.out.println(id);
+            System.out.println(name);
+            System.out.println(description);
+            System.out.println(action);
+            if(name == null || name.equals("")){
+                name=loaisp.getNameLoai();
+            }
+            if(description==null || description.equals("")){
+                description=loaisp.getMota();
+            }
+            boolean isUpdate=LoaiSPDao.getInstance().updateLoaiSP(id,name,description);
+
+            if(isUpdate){
                 response.getWriter().write("success");
             }else{
                 response.getWriter().write("err");
