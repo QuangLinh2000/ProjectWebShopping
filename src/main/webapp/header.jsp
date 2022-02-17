@@ -733,7 +733,6 @@
                 }
             });
         }
-    })
     });
 
     document.getElementById('toogle-search').addEventListener('click', function (event) {
