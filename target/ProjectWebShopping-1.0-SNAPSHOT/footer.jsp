@@ -82,14 +82,14 @@
         </div>
         <div class="footer-content-item">
             <p class="footer-content-item-title">CHÍNH SÁCH</p>
-            <p class="footer-content-item-focuse">Điều khoản sử dụng</p><br>
-            <p class="footer-content-item-focuse">Hướng dẫn thanh toán</p><br>
-            <p class="footer-content-item-focuse">Hướng dẫn mua hàng</p><br>
-            <p class="footer-content-item-focuse">Chính sách vận chuyển</p><br>
-            <p class="footer-content-item-focuse">Chính sách đổi trả</p><br>
-            <p class="footer-content-item-focuse">Chính sách bán hàng và bảo hành</p><br>
-            <p class="footer-content-item-focuse">Chính sách bảo vệ thông tin khách hàng</p><br>
-            <p class="footer-content-item-focuse">Quyền lợi sinh nhật của khách hàng</p>
+            <a href="<%=request.getContextPath()%>/term?index=1"><p class="footer-content-item-focuse">Điều khoản sử dụng</p><br></a>
+            <a href="<%=request.getContextPath()%>/term?index=2"><p class="footer-content-item-focuse">Hướng dẫn thanh toán</p><br></a>
+            <a href="<%=request.getContextPath()%>/term?index=3"><p class="footer-content-item-focuse">Hướng dẫn mua hàng</p><br></a>
+            <a href="<%=request.getContextPath()%>/term?index=4"><p class="footer-content-item-focuse">Chính sách vận chuyển</p><br></a>
+            <a href="<%=request.getContextPath()%>/term?index=5"><p class="footer-content-item-focuse">Chính sách đổi trả</p><br></a>
+            <a href="<%=request.getContextPath()%>/term?index=6"><p class="footer-content-item-focuse">Chính sách bán hàng và bảo hành</p><br></a>
+            <a href="<%=request.getContextPath()%>/term?index=7"><p class="footer-content-item-focuse">Chính sách bảo vệ thông tin khách hàng</p><br></a>
+            <a href="<%=request.getContextPath()%>/term?index=8"><p class="footer-content-item-focuse">Quyền lợi sinh nhật của khách hàng</p></a>
         </div>
         <div class="footer-content-item">
             <p class="footer-content-item-title">VỀ SEVEN.AM</p>
@@ -98,6 +98,7 @@
             <p class="footer-content-item-focuse">Tuyển dụng</p><br>
             <p class="footer-content-item-focuse">Liên hệ</p><br>
             <p class="footer-content-item-focuse">Hợp tác kinh doanh</p><br>
+            <p class="footer-content-item-focuse" id="comment-label">Góp ý cho chúng tôi</p><br>
         </div>
         <div class="footer-content-item footer-content-item-rigeter">
             <p class="footer-content-item-title">ĐĂNG KÝ NHẬN TIN</p>

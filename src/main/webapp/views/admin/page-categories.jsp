@@ -55,7 +55,6 @@
                             <label for="product_name" class="form-label">Tên</label>
                             <input type="text" placeholder="Nhập tại đây" class="form-control" id="product_name" />
                         </div>
-
                         <div class="mb-4">
                             <label class="form-label">Mô tả</label>
                             <textarea id="product_mota" placeholder="Nhập tại đây" class="form-control" rows="5"></textarea>

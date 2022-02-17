@@ -119,6 +119,9 @@ table {
     body {
         flex-direction: column;
     }
+    .wrapper.margin-top-mobile{
+        flex-direction: column;
+    }
     .menu__bar {
         width: 100%;
     }

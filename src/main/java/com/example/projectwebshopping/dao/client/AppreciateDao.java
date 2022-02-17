@@ -1,2 +1,73 @@
-package com.example.projectwebshopping.dao.client;public class AppreciateDao {
+package com.example.projectwebshopping.dao.client;
+
+import com.example.projectwebshopping.connection.DataSourceConnection;
+import com.example.projectwebshopping.dto.client.LoaiSPAdmin;
+import com.example.projectwebshopping.model.admin.Appreciate;
+
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+public class AppreciateDao {
+    private static AppreciateDao instance;
+
+    public static AppreciateDao getInstance() {
+        if (instance == null) {
+            instance = new AppreciateDao();
+        }
+        return instance;
+    }
+
+    //pattern singleton
+    private AppreciateDao() {
+    }
+    public boolean addAppreciateNow(String idComment,String idUser, String imgUser, String comment){
+        Connection connection = null;
+        int affect=0;
+
+        try {
+            connection = DataSourceConnection.getConnection();
+        String sql="INSERT INTO nhanxet(IDNhanXet,IDUSER,IMGUSER,NHANXET,NGAY) " +
+                "VALUE(?,?,?,?,?)";
+            Date date=Date.valueOf(LocalDate.now());
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,idComment);
+            preparedStatement.setString(2,idUser);
+            preparedStatement.setString(3,imgUser);
+            preparedStatement.setString(4,comment);
+            preparedStatement.setDate(5,date);
+            affect=preparedStatement.executeUpdate();
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+if(affect>0)return true;
+else return false;
+    }
+    public List<Appreciate> getAllAppreciate(){
+        List<Appreciate> dsdanhgia = new ArrayList<>();
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            String sql = "SELECT * FROM khachhang inner join nhanxet on nhanxet.IDUSER=khachhang.IDUSER"
+                    ;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Appreciate danhgia=new Appreciate();
+                danhgia.addAttibute(resultSet);
+                dsdanhgia.add(danhgia);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsdanhgia;
+    }
 }

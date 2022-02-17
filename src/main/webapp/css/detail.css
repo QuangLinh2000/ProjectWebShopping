@@ -253,6 +253,11 @@ li {
     width: auto;
     margin-right: 0.625em;
 }
+.product__size__element label strong{
+    display: block;
+    line-height: 100%;
+}
+
 .product__size__element label .sold-out-image {
     position: absolute;
     object-fit: cover;
