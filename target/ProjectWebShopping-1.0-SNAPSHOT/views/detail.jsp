@@ -179,9 +179,8 @@
                             <button class="add-cart__button" onclick="activeForm();">THÊM VÀO GIỎ</button>
                         </div>
                         <div class="buy-now text-center">
-                            <button class="buy-now__button">MUA NGAY</button>
+                            <a href="<%=request.getContextPath()%>/home"><button class="buy-now__button">TIẾP TỤC MUA HÀNG</button></a>
                         </div>
-
                     </div>
                 </c:when>
                 <c:otherwise>
@@ -373,7 +372,7 @@
                         '<td class="table__image-decription"><a href=""><img' +
                         ' src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" alt=""></a></td>' +
                         '<td class="table__infor-decription ">' +
-                        '<a href="" class="bold-text"><h5><%=product.getTenSP()+" "+product.getMaSP()%></h5></a> <br>' +
+                        '<a href="" class="bold-text"><h6><%=product.getTenSP()+" "+product.getMaSP()%></h6></a> <br>' +
                         '<span class = "size-product" size = "' + size + '">Phiên bản: Size ' + size + ' <%=product.getMau()%> </span><br>' +
                         '<span>Bộ sưu tập: <%=bst.getName()%></span></td>' +
                         '<td class="table__price-bill bold-text"><%=ProductManager.getInstance().formatPrice(product.getGia()-product.getGia()*product.getSell())%>₫</td>' +
@@ -466,16 +465,13 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
             }
         }
             function responsive() {
-
-
                 if (window.innerWidth <= 739) {
                     $('#image__right').insertAfter('.product__price')
                 } else $('#image__right').insertBefore('#image__left')
-
             }
 
             responsive();
-
+    resizeWindow();
             document.getElementsByTagName("BODY")[0].onresize = function () {
                 resizeWindow();
                 responsive();
@@ -483,34 +479,37 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
 
 
         function addCart(arrSize, arrayQuantity) {
-            var id = '<%=product.getMaSP()%>';
-            //convert array to json
-            var size = JSON.stringify(arrSize);
-            var quantity = JSON.stringify(arrayQuantity);
-            //ajax
-            $.ajax({
-                url: '<%=request.getContextPath()%>/cart',
-                type: 'POST',
-                data: {
-                    id: id,
-                    size: size,
-                    quantity: quantity
-                },
-                success: function (data) {
-                    //get json
-                    var json = JSON.parse(data);
-                    if (json.success === 'true') {
-                        $('.cart-count.color-red').text(json.quantity);
-                        pushNotify('success', 'Thêm vào giỏi hàng thành công', 'Thêm Sản phẩm');
-                        closeForm();
+            var data=getDataCheckbox();
+            if(data.length>0){
+                var id = '<%=product.getMaSP()%>';
+                //convert array to json
+                var size = JSON.stringify(arrSize);
+                var quantity = JSON.stringify(arrayQuantity);
+                //ajax
+                $.ajax({
+                    url: '<%=request.getContextPath()%>/cart',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        size: size,
+                        quantity: quantity
+                    },
+                    success: function (data) {
+                        //get json
+                        var json = JSON.parse(data);
+                        if (json.success === 'true') {
+                            $('.cart-count.color-red').text(json.quantity);
+                            pushNotify('success', 'Thêm vào giỏi hàng thành công', 'Thêm Sản phẩm');
+                            closeForm();
 
-                    } else {
-                        pushNotify('error', 'Thêm vào giỏi hàng thất bại', 'Thêm Sản phẩm');
+                        } else {
+                            pushNotify('error', 'Thêm vào giỏi hàng thất bại', 'Thêm Sản phẩm');
 
+                        }
                     }
-                }
-            });
-
+                });
+            }
+            else pushNotify('error', 'Bạn chưa chọn sản phẩm nào','Lỗi');
         }
 
     function pushNotify(status, message, title) {
@@ -536,7 +535,6 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
     // get data to checkout
     function getDataCheckbox(){
         let listRow =   document.querySelectorAll('.row-data');
-
         let listData = [];
         listRow.forEach((element) => {
             let id = element.getAttribute("data-product-size");
@@ -547,7 +545,7 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
                 id: id,
                 size: sizeName,
                 quantity: element.querySelector('.quantity').value,
-                name:element.querySelector('.bold-text>h5').innerText,
+                name:element.querySelector('.bold-text>h6').innerText,
                 img:img,
                 price:price
             });
@@ -556,6 +554,7 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
     }
     function transformCheckout(){
         let data = getDataCheckbox();
+        console.log(data.length)
         if (data.length>0){
             // ajax transform data to json
             let dataJson = JSON.stringify(data);

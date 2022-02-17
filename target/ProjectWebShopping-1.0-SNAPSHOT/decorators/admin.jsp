@@ -53,6 +53,19 @@
     <decorator:body/>
 </main>
 <script type="text/javascript">
+    //document.onload
+    window.onload = function(e){
+        // toogle notify
+        $('#btn-notify').click(function () {
+            $('.dropdown-menu-custom').toggleClass('show');
+        });
+        // click outsize dropdown-menu close
+        $(document).click(function (event) {
+            if (!$(event.target).closest('.notifications').length) {
+                $('.dropdown-menu-custom').removeClass('show');
+            }
+        });
+    };
     if(localStorage.getItem("darkmode")){
         var body_el = document.body;
         body_el.className += 'dark';

@@ -24,9 +24,9 @@
     <link href="<%=request.getContextPath()%>/assets/fontawesome-free-6.0.0-beta3-web/css/all.css" rel="stylesheet" />
     <%--    link notify--%>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/notify/simple-notify.min.css">
-
+    <link href="<%=request.getContextPath()%>/admin/css/bootstrapf9e3.css?v=1.1" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
-
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/term.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/loader.css">
 
@@ -46,7 +46,7 @@
 <jsp:include page="footer.jsp"></jsp:include>
 <script src="<%=request.getContextPath()%>/assets/notify/simple-notify.min.js"></script>
 <script src="<%=request.getContextPath()%>/script/header.js"></script>
-
+<script src="<%=request.getContextPath()%>/script/term.js"></script>
 </body>
 
 </html>

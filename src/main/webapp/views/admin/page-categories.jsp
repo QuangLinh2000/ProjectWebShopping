@@ -9,8 +9,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<LoaiSPAdmin> categories = (List<LoaiSPAdmin>) request.getAttribute("categories");
-    System.out.println(categories.size());
-
 %>
 <html>
 
@@ -57,7 +55,6 @@
                             <label for="product_name" class="form-label">Tên</label>
                             <input type="text" placeholder="Nhập tại đây" class="form-control" id="product_name" />
                         </div>
-
                         <div class="mb-4">
                             <label class="form-label">Mô tả</label>
                             <textarea id="product_mota" placeholder="Nhập tại đây" class="form-control" rows="5"></textarea>
@@ -126,7 +123,7 @@
                             <label for="decription-new">Mô Tả</label>
                             <input type="text" class="form-control mb-2" id="decription-new">
                             <input type="button" value="Hủy" class="btn btn-light btn-cancel">
-                            <input  type="submit" value="Sửa" class="btn btn-primary m-2 btn-submit">
+                            <input  type="submit" value="Sửa" class="btn btn-primary m-2 " id="btn-submit">
                         </div>
                         </tbody>
                     </table>
@@ -143,12 +140,10 @@
         $('.edit-form').removeClass('d-block')
     })
 
-    $('.btn-submit').click(function(){
+    $('#btn-submit').click(function(){
         $('.edit-form').removeClass('d-block')
     })
-    $('.edit-button').click(function(){
-        $('.edit-form').addClass('d-block')
-    })
+
 </script>
 <script>
     var arr = [];
@@ -194,18 +189,19 @@
             }
         });
     }
+
     function showForm(e){
-
+        $("#typename-new").val($(e).closest("tr").children(".typename").children("b").html())
+        $("#decription-new").val($(e).closest("tr").children(".typedecription").html())
         var id=$(e).closest("tr").attr("idtype");
-        document.querySelector(".btn-submit").addEventListener("click",function (){
+        document.getElementById("btn-submit").onclick=function (){
             clickSua(id)
-        })
-
+        }
+        $('.edit-form').addClass('d-block')
     }
     function clickSua(id){
         var name = document.getElementById("typename-new").value;
         var mota = document.getElementById("decription-new").value;
-        alert(name)
         $.ajax({
             url: "<%=request.getContextPath()%>/admin-categories",
             type: "POST",

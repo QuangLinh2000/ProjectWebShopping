@@ -63,7 +63,7 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+                <a class="menu-link" href="<%=request.getContextPath()%>/admin-page-reviews"> <i class="icon material-icons md-comment"></i>
                     <span class="text">Nhận xét</span>
                 </a>
             </li>

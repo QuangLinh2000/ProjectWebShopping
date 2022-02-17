@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
+
+
 public class Product implements Serializable {
     private String maSP;
     private String tenSP;

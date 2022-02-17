@@ -19,7 +19,6 @@ public class CategoriesController extends HttpServlet {
         request.setAttribute("categories", categories);
         request.getRequestDispatcher("/views/admin/page-categories.jsp").forward(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        //get parameter
@@ -42,11 +41,6 @@ public class CategoriesController extends HttpServlet {
         else if(action.equals("edit")){
             String id=request.getParameter("idtype");
             LoaiSPAdmin loaisp=LoaiSPDao.getInstance().getLoaiSp(id);
-            System.out.println(loaisp.getNameLoai());
-            System.out.println(id);
-            System.out.println(name);
-            System.out.println(description);
-            System.out.println(action);
             if(name == null || name.equals("")){
                 name=loaisp.getNameLoai();
             }
@@ -54,7 +48,6 @@ public class CategoriesController extends HttpServlet {
                 description=loaisp.getMota();
             }
             boolean isUpdate=LoaiSPDao.getInstance().updateLoaiSP(id,name,description);
-
             if(isUpdate){
                 response.getWriter().write("success");
             }else{

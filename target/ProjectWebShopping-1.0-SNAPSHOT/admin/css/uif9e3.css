@@ -164,7 +164,7 @@ body.offcanvas-active {
 
 *::-webkit-scrollbar {
     width: 10px;
-    border-radius: 8x;
+    border-radius: 8px;
     background-color: transparent;
 }
 *::-webkit-scrollbar-thumb {
@@ -176,7 +176,7 @@ body.offcanvas-active {
 }
 .navbar-aside::-webkit-scrollbar {
     width: 8px;
-    border-radius: 8x;
+    border-radius: 8px;
     background-color: transparent;
 }
 .navbar-aside::-webkit-scrollbar-thumb {
@@ -1029,10 +1029,28 @@ body.dark .card-product-grid .title {
 body.dark .accordion-button:not(.collapsed) {
     background-color: #29335d;
 }
+/*tu custom*/
 body.dark .input-group-text{
     background-color: #29335d;
     border-color: #29335d;
     color: #fff;
+}
+body.dark .dropdown-menu-custom {
+    background-color: #29335d;
+}
+body.dark .dropdown-header {
+    color: #fff;
+}
+body.dark h5 {
+    color: #fff;
+}
+body.dark p {
+    color: #fff;
+}
+body.dark .list-notifications-item:hover .card {
+    background-color: black;
+    color: var(--bs-table-hover-color);
+    cursor: pointer;
 }
 /* =====================================================dashboard ============================================*/
 .card-body-main {
@@ -1044,7 +1062,7 @@ body.dark .input-group-text{
 
 .card-body-main::-webkit-scrollbar {
     width: 6px;
-    border-radius: 4x;
+    border-radius: 4px;
     background-color: transparent;
 }
 .card-body-main::-webkit-scrollbar-thumb {
@@ -1062,4 +1080,36 @@ body.dark .input-group-text{
 }
 #content-wrapper .nav .accordion-button::after {
     display: none;
+}
+/* style notify */
+.dropdown-body{
+    min-width: 360px;
+    overflow-y: auto;
+    height: 326px;
+}
+.dropdown-menu-custom.show {
+    display: block;
+}
+.dropdown-menu-custom {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #141432;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.list-notifications-item:hover .card {
+    background-color: #dbdcdf;
+    cursor: pointer;
 }

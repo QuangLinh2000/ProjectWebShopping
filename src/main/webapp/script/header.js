@@ -64,3 +64,12 @@ if (dropDown) {
         event.stopPropagation();
     });
 }
+$("#comment-label").click(function(){
+    $(".comment").addClass('flex')
+})
+$(".btn-cancel").click(function(){
+    $(".comment").removeClass('flex')
+})
+$(".btn-submit").click(function(){
+    $(".comment").removeClass('flex')
+})
