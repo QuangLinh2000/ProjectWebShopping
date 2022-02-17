@@ -241,6 +241,9 @@ li {
 .product__size .product__size__elements {
     position: relative;
 }
+.product__size__element{
+    display: flex;
+}
 .product__size__element label {
     padding: 0.625em;
     min-width: 2.3125em;

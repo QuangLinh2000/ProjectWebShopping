@@ -465,16 +465,13 @@ TỔNG: ` + convertPrice(arrNumber.length * (<%=product.getGia()-product.getGia(
             }
         }
             function responsive() {
-
-
                 if (window.innerWidth <= 739) {
                     $('#image__right').insertAfter('.product__price')
                 } else $('#image__right').insertBefore('#image__left')
-
             }
 
             responsive();
-
+    resizeWindow();
             document.getElementsByTagName("BODY")[0].onresize = function () {
                 resizeWindow();
                 responsive();
