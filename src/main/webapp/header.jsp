@@ -48,75 +48,9 @@
                 <div class="header-search" id="input-group-header">
                     <input id="searchtext" name="q" value="" maxlength="40" class="input-search" type="text"
                            size="20" placeholder="Tìm kiếm ...." autocomplete="off">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <i class="fa-solid fa-magnifying-glass search-icon" onclick="redirectSearch(this)"></i>
                     <div class="wrapper-search box-shadow " id="wrapper-search1">
-                        <div class="search_prod_title">
-                            <span class="left">Sản phẩm</span>
-                            <a id="view_article" href="#" class="left">Xem thêm(32)</a>
-                        </div>
-                        <ul class="list-search">
-                            <li class="search-items">
-                                <div class="search-items-left">
-                                    <a href="#" class="item-search-img">
-                                        <img src="<%=request.getContextPath()%>/img/product/1_1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="search-item-right">
-                                    <h3 class="item-search-title text-one-line">Áo Khoác Seven.AM Chất Liệu Dạ Kiểu Dáng Tay Lỡ Họa Tiết Caro</h3>
-                                    <div class="search-item-wrap-price">
-                                        <span class="sale-price">99.999.999đ</span>
-                                        <span class="current-price">19.000.000đ</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="search-items">
-                                <div class="search-items-left">
-                                    <a href="#" class="item-search-img">
-                                        <img src="<%=request.getContextPath()%>/img/product/1_1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="search-item-right">
-                                    <h3 class="item-search-title text-one-line">Áo Khoác Seven.AM Chất Liệu Dạ Kiểu Dáng Tay Lỡ Họa Tiết Caro</h3>
-                                    <div class="search-item-wrap-price">
-                                        <span class="sale-price">99.999.999đ</span>
-                                        <span class="current-price">19.000.000đ</span>
-                                    </div>
-                                </div>
 
-
-                            </li>
-                            <li class="search-items">
-                                <div class="search-items-left">
-                                    <a href="#" class="item-search-img">
-                                        <img src="<%=request.getContextPath()%>/img/product/1_1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="search-item-right">
-                                    <h3 class="item-search-title text-one-line">Áo Khoác Seven.AM Chất Liệu Dạ Kiểu Dáng Tay Lỡ Họa Tiết Caro</h3>
-                                    <div class="search-item-wrap-price">
-                                        <span class="sale-price">99.999.999đ</span>
-                                        <span class="current-price">19.000.000đ</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="search-items">
-                                <div class="search-items-left">
-                                    <a href="#" class="item-search-img">
-                                        <img src="<%=request.getContextPath()%>/img/product/1_1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="search-item-right">
-                                    <h3 class="item-search-title text-one-line">Áo Khoác Seven.AM Chất Liệu Dạ Kiểu Dáng Tay Lỡ Họa Tiết Caro</h3>
-                                    <div class="search-item-wrap-price">
-                                        <span class="sale-price">99.999.999đ</span>
-                                        <span class="current-price">19.000.000đ</span>
-                                    </div>
-                                </div>
-
-
-                            </li>
-
-                        </ul>
                     </div>
                 </div>
                 <div class="header-top-wrap-logo">
@@ -455,72 +389,9 @@
                         <div class="header-search" id="input-group-scroll">
                             <input id="searchtext2" name="q" value="" maxlength="40" class="input-search" type="text" size="20"
                                    placeholder="Tìm kiếm ...." autocomplete="off">
-                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <i class="fa-solid fa-magnifying-glass search-icon" onclick="redirectSearch(this)"></i>
                             <div class="wrapper-search box-shadow " id="wrapper-search2">
-                                <div class="search_prod_title">
-                                    <span class="left">Sản phẩm</span>
-                                    <a id="view_article_1" href="#" class="left">Xem thêm(32)</a>
-                                </div>
-                                <ul class="list-search">
-                                    <li class="search-items">
-                                        <div class="search-items-left">
-                                            <a href="#" class="item-search-img">
-                                                <img src="<%=request.getContextPath()%>/img/product/1_1.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="search-item-right">
-                                            <h3 class="item-search-title text-one-line">Áo Khoác Seven.AM Chất Liệu Dạ Kiểu Dáng Tay Lỡ Họa Tiết Caro</h3>
-                                            <div class="search-item-wrap-price">
-                                                <span class="sale-price">99.999.999đ</span>
-                                                <span class="current-price">19.000.000đ</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="search-items">
-                                        <div class="search-items-left">
-                                            <a href="#" class="item-search-img">
-                                                <img src="<%=request.getContextPath()%>/img/product/1_1.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="search-item-right">
-                                            <h3 class="item-search-title text-one-line">Áo Khoác Seven.AM Chất Liệu Dạ Kiểu Dáng Tay Lỡ Họa Tiết Caro</h3>
-                                            <div class="search-item-wrap-price">
-                                                <span class="sale-price">99.999.999đ</span>
-                                                <span class="current-price">19.000.000đ</span>
-                                            </div>
-                                        </div>
 
-
-                                    </li>
-                                    <li class="search-items">
-                                        <div class="search-items-left">
-                                            <a href="#" class="item-search-img">
-                                                <img src="<%=request.getContextPath()%>/img/product/1_1.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="search-item-right">
-                                            <h3 class="item-search-title text-one-line">Áo Khoác Seven.AM Chất Liệu Dạ Kiểu Dáng Tay Lỡ Họa Tiết Caro</h3>
-                                            <div class="search-item-wrap-price">
-                                                <span class="sale-price">99.999.999đ</span>
-                                                <span class="current-price">19.000.000đ</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="search-items">
-                                        <div class="search-items-left">
-                                            <a href="#" class="item-search-img">
-                                                <img src="<%=request.getContextPath()%>/img/product/1_1.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="search-item-right">
-                                            <h3 class="item-search-title text-one-line">Áo Khoác Seven.AM Chất Liệu Dạ Kiểu Dáng Tay Lỡ Họa Tiết Caro</h3>
-                                            <div class="search-item-wrap-price">
-                                                <span class="sale-price">99.999.999đ</span>
-                                                <span class="current-price">19.000.000đ</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -703,24 +574,39 @@
     const search1 = document.getElementById('searchtext');
     const wrapperSearch1 = document.getElementById('wrapper-search1');
     search1.addEventListener('keyup', function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            redirectSearch(this);
+        }
         if(search1.value.length === 0){
             wrapperSearch1.classList.remove('show');
         }else{
+            wrapperSearch2.classList.remove('show');
             wrapperSearch1.classList.add('show');
+            searchAjax(search1.value,wrapperSearch1);
 
         }
+        event.preventDefault();
+
     });
 
     const search2 = document.getElementById('searchtext2');
     const wrapperSearch2 = document.getElementById('wrapper-search2');
     search2.addEventListener('keyup', function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            redirectSearch(this);
+        }
         if (search2.value.length === 0) {
             wrapperSearch2.classList.remove('show');
         } else {
+            wrapperSearch1.classList.remove('show');
             wrapperSearch2.classList.add('show');
-
+            searchAjax(search2.value,wrapperSearch2);
         }
+
     });
+
     document.getElementById('toogle-search').addEventListener('click', function (event) {
         document.getElementById('input-group-scroll').classList.toggle('show');
     });
@@ -734,4 +620,73 @@
         }
     });
 
+
+    var req = null;
+
+    function searchAjax(value,element) {
+        if (req != null) req.abort();
+        req = $.ajax({
+            type: "POST",
+            url: "<%=request.getContextPath()%>/searchAjax",
+            data: {'txtSearch' : value, 'type' : 'SEARCHICON'},
+            dataType: "text",
+            success: function(msg){
+                let data = JSON.parse(msg);
+                let countSearch = data.count;
+                let html = '';
+                if (countSearch>0){
+                    html += '<div class="search_prod_title">';
+                    html += '<span class="left">Sản phẩm</span>';
+                    html += '<a id="view_article" href="#" class="left">Xem thêm('+countSearch+')</a>';
+                    html += '</div>';
+                    html += '<ul class="list-search">';
+                    let list =data.data;
+                    for (let i = 0; i < list.length; i++) {
+                        let gia = parseInt(list[i].gia);
+                        let sale = parseFloat(list[i].sell);
+                        html += '<li class="search-items">' +
+
+                            '<div class="search-items-left">' +
+                            '<a href="<%=request.getContextPath()%>/detail?id='+list[i].maSP+'" class="item-search-img">' +
+                            '<img src="<%=request.getContextPath()%>/' + list[i].listUrlImg[0] + '" alt="">' +
+                            '</a>' +
+                            '</div>' +
+
+                            '<div class="search-item-right">' +
+                            '<a href="<%=request.getContextPath()%>/detail?id='+list[i].maSP+'">' +
+                            '<h3 class="item-search-title text-one-line">' + list[i].tenSP + '</h3>' +
+
+                            '<div class="search-item-wrap-price">';
+                        sale = Math.ceil(gia*(1-sale));
+                        html +='<span class="sale-price">' + formatPriceHome(sale) + 'đ</span>' ;
+                        html += '</div>' +
+                            '</a>'+
+                            '</div>' +
+                            '</li>';
+                    }
+                    html += '</ul>';
+                }else {
+                    html= "<h4 style='text-align: center;'>Không có sản phẩm phù hợp"+value+"</h4>";
+                }
+                element.innerHTML =html;
+            }
+        });
+    }
+    //function format price vietnamese
+    function formatPriceHome(price){
+        let priceFormat = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+        return priceFormat;
+    }
+    function redirectSearch(ele){
+        let par = ele.closest('.header-search');
+        // select input type text
+        let input = par.querySelector('input[type="text"]');
+        let keyword = input.value;
+        if(keyword.length == 0){
+            pushNotify('warning','Vui lòng nhập từ khóa','Tìm kiếm');
+        }else {
+            window.location.href = '<%=request.getContextPath()%>/searchAjax?txt='+keyword;
+        }
+
+    };
 </script>

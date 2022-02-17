@@ -600,10 +600,10 @@ public class ProductDao {
             if(cartJsonList.size()==0){
                 String idHoaDon = UUID.randomUUID().toString();
                 int delete = deleteCart(idUser,cartJsonList1,connection);
-                int ínert = insertHoaDon(idUser,connection,idHoaDon,sumMoney);
+                int insert = insertHoaDon(idUser,connection,idHoaDon,sumMoney);
                 int ctInsert = insertCTHoaDon(idHoaDon,cartJsonList1,connection);
                 if(delete >=1
-                && ínert>=1
+                && insert>=1
                 && ctInsert>=1) {
                     connection.commit();
                 }else{
@@ -946,4 +946,124 @@ public class ProductDao {
         }
         return -1;
    }
+   // trang thai 0 het hang 1 con hang 2 tam ngung sap xep theo ngay nhap
+   public List<Product> getListProductByNameAndID(String pram,int rowCount){
+       Map<String, Product> map = new HashMap<>();
+       List<Product> products = new ArrayList<>();
+       String sql = "SELECT * FROM hinhanh AS h JOIN ( SELECT * FROM products ps " +
+               "JOIN loaisp l ON l.IDLOAI = ps.LOAISP "+
+               "WHERE TRANGTHAI = 1 AND ( TENSP LIKE ? OR MASP LIKE ? )" +
+               "ORDER BY NGAYNHAP DESC LIMIT ? ) AS p ON p.MASP = h.IDSP";
+       try {
+           Connection connection = DataSourceConnection.getConnection();
+           PreparedStatement preparedStatement = connection.prepareStatement(sql);
+           preparedStatement.setString(1,"%"+pram+"%");
+           preparedStatement.setString(2,"%"+pram+"%");
+           preparedStatement.setInt(3,rowCount);
+           ResultSet resultSet = preparedStatement.executeQuery();
+           while (resultSet.next()){
+               String maSP = resultSet.getString("MASP");
+               String url = resultSet.getString("URL");
+               String nameLoai = resultSet.getString("NAMELOAI");
+               Product product = new Product();
+               product.setNamLoaiSP(nameLoai);
+               product.addProduct(resultSet);
+               if (map.containsKey(maSP)) {
+                   List<String> listURL = map.get(maSP).getListUrlImg();
+                   listURL.add(url);
+                   product.setListUrlImg(listURL);
+                   map.put(maSP, product);
+               } else {
+                   List<String> listURL = new ArrayList<>();
+                   listURL.add(url);
+                   product.setListUrlImg(listURL);
+                   map.put(maSP, product);
+               }
+           }
+           resultSet.close();
+           preparedStatement.close();
+           DataSourceConnection.returnConnection(connection);
+       } catch (ClassNotFoundException e) {
+           e.printStackTrace();
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+        //convert map to list
+       for (Map.Entry<String, Product> entry : map.entrySet()) {
+           products.add(entry.getValue());
+       }
+       return products;
+   }
+    public List<Product> getListProductByNameAndID(String pram,int offset,int rowCount){
+        Map<String, Product> map = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM hinhanh AS h JOIN ( SELECT * FROM products ps " +
+                "JOIN loaisp l ON l.IDLOAI = ps.LOAISP "+
+                "WHERE TRANGTHAI = 1 AND ( TENSP LIKE ? OR MASP LIKE ? )" +
+                "ORDER BY NGAYNHAP DESC LIMIT ?,? ) AS p ON p.MASP = h.IDSP";
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,"%"+pram+"%");
+            preparedStatement.setString(2,"%"+pram+"%");
+            preparedStatement.setInt(3,offset);
+            preparedStatement.setInt(4,rowCount);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String maSP = resultSet.getString("MASP");
+                String url = resultSet.getString("URL");
+                String nameLoai = resultSet.getString("NAMELOAI");
+                Product product = new Product();
+                product.setNamLoaiSP(nameLoai);
+                product.addProduct(resultSet);
+                if (map.containsKey(maSP)) {
+                    List<String> listURL = map.get(maSP).getListUrlImg();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                } else {
+                    List<String> listURL = new ArrayList<>();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                }
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //convert map to list
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
+            products.add(entry.getValue());
+        }
+        return products;
+    }
+    public int getCountProductSearch(String pram){
+        int result = 0;
+        String sql = "SELECT COUNT(*) AS COUNT FROM products " +
+                "WHERE TRANGTHAI = 1 AND ( TENSP LIKE ? OR MASP LIKE ? )";
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,"%"+pram+"%");
+            preparedStatement.setString(2,"%"+pram+"%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                result = resultSet.getInt("COUNT");
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

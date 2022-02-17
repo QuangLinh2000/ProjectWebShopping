@@ -55,7 +55,20 @@ public class HomeSerVice implements IHomeService{
         return ProductDao.getInstance().getProduct(id);
     }
 
+    @Override
+    public List<Product> searchProduct(String param, int row) {
+        return ProductDao.getInstance().getListProductByNameAndID(param,row);
+    }
 
+    @Override
+    public List<Product> searchProduct(String param, int offset, int rowCount) {
+        return ProductDao.getInstance().getListProductByNameAndID(param,offset,rowCount);
+    }
+
+    @Override
+    public int countSearch(String param) {
+        return ProductDao.getInstance().getCountProductSearch(param);
+    }
 
 
 }

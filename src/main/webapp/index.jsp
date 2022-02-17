@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/loader.css">
+
     <% IHomeService iHomeService = new HomeSerVice();
         request.setAttribute("listLoaiSP", iHomeService.getAllLoaiSP());%>
 </head>

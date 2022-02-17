@@ -19,4 +19,5 @@ public interface IUserService {
     User getUserByUsername(String userName, String vetificationCode);
 
     int updatePassword(String userName, String password, String code, String newCode);
+
 }

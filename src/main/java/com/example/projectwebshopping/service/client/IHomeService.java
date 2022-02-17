@@ -17,4 +17,7 @@ public interface IHomeService {
     List<Product> getSanPhamHeader(String idLoai,int limit,int loaiSlected);
     List<Product> getProducts(String idLoai,int loaiSlected);
     DetailProduct getProduct(String id);
+    List<Product> searchProduct(String param, int rowCount);
+    List<Product> searchProduct(String param,int offset , int rowCount);
+    int countSearch(String param);
 }
