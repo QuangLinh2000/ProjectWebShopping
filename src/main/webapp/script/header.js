@@ -3,11 +3,16 @@ window.onscroll = function () {
     scrollHideNav();
 };
 var header = document.getElementById("header-scroll");
+var headerTop = document.getElementById("header-first");
 
 function scrollHideNav() {
     var doc = document.documentElement;
     var w = window;
     var prevScroll = w.pageYOffset || w.scrollY || doc.scrollTop;
+    let norifyTop = headerTop.querySelector('.nofification');
+    if(prevScroll > 120){
+        norifyTop.classList.remove("flex");
+    }
     if (prevScroll > 20) {
         header.classList.add("header-scroll-active");
     } else {
