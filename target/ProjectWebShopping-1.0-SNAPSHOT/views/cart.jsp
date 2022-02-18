@@ -15,7 +15,6 @@
   List<CartProduct> cartProductList = (List<CartProduct>) request.getAttribute("cartList");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cart.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/loader.css">
   <section id="cart" class="margin-top-mobile">
     <div class="container">
       <div class="cart-holder">

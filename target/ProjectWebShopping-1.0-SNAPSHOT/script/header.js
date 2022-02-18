@@ -12,6 +12,7 @@ function scrollHideNav() {
     let norifyTop = headerTop.querySelector('.nofification');
     if(prevScroll > 120){
         norifyTop.classList.remove("flex");
+        document.getElementById("wrapper-search1").classList.remove("show");
     }
     if (prevScroll > 20) {
         header.classList.add("header-scroll-active");

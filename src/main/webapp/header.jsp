@@ -44,7 +44,7 @@
     }
 %>
 <div class="comment">
-    <form action="<%=request.getContextPath()%>/review" id="comment-dialog" method="post" enctype="multipart/form-data">
+    <form action="" id="comment-dialog" method="post" enctype="multipart/form-data">
         <div class="comment-header">
             <h3 class="comment-header-title">Hộp Thoại Góp Ý</h3>
             <div class="comment-close"></div>
@@ -57,7 +57,7 @@
                     <i class="material-icons fas fa-plus"></i>
                 </label>
                 <input  name="comment-image-input" class="d-none" id="comment-image-input" type="file" required accept="image/*" >
-                <div id="comment-image-col" class="row gx-3 row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-xl-2 row-cols-xxl-2">
+                <div id="comment-image-col" class="">
                 </div>
             </div>
         </div>
@@ -659,37 +659,37 @@
     }
     //show comment image
     document.querySelector("#comment-image-input").addEventListener("change", function() {
-        var files = this.files;
-        var filesArr = Array.prototype.slice.call(files);
-        filesArr.forEach(function(f) {
-            if (!f.type.match("image.*")) {
-                alert("Không phải file ảnh");
-                return;
-            }
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var html = "<div class='col'>" +
-                    "<div class='card card-product-grid'>" +
-                    "<img src='" + e.target.result + "' class='card-img img-thumbnail' alt='...'>" +
-                    "<input class='d-none' id='file-image-" + files.length + "' type='file' accept='image/*' />" +
-                    "<div class='info-wrap'>" +
-                    "<a href='#' class='title text-truncate'>" + f.name + "</a>" +
-                    "<div id='delete-comment-image' class='btn btn-sm btn-outline-danger mt-0'>" +
-                    "Xóa" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>";
-                $('#comment-image-col').html(html);
+       var files = this.files;
+       var filesArr = Array.prototype.slice.call(files);
+       filesArr.forEach(function(f) {
+           if (!f.type.match("image.*")) {
+               alert("Không phải file ảnh");
+               return;
+           }
+           var reader = new FileReader();
+           reader.onload = function(e) {
+               var html = "<div class=''>" +
+                   "<div class='card'>" +
+                   "<img src='" + e.target.result + "' class='card-img img-thumbnail' alt='...'>" +
+                   "<input class='d-none' id='file-image-" + files.length + "' type='file' accept='image/*' />" +
+                   "<div class='info-wrap'>" +
+                   "<a href='#' class=''>" + f.name + "</a>" +
+                   "<div id='delete-comment-image' class='btn btn-outline-danger'>" +
+                   "Xóa" +
+                   "</div>" +
+                   "</div>" +
+                   "</div>" +
+                   "</div>";
+               $('#comment-image-col').html(html);
 
-            }
-            reader.readAsDataURL(f);
+           }
+           reader.readAsDataURL(f);
 
-        });
-        if(filesArr.length>0){
-            $("#label-comment-image").addClass("d-none")
-        }
-    });
+       });
+       if(filesArr.length>0){
+           $("#label-comment-image").addClass("d-none")
+       }
+   });
     //click button "Xoa" in comment form to delete image anh show plus icon
     $("#delete-comment-image").click(function (){
         $('#comment-image-col').html("");
