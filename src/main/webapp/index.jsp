@@ -19,10 +19,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
-    <title>Document</title>
+    <title>Shop ITSUKI</title>
     <script src="<%=request.getContextPath()%>/script/jquery-3.5.0.min.js"></script>
     <link href="<%=request.getContextPath()%>/assets/fontawesome-free-6.0.0-beta3-web/css/all.css" rel="stylesheet" />
-    <%--    link notify--%>
+    <%--    link notify--%>    <link href="<%=request.getContextPath()%>/img/favicon.svg" rel="shortcut icon" type="image/x-icon">
+
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/notify/simple-notify.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/term.css">

@@ -16,7 +16,7 @@
 %>
 <html>
 <head>
-    <title>Danh Sách hóa đơn</title>
+    <title>Đơn hàng</title>
 </head>
 <body>
 <section class="content-main">
