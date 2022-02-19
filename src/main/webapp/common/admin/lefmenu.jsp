@@ -58,8 +58,8 @@
                 </div>
             </li>
             <li class="menu-item">
-                <a class="menu-link" href="<%=request.getContextPath()%>/admin-list-view-product"> <i class="icon material-icons md-monetization_on"></i>
-                    <span class="text">Giao dịch</span>
+                <a class="menu-link" href="<%=request.getContextPath()%>/admin-products-discount"> <i class="icon material-icons md-monetization_on"></i>
+                    <span class="text">Giảm giá</span>
                 </a>
             </li>
             <li class="menu-item">
