@@ -1,0 +1,192 @@
+/* -------------------------footer --------------------------------*/
+footer {
+    background-color: rgb(229, 229, 229);
+    margin-top: 50px;
+}
+.footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: solid black 1px;
+    padding-bottom: 20px;
+    justify-content: space-evenly;
+}
+.footer-content-item {
+    flex: 1;
+}
+.footer-content-item-title {
+    font-weight: bold;
+}
+.footer-bottom {
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.footer-content-item-contact {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.footer-content-item-contact-item {
+    display: flex;
+}
+.footer-content-item-contact-item p {
+    margin: 17px;
+
+    margin-left: 20px;
+}
+.footer-content-item-contact-item i {
+    margin-top: 20px;
+}
+.footer-content-item-rigeter {
+    margin-right: 20px;
+}
+.footer-content-item-input {
+    margin-top: 20px;
+    background-color: white;
+    width: 300px;
+    height: 40px;
+    position: relative;
+    padding-left: 10px;
+}
+.footer-content-item-input i {
+    background-color: black;
+    width: 50px;
+    height: 40px;
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+    padding-top: 10px;
+}
+#footer-content-item-input-email {
+    width: 100%;
+    height: 40px;
+    outline: none;
+}
+.footer-content-item-image img {
+    margin-top: 20px;
+    width: 300px;
+    height: 150px;
+}
+.footer-content-item-focuse {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+.footer-content-item-focuse::after {
+    content: "";
+    width: 0;
+    background-color: black;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: all 0.5s ease-in-out;
+}
+.footer-content-item-focuse:hover::after {
+    width: 100%;
+}
+/* ========================================home about============================================================ */
+#home-about {
+    text-align: center;
+    padding: 30px 0 30px;
+    background: #e5e5e5;
+}
+.home-about-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.home-about-icon {
+    margin-bottom: 15px;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: #1f2027;
+    border-radius: 100rem;
+}
+.home-about-icon i {
+    font-size: 20px;
+    color: #fff;
+}
+.home-about-icon:hover i {
+    animation: rotating 0.4s linear;
+}
+.home-about-icon:hover .home-about-icon {
+    animation: radius 0.4s linear;
+}
+@keyframes rotating /* Safari and Chrome */ {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes radius /* Safari and Chrome */ {
+    from {
+        border-radius: 100rem;
+    }
+    to {
+        border-radius: 0;
+    }
+}
+.home-about-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.home-about-item h3 {
+    font-size: 22px;
+}
+.home-about-item span {
+    font-size: var(--small-font-size);
+}
+.space-white {
+    width: 100%;
+    height: 50px;
+    background-color: white;
+}
+/* Responsive   */
+@media only screen and (max-width: 800px) {
+    .footer-content-item-input,
+    .footer-content-item-image img {
+        margin-left: 20%;
+    }
+    .footer-content-item-rigeter p {
+        margin-top: 20px;
+        text-align: center;
+        margin-left: 30px;
+    }
+    .footer-content-item-title {
+        margin-top: 30px;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 600px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-content-item-contact-item {
+        justify-content: center;
+    }
+}
+.footer-content-item-title {
+    display: block;
+    /* margin: 0 10px; */
+}
