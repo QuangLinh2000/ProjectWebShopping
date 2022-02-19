@@ -1234,5 +1234,125 @@ public class ProductDao {
         }
         return result;
     }
+    //get page product
+    public List<Product> getProductsSellAdmin(String idLoai,Date ngayNhap,int status,int start, int limit) {
+        Map<String, Product> map = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+        String where = "";
+        String sqlStart = "SELECT * FROM hinhanh AS h INNER JOIN (  SELECT * FROM products ps " +
+                "JOIN loaisp l ON l.IDLOAI = ps.LOAISP WHERE 1 = 1 AND PS.SALE > 0";
+        String sqlEnd =  " LIMIT ?,?) as p ON h.IDSP = p.MASP";
+        if(idLoai != null){
+            where += " AND ps.LOAISP = ? ";
+        }
+        if(ngayNhap != null){
+            where += " AND ps.NGAYNHAP = ? ";
+        }
+        if (status != -1){
+            where += " AND ps.TRANGTHAI = ? ";
+        }
+        try {
+            String sql = sqlStart + where + sqlEnd;
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            int i = 1;
+            if(idLoai != null){
+                preparedStatement.setString(i, idLoai);
+                i++;
 
+            }
+            if(ngayNhap != null){
+                preparedStatement.setDate(i, ngayNhap);
+                i++;
+            }
+            if (status != -1){
+                preparedStatement.setInt(i, status);
+                i++;
+            }
+            preparedStatement.setInt(i, start);
+            preparedStatement.setInt(i + 1, limit);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String maSP = resultSet.getString("MASP");
+                String url = resultSet.getString("URL");
+                String nameLoai = resultSet.getString("NAMELOAI");
+                Product product = new Product();
+                product.setNamLoaiSP(nameLoai);
+                product.addProduct(resultSet);
+                if (map.containsKey(maSP)) {
+                    List<String> listURL = map.get(maSP).getListUrlImg();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                } else {
+                    List<String> listURL = new ArrayList<>();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                }
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //convert map to list
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
+            products.add(entry.getValue());
+        }
+        return products;
+    }
+
+    public int getCountProductSellAdmin(String idLoai,Date ngayNhap,int status) {
+        int count = 0;
+        String where = "";
+        String sqlStart = "SELECT COUNT(*) tong FROM products WHERE 1 = 1 AND SALE > 0";
+        if(idLoai != null){
+            where += " AND LOAISP = ? ";
+        }
+        if(ngayNhap != null){
+            where += " AND NGAYNHAP = ? ";
+        }
+        if (status != -1){
+            where += " AND TRANGTHAI = ? ";
+        }
+        try {
+            String sql = sqlStart + where;
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            int i = 1;
+            if(idLoai != null){
+                preparedStatement.setString(i, idLoai);
+                i++;
+
+            }
+            if(ngayNhap != null){
+                preparedStatement.setDate(i, ngayNhap);
+                i++;
+            }
+            if (status != -1){
+                preparedStatement.setInt(i, status);
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                count = resultSet.getInt("tong");
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
 }
