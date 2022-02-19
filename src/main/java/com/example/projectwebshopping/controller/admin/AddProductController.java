@@ -92,7 +92,6 @@ public class AddProductController extends HttpServlet {
            if(fileName != null && fileName.length() > 0){
                String id = UUID.randomUUID().toString();
                String path = "/img/footer/"+id + fileName;
-               System.out.println(path);
                part.write(realPath + "/" +id+ fileName);
                listFileName.add(path);
 
@@ -135,7 +134,6 @@ public class AddProductController extends HttpServlet {
                 //remove file
 
                 String realPath2 = getServletContext().getRealPath("");
-                System.out.println(realPath2);
                 for ( String fileName : listFileName) {
                     File file = new File(realPath2 + fileName);
                     if(file.exists()){

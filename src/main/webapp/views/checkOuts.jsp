@@ -184,7 +184,7 @@
                 <button>Trở Lại Trang Chủ</button>
             </a>
             <strong>OR</strong>
-            <a class="orders-page__button" href="">
+            <a class="orders-page__button" href="<%=request.getContextPath()%>/order?status=all">
                 <button>Xem Đơn Mua</button>
             </a>
         </div>

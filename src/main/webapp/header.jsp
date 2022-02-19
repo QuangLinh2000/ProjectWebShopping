@@ -9,6 +9,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="com.example.projectwebshopping.dao.client.CartDao" %>
+<%@ page import="com.example.projectwebshopping.dao.client.ThongBaoDao" %><%--
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.format.DateTimeFormatter" %><%--
   Created by IntelliJ IDEA.
@@ -22,13 +23,15 @@
 <% IHomeService iHomeService = new HomeSerVice();
     List<LoaiSP> listLoaiSP = (List<LoaiSP>) request.getAttribute("listLoaiSP");
     //get cookie
-
+    //hello
 
 %>
 <%
     int quantity = 0;
     User user = (User) request.getSession().getAttribute("userLognin");
     Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
+    int countNotify = 0;
+
     String userID="";
     if (user == null) {
         if (cartMap == null) {
@@ -40,6 +43,7 @@
         }
     } else {
         quantity = CartDao.getInstance().getSizeCart(user.getId());
+        countNotify = ThongBaoDao.getInstance().countNotify(user.getId());
         userID=user.getId();
     }
 %>
@@ -94,70 +98,32 @@
                 <div class="header-top-list">
 
                     <!--Icon chuông-->
+                    <%if(user != null){%>
                     <div class="nav-item nav-notify">
+                        <%if(countNotify > 0){%>
+                        <span><%=countNotify%></span>
+                        <%}%>
                         <i class="fa-regular fa-bell icon-header"></i>
                         <div class="nofification" id="nofification-1">
                             <div class="notify-header">
                                 <div class="notify-title">
                                     <h4>Thông Báo</h4>
                                 </div>
-                                <div class="notify-filter">
-                                    <a href="" class="notify-all">Tất Cả</a>
-                                    <a href="" class="notify-orders">Đơn Hàng</a>
-                                    <a href="" class="notify-sale">Khuyến Mãi</a>
-                                    <a href="" class="notify-system">Hệ Thống</a>
-                                </div>
+<%--                                <div class="notify-filter">--%>
+<%--                                    <a href="" class="notify-all">Tất Cả</a>--%>
+<%--                                    <a href="" class="notify-orders">Đơn Hàng</a>--%>
+<%--                                    <a href="" class="notify-sale">Khuyến Mãi</a>--%>
+<%--                                    <a href="" class="notify-system">Hệ Thống</a>--%>
+<%--                                </div>--%>
                             </div>
                             <div class="notifys">
                                 <!--Thông báo 1-->
-                                <div class="notify">
-                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
-                                    <div class="notify-contents">
-                                        <p class="notify-subject">Giảm Giá Lớn !</p>
-                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
-                                        <p class="notify-time">12-01-2022</p>
-                                    </div>
-                                </div>
-                                <!--Thông báo 2-->
-                                <div class="notify">
-                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
-                                    <div class="notify-contents">
-                                        <p class="notify-subject">Giảm Giá Lớn !</p>
-                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
-                                        <p class="notify-time">12-01-2022</p>
-                                    </div>
-                                </div>
-                                <!--Thông báo 3-->
-                                <div class="notify">
-                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
-                                    <div class="notify-contents">
-                                        <p class="notify-subject">Giảm Giá Lớn !</p>
-                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
-                                        <p class="notify-time">12-01-2022</p>
-                                    </div>
-                                </div>
-                                <!--Thông báo 4-->
-                                <div class="notify">
-                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
-                                    <div class="notify-contents">
-                                        <p class="notify-subject">Giảm Giá Lớn !</p>
-                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
-                                        <p class="notify-time">12-01-2022</p>
-                                    </div>
-                                </div>
-                                <!--Thông báo 5-->
-                                <div class="notify">
-                                    <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon">
-                                    <div class="notify-contents">
-                                        <p class="notify-subject">Giảm Giá Lớn !</p>
-                                        <p class="notify-content">Sản phẩm Áo Dài Phối Hoa DH1234 đang giảm chỉ còn 1,000,000đ</p>
-                                        <p class="notify-time">12-01-2022</p>
-                                    </div>
-                                </div>
+
                             </div>
                             <a href="" class="link_all_noti">Xem tất cả</a>
                         </div>
                     </div>
+                    <%}%>
                     <div>
                         <a href="<%=request.getContextPath()%>/cart">
                             <i class="fa-solid fa-cart-shopping icon-header"></i>
@@ -351,19 +317,23 @@
                     </ul>
                 </nav>
                 <div class="header-top-list nav-notify">
+                    <%if(user != null){%>
                     <div class="nav-item nav-notify">
+                        <%if(countNotify > 0){%>
+                        <span><%=countNotify%></span>
+                        <%}%>
                         <i class="fa-regular fa-bell icon-header"></i>
                         <div class="nofification" id="nofification-2">
                             <div class="notify-header">
                                 <div class="notify-title">
                                     <h4>Thông Báo</h4>
                                 </div>
-                                <div class="notify-filter">
-                                    <a href="" class="notify-all">Tất Cả</a>
-                                    <a href="" class="notify-orders">Đơn Hàng</a>
-                                    <a href="" class="notify-sale">Khuyến Mãi</a>
-                                    <a href="" class="notify-system">Hệ Thống</a>
-                                </div>
+<%--                                <div class="notify-filter">--%>
+<%--                                    <a href="" class="notify-all">Tất Cả</a>--%>
+<%--                                    <a href="" class="notify-orders">Đơn Hàng</a>--%>
+<%--                                    <a href="" class="notify-sale">Khuyến Mãi</a>--%>
+<%--                                    <a href="" class="notify-system">Hệ Thống</a>--%>
+<%--                                </div>--%>
                             </div>
                             <div class="notifys">
                                 <!--Thông báo 1-->
@@ -415,6 +385,7 @@
                             <a href="" class="link_all_noti">Xem tất cả</a>
                         </div>
                     </div>
+                    <%}%>
                     <div id="search-scroll">
                         <i class="fa-solid fa-magnifying-glass search-icon" id="toogle-search"></i>
                         <div class="header-search" id="input-group-scroll">
@@ -590,9 +561,11 @@
     let notifycations=$('.nofification');
     let notifyButton=$('.fa-regular.fa-bell');
     $('#header-first .fa-regular.fa-bell').click(function (){
+        sendAjaxnotify(-1);
         $('#nofification-1').toggleClass('flex');
     });
     $('#header-scroll .fa-regular.fa-bell').click(function (){
+        sendAjaxnotify(-1);
         $('#nofification-2').toggleClass('flex');
     });
     $(document).click(function(e){
@@ -600,6 +573,35 @@
             notifycations.removeClass('flex')
         }
     })
+
+    function sendAjaxnotify(type) {
+        $('.notifys').html('');
+        $.ajax({
+            url: "<%=request.getContextPath()%>/header-user",
+            type: "POST",
+            data: {
+                type: type
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    $('.notifys').append(
+                        '<a href="<%=request.getContextPath()%>'+item.link+'">' +
+                        ' <div class="notify"> '+
+                        ' <img src="<%=request.getContextPath()%>/img/discount.png" alt="" class="notify-icon"> '+
+                        ' <div class="notify-contents"> '+
+                        ' <p class="notify-subject">'+item.title+'</p> '+
+                        ' <p class="notify-content">'+item.mota+'</p> '+
+                        ' <p class="notify-time">'+item.ngayCapNhat+'</p> '+
+                        ' </div> '+
+                        ' </div> '+
+                        ' </a>'
+
+                    );
+                }
+            }
+        });
+    }
 
     // search
     const search1 = document.getElementById('searchtext');
