@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.example.projectwebshopping.dao.client.ThongBaoDao" %>
+<%@ page import="com.example.projectwebshopping.data.DataString" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 1/11/2022
@@ -6,6 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+ int countNotify = ThongBaoDao.getInstance().countNotify(DataString.ID_USER_ADMIN);
+%>
 <style>
 
 </style>
@@ -31,24 +35,28 @@
                 <a class="nav-link btn-icon" onclick="darkmode(this)" title="Dark mode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
             </li>
             <li class="nav-item notifications position-relative" id="box">
-                <a class="nav-link btn-icon" href="#" id="btn-notify"> <i class="material-icons md-notifications_active"></i> </a>
+                <a class="nav-link btn-icon" href="#" id="btn-notify">
+                    <% if(countNotify > 0){%>
+                    <span><%=countNotify%></span>
+                    <%}%>
+                    <i class="material-icons md-notifications_active"></i> </a>
                 <div class="dropdown-menu-custom px-3">
                     <div class="dropdown-header">
                         <h5>Thông báo</h5>
                     </div>
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Tất cả</a>
+                            <a id="all-notify" class="nav-link active" aria-current="page" href="#">Tất cả</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Mới đăt</a>
+                        <li  class="nav-item">
+                            <a id="moi-dat" class="nav-link" href="#">Mới đặt</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Đã giao</a>
+                        <li  class="nav-item">
+                            <a id="da-giao" class="nav-link" href="#">Đã giao</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Đã huỷ</a>
+                        <li  class="nav-item">
+                            <a id="muon-huy" class="nav-link" href="#">Muốn huỷ</a>
                         </li>
                     </ul>
                     <div class="dropdown-body">
@@ -71,63 +79,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="list-notifications-item mb-2">
-                                <div class="card">
-                                    <div class="row g-0 px-4">
-                                        <div class="col-md-2 d-flex align-items-center">
-                                            <div>
-                                                <img src="<%=request.getContextPath()%>/admin/images/people/avatar1.jpg" class="rounded-circle" alt="..." style="width: 60px;">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="card-body py-0 ps-3">
-                                                <h5 class="card-title mb-0 text-left">Đơn hàng </h5>
-                                                <small class="text-muted text-right">25/11/2001</small>
-                                                <p class="card-text mb-2">Có đơn hàng 1999 cần duyệt</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-notifications-item mb-2">
-                                <div class="card">
-                                    <div class="row g-0 px-4">
-                                        <div class="col-md-2 d-flex align-items-center">
-                                            <div>
-                                                <img src="<%=request.getContextPath()%>/admin/images/people/avatar1.jpg" class="rounded-circle" alt="..." style="width: 60px;">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="card-body py-0 ps-3">
-                                                <h5 class="card-title mb-0 text-left">Đơn hàng </h5>
-                                                <small class="text-muted text-right">25/11/2001</small>
-                                                <p class="card-text mb-2">Có đơn hàng 1999 cần duyệt</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-notifications-item mb-2">
-                                <div class="card">
-                                    <div class="row g-0 px-4">
-                                        <div class="col-md-2 d-flex align-items-center">
-                                            <div>
-                                                <img src="<%=request.getContextPath()%>/admin/images/people/avatar1.jpg" class="rounded-circle" alt="..." style="width: 60px;">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="card-body py-0 ps-3">
-                                                <h5 class="card-title mb-0 text-left">Đơn hàng </h5>
-                                                <small class="text-muted text-right">25/11/2001</small>
-                                                <p class="card-text mb-2">Có đơn hàng 1999 cần duyệt</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
 
                         </div>
                     </div>
