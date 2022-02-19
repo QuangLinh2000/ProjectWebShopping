@@ -23,14 +23,50 @@ public class AppreciateDao {
     //pattern singleton
     private AppreciateDao() {
     }
-    public boolean addAppreciateNow(String idComment,String idUser, String imgUser, String comment){
+    public boolean deleteAppreciate(String id){
         Connection connection = null;
         int affect=0;
 
         try {
             connection = DataSourceConnection.getConnection();
-        String sql="INSERT INTO nhanxet(IDNhanXet,IDUSER,IMGUSER,NHANXET,NGAY) " +
-                "VALUE(?,?,?,?,?)";
+            String sql="DELETE FROM NHANXET WHERE NHANXET.IDNhanXet=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,id);
+            affect=preparedStatement.executeUpdate();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(affect>0)return true;
+        else return false;
+    }
+    public boolean confirmAppreciate(String id){
+        Connection connection = null;
+        int affect=0;
+
+        try {
+            connection = DataSourceConnection.getConnection();
+            String sql="UPDATE NHANXET SET NHANXET.STATUS=1 WHERE NHANXET.IDNhanXet=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,id);
+            affect=preparedStatement.executeUpdate();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(affect>0)return true;
+        else return false;
+    }
+    public boolean addAppreciateNow(String idComment,String idUser, String imgUser, String comment,String job){
+        Connection connection = null;
+        int affect=0;
+
+        try {
+            connection = DataSourceConnection.getConnection();
+        String sql="INSERT INTO nhanxet(IDNhanXet,IDUSER,IMGUSER,NHANXET,NGAY,STATUS,JOB) " +
+                "VALUE(?,?,?,?,?,?,?)";
             Date date=Date.valueOf(LocalDate.now());
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,idComment);
@@ -38,6 +74,8 @@ public class AppreciateDao {
             preparedStatement.setString(3,imgUser);
             preparedStatement.setString(4,comment);
             preparedStatement.setDate(5,date);
+            preparedStatement.setInt(6,0);
+            preparedStatement.setString(7,job);
             affect=preparedStatement.executeUpdate();
         } catch (ClassNotFoundException e) {
         e.printStackTrace();

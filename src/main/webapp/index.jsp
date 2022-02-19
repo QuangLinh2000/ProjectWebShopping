@@ -12,6 +12,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,6 +47,12 @@
 <script src="<%=request.getContextPath()%>/assets/notify/simple-notify.min.js"></script>
 <script src="<%=request.getContextPath()%>/script/header.js"></script>
 <script src="<%=request.getContextPath()%>/script/term.js"></script>
+<script>
+    $("#comment-label").click(function (){
+
+        $(".comment").removeClass('flex')
+    })
+</script>
 </body>
 
 </html>

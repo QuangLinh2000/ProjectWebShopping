@@ -11,15 +11,27 @@ public class Appreciate {
     private String userName;
     private String comment;
     private Date commentDate;
+    private int status;
+    private String job;
 public Appreciate(){
 
 }
-    public Appreciate(String id, String userImg, String userName, String comment, Date commentDate) {
+    public Appreciate(String id, String userImg, String userName, String comment, Date commentDate,int status,String job) {
         this.id = id;
         this.userImg = userImg;
         this.userName = userName;
         this.comment = comment;
         this.commentDate = commentDate;
+        this.status=status;
+        this.job=job;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public String getId() {
@@ -62,11 +74,22 @@ public Appreciate(){
         this.commentDate = commentDate;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public void addAttibute(ResultSet resultSet) throws SQLException {
     this.id=resultSet.getString("IDNhanXet");
     this.userImg=resultSet.getString("IMGUSER");
     this.userName=resultSet.getString("HoTen");
     this.comment=resultSet.getString("NHANXET");
     this.commentDate=resultSet.getDate("NGAY");
+    this.status=resultSet.getInt("STATUS");
+    this.job=resultSet.getString("JOB");
+
     }
 }
