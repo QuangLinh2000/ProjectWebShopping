@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/notify/simple-notify.min.css">
 
 
 <b class="screen-overlay"></b>
@@ -96,8 +97,7 @@
                                                 đ
                                             </div>
                                             <div class="button-group">
-                                                <a href="" class="buy-again">Mua Lại</a>
-                                                <a href="" class="cancel-button">
+                                                <a style="cursor: pointer" class="cancel-button cancel-button-xu-ly" idOrder="<%=order.getOrderId()%>">
                                                     <img src="<%=request.getContextPath()%>/img/exclamation.png" alt="">
                                                     Hủy</a>
                                             </div>
@@ -145,8 +145,7 @@
                                                     đ</s>
                                             </div>
                                             <div class="button-group">
-                                                <a href="" class="buy-again">
-                                                    Mua Lại</a>
+
                                             </div>
                                         </div>
 
@@ -189,7 +188,9 @@
                                                 đ
                                             </div>
                                             <div class="button-group">
-                                                <a href="" class="buy-again">Mua Lại</a>
+                                                <a style="cursor: pointer" class="cancel-button cancel-button-da-xac-nhan" idOrder="<%=order.getOrderId()%>">
+                                                    <img src="<%=request.getContextPath()%>/img/exclamation.png" alt="">
+                                                    Hủy</a>
                                             </div>
                                         </div>
 
@@ -234,7 +235,8 @@
                                                 đ
                                             </div>
                                             <div class="button-group">
-                                                <a href="" class="buy-again">Mua Lại</a>
+                                                <a style="cursor: pointer" class="buy-again buy-again-nhan-hang" idOrder="<%=order.getOrderId()%>">Nhận hàng</a>
+
                                             </div>
                                         </div>
 
@@ -278,7 +280,6 @@
                                                 đ
                                             </div>
                                             <div class="button-group">
-                                                <a href="" class="buy-again">Mua Lại</a>
                                             </div>
                                         </div>
                                     </div>
@@ -469,8 +470,7 @@
                         'đ'+
                         '</div>'+
                         '<div class="button-group">'+
-                        '<a href="" class="buy-again">Mua Lại</a>'+
-                        '<a href="" class="cancel-button">'+
+                        '<a style="cursor: pointer" class="cancel-button cancel-button-xu-ly" idOrder="'+order.orderId+'">'+
                         '<img src="<%=request.getContextPath()%>/img/exclamation.png" alt="">'+
                         'Hủy</a>'+
                         '</div>'+
@@ -513,8 +513,6 @@
                         'đ</s>'+
                         '</div>'+
                         '<div class="button-group">'+
-                        '<a href="" class="buy-again">'+
-                        'Mua Lại</a>'+
                         '</div>'+
                         '</div>'+
                         '</div>'+
@@ -555,8 +553,9 @@
                         'đ'+
                         '</div>'+
                         '<div class="button-group">'+
-                        '<a href="" class="buy-again">Mua Lại</a>'+
-                        '</div>'+
+                            '<a style="cursor: pointer" class="cancel-button cancel-button-da-xac-nhan" idOrder="'+order.orderId+'>'+
+                            '<img src="<%=request.getContextPath()%>/img/exclamation.png" alt="">'+
+                            'Hủy</a>'+
                         '</div>'+
                         '</div>'+
                         '</li>'
@@ -596,7 +595,7 @@
                         'đ'+
                         '</div>'+
                         '<div class="button-group">'+
-                        '<a href="" class="buy-again">Mua Lại</a>'+
+                        '<a style="cursor: pointer" class="buy-again buy-again-nhan-hang" idOrder="'+order.orderId+'>Nhận hàng</a>'+
                         '</div>'+
                         '</div>'+
                         '</div>'+
@@ -637,7 +636,6 @@
                         'đ'+
                         '</div>'+
                         '<div class="button-group">'+
-                        '<a href="" class="buy-again">Mua Lại</a>'+
                         '</div>'+
                         '</div>'+
                         '</div>'+
@@ -660,7 +658,93 @@
         return day + "/" + month + "/" + year;
     }
 
+    var cancelOrderDangXuLy = document.querySelectorAll('.cancel-button-xu-ly');
+    if(cancelOrderDangXuLy != null){
+        for(var i = 0; i < cancelOrderDangXuLy.length; i++){
+            cancelOrderDangXuLy[i].addEventListener('click', function(e) {
+                var idOrder = e.target.getAttribute('idOrder');
+                sendAjaxCancelOrder(idOrder, 1)
 
+            });
+        }
+
+    }
+    var cancelOrderDaXacNhan = document.querySelectorAll('.cancel-button-da-xac-nhan');
+    if(cancelOrderDaXacNhan != null){
+        for(var i = 0; i < cancelOrderDaXacNhan.length; i++){
+            cancelOrderDaXacNhan[i].addEventListener('click', function(e) {
+                var idOrder = e.target.getAttribute('idOrder');
+                sendAjaxCancelOrder(idOrder, 5);
+
+            });
+        }
+
+    }
+    var cancelOrderDaNhanHang = document.querySelectorAll('.buy-again-nhan-hang');
+    if(cancelOrderDaNhanHang != null){
+        for(var i = 0; i < cancelOrderDaNhanHang.length; i++){
+            cancelOrderDaNhanHang[i].addEventListener('click', function(e) {
+                var idOrder = e.target.getAttribute('idOrder');
+                sendAjaxCancelOrder(idOrder, 4)
+            });
+        }
+
+    }
+    //send ajax
+    function sendAjaxCancelOrder(idOrder, status){
+        if(idOrder == null){
+            return;
+        }
+        $.ajax({
+            url: '<%=request.getContextPath()%>'+'/cancel-order',
+            type: 'POST',
+            data:{
+                idOrder: idOrder,
+                status: status
+            },
+            success: function(response){
+                if(response != 0){
+                    if(status == 1) {
+                        pushNotify('success', 'Đơn Hàng Đã Được Huỷ', 'Thông Báo');
+                    }
+                    if(response == 4 ){
+                        pushNotify('success', 'Cập nhật đơn hàng thành công', 'Thông Báo');
+
+                    }
+                    if(response == 5){
+                        pushNotify('success', 'Gửi yêu cầu thành công', 'Thông Báo');
+
+                    }
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1000);
+                }else{
+                    pushNotify('error', 'Đơn Hàng Không Thể Huỷ', 'Thông Báo');
+                }
+            }
+        });
+    }
+
+    function pushNotify(status, message, title) {
+        new Notify({
+            status: status,
+            title: title,
+            text: message,
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 2000,
+            gap: 20,
+            distance: 20,
+            type: 1,
+            position: 'right top',
+            customWrapper: '',
+        })
+    }
 </script>
 
 <script>

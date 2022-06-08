@@ -85,11 +85,34 @@ public class AppreciateDao {
 if(affect>0)return true;
 else return false;
     }
+    public List<Appreciate> getAppreciateAlready(){
+        List<Appreciate> dsdanhgia = new ArrayList<>();
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            String sql = "SELECT * FROM khachhang inner join nhanxet on nhanxet.IDUSER=khachhang.IDUSER WHERE nhanxet.STATUS=1 ORDER BY nhanxet.NGAY LIMIT 4"
+                    ;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Appreciate danhgia=new Appreciate();
+                danhgia.addAttibute(resultSet);
+                dsdanhgia.add(danhgia);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsdanhgia;
+    }
     public List<Appreciate> getAllAppreciate(){
         List<Appreciate> dsdanhgia = new ArrayList<>();
         try {
             Connection connection =  DataSourceConnection.getConnection();
-            String sql = "SELECT * FROM khachhang inner join nhanxet on nhanxet.IDUSER=khachhang.IDUSER"
+            String sql = "SELECT * FROM khachhang inner join nhanxet on nhanxet.IDUSER=khachhang.IDUSER ORDER BY nhanxet.NGAY"
                     ;
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();

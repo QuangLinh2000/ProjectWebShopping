@@ -2,6 +2,9 @@ package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.dao.client.KhachHangDao;
 import com.example.projectwebshopping.dao.client.ProductDao;
+import com.example.projectwebshopping.dao.client.ThongBaoDao;
+import com.example.projectwebshopping.data.DataString;
+import com.example.projectwebshopping.model.admin.ThongBao;
 import com.example.projectwebshopping.model.client.CartJson;
 import com.example.projectwebshopping.model.client.KhachHang;
 import com.example.projectwebshopping.model.client.User;
@@ -10,7 +13,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 
 @WebServlet(name = "CheckOutsController", value = "/check-outs")
 public class CheckOutsController extends HttpServlet {
@@ -54,7 +59,8 @@ public class CheckOutsController extends HttpServlet {
 
 
         if (cart != null && user != null) {
-           String mess = ProductDao.getInstance().checkOut(user.getId(), cart);
+            String idHoaDon = UUID.randomUUID().toString();
+           String mess = ProductDao.getInstance().checkOut(user.getId(), cart,idHoaDon);
            //send ajax
             if(mess.equals("success")){
                 session.removeAttribute("cartCheckout");
@@ -71,6 +77,27 @@ public class CheckOutsController extends HttpServlet {
                     KhachHangDao.getInstance().themKhachHang(khachHang);
                 }
             }
+//            private String idThongBao;
+//            private String title;
+//            private String mota;
+//            private String link;
+//            private Date ngayCapNhat;
+//            private int trangThai;
+//            private int loaiThongBao;
+//            private int phanLoai;
+//            private String idUser;
+
+            ThongBao thongBao = new ThongBao();
+            thongBao.setIdThongBao(UUID.randomUUID().toString());
+            thongBao.setTitle("Đơn hàng mới");
+            thongBao.setMota("Có đơn hàng từ "+user.getUsername()+" cần phê duyệt");
+            thongBao.setLink("/admin-order-detail?id="+idHoaDon);
+            thongBao.setNgayCapNhat(new Date(System.currentTimeMillis()));
+            thongBao.setTrangThai(0);
+            thongBao.setLoaiThongBao(0);
+            thongBao.setPhanLoai(0);
+            thongBao.setIdUser(DataString.ID_USER_ADMIN);
+            ThongBaoDao.getInstance().insertThongBao(thongBao);
             response.getWriter().write(mess);
 
         }else{

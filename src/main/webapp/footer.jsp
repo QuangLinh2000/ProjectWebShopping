@@ -22,7 +22,7 @@
             <label for="comment-job">Công Việc :</label>
             <input type="text" name="comment-job" id="comment-job">
             <div class="comment-image">
-                <label for="comment-image-input" class="btn btn-primary mt-0" id="label-comment-image">
+                <label for="comment-image-input" class="comment-button" id="label-comment-image">
                     <i class="material-icons fas fa-plus"></i>
                 </label>
                 <span class="comment-image-size">Click để thêm ảnh (600x900)</span>
@@ -36,8 +36,8 @@
                 Nếu bạn có ý tưởng để cải thiện sản phẩm thì hãy cho chúng tôi biết nhé. Còn nếu cần trợ giúp để khắc phục vấn đề cụ thể, hãy truy cập <a href="<%=request.getContextPath()%>/term?index=1" style="color: rgb(0, 68, 255);">Trung tâm trợ giúp</a>.
             </h6>
             <div class="comment-footer-button">
-                <div class="btn btn-light btn-cancel" style="margin-right: 10px;">Hủy</div>
-                <div class="btn btn-primary btn-submit">GỬI</div>
+                <div class="comment-button btn-cancel" style="margin-right: 10px;">Hủy</div>
+                <div class="comment-button btn-primary btn-submit">GỬI</div>
             </div>
         </div>
     </form>
@@ -173,16 +173,13 @@
         document.querySelector("#comment-image-input").addEventListener("change", function() {
             var files = this.files;
             var filesArr = Array.prototype.slice.call(files);
-            var isImage=true;
-            var checkSize=true;
+            var heigh=0;
             filesArr.forEach(function(f) {
                 if (!f.type.match("image.*")) {
-                    isImage=false;
                     alert("Không phải file ảnh");
-                    document.getElementById("comment-image-input").value=null
+                    document.getElementById("comment-image-input").value = ""
                     return;
                 }
-
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     //Initiate the JavaScript Image object.
@@ -193,45 +190,46 @@
 
                     //Validate the File Height and Width.
                     image.onload = function () {
-                        var height = this.height;
+                       height = this.height;
                         var width = this.width;
-                        if (height !=900 || width !=600) {
-                            alert("Vui lòng chọn ảnh đúng kích thước.");
-                            checkSize=false;
+                        if (height ==900 && width==600) {
+                            var html = "<div class=''>" +
+                                "<div class='comment-card'>" +
+                                "<img src='" + e.target.result + "' class='comment-card-img comment-img-thumbnail' alt='...'>" +
+                                "<input class='d-none' id='file-image-" + files.length + "' type='file' accept='image/*' />" +
+                                "<div class='comment-info-wrap'>" +
+                                "<a href='#' class=''>" + f.name + "</a>" +
+                                "<div id='delete-comment-image' class='comment-button'>" +
+                                "Xóa" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>";
+                            $('#comment-image-col').html(html);
+                            $("#label-comment-image").addClass("d-none")
+                            $(".comment-image-size").addClass("d-none")
+                            //click button "Xoa" in comment form to delete image anh show plus icon
+                            $("#delete-comment-image").click(function (){
+                                document.getElementById("comment-image-input").value=""
+                                $(".comment-image-size").removeClass("d-none")
+                                $('#comment-image-col').html("");
+                                $("#label-comment-image").removeClass("d-none")
+                            });
+                        }
+                        else {
+                              alert("Vui lòng chọn ảnh đúng kích thước.");
+                            console.log("file trc "+document.getElementById("comment-image-input").value)
+                            document.getElementById("comment-image-input").value = ""
+                            console.log("file sau "+document.getElementById("comment-image-input").value)
                         }
                     };
-                    if(checkSize==true){
-                        var html = "<div class=''>" +
-                            "<div class='card'>" +
-                            "<img src='" + e.target.result + "' class='card-img img-thumbnail' alt='...'>" +
-                            "<input class='d-none' id='file-image-" + files.length + "' type='file' accept='image/*' />" +
-                            "<div class='info-wrap'>" +
-                            "<a href='#' class=''>" + f.name + "</a>" +
-                            "<div id='delete-comment-image' class='btn btn-outline-danger'>" +
-                            "Xóa" +
-                            "</div>" +
-                            "</div>" +
-                            "</div>" +
-                            "</div>";
-                        $('#comment-image-col').html(html);
-                        //click button "Xoa" in comment form to delete image anh show plus icon
-                        $("#delete-comment-image").click(function (){
-                            document.getElementById("comment-image-input").value=null
-                            $(".comment-image-size").removeClass("d-none")
-                            $('#comment-image-col').html("");
-                            $("#label-comment-image").removeClass("d-none")
-                        });
-                    }
 
-                }
+                    }
                 reader.readAsDataURL(f);
 
             });
-            if(filesArr.length>0&&isImage){
-                $("#label-comment-image").addClass("d-none")
-                $(".comment-image-size").addClass("d-none")
-            }
         });
+
         //send comment
         //click when push button "Gui"
         $("#comment-dialog").submit(function (e){

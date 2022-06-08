@@ -21,6 +21,7 @@ public class Order {
     private String tinhTP;
     private String quanHuyen;
     private String phuongXa;
+    private String phoneNumber;
     //constructor
     public Order() {
     }
@@ -147,6 +148,12 @@ public class Order {
                 return "alert-warning";
         }
     }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public void addOrder(ResultSet resultSet) throws SQLException {
         String MAHOADON =resultSet.getString("MAHOADON");
@@ -162,6 +169,7 @@ public class Order {
         String TinhTP = resultSet.getString("TinhTP");
         String QuanHuyen = resultSet.getString("QuanHuyen");
         String PhuongXa = resultSet.getString("PhuongXa");
+        String SDT = resultSet.getString("DienThoai");
 
         this.setOrderId(MAHOADON);
         this.setUserId(IDUSER);
@@ -173,10 +181,11 @@ public class Order {
         this.setEmail(USERMAIL);
         this.setName(HoTen);
         this.setPhone(DiaChi);
-        this.setAddress(TinhTP);
+        this.setAddress(DiaChi);
         this.setTinhTP(TinhTP);
         this.setQuanHuyen(QuanHuyen);
         this.setPhuongXa(PhuongXa);
+        this.setPhoneNumber(SDT);
 
     }
     public void addOrderUser(ResultSet resultSet) throws SQLException {

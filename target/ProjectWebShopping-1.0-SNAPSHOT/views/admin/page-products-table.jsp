@@ -20,6 +20,69 @@
     <title>Xem dạng bảng</title>
 </head>
 <body>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Xoá sản phẩm</h5>
+                <button type="button" class="close dismis-model-item" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body notify-delete-product">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary dismis-model-item" >Thoát</button>
+                <button id="delete-product" type="button" class="btn btn-primary bg-danger btn-accept dismis-model-item">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%----------model thong bao -----------%>
+
+<div class="modal fade" id="notyleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Hủy Đơn hàng</h5>
+                <button type="button" class="close dismis-model-item" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn hủy đơn hàng và xóa sản phẩm này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary dismis-model-item" >Thoát</button>
+                <button id="btn-delete-huy" type="button" class="btn btn-primary bg-danger btn-accept dismis-model-item">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%------------modle co don hang dang giao---------%>
+<div class="modal fade" id="cancel-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Thông báo</h5>
+                <button type="button" class="close dismis-model-item" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body notify-delete-product-3">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary dismis-model-item" >Thoát</button>
+                <button id="btn-tam-ngung-kinh-doanh" type="button" class="btn btn-primary bg-danger btn-accept dismis-model-item">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <section class="content-main">
 
     <div class="content-header">
@@ -103,7 +166,7 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="<%=request.getContextPath()%>/admin-detail-product?id=<%=product.getMaSP()%>">Xem chi tiết</a>
                                     <a class="dropdown-item" href="<%=request.getContextPath()%>/admin-detail-product?id=<%=product.getMaSP()%>">Chỉnh sửa</a>
-                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#exampleModalCenter">Xóa</a>
+                                    <a idsp ="<%=product.getMaSP()%>" class="dropdown-item  text-danger delete-product-item"  style="cursor: pointer">Xoá</a>
                                 </div>
                             </div> <!-- dropdown //end -->
                         </td>
@@ -311,7 +374,7 @@
                         '                                <div class="dropdown-menu">'+
                         '                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/admin-detail-product?id=' + product.maSP + '">Xem chi tiết</a>'+
                         '                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/admin-detail-product?id=' + product.maSP + '">Chỉnh sửa</a>'+
-                        '                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#exampleModalCenter">Xóa</a>'+
+                        '                                    <a idsp = "'+product.maSP+'" class="dropdown-item text-danger delete-product-item" style="cursor: pointer">Xoá</a>' +
                         '                                </div>'+
                         '                            </div> <!-- dropdown //end -->'+
                         '                        </td>'+
@@ -345,6 +408,8 @@
 
 
                 }
+                clickDelete();
+
             }
         });
 
@@ -418,6 +483,151 @@
             return sum / pageSize;
         }
         return parseInt(sum / pageSize )+ 1;
+    }
+
+    var idSP;
+    clickDelete();
+    function clickDelete() {
+        //---------delete product------------
+        document.querySelectorAll('.delete-product-item').forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                var id = e.target.getAttribute('idSP');
+                // $('#exampleModalCenter').modal('show');
+                sendAjaxCheckDelete(id);
+                idSP = id;
+
+            });
+
+        });
+    }
+    var checkDangGiao = false;
+    var checkXoa = false;
+    var xacNhan = false;
+    var listMHD ;
+    function sendAjaxCheckDelete(id) {
+        $.ajax({
+            url: '<%=request.getContextPath()%>'+'/admin-delete-product',
+            type: 'POST',
+            data:{
+                id: id,
+                type:'check'
+            },
+            success: function (res) {
+                checkDangGiao = false;
+                checkXoa = false;
+                xacNhan = false;
+                listMHD = res.listMaHoaDon;
+                console.log(listMHD);
+                if(res.list.length == 0){
+                    checkXoa = true;
+                }
+                $('.notify-delete-product').html('');
+                for (var i = 0; i < res.list.length; i++) {
+                    $('.notify-delete-product').append('<p>'+res.list[i]+'</p>');
+                    if(res.list[i].indexOf('hóa đơn đang giao') > -1){
+                        checkDangGiao = true;
+                    }else{
+                        xacNhan = true;
+                    }
+                }
+                $('.notify-delete-product').append('<p> bạn có chắc chắn muốn xoá sản phẩm này không?</p>');
+                $('#exampleModalCenter').modal('show');
+
+            }
+        });
+
+
+    }
+    document.querySelectorAll(".dismis-model-item").forEach(function (item) {
+        item.addEventListener('click', function (e) {
+            $('#exampleModalCenter').modal('hide');
+            $('#notyleModalCenter').modal('hide');
+            $('#cancel-order').modal('hide');
+
+
+        });
+    });
+
+    // có 3 trường hơp
+    // 1. xoá sản phẩm không có hóa đơn nào
+    // 2. xoá sản phẩm có hóa đơn nhưng chưa giao
+    // 3. xoá sản phẩm có hóa đơn đang giao
+
+    document.querySelector("#delete-product").addEventListener('click', function (e) {
+        $('.notify-delete-product-3').html('');
+        if(checkXoa == false){
+            if(checkDangGiao){
+                if(xacNhan){
+                    $('.notify-delete-product-3').append('<p>không thể xóa sản phẩm này do có đơn hàng đang giao.' +
+                        'Bạn có muốn hủy các đơn hàng đang chờ' +
+                        ' xác nhận và đã xác nhận và tạm ngừng kinh doanh sản phẩm này không</p>');
+                }else{
+                    $('.notify-delete-product-3').append('<p>không thể xóa sản phẩm này do có đơn hàng đang giao' +
+                        ' nhưng bạn có thể tạm ngừng doanh sản phẩm này, ' +
+                        'bạn có muốn tạm ngừng kinh doanh sản phẩm này không</p>');
+                }
+
+                $('#cancel-order').modal('show');
+
+
+            }else{
+                $('#notyleModalCenter').modal('show');
+            }
+        }else{
+            // 1. xoá sản phẩm không có hóa đơn nào
+
+            sendAjaxDelete(0);
+
+        }
+
+
+    });
+
+    // 2. xoá sản phẩm có hóa đơn nhưng chưa giao
+    document.querySelector('#btn-delete-huy').addEventListener('click', function (e) {
+
+        sendAjaxDelete(1);
+    });
+    // 3. xoá sản phẩm có hóa đơn đang giao
+    document.querySelector("#btn-tam-ngung-kinh-doanh").addEventListener('click', function (e) {
+        sendAjaxDelete(2);
+
+    });
+
+    // 0.xóa sản phẩm không có hóa dơn nào
+    // 1. xóa sản phẩm có hóa đơn nhưng chưa giao
+    // 2. xóa sản phẩm có hóa đơn đang giao
+
+    function sendAjaxDelete(typeDelete) {
+        //convert listMHD to json
+        var listMHDJson = JSON.stringify(listMHD);
+
+        $.ajax({
+            url: '<%=request.getContextPath()%>'+'/admin-delete-product',
+            type: 'POST',
+            data:{
+                id: idSP,
+                type:'delete',
+                typeDelete:typeDelete,
+                listMaHoaDon:listMHDJson
+            },
+            success: function (res) {
+                if(res == 1){
+                    pushNotify('success', 'Xóa sản phẩm thành công', 'success');
+
+                }else if(res == 0){
+                    pushNotify('warning', 'Xóa sản phẩm thất bại', 'warning');
+                }else{
+                    pushNotify('success', 'Đã tạm ngừng kinh doanh sản phẩm', 'success');
+                }
+                //setTimeout
+                setTimeout(function () {
+                    window.location.reload();
+                }, 2000);
+            }
+        });
+
+
     }
 </script>
 

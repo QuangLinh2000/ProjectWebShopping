@@ -2,6 +2,7 @@ package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.dao.client.AppreciateDao;
 import com.example.projectwebshopping.dao.client.LoaiSPDao;
+import com.example.projectwebshopping.model.admin.Appreciate;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -26,6 +27,7 @@ public class ReviewController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String idUser=request.getParameter("idUser");
         String comment=request.getParameter("comment-content");
         String job=request.getParameter("job");

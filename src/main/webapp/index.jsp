@@ -37,7 +37,7 @@
 <jsp:include page="header.jsp"></jsp:include>
 <%if (request.getAttribute("container_view") != null) {%>
 <jsp:include page="${container_view}"></jsp:include>
-
+<%--//ok--%>
 <%
 } else {
 %>

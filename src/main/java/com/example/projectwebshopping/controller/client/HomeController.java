@@ -1,6 +1,8 @@
 package com.example.projectwebshopping.controller.client;
 
+import com.example.projectwebshopping.dao.client.AppreciateDao;
 import com.example.projectwebshopping.dao.client.ProductDao;
+import com.example.projectwebshopping.model.admin.Appreciate;
 import com.example.projectwebshopping.model.client.BoSuaTap;
 import com.example.projectwebshopping.model.client.LogninManager;
 import com.example.projectwebshopping.model.client.Product;
@@ -36,7 +38,8 @@ public class HomeController extends HttpServlet {
 
         LogninManager.getInstance().setURLCookies(request, response);
 
-
+        List<Appreciate> listComment= AppreciateDao.getInstance().getAppreciateAlready();
+        request.setAttribute("listComment",listComment);
         request.setAttribute("container_view","/views/index.jsp");
 
         request.getRequestDispatcher("index.jsp").forward(request, response);

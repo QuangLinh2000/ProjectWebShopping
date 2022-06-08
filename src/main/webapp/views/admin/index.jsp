@@ -142,15 +142,8 @@
                         <%Date ngayNhap = order.getOrderDate();%>
                         <td><%=ngayNhap.getDate()+"/"+(ngayNhap.getMonth()+1)+"/"+(ngayNhap.getYear()+1900)%></td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-light">Chi tiết</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                    <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#exampleModalCenter">Xoá</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
+                            <a href="<%=request.getContextPath()%>/admin-order-detail?id=<%=order.getOrderId()%>" class="btn btn-light">Chi tiết</a>
+
                         </td>
                     </tr>
 

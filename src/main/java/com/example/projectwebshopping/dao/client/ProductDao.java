@@ -147,7 +147,8 @@ public class ProductDao {
         }
         return products;
     }
-    public List<Product> getSanPhamNoiBat(int loaiSlected, int limit,int start) {
+
+    public List<Product> getSanPhamNoiBat(int loaiSlected, int limit, int start) {
         Map<String, Product> map = new HashMap<>();
         List<Product> products = new ArrayList<>();
         try {
@@ -166,11 +167,11 @@ public class ProductDao {
                     break;
                 case 3:
                     preparedStatement = connection.prepareStatement("SELECT * FROM hinhanh AS h INNER JOIN (SELECT p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
-                                                        "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL,SUM(ct.SOLUONG) soLuong" +
-                                                       " FROM products p JOIN cthoadon ct ON p.MASP = ct.MaSP" +
-                                                        " WHERE p.TRANGTHAI = ?" +
-                                                       " GROUP BY p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
-                                                     "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL ORDER BY SOLUONG DESC LIMIT ?,?) as p ON h.IDSP = p.MASP ");
+                            "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL,SUM(ct.SOLUONG) soLuong" +
+                            " FROM products p JOIN cthoadon ct ON p.MASP = ct.MaSP" +
+                            " WHERE p.TRANGTHAI = ?" +
+                            " GROUP BY p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                            "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL ORDER BY SOLUONG DESC LIMIT ?,?) as p ON h.IDSP = p.MASP ");
                     break;
 
                 default:
@@ -311,22 +312,27 @@ public class ProductDao {
         String sqlEnd = "  ) as p ON h.IDSP = p.MASP";
 
         switch (loaiSlected) {
-            case 0: sqlOrderBy += " ORDER BY DONGIA DESC ";
+            case 0:
+                sqlOrderBy += " ORDER BY DONGIA DESC ";
                 break;
-            case 1: sqlOrderBy += " ORDER BY NGAYNHAP DESC";
+            case 1:
+                sqlOrderBy += " ORDER BY NGAYNHAP DESC";
                 break;
-            case 2: sqlOrderBy += " SELECT * FROM hinhanh AS h INNER JOIN (SELECT p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
-                    "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL,SUM(ct.SOLUONG) soLuong" +
-                    " FROM products p JOIN cthoadon ct ON p.MASP = ct.MaSP" +
-                    " WHERE  LOAISP = ? AND TRANGTHAI = ? " +
-                    " GROUP BY p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
-                    "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL ORDER BY SOLUONG DESC LIMIT 8) as p ON h.IDSP = p.MASP";
+            case 2:
+                sqlOrderBy += " SELECT * FROM hinhanh AS h INNER JOIN (SELECT p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                        "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL,SUM(ct.SOLUONG) soLuong" +
+                        " FROM products p JOIN cthoadon ct ON p.MASP = ct.MaSP" +
+                        " WHERE  LOAISP = ? AND TRANGTHAI = ? " +
+                        " GROUP BY p.MASP,p.TENSP,p.IDBoSuuTap,p.MOTA,p.DONGIA,p.SALE,p.MAU,p.NGAYNHAP,p.NGAYBATDAUSALE,p.NGAYKETTHUCSALE," +
+                        "p.LOAISP,p.TRANGTHAI,p.S,p.L,p.M,p.XL ORDER BY SOLUONG DESC LIMIT 8) as p ON h.IDSP = p.MASP";
                 break;
 
-            case 3: sqlOrderBy += " ORDER BY SALE DESC";
+            case 3:
+                sqlOrderBy += " ORDER BY SALE DESC";
                 sqlWhere += " AND SALE > 0 AND CURDATE() BETWEEN NGAYBATDAUSALE AND NGAYKETTHUCSALE ";
                 break;
-            case 4: sqlOrderBy += "";
+            case 4:
+                sqlOrderBy += "";
                 break;
             default:
                 throw new IllegalArgumentException("Invalid loaiSlected");
@@ -337,13 +343,12 @@ public class ProductDao {
             Connection connection = DataSourceConnection.getConnection();
             String sql = sqlStart + sqlWhere + sqlOrderBy + sqlEnd;
 
-            if(loaiSlected == 2){
+            if (loaiSlected == 2) {
                 sql = sqlOrderBy;
             }
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
 
 
             preparedStatement.setString(1, idLoai);
@@ -388,7 +393,7 @@ public class ProductDao {
         DetailProduct detailProduct = new DetailProduct();
         BoSuaTap boSuaTap = new BoSuaTap();
 
-        Map<String,Product> map = new HashMap<>();
+        Map<String, Product> map = new HashMap<>();
         try {
             Connection connection = DataSourceConnection.getConnection();
             String sql = "SELECT * FROM products p JOIN hinhanh  h ON p.MASP = h.IDSP JOIN bosutap b ON b.IdBST = p.IDBoSuuTap WHERE MASP = ?";
@@ -423,7 +428,8 @@ public class ProductDao {
         }
         return detailProduct;
     }
-    public int getSizeProduct(String id,String sizeName) {
+
+    public int getSizeProduct(String id, String sizeName) {
         int size = 0;
 
         try {
@@ -445,13 +451,14 @@ public class ProductDao {
         }
         return size;
     }
-    public int getSizeProduct(String id,String sizeName,String idUser, int quantity) {
+
+    public int getSizeProduct(String id, String sizeName, String idUser, int quantity) {
         int size = 0;
 
         try {
             Connection connection = DataSourceConnection.getConnection();
             String sql = "SELECT * FROM products WHERE MASP = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             String sql2 = "UPDATE  giohang SET SOLUONG = ? WHERE IDUser = ? AND IDSP = ? AND SIZE = ?";
@@ -477,45 +484,45 @@ public class ProductDao {
         }
         return size;
     }
+
     // update product and countdown size current
-    public int getSizeProduct(String id,String sizeName,String idUser, int quantity,String sizeCurrent) {
+    public int getSizeProduct(String id, String sizeName, String idUser, int quantity, String sizeCurrent) {
         int size = 0;
         try {
             Connection connection = DataSourceConnection.getConnection();
             String sql = "SELECT * FROM products WHERE MASP = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             String sqlRemove = "DELETE FROM giohang WHERE IDUser = ? AND IDSP = ? AND SIZE = ?";
-            String sqlGioHang= "select * from giohang where IDUser = ? and IDSP = ? and SIZE = ?";
+            String sqlGioHang = "select * from giohang where IDUser = ? and IDSP = ? and SIZE = ?";
             if (resultSet.next()) {
                 // size moi trong cua hang con bao nhieu
                 size = resultSet.getInt(sizeName);
 
-                    PreparedStatement preparedStatement2 = connection.prepareStatement(sqlGioHang,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                        preparedStatement2.setString(1, idUser);
-                        preparedStatement2.setString(2, id);
-                        preparedStatement2.setString(3, sizeName);
-                        ResultSet resultSet2 = preparedStatement2.executeQuery();
-                        if (resultSet2.next()) {
-                            int soluong = resultSet2.getInt("SOLUONG");
-                            if(size>=(soluong+quantity)){
-                                resultSet2.updateInt("SOLUONG", soluong+quantity);
-                                resultSet2.updateRow();
-                            }
+                PreparedStatement preparedStatement2 = connection.prepareStatement(sqlGioHang, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                preparedStatement2.setString(1, idUser);
+                preparedStatement2.setString(2, id);
+                preparedStatement2.setString(3, sizeName);
+                ResultSet resultSet2 = preparedStatement2.executeQuery();
+                if (resultSet2.next()) {
+                    int soluong = resultSet2.getInt("SOLUONG");
+                    if (size >= (soluong + quantity)) {
+                        resultSet2.updateInt("SOLUONG", soluong + quantity);
+                        resultSet2.updateRow();
+                    }
 
 
-
-                        }else {
-                            String sql2 = "INSERT INTO giohang(IDUser,IDSP,SIZE,SOLUONG) VALUES(?,?,?,?)";
-                            PreparedStatement preparedStatement3 = connection.prepareStatement(sql2);
-                            preparedStatement3.setString(1, idUser);
-                            preparedStatement3.setString(2, id);
-                            preparedStatement3.setString(3, sizeName);
-                            preparedStatement3.setInt(4, quantity);
-                            preparedStatement3.executeUpdate();
-                            preparedStatement3.close();
-                        }
+                } else {
+                    String sql2 = "INSERT INTO giohang(IDUser,IDSP,SIZE,SOLUONG) VALUES(?,?,?,?)";
+                    PreparedStatement preparedStatement3 = connection.prepareStatement(sql2);
+                    preparedStatement3.setString(1, idUser);
+                    preparedStatement3.setString(2, id);
+                    preparedStatement3.setString(3, sizeName);
+                    preparedStatement3.setInt(4, quantity);
+                    preparedStatement3.executeUpdate();
+                    preparedStatement3.close();
+                }
                 PreparedStatement preparedStatementRemove = connection.prepareStatement(sqlRemove);
                 preparedStatementRemove.setString(1, idUser);
                 preparedStatementRemove.setString(2, id);
@@ -523,7 +530,7 @@ public class ProductDao {
                 preparedStatementRemove.executeUpdate();
                 preparedStatementRemove.close();
 
-                        resultSet2.close();
+                resultSet2.close();
 
                 preparedStatement2.close();
 
@@ -539,28 +546,28 @@ public class ProductDao {
         return size;
     }
 
-    public String checkOut(String idUser, List<CartJson> cartJsonList) {
+    public String checkOut(String idUser, List<CartJson> cartJsonList,String idHoaDon) {
         List<CartJson> cartJsonList1 = new ArrayList<>();
         int sumMoney = 0;
-        for ( CartJson cartJson : cartJsonList) {
-             sumMoney+= cartJson.getPrice()*cartJson.getQuantity();
+        for (CartJson cartJson : cartJsonList) {
+            sumMoney += cartJson.getPrice() * cartJson.getQuantity();
         }
         cartJsonList1.addAll(cartJsonList);
         try {
             Connection connection = DataSourceConnection.getConnection();
             connection.setAutoCommit(false);
-            String where ="";
+            String where = "";
             for (int i = 0; i < cartJsonList.size(); i++) {
-                if(i==0){
+                if (i == 0) {
                     where = " where MASP = ?";
-                }else{
-                    where = where+" or MASP = ?";
+                } else {
+                    where = where + " or MASP = ?";
                 }
             }
-            String sql = "SELECT * FROM products "+where;
-            PreparedStatement preparedStatement = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM products " + where;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             for (int i = 0; i < cartJsonList.size(); i++) {
-                preparedStatement.setString(i+1, cartJsonList.get(i).getId());
+                preparedStatement.setString(i + 1, cartJsonList.get(i).getId());
             }
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -569,24 +576,24 @@ public class ProductDao {
                 String name = resultSet.getString("TENSP");
                 for (int i = 0; i < cartJsonList.size(); i++) {
 
-                    if(cartJsonList.get(i).getId().equals(id)) {
+                    if (cartJsonList.get(i).getId().equals(id)) {
                         //số lượng muốn mua
                         int quantity = cartJsonList.get(i).getQuantity();
                         String size = cartJsonList.get(i).getSize();
                         //số lượng của size có trong cửa hàng
                         int soluong = resultSet.getInt(size);
 
-                        if(soluong>=quantity){
-                            resultSet.updateInt(size, soluong-quantity);
+                        if (soluong >= quantity) {
+                            resultSet.updateInt(size, soluong - quantity);
                             resultSet.updateRow();
                             cartJsonList.remove(i);
                             i--;
-                        }else{
+                        } else {
                             connection.rollback();
                             connection.setAutoCommit(true);
                             DataSourceConnection.returnConnection(connection);
 
-                            return "Sản phẩm "+name+" không đủ số lượng";
+                            return "Sản phẩm " + name + " không đủ số lượng";
                         }
 
                     }
@@ -597,23 +604,22 @@ public class ProductDao {
             resultSet.close();
             preparedStatement.close();
 
-            if(cartJsonList.size()==0){
-                String idHoaDon = UUID.randomUUID().toString();
-                int delete = deleteCart(idUser,cartJsonList1,connection);
-                int insert = insertHoaDon(idUser,connection,idHoaDon,sumMoney);
-                int ctInsert = insertCTHoaDon(idHoaDon,cartJsonList1,connection);
-                if(delete >=1
-                && insert>=1
-                && ctInsert>=1) {
+            if (cartJsonList.size() == 0) {
+                int delete = deleteCart(idUser, cartJsonList1, connection);
+                int ínert = insertHoaDon(idUser, connection, idHoaDon, sumMoney);
+                int ctInsert = insertCTHoaDon(idHoaDon, cartJsonList1, connection);
+                if (delete >= 1
+                        && ínert >= 1
+                        && ctInsert >= 1) {
                     connection.commit();
-                }else{
+                } else {
                     connection.rollback();
                     connection.setAutoCommit(true);
 
                     DataSourceConnection.returnConnection(connection);
                     return "Đặt hàng thất bại 1";
                 }
-            }else{
+            } else {
                 connection.rollback();
                 connection.setAutoCommit(true);
 
@@ -632,7 +638,8 @@ public class ProductDao {
         }
         return "success";
     }
-   public int deleteCart(String idUser,List<CartJson> cartJsonList ,Connection connection) {
+
+    public int deleteCart(String idUser, List<CartJson> cartJsonList, Connection connection) {
         try {
             String sql = "DELETE FROM giohang WHERE IDUSER = ? AND IDSP = ? AND SIZE = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -649,7 +656,8 @@ public class ProductDao {
         }
         return 0;
     }
-    public int insertHoaDon(String idUser,Connection connection,String idHoaDon,double tongTien) {
+
+    public int insertHoaDon(String idUser, Connection connection, String idHoaDon, double tongTien) {
         try {
             String sql = "INSERT INTO hoadon(MAHOADON,IDUSER,NgayDatHang,TrangThai,tongTien) VALUES(?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -666,7 +674,8 @@ public class ProductDao {
         }
         return 0;
     }
-    public int insertCTHoaDon(String idHoaDon,List<CartJson> cartJsonList,Connection connection) {
+
+    public int insertCTHoaDon(String idHoaDon, List<CartJson> cartJsonList, Connection connection) {
         try {
             String sql = "INSERT INTO cthoadon(MaHD,PRICE,SoLuong,MaSP,SIZE) VALUES(?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -687,20 +696,20 @@ public class ProductDao {
     }
 
     //get page product
-    public List<Product> getProductsAdmin(String idLoai,Date ngayNhap,int status,int start, int limit) {
+    public List<Product> getProductsAdmin(String idLoai, Date ngayNhap, int status, int start, int limit) {
         Map<String, Product> map = new HashMap<>();
         List<Product> products = new ArrayList<>();
         String where = "";
         String sqlStart = "SELECT * FROM hinhanh AS h INNER JOIN (  SELECT * FROM products ps " +
                 "JOIN loaisp l ON l.IDLOAI = ps.LOAISP WHERE 1 = 1";
-        String sqlEnd =  " LIMIT ?,?) as p ON h.IDSP = p.MASP";
-        if(idLoai != null){
-           where += " AND ps.LOAISP = ? ";
+        String sqlEnd = " LIMIT ?,?) as p ON h.IDSP = p.MASP";
+        if (idLoai != null) {
+            where += " AND ps.LOAISP = ? ";
         }
-        if(ngayNhap != null){
+        if (ngayNhap != null) {
             where += " AND ps.NGAYNHAP = ? ";
         }
-        if (status != -1){
+        if (status != -1) {
             where += " AND ps.TRANGTHAI = ? ";
         }
         try {
@@ -708,16 +717,16 @@ public class ProductDao {
             Connection connection = DataSourceConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             int i = 1;
-            if(idLoai != null){
+            if (idLoai != null) {
                 preparedStatement.setString(i, idLoai);
                 i++;
 
             }
-            if(ngayNhap != null){
+            if (ngayNhap != null) {
                 preparedStatement.setDate(i, ngayNhap);
                 i++;
             }
-            if (status != -1){
+            if (status != -1) {
                 preparedStatement.setInt(i, status);
                 i++;
             }
@@ -760,55 +769,55 @@ public class ProductDao {
         return products;
     }
 
-     public int getCountProductAdmin(String idLoai,Date ngayNhap,int status) {
-         int count = 0;
+    public int getCountProductAdmin(String idLoai, Date ngayNhap, int status) {
+        int count = 0;
         String where = "";
-         String sqlStart = "SELECT COUNT(*) tong FROM products WHERE 1 = 1";
-         if(idLoai != null){
-             where += " AND LOAISP = ? ";
-         }
-         if(ngayNhap != null){
-             where += " AND NGAYNHAP = ? ";
-         }
-         if (status != -1){
-             where += " AND TRANGTHAI = ? ";
-         }
-         try {
-             String sql = sqlStart + where;
-             Connection connection = DataSourceConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             int i = 1;
-             if(idLoai != null){
-                 preparedStatement.setString(i, idLoai);
-                 i++;
+        String sqlStart = "SELECT COUNT(*) tong FROM products WHERE 1 = 1";
+        if (idLoai != null) {
+            where += " AND LOAISP = ? ";
+        }
+        if (ngayNhap != null) {
+            where += " AND NGAYNHAP = ? ";
+        }
+        if (status != -1) {
+            where += " AND TRANGTHAI = ? ";
+        }
+        try {
+            String sql = sqlStart + where;
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            int i = 1;
+            if (idLoai != null) {
+                preparedStatement.setString(i, idLoai);
+                i++;
 
-             }
-             if(ngayNhap != null){
-                 preparedStatement.setDate(i, ngayNhap);
-                 i++;
-             }
-             if (status != -1){
-                 preparedStatement.setInt(i, status);
-             }
+            }
+            if (ngayNhap != null) {
+                preparedStatement.setDate(i, ngayNhap);
+                i++;
+            }
+            if (status != -1) {
+                preparedStatement.setInt(i, status);
+            }
 
-             ResultSet resultSet = preparedStatement.executeQuery();
-             if (resultSet.next()) {
-                 count = resultSet.getInt("tong");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                count = resultSet.getInt("tong");
 
-             }
-             resultSet.close();
-             preparedStatement.close();
-             DataSourceConnection.returnConnection(connection);
-         } catch (ClassNotFoundException e) {
-             e.printStackTrace();
-         } catch (SQLException e) {
-             e.printStackTrace();
-         }
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-         return count;
-     }
+        return count;
+    }
 
-     //INSERT INTO `products`(`MASP`, `TENSP`, `IDBoSuuTap`, `MOTA`, `DONGIA`, `SALE`, `MAU`, `NGAYNHAP`, `NGAYBATDAUSALE`, `NGAYKETTHUCSALE`, `LOAISP`, `TRANGTHAI`, `S`, `L`, `M`, `XL`) VALUES ()
+    //INSERT INTO `products`(`MASP`, `TENSP`, `IDBoSuuTap`, `MOTA`, `DONGIA`, `SALE`, `MAU`, `NGAYNHAP`, `NGAYBATDAUSALE`, `NGAYKETTHUCSALE`, `LOAISP`, `TRANGTHAI`, `S`, `L`, `M`, `XL`) VALUES ()
     //insert product
     public boolean insertProduct(Product product) {
         boolean result = false;
@@ -898,31 +907,29 @@ public class ProductDao {
             preparedStatement.setInt(14, product.getM());
             preparedStatement.setInt(15, product.getXL());
             preparedStatement.setString(16, product.getMaSP());
-            int k =0;
+            int k = 0;
             if (product.getListUrlImg().size() > 0) {
                 String sqlStart = "INSERT INTO `hinhanh`(`IDSP`, `URL`) VALUES(?,?)";
                 PreparedStatement preparedStatement2 = connection.prepareStatement(sqlStart);
                 for (String url : product.getListUrlImg()) {
                     preparedStatement2.setString(1, product.getMaSP());
                     preparedStatement2.setString(2, url);
-                    k+=preparedStatement2.executeUpdate();
+                    k += preparedStatement2.executeUpdate();
                 }
                 preparedStatement2.close();
             }
 
             int i = preparedStatement.executeUpdate();
-            if (i > 0 && k==product.getListUrlImg().size()) {
+            if (i > 0 && k == product.getListUrlImg().size()) {
                 connection.commit();
                 connection.setAutoCommit(true);
                 result = true;
             }
             preparedStatement.close();
             DataSourceConnection.returnConnection(connection);
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
@@ -945,6 +952,168 @@ public class ProductDao {
             e.printStackTrace();
         }
         return -1;
+    }
+    //delete product
+
+    public List<String> deleteProduct(String idProduct) {
+        List<String> result =  new ArrayList<>();
+        String sql = "DELETE FROM `products` WHERE `MASP`= ?";
+        String sqlDeleteImg = "DELETE FROM `hinhanh` WHERE `IDSP`=?";
+        String sqlDeleteGioHang = "DELETE FROM `giohang` WHERE `IDSP`=?";
+        String selectImg = "SELECT `URL` FROM `hinhanh` WHERE `IDSP`=?";
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement4 = connection.prepareStatement(selectImg);
+            preparedStatement4.setString(1, idProduct);
+            ResultSet resultSet = preparedStatement4.executeQuery();
+            while (resultSet.next()) {
+                result.add(resultSet.getString("URL"));
+            }
+            resultSet.close();
+            preparedStatement4.close();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlDeleteImg);
+            preparedStatement.setString(1, idProduct);
+            preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement2 = connection.prepareStatement(sqlDeleteGioHang);
+            preparedStatement2.setString(1, idProduct);
+            preparedStatement2.executeUpdate();
+            PreparedStatement preparedStatement3 = connection.prepareStatement(sql);
+            preparedStatement3.setString(1, idProduct);
+            preparedStatement3.executeUpdate();
+
+
+
+            preparedStatement3.close();
+
+            preparedStatement2.close();
+
+            preparedStatement.close();
+
+            connection.commit();
+
+            connection.setAutoCommit(true);
+            DataSourceConnection.returnConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<String> deleteProductCoHoaDonChuaGiao(String idProduct, List<String> listIdHoaDon) {
+        List<String> result = new ArrayList<>();
+        String sql = "DELETE FROM `products` WHERE `MASP`= ?";
+        String sqlDeleteImg = "DELETE FROM `hinhanh` WHERE `IDSP`=?";
+        String sqlDeleteGioHang = "DELETE FROM `giohang` WHERE `IDSP`=?";
+        String sqlUpdateHoaDon = "UPDATE `hoadon` SET `TrangThai`= 1, `NgayNhanHang` = NOW(), `SoNgayDuKien` = 0 ";
+        String sqlUpdatectHoaDon = "UPDATE `cthoadon` SET `MASP`= 'SANPHAMNGUNGKINHDOANH' WHERE `MASP`=?";
+        String selectImg = "SELECT `URL` FROM `hinhanh` WHERE `IDSP`=?";
+
+        for (int i = 0; i < listIdHoaDon.size(); i++) {
+            if (i == 0) {
+                sqlUpdateHoaDon += " WHERE `MAHOADON` = ?";
+            } else {
+                sqlUpdateHoaDon += " OR `MAHOADON` = ?";
+            }
+        }
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            connection.setAutoCommit(false);
+
+            PreparedStatement preparedStatement6 = connection.prepareStatement(selectImg);
+            preparedStatement6.setString(1, idProduct);
+            ResultSet resultSet = preparedStatement6.executeQuery();
+            while (resultSet.next()) {
+                result.add(resultSet.getString("URL"));
+            }
+            resultSet.close();
+            preparedStatement6.close();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlDeleteImg);
+            preparedStatement.setString(1, idProduct);
+            preparedStatement.executeUpdate();
+
+            PreparedStatement preparedStatement2 = connection.prepareStatement(sqlDeleteGioHang);
+            preparedStatement2.setString(1, idProduct);
+            preparedStatement2.executeUpdate();
+            PreparedStatement preparedStatement3 = connection.prepareStatement(sqlUpdatectHoaDon);
+            preparedStatement3.setString(1, idProduct);
+            preparedStatement3.executeUpdate();
+            PreparedStatement preparedStatement4 = connection.prepareStatement(sqlUpdateHoaDon);
+            for (int i = 0; i < listIdHoaDon.size(); i++) {
+                preparedStatement4.setString(i + 1, listIdHoaDon.get(i));
+            }
+            preparedStatement4.executeUpdate();
+            PreparedStatement preparedStatement5 = connection.prepareStatement(sql);
+            preparedStatement5.setString(1, idProduct);
+            preparedStatement5.executeUpdate();
+
+
+
+
+
+            preparedStatement5.close();
+            preparedStatement4.close();
+
+            preparedStatement3.close();
+
+            preparedStatement2.close();
+
+            preparedStatement.close();
+            connection.commit();
+
+            connection.setAutoCommit(true);
+            DataSourceConnection.returnConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int deleteProductCoHoaDonDangGiao(String idProduct, List<String> listIdHoaDon) {
+        int result = 0;
+        String sqlUpdateProduct = "UPDATE `products` SET `TrangThai`= 2 WHERE `MASP`=?";
+        String sqlUpdateHoaDon = "UPDATE `hoadon` SET `TrangThai`= 1";
+
+        for (int i = 0; i < listIdHoaDon.size(); i++) {
+            if (i == 0) {
+                sqlUpdateHoaDon += " WHERE (`MAHOADON` = ? and `TrangThai`!= 3)";
+            } else {
+                sqlUpdateHoaDon += " OR (`MAHOADON` = ? and `TrangThai`!= 3)";
+            }
+        }
+        try {
+            Connection connection = DataSourceConnection.getConnection();
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdateProduct);
+            preparedStatement.setString(1, idProduct);
+            preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement2 = connection.prepareStatement(sqlUpdateHoaDon);
+            for (int i = 0; i < listIdHoaDon.size(); i++) {
+                preparedStatement2.setString(i + 1, listIdHoaDon.get(i));
+            }
+            preparedStatement2.executeUpdate();
+            result = 1;
+            preparedStatement2.close();
+
+
+            preparedStatement.close();
+
+
+            connection.commit();
+            connection.setAutoCommit(true);
+            DataSourceConnection.returnConnection(connection);
+       } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return result;
    }
    // trang thai 0 het hang 1 con hang 2 tam ngung sap xep theo ngay nhap
    public List<Product> getListProductByNameAndID(String pram,int rowCount){
@@ -1065,5 +1234,125 @@ public class ProductDao {
         }
         return result;
     }
+    //get page product
+    public List<Product> getProductsSellAdmin(String idLoai,Date ngayNhap,int status,int start, int limit) {
+        Map<String, Product> map = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+        String where = "";
+        String sqlStart = "SELECT * FROM hinhanh AS h INNER JOIN (  SELECT * FROM products ps " +
+                "JOIN loaisp l ON l.IDLOAI = ps.LOAISP WHERE 1 = 1 AND PS.SALE > 0";
+        String sqlEnd =  " LIMIT ?,?) as p ON h.IDSP = p.MASP";
+        if(idLoai != null){
+            where += " AND ps.LOAISP = ? ";
+        }
+        if(ngayNhap != null){
+            where += " AND ps.NGAYNHAP = ? ";
+        }
+        if (status != -1){
+            where += " AND ps.TRANGTHAI = ? ";
+        }
+        try {
+            String sql = sqlStart + where + sqlEnd;
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            int i = 1;
+            if(idLoai != null){
+                preparedStatement.setString(i, idLoai);
+                i++;
 
+            }
+            if(ngayNhap != null){
+                preparedStatement.setDate(i, ngayNhap);
+                i++;
+            }
+            if (status != -1){
+                preparedStatement.setInt(i, status);
+                i++;
+            }
+            preparedStatement.setInt(i, start);
+            preparedStatement.setInt(i + 1, limit);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String maSP = resultSet.getString("MASP");
+                String url = resultSet.getString("URL");
+                String nameLoai = resultSet.getString("NAMELOAI");
+                Product product = new Product();
+                product.setNamLoaiSP(nameLoai);
+                product.addProduct(resultSet);
+                if (map.containsKey(maSP)) {
+                    List<String> listURL = map.get(maSP).getListUrlImg();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                } else {
+                    List<String> listURL = new ArrayList<>();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                }
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //convert map to list
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
+            products.add(entry.getValue());
+        }
+        return products;
+    }
+
+    public int getCountProductSellAdmin(String idLoai,Date ngayNhap,int status) {
+        int count = 0;
+        String where = "";
+        String sqlStart = "SELECT COUNT(*) tong FROM products WHERE 1 = 1 AND SALE > 0";
+        if(idLoai != null){
+            where += " AND LOAISP = ? ";
+        }
+        if(ngayNhap != null){
+            where += " AND NGAYNHAP = ? ";
+        }
+        if (status != -1){
+            where += " AND TRANGTHAI = ? ";
+        }
+        try {
+            String sql = sqlStart + where;
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            int i = 1;
+            if(idLoai != null){
+                preparedStatement.setString(i, idLoai);
+                i++;
+
+            }
+            if(ngayNhap != null){
+                preparedStatement.setDate(i, ngayNhap);
+                i++;
+            }
+            if (status != -1){
+                preparedStatement.setInt(i, status);
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                count = resultSet.getInt("tong");
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
 }

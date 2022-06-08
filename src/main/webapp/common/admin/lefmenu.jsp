@@ -37,14 +37,11 @@
                     <a href="<%=request.getContextPath()%>/admin-add-product">Thêm sản phẩm</a>
                 </div>
             </li>
-            <li class="menu-item has-submenu">
-                <a class="menu-link" href=""> <i class="icon material-icons md-shopping_cart"></i>
+            <li class="menu-item">
+                <a class="menu-link" href="<%=request.getContextPath()%>/admin-orders"> <i class="icon material-icons md-shopping_cart"></i>
                     <span class="text">Đơn hàng</span>
                 </a>
-                <div class="submenu">
-                    <a href="<%=request.getContextPath()%>/admin-orders">Danh sách đơn hàng</a>
-                    <a href="page-orders-detail.html">Chi tiết đơn hàng</a>
-                </div>
+
             </li>
             <li class="menu-item has-submenu">
                 <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
@@ -58,8 +55,8 @@
                 </div>
             </li>
             <li class="menu-item">
-                <a class="menu-link" href="<%=request.getContextPath()%>/admin-list-view-product"> <i class="icon material-icons md-monetization_on"></i>
-                    <span class="text">Giao dịch</span>
+                <a class="menu-link" href="<%=request.getContextPath()%>/admin-products-discount"> <i class="icon material-icons md-monetization_on"></i>
+                    <span class="text">Giảm giá</span>
                 </a>
             </li>
             <li class="menu-item">

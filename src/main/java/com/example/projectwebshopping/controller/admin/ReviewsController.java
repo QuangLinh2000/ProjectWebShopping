@@ -20,6 +20,7 @@ public class ReviewsController extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     String id=request.getParameter("idComment");
     String action=request.getParameter("action");
     if(action!=null&&id!=null){

@@ -26,46 +26,14 @@
 </head>
 <body>
 <b class="screen-overlay"></b>
-<!-- * modal delete -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Xoá sản phẩm</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Bạn có chắc chắn muốn xoá sản phẩm này không?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                <button type="button" class="btn btn-primary bg-danger btn-accept">Đồng ý</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <jsp:include page="/common/admin/lefmenu.jsp"></jsp:include>
 <main class="main-wrap">
     <jsp:include page="/common/admin/header.jsp"></jsp:include>
     <decorator:body/>
 </main>
 <script type="text/javascript">
-    //document.onload
-    window.onload = function(e){
-        // toogle notify
-        $('#btn-notify').click(function () {
-            $('.dropdown-menu-custom').toggleClass('show');
-        });
-        // click outsize dropdown-menu close
-        $(document).click(function (event) {
-            if (!$(event.target).closest('.notifications').length) {
-                $('.dropdown-menu-custom').removeClass('show');
-            }
-        });
-    };
+
     if(localStorage.getItem("darkmode")){
         var body_el = document.body;
         body_el.className += 'dark';
@@ -90,6 +58,95 @@
             position: 'right top',
             customWrapper: '',
         })
+    }
+    //document.onload
+    window.onload = function(e){
+        // toogle notify
+        $('#btn-notify').click(function () {
+            sendAjaxNotify(-1);
+            $('.dropdown-menu-custom').toggleClass('show');
+        });
+        // click outsize dropdown-menu close
+        $(document).click(function (event) {
+            if (!$(event.target).closest('.notifications').length) {
+                $('.dropdown-menu-custom').removeClass('show');
+            }
+        });
+    };
+
+    document.querySelector('#moi-dat').addEventListener('click', function () {
+        //remove class active
+        document.querySelectorAll('.nav-link').forEach(function (el) {
+            el.classList.remove('active');
+        });
+        //add class active
+        document.querySelector('#moi-dat').classList.add('active');
+        sendAjaxNotify(0);
+    });
+    document.querySelector('#da-giao').addEventListener('click', function () {
+        //remove class active
+        document.querySelectorAll('.nav-link').forEach(function (el) {
+            el.classList.remove('active');
+        });
+        //add class active
+        document.querySelector('#da-giao').classList.add('active');
+        sendAjaxNotify(4);
+    });
+    document.querySelector('#muon-huy').addEventListener('click', function () {
+        //remove class active
+        document.querySelectorAll('.nav-link').forEach(function (el) {
+            el.classList.remove('active');
+        });
+        //add class active
+        document.querySelector('#muon-huy').classList.add('active');
+        sendAjaxNotify(5);
+    });
+    document.querySelector('#all-notify').addEventListener('click', function () {
+        //remove class active
+        document.querySelectorAll('.nav-link').forEach(function (el) {
+            el.classList.remove('active');
+        });
+        //add class active
+        document.querySelector('#all-notify').classList.add('active');
+        sendAjaxNotify(-1);
+    });
+
+    function sendAjaxNotify(style){
+        $('.list-notifications').html('');
+        $.ajax({
+            url: '<%=request.getContextPath()%>/admin-header',
+            type: 'POST',
+            data: {
+                style: style
+            },
+            success: function (data) {
+               for (var i = 0; i < data.length; i++) {
+                   var item = data[i];
+                   $('.list-notifications').append(
+                       '<a href="<%=request.getContextPath()%>'+item.link+'">' +
+                       ' <div class="list-notifications-item mb-2"> '+
+                       ' <div class="card"> '+
+                       ' <div class="row g-0 px-4"> '+
+                       ' <div class="col-md-2 d-flex align-items-center"> '+
+                       ' <div> '+
+                       ' <img src="<%=request.getContextPath()%>/admin/images/people/avatar1.jpg" class="rounded-circle" alt="..." style="width: 60px;"> '+
+                       ' </div> '+
+                       ' </div> '+
+                       ' <div class="col-md-10"> '+
+                       ' <div class="card-body py-0 ps-3"> '+
+                       ' <h5 class="card-title mb-0 text-left">'+item.title+' </h5> '+
+                       ' <small class="text-muted text-right">'+item.ngayCapNhat+'</small> '+
+                       ' <p class="card-text mb-2">'+item.mota+'</p> '+
+                       ' </div> '+
+                       ' </div> '+
+                       ' </div> '+
+                       ' </div> '+
+                       ' </div> '+
+                       ' </a>'
+                   );
+               }
+            }
+        });
     }
 
 </script>
