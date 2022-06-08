@@ -6,11 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-%>
+
 <aside class="navbar-aside" id="offcanvas_aside">
     <div class="aside-top">
-        <a href="page-index-1.html" class="brand-wrap">
+        <a href="<%=request.getContextPath()%>/admin-dashboard" class="brand-wrap">
             <img src="<%=request.getContextPath()%>/admin/images/logo.svg" height="46" class="logo" alt="Ecommerce dashboard template">
         </a>
         <div>
@@ -20,7 +19,7 @@
 
     <nav>
         <ul class="menu-aside">
-            <li class="menu-item active">
+            <li class="menu-item">
                 <a class="menu-link" href="<%=request.getContextPath()%>/admin-dashboard"> <i class="icon material-icons md-home"></i>
                     <span class="text">Bảng điều khiển</span>
                 </a>
@@ -32,7 +31,7 @@
                 <div class="submenu">
                     <a href="<%=request.getContextPath()%>/admin-list-view-product">Xem dạng danh sách</a>
                     <a href="<%=request.getContextPath()%>/admin-products-table">Xem dạng bảng</a>
-                    <a href="<%=request.getContextPath()%>/admin-product-gird">Xem dạng lưới</a>
+                    <a href="<%=request.getContextPath()%>/admin-product-gird">Xem Dạng Lưới</a>
                     <a href="<%=request.getContextPath()%>/admin-categories">Thể loại</a>
                     <a href="<%=request.getContextPath()%>/admin-add-product">Thêm sản phẩm</a>
                 </div>
@@ -95,3 +94,48 @@
         <br>
     </nav>
 </aside>
+<script>
+    var title = document.title;
+    //clcik has-submenu
+    document.querySelectorAll('.has-submenu').forEach(function (item) {
+        //remove active
+
+        item.addEventListener('click', function () {
+            document.querySelectorAll('.menu-item').forEach(function (item) {
+                item.classList.remove('active');
+            });
+            item.classList.add('active');
+        });
+    });
+    document.querySelectorAll('.menu-item').forEach(function (item) {
+        //get text child
+        var text = item.querySelector('.text').innerHTML;
+        if (text.toLowerCase() == title.toLowerCase()) {
+            item.classList.add('active');
+        }
+    });
+
+    if(title == 'Xem dạng danh sách' || title == 'Xem dạng bảng'
+     || title == 'Xem Dạng Lưới' || title == 'Thể loại'
+     || title == 'Thêm sản phẩm' ){
+
+        document.querySelectorAll('.has-submenu').forEach(function (item) {
+            //get text child
+            var text = item.querySelector('.text').innerHTML;
+            if (text == 'Sản phẩm') {
+                //set style css display block
+                item.classList.add('active');
+                item.style.display = 'block';
+                var text = item.querySelector('.submenu').querySelectorAll('a');
+                text.forEach(function (item) {
+
+                    if (item.innerText == title) {
+                       item.style.color = '#000';
+                        item.style.fontWeight = 'bold';
+                    }
+                });
+            }
+        });
+    }
+
+</script>

@@ -9,7 +9,7 @@
 
 <!-- Mirrored from www.ecommerce-admin.com/demo/page-reviews.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 02:39:01 GMT -->
 <head>
-  <title>Nhận Xét</title>
+  <title>Nhận xét</title>
 </head>
 <body>
    <section class="content-main">
