@@ -1113,3 +1113,7 @@ body.dark .list-notifications-item:hover .card {
     background-color: #dbdcdf;
     cursor: pointer;
 }
+.list-notifications a {
+    color: #141432;
+    text-decoration-line: none;
+}

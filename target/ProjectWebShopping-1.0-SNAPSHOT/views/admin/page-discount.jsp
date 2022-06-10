@@ -10,12 +10,13 @@
 <%@ page import="com.example.projectwebshopping.model.client.LoaiSP" %>
 <%@ page import="java.sql.Date" %>
 <%@ page import="com.example.projectwebshopping.model.client.ProductManager" %>
+<%@ page import="com.example.projectwebshopping.model.client.BoSuaTap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<Product> productList =(List<Product>) request.getAttribute("products");
     List<LoaiSP> loaiSPS = (List<LoaiSP>) request.getAttribute("loaiSPs");
     int totalPage = (int) request.getAttribute("total");
-
+    List<BoSuaTap> listBoSuuTap = (List<BoSuaTap>) request.getAttribute("boSuuTap");
 %>
 <html>
 <head>
@@ -27,18 +28,22 @@
     <div class="content-header">
         <h2 class="content-title">Danh sách sản phẩm giảm giá</h2>
         <div>
-            <a href="#" class="btn btn-primary"><i class="material-icons md-plus"></i> Tạo mới</a>
+            <a href="#" class="btn btn-primary"><i class="material-icons md-plus"></i> Chỉnh sửa</a>
+        </div>
+        <div>
+            <a href="#" class="btn btn-primary" data-toggle="modal"
+               data-target="#modalAddDiscount"><i class="material-icons md-local_offer "></i> Giảm giá</a>
         </div>
     </div>
 
     <div class="card mb-4">
         <header class="card-header">
             <div class="row align-items-center">
-                <div class="col col-check flex-grow-0">
-                    <div class="form-check ms-2">
-                        <input class="form-check-input" type="checkbox" value="">
-                    </div>
-                </div>
+<%--                <div class="col col-check flex-grow-0">--%>
+<%--                    <div class="form-check ms-2">--%>
+<%--                        <input class="form-check-input" type="checkbox" value="">--%>
+<%--                    </div>--%>
+<%--                </div>--%>
                 <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
                     <select id="loai-product" class="form-select">
                         <option>Loại</option>
@@ -155,12 +160,92 @@
                 <%}%>
             </div>
 
-
         </div> <!-- card-body end// -->
     </div> <!-- card end// -->
 
 
 </section>
+<!-- Modal -->
+<div class="modal fade" id="modalAddDiscount" tabindex="-1" role="dialog" aria-labelledby="modalAddDiscountTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg  modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAddDiscountTitle">Giảm giá theo loại và bộ sưu tập</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-7 col-sm-12">
+                        <div class="row">
+                            <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="Các Loại quần áo">
+                                <div class="col-md-12 form-group  mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Các Loại quần áo">
+                                    <label class="form-label" for="type">Loại</label>
+                                    <select class="form-select" id="type" name="type">
+                                        <option value="">Loại</option>
+                                        <%
+                                            for (int i = 0; i < loaiSPS.size(); i++) {
+                                                LoaiSP type = loaiSPS.get(i);
+                                            %>
+                                        <option value="<%=type.getMaLoai()%>"><%=type.getTenLoai()%></option>
+                                        <%}%>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 form-group  mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Các Loại quần áo">
+                                <label class="form-label" for="collection">Bộ sưu tập</label>
+                                <select class="form-select" id="collection" name="collection">
+
+                                    <option value="">Bộ sưu tập</option>
+                                    <%
+                                        for (int i = 0; i < loaiSPS.size(); i++) {
+                                            BoSuaTap collect = listBoSuuTap.get(i);
+                                    %>
+                                    <option value="<%=collect.getId()%>"><%=collect.getName()%></option>
+                                    <%}%>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12">
+                        <div class="row">
+                            <label for="product_price_sale" class="form-label">Giá sale</label>
+                            <div class="input-group">
+                                <input type="number" placeholder="Giá sale" class="form-control" id="product_price_sale"
+                                       name="product_price_sale" min="0" max="100" value="0">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-2">
+                                <label for="product_date_start" class="form-label">Ngày bắt đầu</label>
+                                <input type="date" class="form-control" min="2010-02-01" id="product_date_start" name="product_date_start">
+                            </div>
+                            <div class="mb-4">
+                                <label for="product_date_end" class="form-label">Ngày Kết thúc</label>
+                                <input type="date" class="form-control" min="2010-02-01" id="product_date_end" name="product_date_end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-primary bg-danger" id="btn-add-discount">Giảm giá</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var dateStart;
     var dateEnd;
@@ -173,9 +258,9 @@
     const filterDateEnd = document.getElementById("filter-date");
     const filterDateStart = document.getElementById("filter-date-start");
     filterDateEnd.addEventListener("change", function () {
-        let value = this.value;
-        dateEnd = value;
-        filterDateStart.max = value;
+        dateEnd = this.value;
+        console.log('ok end'+dateEnd);
+        filterDateStart.max = dateEnd;
         page = -1;
         sendAjax();
         setNonePageItemChild();
@@ -183,13 +268,12 @@
     });
     //event onchange filter-date-start use dom
     filterDateStart.addEventListener("change", function () {
-        let value = this.value;
-        dateStart = value;
-        filterDateEnd.min = value;
+        dateStart =  this.value;
+        console.log('ok start'+dateStart);
+        filterDateEnd.min = dateStart;
         page = -1;
         sendAjax();
         setNonePageItemChild();
-
     });
     //event onchange status-product use dom
     document.getElementById("status-product").addEventListener("change", function () {
@@ -311,6 +395,7 @@
                 dateEnd: dateEnd,
                 status: satus,
                 loai: loai,
+                serviceName:"getProductDiscount",
                 page: page
             },
             success: function (data) {
@@ -457,6 +542,39 @@
         }
         return parseInt(sum / pageSize )+ 1;
     }
+    const collectionDOM = document.getElementById('collection');
+    const typeDOM = document.getElementById('type');
+    const discountDOM = document.getElementById('product_price_sale');
+    const startDateDOM = document.getElementById('product_date_start');
+    const endDateDOM = document.getElementById('product_date_end');
+    document.getElementById('btn-add-discount').addEventListener('click', function () {
+        let collection = collectionDOM.value;
+        let type = typeDOM.value;
+        let discount = discountDOM.value;
+        let startDate = startDateDOM.value;
+        let endDate = endDateDOM.value;
+        console.log(collection, type, discount, startDate, endDate);
+        if (discount>=0 && discount<=100){
+            // $.ajax({
+            //     url: 'http://localhost:8080/api/admin/add-discount',
+            //     type: 'POST',
+            //     data: {
+            //         collection: collection,
+            //         type: type,
+            //         discount: discount,
+            //         startDate: startDate,
+            //         endDate: endDate
+            //     },
+            //     success: function (data) {
+            //         if (data.status == 200) {
+            //             pushNotify('success', 'Giảm giá thành công','Thêm giảm giá');
+            //         }
+            //     }
+            // });
+        }else {
+            pushNotify('warning', 'Vui lòng nhập mức giảm giá từ 0% đến 100%',"Thêm giảm giá");
+        }
+    });
 </script>
 
 </body>

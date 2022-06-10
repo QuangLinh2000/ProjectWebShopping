@@ -27,7 +27,7 @@
 
             <c:forEach var="p" items="${listQC}">
                 <div class="mySlides">
-                    <a href="<%=request.getContextPath()%>/${p.url}"><img src="${p.hinhAnh}" alt=""></a>
+                    <a href="<%=request.getContextPath()%>/${p.url}"><img src="<%=request.getContextPath()%>/${p.hinhAnh}" alt=""></a>
                 </div>
 
             </c:forEach>

@@ -142,7 +142,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">
-                            <a class="itemside" href="#">
+                            <a class="itemside" href="<%=request.getContextPath()%>/admin-detail-product?id=<%=product.getMaSP()%>">
                                 <div class="left">
                                     <img src="<%=request.getContextPath()%><%=product.getListUrlImg().get(0)%>" class="img-sm img-thumbnail" alt="Item">
                                 </div>
@@ -359,7 +359,7 @@
                            ' </div>' +
                            ' </div>' +
                            '<div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">' +
-                           ' <a class="itemside" href="#">' +
+                           ' <a class="itemside" href="<%=request.getContextPath()%>/admin-detail-product?id='+product.maSP+'">' +
                            '  <div class="left">' +
                            '     <img src="<%=request.getContextPath()%>' + product.listUrlImg[0] + '" class="img-sm img-thumbnail" alt="Item">' +
                            '  </div>' +

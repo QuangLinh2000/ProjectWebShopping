@@ -20,9 +20,9 @@
 <section class="content-main">
     <form id="form-send-data" action="<%=request.getContextPath()%>/admin-add-product" method="post" enctype="multipart/form-data">
         <div class="content-header">
-            <h2 class="content-title">Sản phẩm</h2>
+            <h2 class="content-title">Thêm Sản phẩm</h2>
             <div>
-                <input  type="submit" class="btn btn-primary" value="Lưu">
+                <input  type="submit" class="btn btn-primary" value="Thêm">
             </div>
         </div>
 

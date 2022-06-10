@@ -1235,7 +1235,7 @@ public class ProductDao {
         return result;
     }
     //get page product
-    public List<Product> getProductsSellAdmin(String idLoai,Date ngayNhap,int status,int start, int limit) {
+    public List<Product> getProductsSellAdmin(String idLoai,Date dateStart,Date dateEnd,int status,int start, int limit) {
         Map<String, Product> map = new HashMap<>();
         List<Product> products = new ArrayList<>();
         String where = "";
@@ -1245,8 +1245,11 @@ public class ProductDao {
         if(idLoai != null){
             where += " AND ps.LOAISP = ? ";
         }
-        if(ngayNhap != null){
-            where += " AND ps.NGAYNHAP = ? ";
+        if(dateStart != null){
+            where += " AND PS.NGAYBATDAUSALE >= ? ";
+        }
+        if(dateEnd != null){
+            where += " AND PS.NGAYKETTHUCSALE <= ? ";
         }
         if (status != -1){
             where += " AND ps.TRANGTHAI = ? ";
@@ -1261,8 +1264,12 @@ public class ProductDao {
                 i++;
 
             }
-            if(ngayNhap != null){
-                preparedStatement.setDate(i, ngayNhap);
+            if(dateStart != null){
+                preparedStatement.setDate(i, dateStart);
+                i++;
+            }
+            if(dateEnd != null){
+                preparedStatement.setDate(i, dateEnd);
                 i++;
             }
             if (status != -1){
@@ -1271,7 +1278,7 @@ public class ProductDao {
             }
             preparedStatement.setInt(i, start);
             preparedStatement.setInt(i + 1, limit);
-
+//            System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String maSP = resultSet.getString("MASP");
@@ -1308,15 +1315,18 @@ public class ProductDao {
         return products;
     }
 
-    public int getCountProductSellAdmin(String idLoai,Date ngayNhap,int status) {
+    public int getCountProductSellAdmin(String idLoai,Date dateStart,Date dateEnd,int status) {
         int count = 0;
         String where = "";
         String sqlStart = "SELECT COUNT(*) tong FROM products WHERE 1 = 1 AND SALE > 0";
         if(idLoai != null){
             where += " AND LOAISP = ? ";
         }
-        if(ngayNhap != null){
-            where += " AND NGAYNHAP = ? ";
+        if(dateStart != null){
+            where += " AND NGAYBATDAUSALE >= ? ";
+        }
+        if(dateEnd != null){
+            where += " AND NGAYKETTHUCSALE <= ? ";
         }
         if (status != -1){
             where += " AND TRANGTHAI = ? ";
@@ -1331,12 +1341,17 @@ public class ProductDao {
                 i++;
 
             }
-            if(ngayNhap != null){
-                preparedStatement.setDate(i, ngayNhap);
+            if(dateStart != null){
+                preparedStatement.setDate(i, dateStart);
+                i++;
+            }
+            if(dateEnd != null){
+                preparedStatement.setDate(i, dateEnd);
                 i++;
             }
             if (status != -1){
                 preparedStatement.setInt(i, status);
+                i++;
             }
 
             ResultSet resultSet = preparedStatement.executeQuery();
