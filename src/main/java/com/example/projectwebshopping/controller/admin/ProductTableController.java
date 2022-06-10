@@ -12,11 +12,10 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductsTableController", value = "/admin-products-table")
-public class ProductsTableController extends HttpServlet {
+@WebServlet(name = "ProductTableController", value = "/admin-products-table")
+public class ProductTableController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         List<Product> products = ProductDao.getInstance().getProductsAdmin(null,null,-1,0,10);
         List<LoaiSP> loaiSPs = LoaiSPDao.getInstance().getAllLoaiSP();
         int total = ProductDao.getInstance().getCountProductAdmin(null,null,-1);
@@ -24,6 +23,7 @@ public class ProductsTableController extends HttpServlet {
         request.setAttribute("total", ProductManager.getInstance().getPageCount(10,total));
         request.setAttribute("loaiSPs", loaiSPs);
         request.getRequestDispatcher("views/admin/page-products-table.jsp").forward(request, response);
+
     }
 
     @Override
