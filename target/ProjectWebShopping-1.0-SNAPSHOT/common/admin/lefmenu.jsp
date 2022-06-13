@@ -81,7 +81,7 @@
                 </a>
                 <div class="submenu">
                     <a href="page-settings-1.html">Cài đặt tài khoản</a>
-                    <a href="<%=request.getContextPath()%>/admin-term">Cài đặt trang web</a>
+                    <a href="page-settings-2.html">Cài đặt trang web</a>
                 </div>
             </li>
             <li class="menu-item">

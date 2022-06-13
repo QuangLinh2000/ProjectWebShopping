@@ -18,6 +18,7 @@ public class TermSettingController extends HttpServlet {
         String content= TermDao.getInstance().getTerm(index);
         request.setAttribute("content",content);
         request.setAttribute("index",index);
+
         request.getRequestDispatcher("/views/admin/page-term.jsp").forward(request, response);
     }
     @Override

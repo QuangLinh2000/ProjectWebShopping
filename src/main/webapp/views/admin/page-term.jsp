@@ -137,11 +137,13 @@ String content= (String) request.getAttribute("content");
                                 <i class="material-icons md-delete_forever"></i>  xóa
                             </a>
                         </div>
+                        <%if(request.getAttribute("index")!=null){%>
                         <div style="border: 2px solid #ccc;" class="p-4">
-  <textarea name="term_area" id="term_area">
-<%=content%>
-  </textarea>
+                        <textarea name="term_area" id="term_area">
+                            <%=content%>
+                        </textarea>
                         </div>
+                        <%}%>
 
                     </section> <!-- content-body .// -->
                 </div> <!-- col.// -->
@@ -151,9 +153,12 @@ String content= (String) request.getAttribute("content");
     </div> <!-- card .//end -->
 </section> <!-- content-main end// -->
 <script>
-    CKEDITOR.config.extraPlugins = 'stylesheetparser';
-    CKEDITOR.config.entities_latin = true;
-    CKEDITOR.inline( 'term_area' );
+    console.log(<%=(request.getAttribute("index"))%>)
+    if(<%=(request.getAttribute("index")!=null)%>){
+        CKEDITOR.config.extraPlugins = 'stylesheetparser';
+        CKEDITOR.config.entities_latin = true;
+        CKEDITOR.inline( 'term_area' );
+    }
 
 </script>
 <script src="<%=request.getContextPath()%>/script/jquery-3.5.0.min.js"></script>
