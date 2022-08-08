@@ -21,6 +21,20 @@ public class ReviewsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    String id=request.getParameter("idComment");
+    String action=request.getParameter("action");
+    if(action!=null&&id!=null){
+        if(action.equals("confirm")) {
+            if (AppreciateDao.getInstance().confirmAppreciate(id)) {
+                response.getWriter().write("success");
+            } else response.getWriter().write("fail");
+        }
+        else if(action.equals("delete")){
+            if (AppreciateDao.getInstance().deleteAppreciate(id)) {
+                response.getWriter().write("success");
+            } else response.getWriter().write("fail");
+        }
+    }
 
     }
 }

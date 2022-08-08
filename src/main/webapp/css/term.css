@@ -108,11 +108,15 @@ table {
     width: 65%;
     padding: 0 15px;
 }
-.content-header > h4 {
+.content-head > h4 {
     margin-top: 5px;
+    text-transform: uppercase;
 }
 .content-main-title > strong {
     text-transform: uppercase;
+}
+.cke_textarea_inline{
+    padding: 15px;
 }
 /* Mobile */
 @media only screen and (max-width: 46.1875em) {

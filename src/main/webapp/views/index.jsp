@@ -1,7 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.projectwebshopping.model.client.BoSuaTap" %>
 <%@ page import="com.example.projectwebshopping.model.client.Product" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.projectwebshopping.model.admin.Appreciate" %><%--
   Created by IntelliJ IDEA.
   User: QUANGLINH
   Date: 12/29/2021
@@ -13,7 +14,9 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%List<BoSuaTap> listBST = (List<BoSuaTap>) request.getAttribute("listBST");
     BoSuaTap boSuaTap1 = listBST.get(0);
-    BoSuaTap boSuaTap2 = listBST.get(1);%>
+    BoSuaTap boSuaTap2 = listBST.get(1);
+List<Appreciate> listComment=(List<Appreciate>)request.getAttribute("listComment");
+%>
 <%--limit imgae small gioi han anh hover--%>
 <%int limitImageSmall =5;%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/home.css">
@@ -607,6 +610,7 @@
             SEVEN.AM - SHALL WE DANCE
         </h2>
         <div class="customer-grid">
+            <%for(int i=0;i<listComment.size();i++){%>
             <div class="customer-item">
                 <div class="customer-img shine-hover">
                     <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
@@ -615,63 +619,15 @@
                 </div>
                 <div class="customer-des">
                     <h3>
-                        Nguyễn Trần Mỹ Nga
+                        <%=listComment.get(i).getUserName()%>
                     </h3>
-                    <span>Công chức</span>
+                    <span><%=listComment.get(i).getJob()%></span>
                     <p>
-                        Cảm ơn Seven.AM vì đã mang đến những sản phẩm rất vừa với vóc dáng của người phụ nữ Việt. Khi khoác lên mình các trang phục ở đây, tôi cảm thấy vô cùng thoải mái và tự tin.
+                     <%=listComment.get(i).getComment()%>
                     </p>
                 </div>
             </div>
-            <div class="customer-item">
-                <div class="customer-img shine-hover">
-                    <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
-                </div>
-                <div class="bg-color">
-                </div>
-                <div class="customer-des">
-                    <h3>
-                        Nguyễn Trần Mỹ Nga
-                    </h3>
-                    <span>Công chức</span>
-                    <p>
-                        Cảm ơn Seven.AM vì đã mang đến những sản phẩm rất vừa với vóc dáng của người phụ nữ Việt. Khi khoác lên mình các trang phục ở đây, tôi cảm thấy vô cùng thoải mái và tự tin.
-                    </p>
-                </div>
-            </div>
-            <div class="customer-item">
-                <div class="customer-img shine-hover">
-                    <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
-                </div>
-                <div class="bg-color">
-                </div>
-                <div class="customer-des">
-                    <h3>
-                        Nguyễn Trần Mỹ Nga
-                    </h3>
-                    <span>Công chức</span>
-                    <p>
-                        Cảm ơn Seven.AM vì đã mang đến những sản phẩm rất vừa với vóc dáng của người phụ nữ Việt. Khi khoác lên mình các trang phục ở đây, tôi cảm thấy vô cùng thoải mái và tự tin.
-                    </p>
-                </div>
-            </div>
-            <div class="customer-item">
-                <div class="customer-img shine-hover">
-                    <img src="<%=request.getContextPath()%>/img/home_customer_img1.jpg" alt="">
-                </div>
-                <div class="bg-color">
-                </div>
-                <div class="customer-des">
-                    <h3>
-                        Nguyễn Trần Mỹ Nga
-                    </h3>
-                    <span>Công chức</span>
-                    <p>
-                        Cảm ơn Seven.AM vì đã mang đến những sản phẩm rất vừa với vóc dáng của người phụ nữ Việt. Khi khoác lên mình các trang phục ở đây, tôi cảm thấy vô cùng thoải mái và tự tin.
-                    </p>
-                </div>
-            </div>
-
+            <%}%>
         </div>
     </div>
 </section>

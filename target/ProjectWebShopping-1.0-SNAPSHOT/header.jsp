@@ -30,6 +30,7 @@
     int quantity = 0;
     User user = (User) request.getSession().getAttribute("userLognin");
     Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
+
     int countNotify = 0;
 
     String userID="";
@@ -43,39 +44,12 @@
         }
     } else {
         quantity = CartDao.getInstance().getSizeCart(user.getId());
+
         countNotify = ThongBaoDao.getInstance().countNotify(user.getId());
         userID=user.getId();
     }
 %>
-<div class="comment">
-    <form action="" id="comment-dialog" method="post" enctype="multipart/form-data">
-        <div class="comment-header">
-            <h3 class="comment-header-title">Hộp Thoại Góp Ý</h3>
-            <div class="comment-close"></div>
-        </div>
-        <div class="comment-body">
-            <label for="comment-content">Vui lòng điền nhận xét của bạn :</label>
-            <textarea name="comment-content" id="comment-content" cols="40" rows="6" ></textarea>
-            <div class="comment-image">
-                <label for="comment-image-input" class="btn btn-primary mt-3" id="label-comment-image">
-                    <i class="material-icons fas fa-plus"></i>
-                </label>
-                <input  name="comment-image-input" class="d-none" id="comment-image-input" type="file" required accept="image/*" >
-                <div id="comment-image-col" class="">
-                </div>
-            </div>
-        </div>
-        <div class="comment-footer">
-            <h6 class="comment-footer-title">
-                Nếu bạn có ý tưởng để cải thiện sản phẩm thì hãy cho chúng tôi biết nhé. Còn nếu cần trợ giúp để khắc phục vấn đề cụ thể, hãy truy cập <a href="<%=request.getContextPath()%>/term?index=1" style="color: rgb(0, 68, 255);">Trung tâm trợ giúp</a>.
-            </h6>
-            <div class="comment-footer-button">
-                <div class="btn btn-light btn-cancel" style="margin-right: 10px;">Hủy</div>
-                <div class="btn btn-primary btn-submit">GỬI</div>
-            </div>
-        </div>
-    </form>
-</div>
+
 <header id="header" class="header-signin-sigup">
     <div id="header-first">
         <div class="container">
@@ -659,83 +633,7 @@
             customWrapper: '',
         })
     }
-    //show comment image
-    document.querySelector("#comment-image-input").addEventListener("change", function() {
-       var files = this.files;
-       var filesArr = Array.prototype.slice.call(files);
-       filesArr.forEach(function(f) {
-           if (!f.type.match("image.*")) {
-               alert("Không phải file ảnh");
-               return;
-           }
-           var reader = new FileReader();
-           reader.onload = function(e) {
-               var html = "<div class=''>" +
-                   "<div class='card'>" +
-                   "<img src='" + e.target.result + "' class='card-img img-thumbnail' alt='...'>" +
-                   "<input class='d-none' id='file-image-" + files.length + "' type='file' accept='image/*' />" +
-                   "<div class='info-wrap'>" +
-                   "<a href='#' class=''>" + f.name + "</a>" +
-                   "<div id='delete-comment-image' class='btn btn-outline-danger'>" +
-                   "Xóa" +
-                   "</div>" +
-                   "</div>" +
-                   "</div>" +
-                   "</div>";
-               $('#comment-image-col').html(html);
 
-           }
-           reader.readAsDataURL(f);
-
-       });
-       if(filesArr.length>0){
-           $("#label-comment-image").addClass("d-none")
-       }
-   });
-    //click button "Xoa" in comment form to delete image anh show plus icon
-    $("#delete-comment-image").click(function (){
-        $('#comment-image-col').html("");
-        $("#label-comment-image").removeClass("d-none")
-    })
-    //send comment
-    //click when push button "Gui"
-    $("#comment-dialog").submit(function (e){
-        e.stopPropagation()
-    })
-    $(".btn-submit").click(function (){
-
-        if(<%=user==null%>){
-            pushNotify("error","Opps ! Vui lòng đăng nhập để tiếp tục.","Góp Ý́")
-        }
-        else {
-
-            var commentForm= new FormData(document.getElementById("comment-dialog"));
-            var userID="<%=userID%>"
-            commentForm.append("idUser",userID)
-            commentForm.append("comment-content",$("#comment-content").val())
-            $.ajax({
-                url: "<%=request.getContextPath()%>/review",
-                type: "POST",
-                data: commentForm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    //set attr
-                    if(data=="success") {
-                        pushNotify('success', 'Góp ý thành công. THANKS !', 'Nhận Xét');
-                    }else if(data="lack"){
-                        pushNotify('error', 'Vui lòng cung cấp đủ lời nhận xét và hình ảnh.', 'Nhận Xét');
-                    }
-                    else{
-                        pushNotify('error', 'Góp ý thất bại.', 'Nhận Xét');
-                    }
-                },
-                error: function(){
-                    pushNotify('error', 'Góp ý thất bại.', 'Nhận Xét');
-                }
-            });
-        }
-    });
 
     document.getElementById('toogle-search').addEventListener('click', function (event) {
         document.getElementById('input-group-scroll').classList.toggle('show');

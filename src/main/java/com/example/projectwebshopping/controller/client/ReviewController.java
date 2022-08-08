@@ -2,6 +2,7 @@ package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.dao.client.AppreciateDao;
 import com.example.projectwebshopping.dao.client.LoaiSPDao;
+import com.example.projectwebshopping.model.admin.Appreciate;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -26,11 +27,13 @@ public class ReviewController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String idUser=request.getParameter("idUser");
         String comment=request.getParameter("comment-content");
+        String job=request.getParameter("job");
         //get list Part
         Part part = (Part) request.getPart("comment-image-input");
-        String realPath = getServletContext().getRealPath("/img/appreciate");
+        String realPath = request.getServletContext().getRealPath("/img/appreciate");
         String imgUser="";
         String idComment = UUID.randomUUID().toString();
         String fileName="";
@@ -38,7 +41,7 @@ public class ReviewController extends HttpServlet {
 
         if(part!=null) {
             fileName = part.getSubmittedFileName();
-            if(comment.equals("")||fileName=="")   {
+            if(comment.equals("")||fileName==""||job=="")   {
                 response.getWriter().write("lack");
                 return;
             }
@@ -48,7 +51,7 @@ public class ReviewController extends HttpServlet {
                 imgUser=path;
             }
         }
-        boolean isAdd = AppreciateDao.getInstance().addAppreciateNow(idComment,idUser,imgUser,comment);;
+        boolean isAdd = AppreciateDao.getInstance().addAppreciateNow(idComment,idUser,imgUser,comment,job);;
         if(isAdd){
             part.write(realPath + "/" +idComment+ fileName);
             response.getWriter().write("success");
