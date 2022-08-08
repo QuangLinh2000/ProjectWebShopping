@@ -16,8 +16,8 @@ public class UserService implements IUserService {
 
     @Override
     public void sendMail(String email, String subject, String text) {
-        final String username = "19130118@st.hcmuaf.edu.vn";
-        final String password = "Hackco2909\"!\"";
+        final String username = "19130249@st.hcmuaf.edu.vn";
+        final String password = "ehpcobexozfujnll";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -53,8 +53,8 @@ public class UserService implements IUserService {
 
     @Override
     public void sendMailHtml(String email, String s, String mainText) {
-        final String username = "19130118@st.hcmuaf.edu.vn";
-        final String password = "Hackco2909\"!\"";
+        final String username = "19130249@st.hcmuaf.edu.vn";
+        final String password = "ehpcobexozfujnll";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");

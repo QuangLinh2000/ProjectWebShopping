@@ -37,8 +37,6 @@ public class CartController extends HttpServlet {
             //get cart from database
             cartProductList = CartDao.getInstance().getCarts(user.getId());
 
-
-
         }
 
         LogninManager.getInstance().setURLCookies(request, response);
