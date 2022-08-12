@@ -308,6 +308,7 @@ public class HoaDonDao {
                 sql = "SELECT COUNT(*) SOLUONG FROM hoadon  WHERE IDUSER = ?";
             }
             if(xemTrangThaiDonHang.equals("0")){
+                
                 sql = "SELECT COUNT(*) SOLUONG FROM hoadon  WHERE IDUSER = ? AND TrangThai = 0";
             }
             if(xemTrangThaiDonHang.equals("1")){

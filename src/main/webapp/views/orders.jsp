@@ -760,7 +760,228 @@
 <script src="<%=request.getContextPath()%>/script/scriptc619.js?v=1.0"></script>
 
 
+if (order.status == 0)
+{
+<!--Đơn Hàng 3-->
+<li class="order col-lg-12">
+    <div class="order-status">
+        <div class="order-status-infor">
 
+            <img src="../img/package-box.png" alt=""
+                 class="status-image">
+            <p class="status__text">Đang Xử Lý</p>
+        </div>
+        <i class="fas fa-angle-left"></i>
+    </div>
+    <div class="order-body">
+
+        <div class="order-details">
+
+        </div>
+    </div>
+    <div class="order-summary">
+        <div class="order-infor">
+            <p class="order-date">Ngày Đặt
+                Hàng: @order.formatDate(order.orderDate)
+            </p>
+            <p class="order-id">Mã Đơn Hàng:
+            <p class="order-id-item">@order.orderId
+            </p></p>
+
+        </div>
+        <div class="order-footer">
+            <div class="order-total-price">
+                Tổng
+                Tiền: @formatPrice(order.totalPrice)
+                đ
+            </div>
+            <div class="button-group">
+                <a style="cursor: pointer" class="cancel-button cancel-button-xu-ly" idOrder="@order.orderId">
+                    <img src="../img/exclamation.png" alt="">
+                    Hủy</a>
+            </div>
+        </div>
+
+    </div>
+</li>
+}
+else if(order.status == 1)
+{
+<!--Đơn Hàng 2-->
+<li class="order col-lg-12">
+    <div class="order-status">
+        <div class="order-status-infor">
+            <img src="../img/traffic-signal.png" alt=""
+                 class="status-image">
+            <p class="status__text">Đã Hủy</p>
+        </div>
+        <i class="fas fa-angle-left"></i>
+
+    </div>
+    <div class="order-body">
+
+        <div class="order-details">
+        </div>
+    </div>
+
+    <div class="order-summary">
+        <div class="order-infor">
+            <p class="order-date">Ngày Đặt
+                Hàng:  @order.formatDate(order.orderDate)
+            </p>
+            <p class="order-receive-date">Ngày
+                Hủy:  @order.formatDate(order.ngayNhanHang)
+            </p>
+            <p class="order-id">Mã Đơn Hàng:
+            <p class="order-id-item">@order.orderId
+            </p></p>
+
+        </div>
+        <div class="order-footer">
+            <div class="order-total-price">
+                Tổng Tiền:
+                <s>@formatPrice(order.totalPrice)
+                    đ</s>
+            </div>
+            <div class="button-group">
+
+            </div>
+        </div>
+
+    </div>
+</li>
+}
+else if(order.status == 2)
+{
+<li class="order col-lg-12">
+    <div class="order-status">
+        <div class="order-status-infor">
+            <img src="../img/fast-delivery.png" alt=""
+                 class="status-image">
+            <p class="status__text">Đã xác nhận</p>
+
+        </div>
+        <i class="fas fa-angle-left"></i>
+    </div>
+    <div class="order-body">
+
+        <div class="order-details">
+        </div>
+    </div>
+    <div class="order-summary">
+        <div class="order-infor">
+            <p class="order-date">Ngày Đặt
+                Hàng: @order.formatDate(order.orderDate)
+            </p>
+            <p class="order-receive-date">Ngày Nhận Hàng Dự
+                Kiến: @order.soNgayDuKien
+            </p>
+            <p class="order-id">Mã Đơn Hàng:
+            <p class="order-id-item">@order.orderId
+            </p></p>
+        </div>
+        <div class="order-footer">
+            <div class="order-total-price">
+                Tổng
+                Tiền: @formatPrice(order.totalPrice)
+                đ
+            </div>
+            <div class="button-group">
+                <a style="cursor: pointer" class="cancel-button cancel-button-da-xac-nhan" idOrder="@order.orderId">
+                    <img src="../img/exclamation.png" alt="">
+                    Hủy</a>
+            </div>
+        </div>
+
+    </div>
+</li>
+}
+else if(order.status == 3)
+{
+<li class="order col-lg-12">
+    <div class="order-status">
+        <div class="order-status-infor">
+            <img src="../img/fast-delivery.png" alt=""
+                 class="status-image">
+            <p class="status__text">Đang Vận Chuyển</p>
+
+        </div>
+        <i class="fas fa-angle-left"></i>
+    </div>
+    <div class="order-body">
+
+        <div class="order-details">
+
+        </div>
+    </div>
+    <div class="order-summary">
+        <div class="order-infor">
+            <p class="order-date">Ngày Đặt
+                Hàng:@order.formatDate(order.orderDate)
+            </p>
+            <p class="order-receive-date">Ngày Nhận Hàng Dự
+                Kiến: @order.soNgayDuKien
+            </p>
+            <p class="order-id">Mã Đơn Hàng:
+            <p class="order-id-item">@order.orderId
+            </p></p>
+        </div>
+        <div class="order-footer">
+            <div class="order-total-price">
+                Tổng
+                Tiền: @formatPrice(order.totalPrice)
+                đ
+            </div>
+            <div class="button-group">
+                <a style="cursor: pointer" class="buy-again buy-again-nhan-hang" idOrder="@order.orderId">Nhận hàng</a>
+
+            </div>
+        </div>
+
+    </div>
+</li>
+}
+else if(order.status == 4)
+{
+<li class="order col-lg-12">
+    <div class="order-status">
+        <div class="order-status-infor">
+            <img src="../img/package.png" alt=""
+                 class="status-image">
+            <p class="status__text">Đã Nhận Được Hàng</p>
+        </div>
+        <i class="fas fa-angle-left"></i>
+    </div>
+    <div class="order-body">
+        <div class="order-details">
+
+        </div>
+    </div>
+
+    <div class="order-summary">
+        <div class="order-infor">
+            <p class="order-date">Ngày Đặt
+                Hàng: @order.formatDate(order.orderDate)
+            </p>
+            <p class="order-receive-date">Ngày Nhận
+                Hàng:@order.soNgayDuKien
+            </p>
+            <p class="order-id">Mã Đơn Hàng:
+            <p class="order-id-item">@order.orderId
+            </p></p>
+        </div>
+        <div class="order-footer">
+            <div class="order-total-price">
+                Tổng
+                Tiền:  @formatPrice(order.totalPrice)
+                đ
+            </div>
+            <div class="button-group">
+            </div>
+        </div>
+    </div>
+</li>
+}
    
 
     
