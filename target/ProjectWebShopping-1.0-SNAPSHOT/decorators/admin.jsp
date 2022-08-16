@@ -163,5 +163,23 @@
 <!-- Custom JS -->
 <script src="<%=request.getContextPath()%>/admin/js/scriptc619.js?v=1.0" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/assets/notify/simple-notify.min.js"></script>
+<script>
+    $(".log-out").click(function () {
+        //set attr
+        //ajax sign out
+        $.ajax({
+            url: "<%=request.getContextPath()%>/signout",
+            type: "POST",
+            data: {
+                "signout": "signout"
+            },
+            success: function (data) {
+                //set attr
+                $(".dropdown-item.text-danger").attr("href", "<%=request.getContextPath()%>/signin");
+                //set text
 
+            }
+        });
+    });
+</script>
 </html>

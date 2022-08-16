@@ -32,9 +32,15 @@
                     <a href="<%=request.getContextPath()%>/admin-list-view-product">Xem dạng danh sách</a>
                     <a href="<%=request.getContextPath()%>/admin-products-table">Xem dạng bảng</a>
                     <a href="<%=request.getContextPath()%>/admin-product-gird">Xem Dạng Lưới</a>
-                    <a href="<%=request.getContextPath()%>/admin-categories">Thể loại</a>
+<%--                    <a href="<%=request.getContextPath()%>/admin-categories">Thể loại</a>--%>
                     <a href="<%=request.getContextPath()%>/admin-add-product">Thêm sản phẩm</a>
                 </div>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="<%=request.getContextPath()%>/admin-categories"> <i class="icon material-icons md-pie_chart"></i>
+                    <span class="text">Thể loại</span>
+                </a>
+
             </li>
             <li class="menu-item">
                 <a class="menu-link" href="<%=request.getContextPath()%>/admin-orders"> <i class="icon material-icons md-shopping_cart"></i>
@@ -42,56 +48,56 @@
                 </a>
 
             </li>
-            <li class="menu-item has-submenu">
-                <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
-                    <span class="text">Nhân viên</span>
-                </a>
-                <div class="submenu">
-                    <a href="page-sellers-cards.html">Thẻ nhân viên</a>
-                    <a href="page-sellers-list.html">Danh sách nhân viên</a>
-                    <a href="page-seller-detail.html">Hồ sơ nhân viên</a>
-                    <a href="page-account-register.html">Thêm nhân viên</a>
-                </div>
-            </li>
-            <li class="menu-item has-submenu">
-                <a class="menu-link" href=""> <i class="icon material-icons md-monetization_on"></i>
+
+<%--            <li class="menu-item has-submenu">--%>
+<%--                <a class="menu-link" href=""> <i class="icon material-icons md-monetization_on"></i>--%>
+<%--                    <span class="text">Giảm giá</span>--%>
+<%--                </a>--%>
+<%--                <div class="submenu">--%>
+<%--                    <a href="<%=request.getContextPath()%>/admin-products-discount">Danh sách giảm giá</a>--%>
+<%--                </div>--%>
+<%--            </li>--%>
+            <li class="menu-item">
+                <a class="menu-link" href="<%=request.getContextPath()%>/admin-products-discount"> <i class="icon material-icons md-monetization_on"></i>
                     <span class="text">Giảm giá</span>
                 </a>
-                <div class="submenu">
-                    <a href="<%=request.getContextPath()%>/admin-products-discount">Danh sách giảm giá</a>
-                </div>
             </li>
             <li class="menu-item">
                 <a class="menu-link" href="<%=request.getContextPath()%>/admin-page-reviews"> <i class="icon material-icons md-comment"></i>
                     <span class="text">Nhận xét</span>
                 </a>
             </li>
-            <li class="menu-item">
-                <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
-                    <span class="text">Thương hiệu</span> </a>
-            </li>
-            <li class="menu-item">
-                <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
-                    <span class="text">Thống kê</span>
-                </a>
-            </li>
+<%--            <li class="menu-item">--%>
+<%--                <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>--%>
+<%--                    <span class="text">Thương hiệu</span> </a>--%>
+<%--            </li>--%>
+<%--            <li class="menu-item">--%>
+<%--                <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>--%>
+<%--                    <span class="text">Thống kê</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
         </ul>
         <hr>
         <ul class="menu-aside">
-            <li class="menu-item has-submenu">
-                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                    <span class="text">Cài đặt</span>
-                </a>
-                <div class="submenu">
-                    <a href="page-settings-1.html">Cài đặt tài khoản</a>
-                    <a href="<%=request.getContextPath()%>/admin-term">Cài đặt trang web</a>
-                </div>
-            </li>
+<%--            <li class="menu-item has-submenu">--%>
+<%--                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>--%>
+<%--                    <span class="text">Cài đặt</span>--%>
+<%--                </a>--%>
+<%--                <div class="submenu">--%>
+<%--                    <a href="page-settings-1.html">Cài đặt tài khoản</a>--%>
+<%--                    <a href="<%=request.getContextPath()%>/admin-term">Cài đặt trang web</a>--%>
+<%--                </div>--%>
+<%--            </li>--%>
             <li class="menu-item">
-                <a class="menu-link" href="page-0-blank.html"> <i class="icon material-icons md-local_offer"></i>
-                    <span class="text"> Thông tin liên hệ </span>
+                <a class="menu-link" href="<%=request.getContextPath()%>/admin-term"> <i class="icon material-icons md-settings"></i>
+                    <span class="text"> Cài đặt trang web </span>
                 </a>
             </li>
+<%--            <li class="menu-item">--%>
+<%--                <a class="menu-link" href="page-0-blank.html"> <i class="icon material-icons md-local_offer"></i>--%>
+<%--                    <span class="text"> Thông tin liên hệ </span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
         </ul>
         <br>
         <br>

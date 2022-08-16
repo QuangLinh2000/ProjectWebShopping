@@ -92,10 +92,9 @@
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="page-seller-detail.html">Tài khoản</a>
                     <a class="dropdown-item" href="page-settings-1.html">Cài đặt</a>
-                    <a class="dropdown-item text-danger" href="#">Đăng xuất</a>
+                    <a class="dropdown-item text-danger log-out" href="#">Đăng xuất</a>
                 </div>
             </li>
         </ul>
     </div>
 </header>
-

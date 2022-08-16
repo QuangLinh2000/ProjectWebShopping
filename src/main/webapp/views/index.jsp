@@ -55,7 +55,7 @@ List<Appreciate> listComment=(List<Appreciate>)request.getAttribute("listComment
 <section id="home-collection">
     <div class="container">
         <div class="collection-item" id="collection-first">
-            <div class="collection-banner" style="background-image: url(<%=boSuaTap1.getHinhAnh()%>)">
+            <div class="collection-banner" style="background-image: url(<%=request.getContextPath()%><%=boSuaTap1.getHinhAnh()%>)">
                 <a href=""></a>
             </div>
             <div class="collection-main">
@@ -266,7 +266,7 @@ List<Appreciate> listComment=(List<Appreciate>)request.getAttribute("listComment
                     </a>
                 </div>
             </div>
-            <div class="collection-banner" style="background-image: url(<%=boSuaTap2.getHinhAnh()%>)">
+            <div class="collection-banner" style="background-image: url(<%=request.getContextPath()%><%=boSuaTap2.getHinhAnh()%>)">
                 <a href=""></a>
             </div>
 
@@ -356,7 +356,7 @@ List<Appreciate> listComment=(List<Appreciate>)request.getAttribute("listComment
 
 <section id="home-shop-map">
     <class class="fixed-bg">
-        <a href="#" class="btn-more-white1">Xem địa chỉ hệ thống cửa hàng</a>
+        <a href="https://goo.gl/maps/wCNqgGcSpxq5jPTK7" target="_blank" class="btn-more-white1">Xem địa chỉ hệ thống cửa hàng</a>
     </class>
 </section>
 

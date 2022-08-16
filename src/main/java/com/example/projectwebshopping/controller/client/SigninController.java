@@ -46,9 +46,11 @@ public class SigninController extends HttpServlet {
                }
                request.removeAttribute("cartMap");
            }
-
-           response.sendRedirect(LogninManager.getInstance().getURLCookies(request));
-
+            if (user.getRole()==0) {
+                response.sendRedirect(request.getContextPath() + "/admin-dashboard");
+            }else{
+                response.sendRedirect(LogninManager.getInstance().getURLCookies(request));
+            }
        }else{
            request.setAttribute("login_err","login fall");
            request.setAttribute("container_view","/views/signinvssignup.jsp");

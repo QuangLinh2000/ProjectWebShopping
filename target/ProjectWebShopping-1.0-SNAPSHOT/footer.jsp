@@ -104,7 +104,7 @@
             </div>
             <div class="footer-content-item-contact-item">
                 <i class="fas fa-envelope"></i>
-                <p class="footer-content-item-focuse">info@sevenam.vn</p><br>
+                <p class="footer-content-item-focuse">info@ITSuki.vn</p><br>
             </div>
             <div class="footer-content-item-contact-item">
                 <i class="fas fa-map-marker-alt"></i>
@@ -128,7 +128,7 @@
             <a href="<%=request.getContextPath()%>/term?index=8"><p class="footer-content-item-focuse">Quyền lợi sinh nhật của khách hàng</p></a>
         </div>
         <div class="footer-content-item">
-            <p class="footer-content-item-title">VỀ SEVEN.AM</p>
+            <p class="footer-content-item-title">VỀ ITSuki</p>
             <p class="footer-content-item-focuse">Giới thiệu</p><br>
             <p class="footer-content-item-focuse">Tin tức</p><br>
             <p class="footer-content-item-focuse">Tuyển dụng</p><br>
@@ -138,7 +138,7 @@
         </div>
         <div class="footer-content-item footer-content-item-rigeter">
             <p class="footer-content-item-title">ĐĂNG KÝ NHẬN TIN</p>
-            <p>Hãy đăng ký nhận tin để nhận được những thông tin hữu ích và những chương trình khuyến mãi hấp dẫn của Seven.AM!</p>
+            <p>Hãy đăng ký nhận tin để nhận được những thông tin hữu ích và những chương trình khuyến mãi hấp dẫn của ITSUKI!</p>
             <div class="footer-content-item-input">
                 <input id="footer-content-item-input-email" style="border: none;" type="text" placeholder="Email quý khách">
                 <i class="far fa-paper-plane"></i>

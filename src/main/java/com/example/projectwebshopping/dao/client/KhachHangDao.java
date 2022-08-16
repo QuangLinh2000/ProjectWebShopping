@@ -25,7 +25,7 @@ public class KhachHangDao {
     public int themKhachHang(KhachHang khachHang) {
         try {
             Connection connection = DataSourceConnection.getConnection();
-            String sql = "INSERT INTO khachhang(IDUSER, HoTen, DienThoai, DiaChi, TinhTP, QuanHuyen, PhuongXa) VALUES(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO khachhang(IDUSER, HoTen, DienThoai, DiaChi, TinhTP, QuanHuyen, PhuongXa,JOB) VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, khachHang.getMaKH());
             preparedStatement.setString(2, khachHang.getTenKH());
@@ -34,6 +34,8 @@ public class KhachHangDao {
             preparedStatement.setString(5, khachHang.getTinhTP());
             preparedStatement.setString(6, khachHang.getQuanHuyen());
             preparedStatement.setString(7, khachHang.getPhuongXa());
+            preparedStatement.setString(8, "");
+
             int result = preparedStatement.executeUpdate();
             preparedStatement.close();
             DataSourceConnection.returnConnection(connection);

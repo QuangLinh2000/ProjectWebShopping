@@ -1,4 +1,4 @@
-package com.example.projectwebshopping.filter.admin;
+package com.example.projectwebshopping.dto.client;
 
 import com.example.projectwebshopping.model.client.Product;
 
