@@ -39,7 +39,6 @@ public class SigninController extends HttpServlet {
        if(username != null && password != null && user != null){
            HttpSession session = request.getSession();
            session.setAttribute("userLognin", user);
-
            Map<String, Cart> cartMap = (Map<String, Cart>) session.getAttribute("cartMap");
            if(cartMap != null){
                for (Map.Entry<String, Cart> entry : cartMap.entrySet()) {

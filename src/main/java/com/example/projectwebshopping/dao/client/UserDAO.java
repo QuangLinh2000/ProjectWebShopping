@@ -152,6 +152,7 @@ public class UserDAO {
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < hashBytes.length; i++) {
                 sb.append(Integer.toString((hashBytes[i] & 0xff) + 0x100, 16).substring(1));
+
             }
             hash = sb.toString();
         } catch (Exception e) {

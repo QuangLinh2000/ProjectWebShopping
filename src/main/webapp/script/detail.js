@@ -152,10 +152,10 @@ result.style.backgroundPosition = ("-" + (x * cx) + "px -" + (y * cy) + "px");
 }
 function getCursorPos(e) {
 var a, x = 0, y = 0;
-e = e || window.event;
+e =entRect();
+/*calculate the cursor's  e || window.event;
 /*get the x and y positions of the image:*/
-a = mainImg.getBoundingClientRect();
-/*calculate the cursor's x and y coordinates, relative to the image:*/
+/*a = mainImg.getBoundingClix and y coordinates, relative to the image:*/
 x = e.pageX - a.left;
 y = e.pageY - a.top;
 /*consider any page scrolling:*/
