@@ -216,4 +216,91 @@ public class UserDAO {
             return 0;
         }
     }
+
+    public User getUserByUsername(String email) {
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where usermail = ?");
+            preparedStatement.setString(1,email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                User user = new User();
+                user.setId(resultSet.getString("id"));
+                user.setEmail(resultSet.getString("usermail"));
+                user.setUsername(resultSet.getString("username"));
+                user.setRole(resultSet.getInt("role"));
+                resultSet.close();
+                preparedStatement.close();
+                DataSourceConnection.returnConnection(connection);
+                return user;
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public User getUserById(String id) {
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where id = ?");
+            preparedStatement.setString(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                User user = new User();
+                user.setId(resultSet.getString("id"));
+                user.setEmail(resultSet.getString("usermail"));
+                user.setUsername(resultSet.getString("username"));
+                user.setRole(resultSet.getInt("role"));
+                resultSet.close();
+                preparedStatement.close();
+                DataSourceConnection.returnConnection(connection);
+                return user;
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public boolean insertUserGoogle(String username,String mail,String idUser){
+        try {
+            Connection connection =  DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into users value(?,?,?,?,?,?,?,?)");
+            preparedStatement.setString(1,idUser);
+            preparedStatement.setString(2,username);
+            preparedStatement.setString(3,hashPassword("shopthoitrang"));
+            preparedStatement.setString(4,mail);
+            preparedStatement.setInt(5,1);
+            preparedStatement.setString(6,"");
+            preparedStatement.setLong(7, System.currentTimeMillis());
+            preparedStatement.setInt(8,0);
+            if(preparedStatement.executeUpdate()==1){
+                preparedStatement.close();
+                DataSourceConnection.returnConnection(connection);
+                return true;
+            }
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+            return false;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

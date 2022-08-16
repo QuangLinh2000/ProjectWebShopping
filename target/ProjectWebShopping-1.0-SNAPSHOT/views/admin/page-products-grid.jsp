@@ -100,10 +100,9 @@
         <div>
             <a href="#" class="btn btn-light">Xuất</a>
             <a href="#" class="btn btn-light">Nhập</a>
-            <a href="#" class="btn btn-primary">Tạo mới</a>
+            <a href="<%=request.getContextPath()%>/admin-add-product" class="btn btn-primary"><i class="material-icons md-plus"></i> Tạo sản phẩm</a>
         </div>
     </div>
-
     <div class="card mb-4">
         <header class="card-header">
             <div class="row align-items-center">

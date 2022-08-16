@@ -2,7 +2,7 @@ package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.model.client.LogninManager;
 import com.example.projectwebshopping.model.client.Product;
-import com.example.projectwebshopping.service.client.HomeSerVice;
+import com.example.projectwebshopping.service.client.HomeService;
 import com.example.projectwebshopping.service.client.IHomeService;
 
 import javax.servlet.*;
@@ -16,7 +16,7 @@ import java.util.List;
 public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        IHomeService iHomeService = new HomeSerVice();
+        IHomeService iHomeService = new HomeService();
         String id = request.getParameter("id");
         String tuTrang = request.getParameter("res");
 

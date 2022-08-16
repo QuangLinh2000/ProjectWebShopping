@@ -1370,4 +1370,81 @@ public class ProductDao {
 
         return count;
     }
+    //get page product
+    public List<Product> getProductsByCollection(String collectionId) {
+        Map<String, Product> map = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+        String where = "";
+        try {
+            String sql = "SELECT * FROM hinhanh AS h INNER JOIN (  SELECT * FROM products ps " +
+                    "JOIN loaisp l ON l.IDLOAI = ps.LOAISP WHERE ps.IDBoSuuTap =? AND  ps.TRANGTHAI = 1) as p ON h.IDSP = p.MASP";
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, collectionId);
+//            System.out.println(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String maSP = resultSet.getString("MASP");
+                String url = resultSet.getString("URL");
+                String nameLoai = resultSet.getString("NAMELOAI");
+                Product product = new Product();
+                product.setNamLoaiSP(nameLoai);
+                product.addProduct(resultSet);
+                if (map.containsKey(maSP)) {
+                    List<String> listURL = map.get(maSP).getListUrlImg();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                } else {
+                    List<String> listURL = new ArrayList<>();
+                    listURL.add(url);
+                    product.setListUrlImg(listURL);
+                    map.put(maSP, product);
+                }
+
+            }
+            resultSet.close();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //convert map to list
+        for (Map.Entry<String, Product> entry : map.entrySet()) {
+            products.add(entry.getValue());
+        }
+        return products;
+    }
+    //update multi product discount
+    public int updateProductsDiscount(String[] ids,double discount, Date dateStart, Date dateEnd) {
+        int count = -1;
+        try {
+            String sql = "UPDATE products SET SALE = ?, NGAYBATDAUSALE = ?, NGAYKETTHUCSALE = ? WHERE MASP IN (" +"'" + String.join("','",ids) +"'" +")";
+            Connection connection = DataSourceConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            int i = 1;
+            preparedStatement.setDouble(i, discount);
+            i++;
+            if (dateStart != null) {
+                preparedStatement.setDate(i, dateStart);
+                i++;
+            }
+            if (dateEnd != null) {
+                preparedStatement.setDate(i, dateEnd);
+                i++;
+            }
+            count = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            DataSourceConnection.returnConnection(connection);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return count;
+    }
 }

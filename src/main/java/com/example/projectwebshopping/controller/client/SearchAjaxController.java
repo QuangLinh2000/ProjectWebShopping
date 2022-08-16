@@ -2,10 +2,8 @@ package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.model.client.LogninManager;
 import com.example.projectwebshopping.model.client.Product;
-import com.example.projectwebshopping.service.client.HomeSerVice;
+import com.example.projectwebshopping.service.client.HomeService;
 import com.example.projectwebshopping.service.client.IHomeService;
-import com.example.projectwebshopping.service.client.IUserService;
-import com.example.projectwebshopping.service.client.UserService;
 import com.google.gson.Gson;
 
 import javax.servlet.*;
@@ -13,14 +11,13 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "SearchAjaxController", value = "/searchAjax")
 public class SearchAjaxController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        IHomeService homeService = new HomeSerVice();
+        IHomeService homeService = new HomeService();
         String param = request.getParameter("txt");
         List<Product> list = homeService.searchProduct(param,10);
         int count = homeService.countSearch(param);
@@ -36,7 +33,7 @@ public class SearchAjaxController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String type = request.getParameter("type");
         String param = request.getParameter("txtSearch");
-        IHomeService homeService = new HomeSerVice();
+        IHomeService homeService = new HomeService();
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

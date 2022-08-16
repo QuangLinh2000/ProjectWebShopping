@@ -19,5 +19,6 @@ public interface IUserService {
     User getUserByUsername(String userName, String vetificationCode);
 
     int updatePassword(String userName, String password, String code, String newCode);
-
+    User getUserById(String id);
+    boolean insertUserGoogle(String username,String mail,String idUser);
 }

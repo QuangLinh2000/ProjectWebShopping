@@ -88,7 +88,11 @@
     <div class="content-header">
         <h2 class="content-title">Sản phẩm (Dạng bảng) </h2>
         <div>
-            <a href="#" class="btn btn-primary"><i class="material-icons md-plus"></i> Tạo mới</a>
+            <a href="<%=request.getContextPath()%>/admin-add-product" class="btn btn-primary"><i class="material-icons md-plus"></i> Tạo sản phẩm</a>
+        </div>
+        <div>
+            <a href="#" class="btn btn-primary" data-toggle="modal"
+               data-target="#modalAddDiscount"><i class="material-icons md-local_offer "></i> Giảm giá</a>
         </div>
     </div>
 
@@ -150,7 +154,7 @@
                     <tr>
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
+                                <input class="form-check-input" type="checkbox" value="<%=product.getMaSP()%>" onchange="changeCheckbox(this)">
                             </div>
                         </td>
                         <td><%=i%></td>
@@ -206,6 +210,52 @@
 
 
 </section>
+<!-- Modal -->
+<div class="modal fade" id="modalAddDiscount" tabindex="-1" role="dialog" aria-labelledby="modalAddDiscountTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAddDiscountTitle">Giảm giá sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="row">
+                            <label for="product_price_sale" class="form-label">Giá sale</label>
+                            <div class="input-group">
+                                <input type="number" placeholder="Giá sale" class="form-control" id="product_price_sale"
+                                       name="product_price_sale" min="0" max="100" value="0">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-2">
+                                <label for="product_date_start" class="form-label">Ngày bắt đầu</label>
+                                <input type="date" class="form-control" min="2010-02-01" id="product_date_start" name="product_date_start">
+                            </div>
+                            <div class="mb-4">
+                                <label for="product_date_end" class="form-label">Ngày Kết thúc</label>
+                                <input type="date" class="form-control" min="2010-02-01" id="product_date_end" name="product_date_end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-primary bg-danger" id="btn-add-discount" data-dismiss="modal">Giảm giá</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var date;
     var  satus = -1;
@@ -358,7 +408,7 @@
                     $("#list-product").append(' <tr>'+
                         '                        <td>'+
                         '                            <div class="form-check">'+
-                        '                                <input class="form-check-input" type="checkbox">'+
+                        '                                <input class="form-check-input" type="checkbox" value="'+product.maSP+'" onchange="changeCheckbox(this)" >'+
                         '                            </div>'+
                         '                        </td>'+
                         '                        <td>'+count+'</td>'+
@@ -379,6 +429,9 @@
                         '                            </div> <!-- dropdown //end -->'+
                         '                        </td>'+
                         '                    </tr>');
+                    if (listProductCheck.includes(product.maSP)){
+                        document.querySelector('input[value="'+product.maSP+'"]').checked =true;
+                    }
                     count++;
 
                 }
@@ -629,6 +682,65 @@
 
 
     }
+
+    let listProductCheck=[];
+    function changeCheckbox(event){
+        let val = event.value;
+        if (event.checked&&!listProductCheck.includes(val)){
+            listProductCheck.push(val);
+        }
+        if (!event.checked){
+            listProductCheck = listProductCheck.filter(x => x !== val);
+        }
+        console.log(listProductCheck);
+    }
+
+    const discountDOM = document.getElementById('product_price_sale');
+    const startDateDOM = document.getElementById('product_date_start');
+    const endDateDOM = document.getElementById('product_date_end');
+    document.getElementById('btn-add-discount').addEventListener('click', function () {
+        let discount = discountDOM.value;
+        let startDate = startDateDOM.value;
+        let endDate = endDateDOM.value;
+        let arrId;
+        console.log( discount, startDate, endDate,arrId);
+        if(listProductCheck.length == 0){
+            pushNotify('warning', 'Bạn chưa chọn sản phẩm nào');
+        }else {
+            arrId = JSON.stringify(listProductCheck);
+            if (discount<=0 && discount>=100){
+                pushNotify('warning', 'Vui lòng nhập mức giảm giá từ 0% đến 100%',"Thêm giảm giá");
+            }else if (startDate == '' || endDate == ''){
+                pushNotify('warning', 'Vui lòng nhập ngày bắt đầu và kết thúc',"Thêm giảm giá");
+            }else if (startDate > endDate){
+                pushNotify('warning', 'Ngày bắt đầu phải nhỏ hơn ngày kết thúc',"Thêm giảm giá");
+            }else{
+                $.ajax({
+                    url: '<%=request.getContextPath()%>/admin-products-discount',
+                    type: 'POST',
+                    data: {
+                        serviceName: 'add-discount',
+                        discount: discount/100,
+                        startDate: startDate,
+                        endDate: endDate,
+                        arrId: arrId
+                    },
+                    success: function (res) {
+                        if (res == 'true') {
+                            pushNotify('success', 'Thêm giảm giá thành công',"Giảm giá");
+                            discountDOM.value = '';
+                            startDateDOM.value = '';
+                            endDateDOM.value = '';
+                            listProductCheck = [];
+                            $('input:checked').prop('checked', false);
+                        } else {
+                            pushNotify('danger', 'Thêm giảm giá thất bại',"Giảm giá");
+                        }
+                    }
+                });
+            }
+        }
+    });
 </script>
 
 </body>

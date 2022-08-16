@@ -53,10 +53,13 @@
                     <a href="page-account-register.html">Thêm nhân viên</a>
                 </div>
             </li>
-            <li class="menu-item">
-                <a class="menu-link" href="<%=request.getContextPath()%>/admin-products-discount"> <i class="icon material-icons md-monetization_on"></i>
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href=""> <i class="icon material-icons md-monetization_on"></i>
                     <span class="text">Giảm giá</span>
                 </a>
+                <div class="submenu">
+                    <a href="<%=request.getContextPath()%>/admin-products-discount">Danh sách giảm giá</a>
+                </div>
             </li>
             <li class="menu-item">
                 <a class="menu-link" href="<%=request.getContextPath()%>/admin-page-reviews"> <i class="icon material-icons md-comment"></i>
@@ -81,7 +84,7 @@
                 </a>
                 <div class="submenu">
                     <a href="page-settings-1.html">Cài đặt tài khoản</a>
-                    <a href="page-settings-2.html">Cài đặt trang web</a>
+                    <a href="<%=request.getContextPath()%>/admin-term">Cài đặt trang web</a>
                 </div>
             </li>
             <li class="menu-item">
@@ -96,7 +99,7 @@
 </aside>
 <script>
     var title = document.title;
-    //clcik has-submenu
+    //click has-submenu
     document.querySelectorAll('.has-submenu').forEach(function (item) {
         //remove active
 
@@ -114,10 +117,27 @@
             item.classList.add('active');
         }
     });
-
+    if(title == 'Danh sách giảm giá' ){
+        document.querySelectorAll('.has-submenu').forEach(function (item) {
+            //get text child
+            var text = item.querySelector('.text').innerHTML;
+            if (text == 'Giảm giá') {
+                //set style css display block
+                item.classList.add('active');
+                item.style.display = 'block';
+                var text = item.querySelector('.submenu').querySelectorAll('a');
+                text.forEach(function (item) {
+                    if (item.innerText == title) {
+                        item.style.color = '#000';
+                        item.style.fontWeight = 'bold';
+                    }
+                });
+            }
+        });
+        }
     if(title == 'Xem dạng danh sách' || title == 'Xem dạng bảng'
      || title == 'Xem Dạng Lưới' || title == 'Thể loại'
-     || title == 'Thêm sản phẩm' ){
+     || title == 'Thêm sản phẩm'){
 
         document.querySelectorAll('.has-submenu').forEach(function (item) {
             //get text child
@@ -135,6 +155,7 @@
                     }
                 });
             }
+
         });
     }
 

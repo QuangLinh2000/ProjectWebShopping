@@ -111,4 +111,14 @@ public class UserService implements IUserService {
     public int updatePassword(String userName, String password, String code, String newCode) {
         return UserDAO.getInstance().updatePassword(userName, password, code, newCode);
     }
+
+    @Override
+    public User getUserById(String id) {
+        return UserDAO.getInstance().getUserById(id);
+    }
+
+    @Override
+    public boolean insertUserGoogle(String username, String mail, String idUser) {
+        return UserDAO.getInstance().insertUserGoogle(username,mail,idUser);
+    }
 }

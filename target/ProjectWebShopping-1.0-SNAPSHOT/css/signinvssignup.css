@@ -229,3 +229,11 @@ input:focus {
 .header-signin-sigup{
     display: none;
 }
+.login-with-google{
+    padding: 0.9rem 0.9rem;
+    margin: 0.5rem 0rem;
+    width: 100%;
+    color: white;
+    background: #DD4B39;
+    font-weight: 600;
+}

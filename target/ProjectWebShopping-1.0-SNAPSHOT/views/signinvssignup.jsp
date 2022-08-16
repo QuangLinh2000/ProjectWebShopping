@@ -57,6 +57,8 @@
 
                 <input type="password" placeholder="Mật khẩu" name="pass" class="input" id="password1"
                        title="Vui Lòng nhập password" required/>
+                <a class="login-with-google" href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/Shopping/login-google&response_type=code
+    &client_id=47942670800-mm0ipbvkqadr93qnh8nkn822kuo4cc7a.apps.googleusercontent.com&approval_prompt=force"><i class="fa-brands fa-google-plus-g"></i> Đăng nhập bằng Google</a>
                 <a href="<%=request.getContextPath()%>/reset" class="link">Quên mật khẩu</a>
                 <!-- <button class="btn">Đăng nhập</button> -->
                 <input type="submit" class="register btn" value="Đăng Nhập">

@@ -1,5 +1,5 @@
 <%@ page import="com.example.projectwebshopping.service.client.IHomeService" %>
-<%@ page import="com.example.projectwebshopping.service.client.HomeSerVice" %>
+<%@ page import="com.example.projectwebshopping.service.client.HomeService" %>
 <%@ page import="com.example.projectwebshopping.model.client.Cart" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/loader.css">
 
-    <% IHomeService iHomeService = new HomeSerVice();
+    <% IHomeService iHomeService = new HomeService();
         request.setAttribute("listLoaiSP", iHomeService.getAllLoaiSP());%>
 </head>
 <body>

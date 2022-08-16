@@ -1,18 +1,13 @@
 package com.example.projectwebshopping.controller.client;
 
 import com.example.projectwebshopping.dao.client.KhachHangDao;
-import com.example.projectwebshopping.dao.client.ProductDao;
-import com.example.projectwebshopping.model.client.CartJson;
 import com.example.projectwebshopping.model.client.KhachHang;
 import com.example.projectwebshopping.model.client.User;
-import com.example.projectwebshopping.service.client.HomeSerVice;
-import com.example.projectwebshopping.service.client.IHomeService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "AccountController", value = "/account")
 public class AccountController extends HttpServlet {

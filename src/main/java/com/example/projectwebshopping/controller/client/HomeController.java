@@ -6,7 +6,7 @@ import com.example.projectwebshopping.model.admin.Appreciate;
 import com.example.projectwebshopping.model.client.BoSuaTap;
 import com.example.projectwebshopping.model.client.LogninManager;
 import com.example.projectwebshopping.model.client.Product;
-import com.example.projectwebshopping.service.client.HomeSerVice;
+import com.example.projectwebshopping.service.client.HomeService;
 import com.example.projectwebshopping.service.client.IHomeService;
 import com.google.gson.Gson;
 
@@ -21,7 +21,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        IHomeService iHomeService = new HomeSerVice();
+        IHomeService iHomeService = new HomeService();
         List<BoSuaTap> listBoSuaTap = iHomeService.getBSHome();
         request.setAttribute("listQC",iHomeService.getAllQC());
         request.setAttribute("listBST",listBoSuaTap);

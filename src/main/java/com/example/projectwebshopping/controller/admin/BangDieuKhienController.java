@@ -1,7 +1,7 @@
 package com.example.projectwebshopping.controller.admin;
 
 import com.example.projectwebshopping.dao.client.HoaDonDao;
-import com.example.projectwebshopping.service.client.HomeSerVice;
+import com.example.projectwebshopping.service.client.HomeService;
 import com.example.projectwebshopping.service.client.IHomeService;
 
 import javax.servlet.*;
@@ -13,7 +13,7 @@ import java.io.IOException;
 public class BangDieuKhienController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        IHomeService iHomeService = new HomeSerVice();
+        IHomeService iHomeService = new HomeService();
 
         double tongDoanhThu = HoaDonDao.getInstance().getTotalRevenue();
        int tongSoHoaDon = HoaDonDao.getInstance().getTotalSumOfBill();

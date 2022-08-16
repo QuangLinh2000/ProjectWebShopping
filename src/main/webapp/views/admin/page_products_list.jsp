@@ -92,7 +92,7 @@
     <div class="content-header">
         <h2 class="content-title">Danh sách sản phẩm </h2>
         <div>
-            <a href="#" class="btn btn-primary"><i class="material-icons md-plus"></i> Tạo mới</a>
+            <a href="<%=request.getContextPath()%>/admin-add-product" class="btn btn-primary"><i class="material-icons md-plus"></i> Tạo sản phẩm</a>
         </div>
     </div>
 

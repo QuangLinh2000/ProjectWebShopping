@@ -1,5 +1,5 @@
 <%@ page import="com.example.projectwebshopping.service.client.IHomeService" %>
-<%@ page import="com.example.projectwebshopping.service.client.HomeSerVice" %>
+<%@ page import="com.example.projectwebshopping.service.client.HomeService" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.projectwebshopping.model.client.Product" %>
 <%@ page import="java.util.ArrayList" %>
@@ -20,7 +20,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% IHomeService iHomeService = new HomeSerVice();
+<% IHomeService iHomeService = new HomeService();
     List<LoaiSP> listLoaiSP = (List<LoaiSP>) request.getAttribute("listLoaiSP");
     //get cookie
     //hello

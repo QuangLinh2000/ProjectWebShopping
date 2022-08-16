@@ -10,10 +10,9 @@ import com.example.projectwebshopping.model.client.LoaiSP;
 import com.example.projectwebshopping.model.client.Product;
 import com.example.projectwebshopping.model.client.QuangCao;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class HomeSerVice implements IHomeService{
+public class HomeService implements IHomeService{
     @Override
     public List<BoSuaTap> getBSHome() {
         return BoSuaTapDao.getInstance().getBSHome();

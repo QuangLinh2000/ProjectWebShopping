@@ -7,6 +7,8 @@ import com.example.projectwebshopping.model.client.BoSuaTap;
 import com.example.projectwebshopping.model.client.LoaiSP;
 import com.example.projectwebshopping.model.client.Product;
 import com.example.projectwebshopping.model.client.ProductManager;
+import com.example.projectwebshopping.service.client.AdminService;
+import com.example.projectwebshopping.service.client.IAdminService;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -31,7 +33,7 @@ public class DiscountProductController extends HttpServlet {
         request.setAttribute("total", ProductManager.getInstance().getPageCount(10,total));
         request.setAttribute("loaiSPs", loaiSPs);
         request.setAttribute("boSuuTap",listBoSuuTap);
-        request.getRequestDispatcher("views/admin/page-discount.jsp").forward(request, response);
+        request.getRequestDispatcher("views/admin/page-discount-list.jsp").forward(request, response);
     }
 
     @Override
@@ -41,15 +43,10 @@ public class DiscountProductController extends HttpServlet {
             case "getProductDiscount":
                 getProductsDiscountInPage(request,response);
                 break;
-            case "addDiscount":
-                addDiscount(request,response);
-                break;
+                case"add-discount":
+                    updateProductsDiscount(request,response);
+                    break;
         }
-        //get parameters date: date,
-        //                   status: satus,
-        //                   loai: loai,
-        //                   page: page
-
 
     }
 
@@ -86,7 +83,28 @@ public class DiscountProductController extends HttpServlet {
         }
     }
 
-    private void addDiscount(HttpServletRequest request, HttpServletResponse response) {
+    private void updateProductsDiscount(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        Double discount = Double.parseDouble(request.getParameter("discount"));
+        String dateStart = request.getParameter("startDate");
+        String dateEnd = request.getParameter("endDate");
+        Date dateStartSell = null;
+        Date dateEndSell = null;
+        if(dateStart != null && dateStart.trim().length() > 0){
+            dateStartSell = Date.valueOf(dateStart);
+        }
+        if(dateEnd != null && dateEnd.trim().length() > 0){
+            dateEndSell = Date.valueOf(dateEnd);
+        }
+        String idsJson = request.getParameter("arrId");
+        String[] ids = new Gson().fromJson(idsJson,String[].class);
+        IAdminService adminService = new AdminService();
+        boolean result = adminService.updateProductsDiscount(ids,discount,dateStartSell,dateEndSell);
+        if(result){
+            response.getWriter().write("true");
+        }else{
+            response.getWriter().write("false");
+        }
+
     }
     //start page
     public int getStart(int page, int limit){

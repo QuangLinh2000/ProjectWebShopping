@@ -10,7 +10,7 @@ function scrollHideNav() {
     var w = window;
     var prevScroll = w.pageYOffset || w.scrollY || doc.scrollTop;
     let norifyTop = headerTop.querySelector('.nofification');
-    if(prevScroll > 120){
+    if(norifyTop&&prevScroll > 120){
         norifyTop.classList.remove("flex");
         document.getElementById("wrapper-search1").classList.remove("show");
     }

@@ -13,7 +13,6 @@ import java.util.Queue;
 public class JdbcConnectionPool {
 
    private  List<Connection> availableConnections = new ArrayList<>();
-   private  Queue<Connection> usedConnections = new LinkedList<>();
     public JdbcConnectionPool() {
         initializeConnectionPool();
     }
