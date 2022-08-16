@@ -551,14 +551,14 @@
                     },
                     success: function (res) {
                         if (res == 'true') {
-                            pushNotify('success', 'Thêm giảm giá thành công',"Giảm giá");
+                            pushNotify('success', 'Chỉnh sửa giảm giá thành công',"Giảm giá");
                             discountDOM.value = '';
                             startDateDOM.value = '';
                             endDateDOM.value = '';
                             listProductCheck = [];
                             $('input:checked').prop('checked', false);
                         } else {
-                            pushNotify('danger', 'Thêm giảm giá thất bại',"Giảm giá");
+                            pushNotify('danger', 'Chỉnh sửa giảm giá thất bại',"Giảm giá");
                         }
                     }
                 });
